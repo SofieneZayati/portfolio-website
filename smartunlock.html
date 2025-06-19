@@ -543,43 +543,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Code Examples - enhanced */
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            position: relative;
-            overflow-x: auto;
-            transition: all 0.4s ease;
-        }
-
-        .code-block:hover {
-            border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
-        }
-
-        .code-block::before {
-            content: 'C++';
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: var(--primary-cyan);
-            color: var(--bg-darker);
-            padding: 5px 15px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .code-block pre {
-            color: #e2e8f0;
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            white-space: pre-wrap;
-        }
-
         /* Image Gallery - enhanced */
         .image-gallery {
             display: grid;
@@ -810,11 +773,6 @@
             .content-section {
                 padding: 60px 15px;
             }
-
-            .code-block,
-            .security-architecture {
-                padding: 20px;
-            }
             
             .cta-button {
                 padding: 15px 25px;
@@ -978,105 +936,10 @@
         <div class="security-architecture">
             <h3>Multi-Layer Protection System</h3>
             <div class="architecture-placeholder">
-                [Security Architecture Diagram Placeholder]
-                <br><br>
-                This section will contain:
-                <br>• Encryption layers
-                <br>• Authentication flow
-                <br>• Secure communication channels
-                <br>• Physical security measures
+                [System Placeholder]
+                
             </div>
             <p>The system implements defense-in-depth security with hardware-level encryption, secure boot, rotating keys, and tamper detection that automatically revokes compromised devices.</p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <h2 class="section-title">Technical Implementation</h2>
-        <div class="code-block">
-            <pre>
-// ESP32 Secure Lock Controller
-#include &lt;BLEDevice.h&gt;
-#include &lt;PubSubClient.h&gt;
-#include &lt;WiFi.h&gt;
-#include &lt;mbedtls/aes.h&gt;
-
-#define LOCK_PIN 23
-#define STATUS_LED 2
-#define TAMPER_PIN 15
-
-// Security configuration
-const byte encryptionKey[32] = { /* Your 256-bit key */ };
-const char* mqttServer = "your-mqtt-broker.com";
-const int mqttPort = 8883;
-
-BLEServer *pServer;
-BLECharacteristic *pCharacteristic;
-WiFiClientSecure espClient;
-PubSubClient client(espClient);
-mbedtls_aes_context aes;
-
-void setup() {
-  Serial.begin(115200);
-  
-  // Initialize security
-  mbedtls_aes_init(&aes);
-  mbedtls_aes_setkey_enc(&aes, encryptionKey, 256);
-  
-  // Initialize BLE
-  BLEDevice::init("SmartLock");
-  pServer = BLEDevice::createServer();
-  BLEService *pService = pServer->createService(SERVICE_UUID);
-  pCharacteristic = pService->createCharacteristic(
-    CHARACTERISTIC_UUID,
-    BLECharacteristic::PROPERTY_READ |
-    BLECharacteristic::PROPERTY_WRITE |
-    BLECharacteristic::PROPERTY_NOTIFY
-  );
-  
-  // Initialize MQTT
-  espClient.setCACert(root_ca);
-  client.setServer(mqttServer, mqttPort);
-  client.setCallback(callback);
-  
-  // Initialize hardware
-  pinMode(LOCK_PIN, OUTPUT);
-  pinMode(STATUS_LED, OUTPUT);
-  pinMode(TAMPER_PIN, INPUT_PULLUP);
-  
-  // Start services
-  pService->start();
-  BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
-  pAdvertising->addServiceUUID(SERVICE_UUID);
-  pAdvertising->setScanResponse(true);
-  pAdvertising->setMinPreferred(0x06);
-  pAdvertising->setMinPreferred(0x12);
-  BLEDevice::startAdvertising();
-  
-  connectToWiFi();
-}
-
-void loop() {
-  if (!client.connected()) {
-    reconnect();
-  }
-  client.loop();
-  
-  // Check for tamper detection
-  if (digitalRead(TAMPER_PIN) == LOW) {
-    handleTamper();
-  }
-  
-  // Handle BLE events
-  // ...
-}
-
-void handleTamper() {
-  // Emergency protocol for tamper detection
-  digitalWrite(LOCK_PIN, HIGH); // Lock door
-  client.publish("smartlock/alarm", "tamper_detected");
-  // Additional security measures...
-}
-            </pre>
         </div>
     </section>
 

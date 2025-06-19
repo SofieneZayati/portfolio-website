@@ -543,43 +543,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Code Examples - enhanced */
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            position: relative;
-            overflow-x: auto;
-            transition: all 0.4s ease;
-        }
-
-        .code-block:hover {
-            border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
-        }
-
-        .code-block::before {
-            content: 'C++';
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: var(--primary-cyan);
-            color: var(--bg-darker);
-            padding: 5px 15px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .code-block pre {
-            color: #e2e8f0;
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            white-space: pre-wrap;
-        }
-
         /* Image Gallery - enhanced */
         .image-gallery {
             display: grid;
@@ -810,8 +773,7 @@
             .content-section {
                 padding: 60px 15px;
             }
-
-            .code-block,
+            
             .system-architecture {
                 padding: 20px;
             }
@@ -979,85 +941,9 @@
             <h3>Distributed Smart Home Network</h3>
             <div class="architecture-placeholder">
                 [System Architecture Diagram Placeholder]
-                <br><br>
-                This section will contain:
-                <br>• Room controller layout
-                <br>• Communication flow
-                <br>• Mobile app integration
-                <br>• Cloud synchronization
+                
             </div>
             <p>The system uses a distributed architecture with ESP32 controllers in each room communicating through Firebase for real-time synchronization and remote access.</p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <h2 class="section-title">Technical Implementation</h2>
-        <div class="code-block">
-            <pre>
-// ESP32 Room Controller Example
-#include &lt;WiFi.h&gt;
-#include &lt;FirebaseESP32.h&gt;
-
-#define FIREBASE_HOST "your-project.firebaseio.com"
-#define FIREBASE_AUTH "your-database-secret"
-#define WIFI_SSID "your-ssid"
-#define WIFI_PASSWORD "your-password"
-
-// Define pins
-const int lightPin = 23;
-const int tempSensorPin = 34;
-const int motionPin = 22;
-
-FirebaseData fbdo;
-
-void setup() {
-  Serial.begin(115200);
-  
-  // Initialize pins
-  pinMode(lightPin, OUTPUT);
-  pinMode(motionPin, INPUT);
-  
-  // Connect to WiFi
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("Connected to WiFi");
-  
-  // Initialize Firebase
-  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
-  Firebase.reconnectWiFi(true);
-}
-
-void loop() {
-  // Read sensors
-  int motionDetected = digitalRead(motionPin);
-  float temperature = readTemperature();
-  
-  // Update Firebase
-  if (Firebase.setInt(fbdo, "/rooms/livingroom/motion", motionDetected)) {
-    Serial.println("Motion data sent");
-  }
-  
-  if (Firebase.setFloat(fbdo, "/rooms/livingroom/temperature", temperature)) {
-    Serial.println("Temp data sent");
-  }
-  
-  // Check for light control updates
-  if (Firebase.getInt(fbdo, "/rooms/livingroom/light")) {
-    int lightState = fbdo.intData();
-    digitalWrite(lightPin, lightState);
-  }
-  
-  delay(2000);
-}
-
-float readTemperature() {
-  // Implementation for reading temperature sensor
-  return 22.5; // Example value
-}
-            </pre>
         </div>
     </section>
 

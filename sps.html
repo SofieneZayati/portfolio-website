@@ -543,43 +543,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Code Examples - enhanced */
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            position: relative;
-            overflow-x: auto;
-            transition: all 0.4s ease;
-        }
-
-        .code-block:hover {
-            border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
-        }
-
-        .code-block::before {
-            content: 'Java';
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: var(--primary-cyan);
-            color: var(--bg-darker);
-            padding: 5px 15px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .code-block pre {
-            color: #e2e8f0;
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            white-space: pre-wrap;
-        }
-
         /* Image Gallery - enhanced */
         .image-gallery {
             display: grid;
@@ -810,11 +773,6 @@
             .content-section {
                 padding: 60px 15px;
             }
-
-            .code-block,
-            .system-architecture {
-                padding: 20px;
-            }
             
             .cta-button {
                 padding: 15px 25px;
@@ -978,116 +936,10 @@
         <div class="system-architecture">
             <h3>Integrated Parking Solution</h3>
             <div class="architecture-placeholder">
-                [System Architecture Diagram Placeholder]
-                <br><br>
-                This section will contain:
-                <br>• Mobile app components
-                <br>• Firebase realtime database
-                <br>• IoT sensor network
-                <br>• Admin dashboard
+                [System  Placeholder]
+                
             </div>
             <p>The system combines IoT sensors with crowd-sourced data to provide the most accurate parking availability information in real-time.</p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <h2 class="section-title">Technical Implementation</h2>
-        <div class="code-block">
-            <pre>
-// Firebase Realtime Database Structure
-{
-  "parking_locations": {
-    "downtown_plaza": {
-      "name": "Downtown Plaza Parking",
-      "total_spaces": 150,
-      "available_spaces": 42,
-      "coordinates": {
-        "lat": 34.052235,
-        "lng": -118.243683
-      },
-      "rates": {
-        "hourly": 2.50,
-        "daily_max": 15.00
-      },
-      "last_updated": 1625097600
-    },
-    // Additional locations...
-  },
-  "user_reports": {
-    "report_1": {
-      "location_id": "downtown_plaza",
-      "user_id": "user_123",
-      "spaces_available": 5,
-      "timestamp": 1625097600,
-      "confidence": 0.85
-    }
-    // Additional reports...
-  }
-}
-
-// Android Parking Space Adapter
-public class ParkingSpaceAdapter extends RecyclerView.Adapter&lt;ParkingSpaceAdapter.ViewHolder&gt; {
-    private List&lt;ParkingLocation&gt; parkingLocations;
-    private Context context;
-
-    public ParkingSpaceAdapter(List&lt;ParkingLocation&gt; parkingLocations, Context context) {
-        this.parkingLocations = parkingLocations;
-        this.context = context;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_parking_space, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ParkingLocation location = parkingLocations.get(position);
-        
-        // Set location name
-        holder.nameTextView.setText(location.getName());
-        
-        // Set availability
-        int available = location.getAvailableSpaces();
-        int total = location.getTotalSpaces();
-        holder.availabilityTextView.setText(
-            String.format("%d/%d spaces available", available, total));
-        
-        // Set color based on availability percentage
-        double percentage = (double) available / total;
-        int colorRes = percentage > 0.3 ? R.color.available_green : 
-                      percentage > 0.1 ? R.color.limited_yellow : R.color.full_red;
-        holder.availabilityTextView.setTextColor(
-            ContextCompat.getColor(context, colorRes));
-        
-        // Set click listener
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ParkingDetailActivity.class);
-            intent.putExtra("location_id", location.getId());
-            context.startActivity(intent);
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return parkingLocations.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView;
-        TextView availabilityTextView;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            nameTextView = itemView.findViewById(R.id.parking_name);
-            availabilityTextView = itemView.findViewById(R.id.parking_availability);
-        }
-    }
-}
-            </pre>
         </div>
     </section>
 

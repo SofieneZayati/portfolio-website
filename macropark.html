@@ -250,6 +250,69 @@
             font-weight: 300;
         }
 
+        /* Project Links */
+        .project-links {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .project-link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-link-btn:hover::before,
+        .project-link-btn:focus-visible::before {
+            left: 100%;
+        }
+
+        .project-link-btn:hover,
+        .project-link-btn:focus-visible {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 245, 255, 0.4);
+            outline: none;
+        }
+
+        .project-link-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-cyan);
+            box-shadow: none;
+        }
+
+        .project-link-btn.secondary:hover,
+        .project-link-btn.secondary:focus-visible {
+            background: var(--primary-cyan);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.3);
+        }
+
         /* Project Status - enhanced */
         .project-status {
             display: flex;
@@ -543,6 +606,20 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
+        /* System Components Image */
+        .system-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .system-image:hover {
+            transform: scale(1.02);
+        }
+
         /* Code Examples - enhanced */
         .code-block {
             background: rgba(0, 0, 0, 0.4);
@@ -804,6 +881,11 @@
                 align-items: center;
                 gap: 15px;
             }
+
+            .project-links {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -816,9 +898,11 @@
                 padding: 20px;
             }
             
-            .cta-button {
+            .cta-button,
+            .project-link-btn {
                 padding: 15px 25px;
                 font-size: 1rem;
+                width: 100%;
             }
         }
 
@@ -861,6 +945,17 @@
             <div class="project-icon-large">🚗</div>
             <h1>MacroPark</h1>
             <p class="project-subtitle">LPR-based Smart Parking System with BLE-enabled Mobile App Fallback</p>
+            
+            <div class="project-links">
+                <a href="MacroPark Presentation final.pptx" class="project-link-btn" download>
+                    <span>Project Presentation</span>
+                    <span>📊</span>
+                </a>
+                <a href="https://github.com/SofieneZayati/MacroPark" class="project-link-btn secondary" target="_blank" rel="noopener noreferrer">
+                    <span>GitHub Repository</span>
+                    <span>📂</span>
+                </a>
+            </div>
             
             <div class="project-status">
                 <div class="status-item status-active">
@@ -977,91 +1072,8 @@
         <h2 class="section-title">System Architecture</h2>
         <div class="architecture-diagram">
             <h3>System Components Overview</h3>
-            <div class="diagram-placeholder">
-                [Architecture Diagram Placeholder]
-                <br><br>
-                This section will contain:
-                <br>• System flow diagram
-                <br>• Component relationships
-                <br>• Communication protocols
-                <br>• Data flow visualization
-            </div>
+            <img src="macroparkimg.png" alt="MacroPark System Architecture" class="system-image">
             <p>The system integrates multiple technologies to create a robust, scalable parking management solution with redundant communication pathways and fail-safe mechanisms.</p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <h2 class="section-title">Technical Implementation</h2>
-        <div class="code-block">
-            <pre>
-// ESP32 Barrier Control Example
-#include &lt;WiFi.h&gt;
-#include &lt;PubSubClient.h&gt;
-#include &lt;BluetoothSerial.h&gt;
-
-#define BARRIER_PIN 23
-#define STATUS_LED 2
-
-class BarrierController {
-private:
-    int barrierPin;
-    bool isOpen;
-    unsigned long lastToggleTime;
-    
-public:
-    BarrierController(int pin) : barrierPin(pin), isOpen(false), lastToggleTime(0) {
-        pinMode(barrierPin, OUTPUT);
-        pinMode(STATUS_LED, OUTPUT);
-        digitalWrite(barrierPin, LOW);
-    }
-    
-    void openBarrier() {
-        if (millis() - lastToggleTime > 3000) { // Debounce
-            digitalWrite(barrierPin, HIGH);
-            digitalWrite(STATUS_LED, HIGH);
-            isOpen = true;
-            lastToggleTime = millis();
-            Serial.println("Barrier opened");
-        }
-    }
-    
-    void closeBarrier() {
-        if (millis() - lastToggleTime > 3000) { // Debounce
-            digitalWrite(barrierPin, LOW);
-            digitalWrite(STATUS_LED, LOW);
-            isOpen = false;
-            lastToggleTime = millis();
-            Serial.println("Barrier closed");
-        }
-    }
-    
-    void toggleBarrier() {
-        if (isOpen) closeBarrier();
-        else openBarrier();
-    }
-};
-
-// MQTT Callback Function Example
-void callback(char* topic, byte* payload, unsigned int length) {
-    Serial.print("Message arrived [");
-    Serial.print(topic);
-    Serial.print("] ");
-    
-    String message;
-    for (int i = 0; i < length; i++) {
-        message += (char)payload[i];
-    }
-    Serial.println(message);
-    
-    if (String(topic) == "parking/barrier/control") {
-        if (message == "open") {
-            barrierController.openBarrier();
-        } else if (message == "close") {
-            barrierController.closeBarrier();
-        }
-    }
-}
-            </pre>
         </div>
     </section>
 

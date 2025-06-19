@@ -978,77 +978,10 @@
         <div class="system-architecture">
             <h3>End-to-End IoT Solution</h3>
             <div class="architecture-placeholder">
-                [System Architecture Diagram Placeholder]
-                <br><br>
-                This section will contain:
-                <br>• Field sensor nodes
-                <br>• Gateway connectivity
-                <br>• Firebase realtime database
-                <br>• Mobile app interface
+                [System  Placeholder]
+                
             </div>
             <p>The system combines rugged field sensors with cloud-based analytics and mobile access for comprehensive farm monitoring.</p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <h2 class="section-title">Technical Implementation</h2>
-        <div class="code-block">
-            <pre>
-// ESP32 Sensor Node Code
-#include &lt;WiFi.h&gt;
-#include &lt;FirebaseESP32.h&gt;
-#include &lt;DHT.h&gt;
-
-#define FIREBASE_HOST "your-project.firebaseio.com"
-#define FIREBASE_AUTH "your-database-secret"
-#define WIFI_SSID "your-wifi"
-#define WIFI_PASSWORD "your-password"
-#define DHTPIN 4
-#define DHTTYPE DHT22
-
-DHT dht(DHTPIN, DHTTYPE);
-FirebaseData firebaseData;
-
-void setup() {
-  Serial.begin(115200);
-  dht.begin();
-  
-  // Connect to WiFi
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("WiFi connected");
-  
-  // Initialize Firebase
-  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
-  Firebase.reconnectWiFi(true);
-}
-
-void loop() {
-  // Read sensor data
-  float humidity = dht.readHumidity();
-  float temperature = dht.readTemperature();
-  
-  if (isnan(humidity) || isnan(temperature)) {
-    Serial.println("Failed to read from DHT sensor!");
-    return;
-  }
-  
-  // Send data to Firebase
-  if (Firebase.setFloat(firebaseData, "/sensor_data/temperature", temperature) &&
-      Firebase.setFloat(firebaseData, "/sensor_data/humidity", humidity)) {
-    Serial.println("Data sent successfully");
-  } else {
-    Serial.println("Firebase error: " + firebaseData.errorReason());
-  }
-  
-  // Deep sleep for 5 minutes to conserve power
-  esp_sleep_enable_timer_wakeup(5 * 60 * 1000000);
-  esp_deep_sleep_start();
-}
-            </pre>
         </div>
     </section>
 

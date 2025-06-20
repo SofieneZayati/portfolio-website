@@ -422,20 +422,30 @@
         }
 
         .project-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink));
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 35px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink));
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 35px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
         }
 
+        .project-icon img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+        transition: all 0.3s ease;
+        }
+        .project-card:hover .project-icon img,
+    .project-card:focus-within .project-icon img {
+        transform: scale(1.05);
+    }
         .project-icon::before {
             content: '';
             position: absolute;
@@ -960,9 +970,11 @@
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-grid">
             <div class="project-card" tabindex="0">
-                <div class="project-icon">🛍️</div>
+                <div class="project-icon">
+                    <img src="innologo.png" alt="InnoMall Logo">
+                </div>
                 <h3>InnoMall</h3>
-                <p>Integrated Mall Management System with JavaFX desktop and PHP Symfony web interfaces. Features IoT parking with real-time sensor tracking, Stripe API payments, AI chatbot (Gemini API), and comprehensive analytics dashboards.</p>
+                 <p>Integrated Mall Management System with JavaFX desktop and PHP Symfony web interfaces. Features IoT parking with real-time sensor tracking, Stripe API payments, AI chatbot (Gemini API), and comprehensive analytics dashboards.</p>
                 
                 <div class="project-stack">
                     <span class="stack-title">Tech Stack</span>
@@ -981,7 +993,9 @@
             </div>
 
             <div class="project-card" tabindex="0">
-                <div class="project-icon">🚗</div>
+                <div class="project-icon">
+                    <img src="macrologo.png" alt="MacroPark Logo">
+                </div>
                 <h3>MacroPark</h3>
                 <p>LPR-based smart parking system with BLE-enabled mobile app fallback. Features ESP32-controlled barriers via MQTT/BLE, hybrid Ethernet/WiFi failover, OTA updates, and WiFiManager web portal for configuration.</p>
                 
@@ -1002,7 +1016,9 @@
             </div>
 
             <div class="project-card" tabindex="0">
-                <div class="project-icon">🏠</div>
+                <div class="project-icon">
+                    <img src="zenithlogo.png" alt="ZenithHouse Logo">
+                </div>
                 <h3>ZenithHouse</h3>
                 <p>Smart home automation system for lights, climate, and access control via mobile app. Uses ESP32 microcontrollers per room with Firebase for real-time sync and user management.</p>
                 
@@ -1021,7 +1037,9 @@
             </div>
 
             <div class="project-card" tabindex="0">
-                <div class="project-icon">🔐</div>
+                <div class="project-icon">
+                    <img src="smartunlocklogo.png" alt="Smart Unlock Logo">
+                </div>
                 <h3>Smart Unlock</h3>
                 <p>Keyless employee access system using BLE mobile app connected via MQTT to control door lock hardware instantly.</p>
                 
@@ -1040,7 +1058,9 @@
             </div>
 
             <div class="project-card" tabindex="0">
-                <div class="project-icon">🅿️</div>
+                <div class="project-icon">
+                    <img src="spslogo.png" alt="SPS Logo">
+                </div>
                 <h3>SPS (Smart Parking Solution)</h3>
                 <p>Mobile app displaying real-time parking availability to minimize user search time and improve convenience.</p>
                 
@@ -1058,7 +1078,9 @@
             </div>
 
             <div class="project-card" tabindex="0">
-                <div class="project-icon">🌱</div>
+                <div class="project-icon">
+                    <img src="smartagrilogo.png" alt="Smart Agri Logo">
+                </div>
                 <h3>Smart Agri (IoT)</h3>
                 <p>IoT system to monitor temperature and humidity for agriculture with real-time data viewing in a mobile app via Firebase.</p>
                 

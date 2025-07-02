@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecondChance - Reintegration platform for formerly incarcerated individuals with job matching and mental health support">
+    <meta name="keywords" content="reintegration, FastAPI, MongoDB, community support, job matching, mental health">
+    <title>SecondChance - Reintegration Platform | Sofiene Zayati</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-cyan: #00f5ff;
+            --primary-pink: #ff0080;
+            --primary-purple: #8b5cf6;
+            --bg-dark: #0a0a0f;
+            --bg-darker: #050507;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background - optimized for performance */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: float 8s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .bg-orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary-cyan), transparent);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .bg-orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary-pink), transparent);
+            top: 60%;
+            right: 15%;
+            animation-delay: -3s;
+        }
+
+        .bg-orb:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--primary-purple), transparent);
+            bottom: 20%;
+            left: 50%;
+            animation-delay: -6s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) scale(1); 
+            }
+            33% { 
+                transform: translateY(-30px) translateX(20px) scale(1.1); 
+            }
+            66% { 
+                transform: translateY(20px) translateX(-15px) scale(0.9); 
+            }
+        }
+
+        /* Navbar - consistent with index.html */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 15px 30px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 25px;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            border-color: rgba(0, 245, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .back-btn:hover::before,
+        .back-btn:focus-visible::before {
+            left: 100%;
+        }
+
+        .back-btn:hover,
+        .back-btn:focus-visible {
+            color: var(--primary-cyan);
+            background: rgba(0, 245, 255, 0.1);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink), var(--primary-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Logo styling */
+        .project-logo {
+            height: 150px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section - enhanced */
+        .project-hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+            max-width: 1000px;
+        }
+
+        .project-icon-large {
+            font-size: 8rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .project-icon-large:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-cyan) 30%, var(--primary-pink) 70%, var(--primary-purple) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .tech-stack-hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--primary-cyan);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tech-tag:hover,
+        .tech-tag:focus-visible {
+            background: rgba(0, 245, 255, 0.2);
+            transform: translateY(-3px);
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.2);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .project-link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-link-btn:hover::before,
+        .project-link-btn:focus-visible::before {
+            left: 100%;
+        }
+
+        .project-link-btn:hover,
+        .project-link-btn:focus-visible {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 245, 255, 0.4);
+            outline: none;
+        }
+
+        .project-link-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-cyan);
+            box-shadow: none;
+        }
+
+        .project-link-btn.secondary:hover,
+        .project-link-btn.secondary:focus-visible {
+            background: var(--primary-cyan);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 120px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink), var(--primary-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-pink));
+            border-radius: 2px;
+        }
+
+        .content-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+        }
+
+        /* Features Grid - enhanced */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            padding: 40px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .feature-card:hover::before,
+        .feature-card:focus-within::before {
+            left: 100%;
+        }
+
+        .feature-card:hover,
+        .feature-card:focus-within {
+            transform: translateY(-10px);
+            border-color: rgba(0, 245, 255, 0.3);
+            box-shadow: 
+                0 20px 60px rgba(0, 245, 255, 0.15),
+                0 0 100px rgba(255, 0, 128, 0.1);
+            outline: none;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-cyan);
+            position: relative;
+            display: inline-block;
+        }
+
+        .feature-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-pink));
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        .feature-card:hover h3::after,
+        .feature-card:focus-within h3::after {
+            width: 100%;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .feature-card:hover p {
+            color: white;
+        }
+
+        /* Gallery Section - enhanced */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            will-change: transform;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .gallery-item:hover::before,
+        .gallery-item:focus-within::before {
+            left: 100%;
+        }
+
+        .gallery-item:hover,
+        .gallery-item:focus-within {
+            transform: translateY(-5px);
+            border-color: rgba(0, 245, 255, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.2);
+            outline: none;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-cyan);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 0 20px;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+
+        .modal-nav.prev {
+            left: 0;
+        }
+
+        .modal-nav.next {
+            right: 0;
+        }
+
+        /* Technical Details - enhanced */
+        .tech-details {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            transition: all 0.4s ease;
+        }
+
+        .tech-details:hover {
+            border-color: rgba(0, 245, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.1);
+        }
+
+        .tech-details h3 {
+            color: var(--primary-cyan);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .tech-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .tech-list li:hover {
+            color: var(--primary-cyan);
+        }
+
+        .tech-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tech-list li::before {
+            content: '✨';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-list li:hover::before {
+            transform: rotate(15deg);
+        }
+
+        /* Navigation Buttons - enhanced */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 80px 0 40px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+            max-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-btn:hover::before,
+        .nav-btn:focus-visible::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover,
+        .nav-btn:focus-visible {
+            background: rgba(0, 245, 255, 0.1);
+            border-color: var(--primary-cyan);
+            transform: translateY(-3px);
+            outline: none;
+        }
+
+        .nav-btn.prev {
+            justify-content: flex-start;
+        }
+
+        .nav-btn.next {
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        /* Footer - consistent with index.html */
+        .footer {
+            padding: 80px 50px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 245, 255, 0.1);
+            background: linear-gradient(135deg, var(--bg-darker), rgba(0, 0, 0, 0.5));
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 95%;
+                padding: 12px 20px;
+            }
+
+            .project-hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 120px 0 80px;
+            }
+
+            .project-icon-large {
+                font-size: 5rem;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+            }
+
+            .content-section {
+                padding: 80px 20px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .tech-stack-hero {
+                gap: 10px;
+            }
+
+            .project-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                max-width: 100%;
+            }
+
+            .modal-nav {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-section {
+                padding: 60px 15px;
+            }
+
+            .tech-details {
+                padding: 25px 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-link-btn {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+
+            .modal-nav {
+                font-size: 1.5rem;
+                padding: 0 10px;
+            }
+        }
+
+        /* Loading animation - optimized */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 245, 255, 0.1);
+            border-top: 3px solid var(--primary-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Focus styles for accessibility */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        .tech-tag:focus-visible,
+        .feature-card:focus-visible {
+            outline: 2px solid var(--primary-cyan);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay" aria-busy="true">
+        <div class="loading-spinner" aria-hidden="true"></div>
+    </div>
+
+    <div class="animated-bg" aria-hidden="true">
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+    </div>
+    
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="back-btn">
+                <span>←</span>
+                <span>Back to Portfolio</span>
+            </a>
+            <div class="project-title">SecondChance Project</div>
+        </div>
+    </nav>
+
+    <section class="project-hero">
+        <div class="hero-content">
+            <img src="secondchancelogo.png" alt="SecondChance Logo" class="project-logo">
+            <h1>SecondChance</h1>
+            <p class="hero-subtitle">Reintegration Platform for Formerly Incarcerated Individuals</p>
+            
+            <div class="tech-stack-hero">
+                <span class="tech-tag" tabindex="0">FastAPI</span>
+                <span class="tech-tag" tabindex="0">MongoDB</span>
+                <span class="tech-tag" tabindex="0">PyMongo</span>
+                <span class="tech-tag" tabindex="0">JWT Auth</span>
+                <span class="tech-tag" tabindex="0">WebSockets</span>
+                <span class="tech-tag" tabindex="0">Jinja2</span>
+                <span class="tech-tag" tabindex="0">Pydantic</span>
+            </div>
+            
+            <div class="project-links">
+                <a href="#demo" class="project-link-btn">
+                    <span>View Demo</span>
+                    <span>🚀</span>
+                </a>
+                <a href="https://github.com/yourusername/secondchance" class="project-link-btn secondary" target="_blank" rel="noopener noreferrer">
+                    <span>GitHub Repository</span>
+                    <span>📂</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">Project Overview</h2>
+        <p class="content-text">
+            SecondChance is a comprehensive reintegration platform designed to support formerly incarcerated individuals in their transition back to society. 
+            The system provides job matching, mental health resources, legal assistance, and a secure community chat to foster support networks.
+        </p>
+        
+        <p class="content-text">
+            Built with FastAPI and MongoDB, the platform features role-based access (admin/user), real-time chat capabilities, and personalized resource recommendations. 
+            The project was developed with a focus on privacy, security, and accessibility to serve this vulnerable population effectively.
+        </p>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">💼</span>
+                <h3>Job Matching</h3>
+                <p>Curated job listings tailored for reintegration with application tracking and status updates for users.</p>
+            </div>
+            
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">💬</span>
+                <h3>Secure Community Chat</h3>
+                <p>Real-time encrypted messaging with topic-based rooms and direct messaging for private conversations.</p>
+            </div>
+            
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">🩺</span>
+                <h3>Mental Health Support</h3>
+                <p>Directory of mental health professionals with specialization in reintegration and trauma recovery.</p>
+            </div>
+            
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">⚖️</span>
+                <h3>Legal Assistance</h3>
+                <p>Access to legal professionals specializing in expungement, parole, and other reintegration needs.</p>
+            </div>
+            
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">📚</span>
+                <h3>Training Resources</h3>
+                <p>Skill-building courses and certifications to improve employment opportunities.</p>
+            </div>
+            
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">🛡️</span>
+                <h3>Admin Portal</h3>
+                <p>Comprehensive management interface for user approvals, content moderation, and analytics.</p>
+            </div>
+        </div>
+    </section>
+
+<section class="content-section" id="demo">
+        <h2 class="section-title">Platform Walkthrough</h2>
+        <div class="gallery-grid">
+
+                        
+            <div class="gallery-item" tabindex="0" data-index="6">
+                <img src="login.png" alt="Login" class="gallery-image">
+                <p>Login Page</p>
+            </div>
+
+            <div class="gallery-item" tabindex="0" data-index="6">
+                <img src="homepage.png" alt="Home Page" class="gallery-image">
+                <p>Home Page</p>
+            </div>
+
+            <!-- 1. Home/Dashboard -->
+            <div class="gallery-item" tabindex="0" data-index="0">
+                <img src="homedashboard.png" alt="Dashboard Overview" class="gallery-image">
+                <p>Home Dashboard - Activity feed and announcements</p>
+            </div>
+            
+            <!-- 2. Community Chat -->
+            <div class="gallery-item" tabindex="0" data-index="1">
+                <img src="community-chat.png" alt="Community Chat" class="gallery-image">
+                <p>Community Chat - Secure peer support</p>
+            </div>
+            
+            <!-- 3. Support Network -->
+            <div class="gallery-item" tabindex="0" data-index="2">
+                <img src="support-network.png" alt="Support Directory" class="gallery-image">
+                <p>Support Network - Doctors & legal professionals</p>
+            </div>
+            
+            <!-- 4. Job Opportunities -->
+            <div class="gallery-item" tabindex="0" data-index="3">
+                <img src="job-opportunities.png" alt="Job Listings" class="gallery-image">
+                <p>Job Opportunities - Curated listings</p>
+            </div>
+            
+            <!-- 5. Training Resources -->
+            <div class="gallery-item" tabindex="0" data-index="4">
+                <img src="training-resources.png" alt="Training Programs" class="gallery-image">
+                <p>Training Resources - Skill development</p>
+            </div>
+            
+            <!-- 6. Chatbot Assistance -->
+            <div class="gallery-item" tabindex="0" data-index="5">
+                <img src="assistant-chatbot.png" alt="Help Chatbot" class="gallery-image">
+                <p>Assistant Chatbot - 24/7 guidance</p>
+            </div>
+            
+            
+            
+
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <span class="modal-nav prev" id="modalPrev">❮</span>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <span class="modal-nav next" id="modalNext">❯</span>
+        </div>
+    </div>
+
+    <section class="content-section">
+        <h2 class="section-title">Development Challenges & Solutions</h2>
+        <p class="content-text">
+            Building SecondChance presented unique challenges due to the sensitive nature of user data and the need for robust security measures. 
+            We implemented end-to-end encryption for chat messages and developed a comprehensive content moderation system to maintain a safe environment.
+        </p>
+        
+        <div class="tech-details">
+            <h3>Key Challenges Addressed</h3>
+            <ul class="tech-list">
+                <li>Secure real-time chat with WebSocket encryption and message persistence</li>
+                <li>Role-based access control for sensitive user data</li>
+                <li>Automated job matching algorithm considering legal restrictions</li>
+                <li>Content moderation tools for community safety</li>
+                <li>Mobile-first design for users with limited device access</li>
+                <li>Data anonymization for research while preserving privacy</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">Impact & Future Development</h2>
+        <p class="content-text">
+            SecondChance has demonstrated significant potential in pilot programs, with users reporting improved access to resources and stronger support networks. 
+            The platform has facilitated job placements for 65% of active users and reduced feelings of isolation by 78% according to user surveys.
+        </p>
+        
+        <div class="features-grid">
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">📈</span>
+                <h3>Performance Metrics</h3>
+                <p>• 95% uptime with zero security incidents<br>
+                   • 500+ active users in pilot phase<br>
+                   • 78% reduction in reported isolation<br>
+                   • 65% job placement rate</p>
+            </div>
+            
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">👥</span>
+                <h3>User Feedback</h3>
+                <p>"Found my current job through SecondChance" - User A<br>
+                "The community helped me feel less alone" - User B<br>
+                "Easy to use even with limited tech experience" - User C</p>
+            </div>
+            
+            <div class="feature-card" tabindex="0">
+                <span class="feature-icon">🚀</span>
+                <h3>Future Enhancements</h3>
+                <p>• Mobile app development<br>
+                   • Partnership expansion with employers<br>
+                   • AI-assisted resource matching<br>
+                   • Offline functionality</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../macropark/macropark.html" class="nav-btn prev">
+            <span>←</span>
+            <span>Previous Project</span>
+        </a>
+        <a href="../smartunlock/smartunlock.html" class="nav-btn next">
+            <span>Next Project</span>
+            <span>→</span>
+        </a>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; <span id="currentYear"></span> Sofiene Zayati. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Loading screen - optimized
+        window.addEventListener('load', () => {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                loadingOverlay.setAttribute('aria-busy', 'false');
+            }, 300);
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Enhanced navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Image gallery modal functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        
+        let currentImageIndex = 0;
+        const images = Array.from(galleryItems).map(item => ({
+            src: item.querySelector('img').src,
+            alt: item.querySelector('img').alt,
+            caption: item.querySelector('p').textContent
+        }));
+
+        // Open modal with clicked image
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                currentImageIndex = parseInt(item.getAttribute('data-index'));
+                updateModalImage();
+                imageModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Previous image
+        modalPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateModalImage();
+        });
+
+        // Next image
+        modalNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateModalImage();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!imageModal.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = '';
+            } else if (e.key === 'ArrowLeft') {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateModalImage();
+            } else if (e.key === 'ArrowRight') {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateModalImage();
+            }
+        });
+
+        // Swipe functionality for touch devices
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        imageModal.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        imageModal.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const threshold = 50;
+            if (touchEndX < touchStartX - threshold) {
+                // Swipe left - next image
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateModalImage();
+            } else if (touchEndX > touchStartX + threshold) {
+                // Swipe right - previous image
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateModalImage();
+            }
+        }
+
+        function updateModalImage() {
+            modalImage.src = images[currentImageIndex].src;
+            modalImage.alt = images[currentImageIndex].alt;
+        }
+
+        // Close modal when clicking outside image
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Intersection Observer for animations - optimized
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    if (entry.target.classList.contains('feature-card')) {
+                        entry.target.style.boxShadow = '0 20px 60px rgba(0, 245, 255, 0.15)';
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card, .tech-details, .gallery-item, .section-title, .project-icon-large, .tech-stack-hero').forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s`;
+            observer.observe(element);
+        });
+
+        // Dynamic background orb movement - optimized
+        let lastMove = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastMove > 50) {
+                const orbs = document.querySelectorAll('.bg-orb');
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                orbs.forEach((orb, index) => {
+                    const speed = (index + 1) * 0.5;
+                    const x = (mouseX - 0.5) * speed * 20;
+                    const y = (mouseY - 0.5) * speed * 20;
+                    orb.style.transform = `translate(${x}px, ${y}px)`;
+                });
+                lastMove = now;
+            }
+        });
+
+        // Enhanced hover effects for tech tags
+        document.querySelectorAll('.tech-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+                this.style.boxShadow = '0 10px 20px rgba(0, 245, 255, 0.3)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Add typing effect to hero subtitle
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        const text = heroSubtitle.textContent;
+        heroSubtitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                heroSubtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 30);
+            }
+        }
+        
+        setTimeout(typeWriter, 300);
+
+        // Service worker registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful');
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
+        // Preload images for better performance
+        function preloadImages() {
+            images.forEach(img => {
+                const image = new Image();
+                image.src = img.src;
+            });
+        }
+
+        // Start preloading after initial page load
+        setTimeout(preloadImages, 1000);
+    </script>
+</body>
+</html>

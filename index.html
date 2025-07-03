@@ -1154,7 +1154,7 @@
 
     <section id="contact" class="contact">
         <h2 class="section-title">Get In Touch</h2>
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/manjkjgp" method="POST">
             <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
@@ -1283,16 +1283,35 @@
             submitBtn.disabled = true;
             submitBtn.style.opacity = '0.7';
             
-            // Simulate form submission
-            setTimeout(() => {
-                showFormMessage('Message Sent Successfully! I\'ll get back to you soon.', 'success');
-                
+            // Create a FormData object
+            const formData = new FormData(this);
+            
+            // Send the form data using fetch
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showFormMessage('Message Sent Successfully! I\'ll get back to you soon.', 'success');
+                    this.reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                showFormMessage('There was a problem sending your message. Please try again later.', 'error');
+                console.error('Error:', error);
+            })
+            .finally(() => {
                 // Reset form and button
-                this.reset();
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
-            }, 2000);
+            });
         });
 
         function validateEmail(email) {

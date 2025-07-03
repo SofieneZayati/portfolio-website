@@ -25,6 +25,76 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
+        /* Logo styling */
+        .project-logo {
+            height: 200px;
+            margin-bottom: 20px;
+            margin-left: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Navigation Buttons - enhanced */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 80px 0 40px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+            max-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-btn:hover::before,
+        .nav-btn:focus-visible::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover,
+        .nav-btn:focus-visible {
+            background: rgba(0, 245, 255, 0.1);
+            border-color: var(--primary-cyan);
+            transform: translateY(-3px);
+            outline: none;
+        }
+
+        .nav-btn.prev {
+            justify-content: flex-start;
+        }
+
+        .nav-btn.next {
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation: none !important;
@@ -767,6 +837,15 @@
                 align-items: center;
                 gap: 15px;
             }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                max-width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -810,7 +889,7 @@
     
     <nav class="navbar" id="navbar">
         <div class="nav-content">
-            <a href="index.html" class="back-btn">
+            <a href="../index.html" class="back-btn">
                 <span>←</span>
                 <span>Back to Portfolio</span>
             </a>
@@ -820,7 +899,7 @@
 
     <section class="project-hero">
         <div class="hero-content">
-            <div class="project-icon-large">🏠</div>
+            <img src="zenithlogo.png" alt="ZenithHouse Logo" class="project-logo">
             <h1>ZenithHouse</h1>
             <p class="project-subtitle">Smart Home Automation System with Real-Time Mobile Control</p>
             
@@ -1023,6 +1102,17 @@
             </div>
         </div>
     </section>
+
+    <div class="nav-buttons">
+        <a href="../smartunlock/smartunlock.html" class="nav-btn prev">
+            <span>←</span>
+            <span>Previous Project</span>
+        </a>
+        <a href="../secondchance/secondchance.html" class="nav-btn next">
+            <span>Next Project</span>
+            <span>→</span>
+        </a>
+    </div>
 
     <footer class="footer">
         <p>&copy; <span id="currentYear"></span> Sofiene Zayati. All rights reserved.</p>

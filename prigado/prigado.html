@@ -7,7 +7,7 @@
     <meta name="keywords" content="n8n, Google Gemini, AI automation, e-commerce, MySQL, Laravel, Vue.js, workflows">
     <title>Prigado - AI Workflow Automation | Sofiene Zayati</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         * {
             margin: 0;
@@ -33,7 +33,7 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg-darker);
             color: #ffffff;
             overflow-x: hidden;
@@ -1281,6 +1281,7 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -1289,7 +1290,7 @@
         document.querySelectorAll('.overview-card, .tech-item, .feature-item, .section-title, .gallery-item, .architecture-diagram, .architecture-card').forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
-            element.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.08}s`;
+            element.style.transition = `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.03}s`;
             observer.observe(element);
         });
 

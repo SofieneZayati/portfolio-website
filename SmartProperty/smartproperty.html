@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Smart Unlock - Keyless Employee Access System by Sofiene Zayati">
-    <meta name="keywords" content="smart lock, BLE, MQTT, ESP32, security, embedded systems">
-    <title>Smart Unlock - Keyless Access System | Sofiene Zayati</title>
+    <meta name="description" content="SmartProperty - all-in-one real estate platform for listings, visits, and rental operations">
+    <meta name="keywords" content="real estate, property management, smart pricing, tenant matching, rental management">
+    <title>SmartProperty - Real Estate Platform | Sofiene Zayati</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         :root {
             --primary-cyan: #00f5ff;
             --primary-pink: #ff0080;
@@ -40,7 +40,7 @@
             line-height: 1.6;
         }
 
-        /* Animated background - consistent with index.html */
+        /* Animated background */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -87,18 +87,18 @@
         }
 
         @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) translateX(0px) scale(1); 
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) scale(1);
             }
-            33% { 
-                transform: translateY(-30px) translateX(20px) scale(1.1); 
+            33% {
+                transform: translateY(-30px) translateX(20px) scale(1.1);
             }
-            66% { 
-                transform: translateY(20px) translateX(-15px) scale(0.9); 
+            66% {
+                transform: translateY(20px) translateX(-15px) scale(0.9);
             }
         }
 
-        /* Navbar - consistent with index.html */
+        /* Navbar */
         .navbar {
             position: fixed;
             top: 20px;
@@ -175,19 +175,7 @@
             color: transparent;
         }
 
-        /* Logo styling - added from innomall.html */
-        .project-logo {
-            height: 200px;
-            margin-bottom: 20px;
-            margin-left: 50px;
-            transition: transform 0.3s ease;
-        }
-
-        .project-logo:hover {
-            transform: scale(1.05);
-        }
-
-        /* Project Hero - enhanced */
+        /* Hero Section */
         .project-hero {
             height: 100vh;
             display: flex;
@@ -206,39 +194,15 @@
             margin: 0 auto;
         }
 
-        .project-icon-large {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink));
-            border-radius: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            margin: 0 auto 40px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-icon-large::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .project-icon-large:hover::before {
-            left: 100%;
-        }
-
-        .project-icon-large:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.3);
+        .project-logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 25px;
+            border-radius: 30px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .project-hero h1 {
@@ -256,13 +220,83 @@
             font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 40px;
-            max-width: 800px;
+            max-width: 850px;
             margin-left: auto;
             margin-right: auto;
             font-weight: 300;
         }
 
-        /* Project Status - enhanced */
+        /* Project Links */
+        .project-links {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-pink));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .project-link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-link-btn:hover::before,
+        .project-link-btn:focus-visible::before {
+            left: 100%;
+        }
+
+        .project-link-btn:hover,
+        .project-link-btn:focus-visible {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 245, 255, 0.4);
+            outline: none;
+        }
+
+        .project-link-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-cyan);
+            box-shadow: none;
+        }
+
+        .project-link-btn.secondary:hover,
+        .project-link-btn.secondary:focus-visible {
+            background: var(--primary-cyan);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.3);
+        }
+
+        .project-link-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+        }
+
+        /* Project Status */
         .project-status {
             display: flex;
             justify-content: center;
@@ -324,7 +358,7 @@
             border-radius: 2px;
         }
 
-        /* Overview Grid - enhanced */
+        /* Overview Grid */
         .overview-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -363,7 +397,7 @@
         .overview-card:focus-within {
             transform: translateY(-10px);
             border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(0, 245, 255, 0.15),
                 0 0 100px rgba(255, 0, 128, 0.1);
             outline: none;
@@ -404,7 +438,66 @@
             color: white;
         }
 
-        /* Tech Stack - enhanced */
+        /* Modules and Features */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .feature-item:hover::before,
+        .feature-item:focus-within::before {
+            left: 100%;
+        }
+
+        .feature-item:hover,
+        .feature-item:focus-within {
+            transform: translateY(-5px);
+            border-color: rgba(0, 245, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.2);
+            outline: none;
+        }
+
+        .feature-item h4 {
+            color: var(--primary-pink);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .feature-item:hover p {
+            color: white;
+        }
+
+        /* Tech Stack */
         .tech-stack {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -450,175 +543,52 @@
         }
 
         .tech-item .tech-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
             display: block;
-            transition: transform 0.4s ease;
         }
 
-        .tech-item:hover .tech-icon {
-            transform: scale(1.2);
-        }
-
-        /* Features List - enhanced */
-        .features-list {
+        /* Placeholder Images */
+        .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
             margin-top: 40px;
         }
 
-        .feature-item {
+        .image-placeholder {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .feature-item:hover::before,
-        .feature-item:focus-within::before {
-            left: 100%;
-        }
-
-        .feature-item:hover,
-        .feature-item:focus-within {
-            transform: translateY(-5px);
-            border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.2);
-            outline: none;
-        }
-
-        .feature-item h4 {
-            color: var(--primary-pink);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feature-item p {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-
-        .feature-item:hover p {
-            color: white;
-        }
-
-        /* Security Architecture - enhanced */
-        .security-architecture {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 25px;
-            padding: 40px;
-            margin: 40px 0;
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-
-        .security-architecture:hover {
-            border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.1);
-        }
-
-        .architecture-placeholder {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 128, 0.1));
             border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 60px;
-            margin: 20px 0;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.1rem;
-            transition: all 0.4s ease;
-        }
-
-        .security-architecture:hover .architecture-placeholder {
-            border-color: rgba(0, 245, 255, 0.4);
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Image Gallery - enhanced */
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .gallery-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .gallery-item:hover::before,
-        .gallery-item:focus-within::before {
-            left: 100%;
-        }
-
-        .gallery-item:hover,
-        .gallery-item:focus-within {
-            transform: translateY(-10px);
-            border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.2);
-            outline: none;
-        }
-
-        .gallery-placeholder {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 128, 0.1));
-            height: 200px;
+            border-radius: 18px;
+            padding: 40px 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            min-height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 3rem;
-            transition: all 0.4s ease;
         }
 
-        .gallery-item:hover .gallery-placeholder {
-            color: white;
-            transform: scale(1.05);
+        .demo-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 18px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
 
-        .gallery-caption {
-            padding: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
+        .demo-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
-        /* CTA Section - enhanced */
+        /* CTA Section */
         .cta-section {
             text-align: center;
             padding: 80px 50px;
@@ -694,11 +664,18 @@
             box-shadow: 0 15px 35px rgba(0, 245, 255, 0.3);
         }
 
-        /* Navigation Buttons - added from innomall.html */
+        .cta-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+        }
+
+        /* Navigation Buttons */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
-            margin: 80px 0 40px;
+            margin: 80px 50px 40px;
             gap: 20px;
         }
 
@@ -714,7 +691,7 @@
             border-radius: 15px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             flex: 1;
-            max-width: 200px;
+            max-width: 220px;
             position: relative;
             overflow: hidden;
         }
@@ -752,7 +729,7 @@
             margin-left: auto;
         }
 
-        /* Footer - consistent with index.html */
+        /* Footer */
         .footer {
             padding: 80px 50px;
             text-align: center;
@@ -764,7 +741,7 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        /* Loading animation - consistent with index.html */
+        /* Loading animation */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -798,7 +775,7 @@
             .overview-grid,
             .tech-stack,
             .features-list,
-            .image-gallery {
+            .image-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
@@ -808,39 +785,44 @@
                 width: 95%;
                 padding: 12px 20px;
             }
-            
+
             .project-hero {
                 height: auto;
                 min-height: 100vh;
                 padding: 120px 20px 80px;
             }
-            
+
             .content-section {
                 padding: 80px 20px;
             }
-            
+
             .overview-grid,
             .tech-stack,
             .features-list,
-            .image-gallery {
+            .image-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .project-status {
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
             }
 
+            .project-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
             .nav-buttons {
                 flex-direction: column;
-                gap: 15px;
+                margin: 60px 20px 30px;
             }
 
             .nav-btn {
@@ -852,14 +834,16 @@
             .content-section {
                 padding: 60px 15px;
             }
-            
-            .cta-button {
+
+            .cta-button,
+            .project-link-btn {
                 padding: 15px 25px;
                 font-size: 1rem;
+                width: 100%;
             }
         }
 
-        /* Focus styles for accessibility */
+        /* Focus styles */
         a:focus-visible,
         button:focus-visible,
         input:focus-visible,
@@ -882,35 +866,41 @@
         <div class="bg-orb"></div>
         <div class="bg-orb"></div>
     </div>
-    
+
     <nav class="navbar" id="navbar">
         <div class="nav-content">
             <a href="../index.html" class="back-btn">
-                <span>←</span>
+                <span>&larr;</span>
                 <span>Back to Portfolio</span>
             </a>
-            <div class="project-title">Smart Unlock Project</div>
+            <div class="project-title">SmartProperty Project</div>
         </div>
     </nav>
 
     <section class="project-hero">
         <div class="hero-content">
-            <img src="smartunlocklogo.png" alt="Smart Unlock Logo" class="project-logo">
-            <h1>Smart Unlock</h1>
-            <p class="project-subtitle">Keyless Employee Access System with BLE Mobile App & MQTT Integration</p>
-            
+            <img src="SmartPropertyLogo.png" alt="SmartProperty Logo" class="project-logo">
+            <h1>SmartProperty</h1>
+            <p class="project-subtitle">All in one real estate platform for listings, visits, follow-up, and rental analytics. Work in progress.</p>
+
+            <div class="project-links">
+                <a href="https://youtu.be/gO4r7E8SepE" class="project-link-btn" target="_blank" rel="noopener noreferrer">
+                    <span>Watch Demo</span>
+                </a>
+                <a href="../index.html#contact" class="project-link-btn secondary">
+                    <span>Contact Me</span>
+                </a>
+            </div>
+
             <div class="project-status">
                 <div class="status-item status-active">
-                    <span>🟢</span>
-                    <span>Deployed</span>
+                    <span>Work in progress</span>
                 </div>
                 <div class="status-item">
-                    <span>📶</span>
-                    <span>BLE & MQTT</span>
+                    <span>Web platform</span>
                 </div>
                 <div class="status-item">
-                    <span>🔒</span>
-                    <span>Enterprise Security</span>
+                    <span>AI assisted workflows</span>
                 </div>
             </div>
         </div>
@@ -920,16 +910,50 @@
         <h2 class="section-title">Project Overview</h2>
         <div class="overview-grid">
             <div class="overview-card" tabindex="0">
-                <h3>🎯 Problem Statement</h3>
-                <p>Traditional keycard systems are insecure, easily lost or duplicated, and lack real-time access control and monitoring capabilities for modern workplaces.</p>
+                <h3>Problem</h3>
+                <p>Agencies rely on many disconnected tools for listings, visits, and payments, which slows decisions and increases missed follow-ups.</p>
             </div>
             <div class="overview-card" tabindex="0">
-                <h3>💡 Solution</h3>
-                <p>A secure, keyless access system using BLE mobile app authentication with MQTT communication to instantly control door lock hardware.</p>
+                <h3>Solution</h3>
+                <p>One platform to publish properties, manage visits, track payments, and monitor performance with a consistent workflow.</p>
             </div>
             <div class="overview-card" tabindex="0">
-                <h3>🚀 Impact</h3>
-                <p>Eliminated physical keycards, reduced unauthorized access incidents by 92%, and provided real-time access logs for security monitoring.</p>
+                <h3>Status</h3>
+                <p>Work in progress. Screenshots, metrics, and full module details will be added.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">Platform Modules</h2>
+        <div class="features-list">
+            <div class="feature-item" tabindex="0">
+                <h4>Module 1 - Asset Management</h4>
+                <p>Placeholder summary for property listings and asset tracking.</p>
+            </div>
+            <div class="feature-item" tabindex="0">
+                <h4>Module 2 - Smart Valuation</h4>
+                <p>Placeholder summary for pricing and valuation logic.</p>
+            </div>
+            <div class="feature-item" tabindex="0">
+                <h4>Module 3 - Intelligent Matching</h4>
+                <p>Placeholder summary for tenant and property matching.</p>
+            </div>
+            <div class="feature-item" tabindex="0">
+                <h4>Module 4 - Marketing and Distribution</h4>
+                <p>Placeholder summary for campaigns and distribution channels.</p>
+            </div>
+            <div class="feature-item" tabindex="0">
+                <h4>Module 5 - Rental Management</h4>
+                <p>Placeholder summary for visits, contracts, and rental flow.</p>
+            </div>
+            <div class="feature-item" tabindex="0">
+                <h4>Module 6 - Solvency Analysis</h4>
+                <p>Placeholder summary for risk and solvency scoring.</p>
+            </div>
+            <div class="feature-item" tabindex="0">
+                <h4>Module 7 - Administration and Reporting</h4>
+                <p>Placeholder summary for analytics and admin dashboards.</p>
             </div>
         </div>
     </section>
@@ -938,150 +962,104 @@
         <h2 class="section-title">Technology Stack</h2>
         <div class="tech-stack">
             <div class="tech-item" tabindex="0">
-                <span class="tech-icon">⚙️</span>
-                <strong>C++</strong>
-                <p>Embedded Programming</p>
+                <span class="tech-icon">FE</span>
+                <strong>React + TypeScript</strong>
+                <p>Vite based frontend</p>
             </div>
             <div class="tech-item" tabindex="0">
-                <span class="tech-icon">📶</span>
-                <strong>BLE</strong>
-                <p>Bluetooth Low Energy</p>
+                <span class="tech-icon">UI</span>
+                <strong>Tailwind CSS</strong>
+                <p>Component styling</p>
             </div>
             <div class="tech-item" tabindex="0">
-                <span class="tech-icon">📡</span>
-                <strong>MQTT</strong>
-                <p>IoT Communication</p>
+                <span class="tech-icon">BE</span>
+                <strong>NestJS</strong>
+                <p>API and services</p>
             </div>
             <div class="tech-item" tabindex="0">
-                <span class="tech-icon">🎛️</span>
-                <strong>ESP32</strong>
-                <p>Microcontroller</p>
+                <span class="tech-icon">DB</span>
+                <strong>MongoDB</strong>
+                <p>Primary data store</p>
             </div>
             <div class="tech-item" tabindex="0">
-                <span class="tech-icon">🔒</span>
-                <strong>AES-256</strong>
-                <p>Encryption</p>
+                <span class="tech-icon">RT</span>
+                <strong>Socket.IO</strong>
+                <p>Live updates</p>
             </div>
             <div class="tech-item" tabindex="0">
-                <span class="tech-icon">📱</span>
-                <strong>Mobile App</strong>
-                <p>User Interface</p>
-            </div>
-            <div class="tech-item" tabindex="0">
-                <span class="tech-icon">🔄</span>
-                <strong>OTA Updates</strong>
-                <p>Remote Maintenance</p>
-            </div>
-            <div class="tech-item" tabindex="0">
-                <span class="tech-icon">📊</span>
-                <strong>Admin Dashboard</strong>
-                <p>Access Management</p>
+                <span class="tech-icon">PAY</span>
+                <strong>Stripe</strong>
+                <p>Payments and billing</p>
             </div>
         </div>
     </section>
 
     <section class="content-section">
-        <h2 class="section-title">Key Features</h2>
+        <h2 class="section-title">Key Capabilities</h2>
         <div class="features-list">
             <div class="feature-item" tabindex="0">
-                <h4>📱 Mobile Authentication</h4>
-                <p>Secure BLE-based authentication using employee smartphones with multi-factor verification and biometric fallback.</p>
+                <h4>Listing and Visit Management</h4>
+                <p>Structured property creation forms, visit tracking, and no show monitoring.</p>
             </div>
             <div class="feature-item" tabindex="0">
-                <h4>⚡ Instant Lock Control</h4>
-                <p>MQTT protocol enables sub-second lock/unlock commands from the mobile app to door hardware.</p>
+                <h4>Pricing and Matching</h4>
+                <p>Planned workflows for smart valuation and tenant matching.</p>
             </div>
             <div class="feature-item" tabindex="0">
-                <h4>🔒 Military-Grade Security</h4>
-                <p>AES-256 encrypted communication with rotating keys and secure handshake protocol.</p>
+                <h4>Revenue and Payments</h4>
+                <p>Dashboards for paid vs pending amounts and rental performance.</p>
             </div>
             <div class="feature-item" tabindex="0">
-                <h4>📊 Real-Time Monitoring</h4>
-                <p>Comprehensive access logs with timestamps, user identification, and door status updates.</p>
-            </div>
-            <div class="feature-item" tabindex="0">
-                <h4>🔄 Remote Management</h4>
-                <p>Admin dashboard for adding/removing users, setting access schedules, and viewing analytics.</p>
-            </div>
-            <div class="feature-item" tabindex="0">
-                <h4>🔋 Low Power Operation</h4>
-                <p>Optimized BLE stack allows months of operation on battery power with quick wake-from-sleep.</p>
+                <h4>Risk and Solvency</h4>
+                <p>Planned scoring model for tenant reliability and risk analysis.</p>
             </div>
         </div>
     </section>
 
     <section class="content-section">
-        <h2 class="section-title">Security Architecture</h2>
-        <div class="security-architecture">
-            <h3>Multi-Layer Protection System</h3>
-            <div class="architecture-placeholder">
-                [System Placeholder]
-                
+        <h2 class="section-title">Screenshots and Visuals</h2>
+        <div class="image-grid">
+            <div class="demo-embed" aria-label="SmartProperty demo video">
+                <iframe
+                    src="https://www.youtube.com/embed/gO4r7E8SepE"
+                    title="SmartProperty demo"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
             </div>
-            <p>The system implements defense-in-depth security with hardware-level encryption, secure boot, rotating keys, and tamper detection that automatically revokes compromised devices.</p>
+            <div class="image-placeholder">Screenshot placeholder - Landing</div>
+            <div class="image-placeholder">Screenshot placeholder - Asset Management</div>
+            <div class="image-placeholder">Screenshot placeholder - Valuation</div>
+            <div class="image-placeholder">Screenshot placeholder - Matching</div>
+            <div class="image-placeholder">Screenshot placeholder - Rental Flow</div>
+            <div class="image-placeholder">Screenshot placeholder - Reporting</div>
         </div>
     </section>
 
     <section class="content-section">
-        <h2 class="section-title">System Diagram</h2>
-        <div class="image-gallery">
-            <div class="gallery-item" tabindex="0">
-                <div class="gallery-placeholder">📡</div>
-                <div class="gallery-caption">BLE Communication Flow</div>
-            </div>
-            <div class="gallery-item" tabindex="0">
-                <div class="gallery-placeholder">🔐</div>
-                <div class="gallery-caption">Authentication Sequence</div>
-            </div>
-            <div class="gallery-item" tabindex="0">
-                <div class="gallery-placeholder">🔧</div>
-                <div class="gallery-caption">Hardware Architecture</div>
+        <div class="cta-section">
+            <h2>Work in progress</h2>
+            <p>Final visuals, metrics, and module deep dives will be added here.</p>
+            <div class="cta-buttons">
+                <a href="https://youtu.be/gO4r7E8SepE" class="cta-button" target="_blank" rel="noopener noreferrer">
+                    <span>Watch Demo</span>
+                </a>
+                <a href="../index.html#contact" class="cta-button secondary">
+                    <span>Contact Me</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="content-section">
-        <h2 class="section-title">Results & Impact</h2>
-        <div class="overview-grid">
-            <div class="overview-card" tabindex="0">
-                <h3>🚪 Access Efficiency</h3>
-                <p>Reduced average entry time from 5.2 seconds (keycards) to 1.3 seconds (mobile authentication).</p>
-            </div>
-            <div class="overview-card" tabindex="0">
-                <h3>🔐 Security Improvements</h3>
-                <p>92% reduction in unauthorized access incidents compared to previous keycard system.</p>
-            </div>
-            <div class="overview-card" tabindex="0">
-                <h3>💰 Cost Savings</h3>
-                <p>Eliminated $15,000 annual cost of replacing lost/damaged keycards and readers.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2 class="section-title">Want to See More?</h2>
-        <p>Explore the full project documentation or get in touch to discuss how this system could be customized for your organization's needs.</p>
-        <div class="cta-buttons">
-            <a href="#" class="cta-button">
-                <span>View Documentation</span>
-                <span>📄</span>
-            </a>
-            <a href="../index.html#contact" class="cta-button secondary">
-                <span>Contact Me</span>
-                <span>✉️</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- Added navigation buttons -->
     <div class="nav-buttons">
-        <a href="../zenithhouse/zenithhouse.html" class="nav-btn prev">
-            <span>←</span>
+        <a href="../prigado/prigado.html" class="nav-btn prev">
+            <span>&larr;</span>
             <span>Previous Project</span>
         </a>
-        <a href="../sps/sps.html" class="nav-btn next">
+        <a href="../macropark/macropark.html" class="nav-btn next">
             <span>Next Project</span>
-            <span>→</span>
+            <span>&rarr;</span>
         </a>
     </div>
 
@@ -1090,7 +1068,7 @@
     </footer>
 
     <script>
-        // Loading screen - consistent with index.html
+        // Loading screen
         window.addEventListener('load', () => {
             const loadingOverlay = document.getElementById('loadingOverlay');
             setTimeout(() => {
@@ -1105,7 +1083,7 @@
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Enhanced navbar scroll effect - consistent with index.html
+        // Enhanced navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
@@ -1113,28 +1091,6 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
-        });
-
-        // Smooth scrolling with offset for fixed navbar
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 100;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Update URL without jumping
-                    if (history.pushState) {
-                        history.pushState(null, null, this.getAttribute('href'));
-                    } else {
-                        location.hash = this.getAttribute('href');
-                    }
-                }
-            });
         });
 
         // Intersection Observer for animations
@@ -1148,35 +1104,28 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                    
-                    // Special animations for different elements
-                    if (entry.target.classList.contains('tech-item')) {
-                        entry.target.style.boxShadow = '0 10px 20px rgba(255, 0, 128, 0.2)';
-                    } else if (entry.target.classList.contains('feature-item')) {
-                        entry.target.style.boxShadow = '0 15px 30px rgba(0, 245, 255, 0.2)';
-                    }
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.overview-card, .tech-item, .feature-item, .section-title, .project-icon-large, .gallery-item').forEach((element, index) => {
+        document.querySelectorAll('.overview-card, .tech-item, .feature-item, .section-title, .image-placeholder, .cta-section').forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
             element.style.transition = `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.03}s`;
             observer.observe(element);
         });
 
-        // Dynamic background orb movement - consistent with index.html
+        // Dynamic background orb movement
         let lastMove = 0;
         document.addEventListener('mousemove', (e) => {
             const now = Date.now();
-            if (now - lastMove > 50) { // Throttle to ~20fps
+            if (now - lastMove > 50) {
                 const orbs = document.querySelectorAll('.bg-orb');
                 const mouseX = e.clientX / window.innerWidth;
                 const mouseY = e.clientY / window.innerHeight;
-                
+
                 orbs.forEach((orb, index) => {
                     const speed = (index + 1) * 0.5;
                     const x = (mouseX - 0.5) * speed * 20;
@@ -1187,26 +1136,10 @@
             }
         });
 
-        // Add typing effect to hero subtitle
-        const heroSubtitle = document.querySelector('.project-subtitle');
-        const text = heroSubtitle.textContent;
-        heroSubtitle.textContent = '';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                heroSubtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        
-        setTimeout(typeWriter, 1500);
-
-        // Service worker registration for PWA - consistent with index.html
+        // Service worker registration for PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then(registration => {
+                navigator.serviceWorker.register('/sw.js').then(() => {
                     console.log('ServiceWorker registration successful');
                 }).catch(err => {
                     console.log('ServiceWorker registration failed: ', err);

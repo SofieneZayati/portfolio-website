@@ -445,6 +445,15 @@
         filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
         transition: all 0.3s ease;
         }
+        .project-icon .icon-placeholder {
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        padding: 0 10px;
+        }
         .project-card:hover .project-icon img,
     .project-card:focus-within .project-icon img {
         transform: scale(1.05);
@@ -1020,6 +1029,29 @@
 
             <div class="project-card" tabindex="0">
                 <div class="project-icon">
+                    <img src="SmartProperty/SmartPropertyLogo.png" alt="SmartProperty Logo">
+                </div>
+                <h3>SmartProperty</h3>
+                <p>All-in-one real estate platform for listings, visits, follow-up, and rental analytics. Work in progress - content and visuals will be updated.</p>
+
+                <div class="project-stack">
+                    <span class="stack-title">Tech Stack</span>
+                    <div class="stack-tags">
+                        <span class="stack-tag">React</span>
+                        <span class="stack-tag">TypeScript</span>
+                        <span class="stack-tag">Vite</span>
+                        <span class="stack-tag">Tailwind CSS</span>
+                        <span class="stack-tag">NestJS</span>
+                        <span class="stack-tag">MongoDB</span>
+                        <span class="stack-tag">Stripe</span>
+                    </div>
+                </div>
+
+                <a href="SmartProperty/smartproperty.html" class="project-link">View Project -></a>
+            </div>
+
+            <div class="project-card" tabindex="0">
+                <div class="project-icon">
                     <img src="macropark/macrologo.png" alt="MacroPark Logo">
                 </div>
                 <h3>MacroPark</h3>
@@ -1421,6 +1453,7 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -1429,7 +1462,7 @@
         document.querySelectorAll('.project-card, .skill, .section-title').forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(50px)';
-            element.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+            element.style.transition = `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.03}s`;
             observer.observe(element);
         });
 

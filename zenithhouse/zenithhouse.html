@@ -1182,6 +1182,7 @@
                     if (entry.target.classList.contains('feature-item')) {
                         entry.target.style.boxShadow = '0 20px 60px rgba(0, 245, 255, 0.15)';
                     }
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -1190,7 +1191,7 @@
         document.querySelectorAll('.overview-card, .tech-item, .feature-item, .section-title, .gallery-item, .system-architecture').forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
-            element.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+            element.style.transition = `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.03}s`;
             observer.observe(element);
         });
 

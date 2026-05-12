@@ -1246,6 +1246,7 @@
                     if (entry.target.classList.contains('feature-card')) {
                         entry.target.style.boxShadow = '0 20px 60px rgba(0, 245, 255, 0.15)';
                     }
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -1254,7 +1255,7 @@
         document.querySelectorAll('.feature-card, .tech-details, .gallery-item, .section-title, .project-icon-large, .tech-stack-hero').forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(20px)';
-            element.style.transition = `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s`;
+            element.style.transition = `all 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.02}s`;
             observer.observe(element);
         });
 

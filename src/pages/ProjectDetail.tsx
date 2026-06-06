@@ -291,7 +291,7 @@ export default function ProjectDetail() {
             <div className="section-anchor mb-4" />
             <SectionLabel>Architecture</SectionLabel>
             <SectionHeading>System design</SectionHeading>
-            <div className="space-y-16 max-w-[860px] mx-auto">
+            <div className="space-y-6 max-w-[860px] mx-auto">
               {content.architecture.map((arch, i) => (
                 <motion.div
                   key={i}

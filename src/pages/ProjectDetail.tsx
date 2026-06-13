@@ -4,25 +4,30 @@ import { HiArrowLeft, HiArrowRight, HiExternalLink, HiCollection, HiUsers, HiSer
 import { projects } from '../data/projects'
 import projectContent from '../data/projectContent'
 import ImageGallery from '../components/ImageGallery'
+import ProjectSectionNav from '../components/ProjectSectionNav'
 
 function ProjectSection({
   children,
   delay = 0,
   first = false,
   className = '',
+  id,
 }: {
   children: React.ReactNode
   delay?: number
   first?: boolean
   className?: string
+  id?: string
 }) {
   return (
     <motion.section
+      id={id}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
       className={`mb-28 last:mb-0 ${first ? 'mt-10' : 'mt-24'} ${className}`}
+      style={id ? { scrollMarginTop: '5rem' } : undefined}
     >
       {children}
     </motion.section>
@@ -80,6 +85,18 @@ export default function ProjectDetail() {
   const hasResults = content.results && content.results.length > 0
   const hasFacts = content.facts && content.facts.length > 0
   const hasMetrics = hasResults && content.results!.some((r) => r.metric)
+  const hasFeatures = content.features.length > 0
+
+  const sections = [
+    ...(hasFacts ? [{ id: 'overview' as const, label: 'Overview' }] : []),
+    ...(hasFeatures ? [{ id: 'capabilities' as const, label: 'Capabilities' }] : []),
+    ...(content.techStack.length > 0 ? [{ id: 'stack' as const, label: 'Stack' }] : []),
+    ...(hasArchitecture ? [{ id: 'architecture' as const, label: 'Architecture' }] : []),
+    ...(hasGallery ? [{ id: 'gallery' as const, label: 'In Action' }] : []),
+    ...(hasChallenges ? [{ id: 'decisions' as const, label: 'Decisions' }] : []),
+    ...(hasResults ? [{ id: 'outcomes' as const, label: 'Outcomes' }] : []),
+    { id: 'next-steps' as const, label: 'Next Steps' },
+  ]
 
   return (
     <div className="min-h-screen pt-28 pb-24 px-4 sm:px-8">
@@ -147,9 +164,11 @@ export default function ProjectDetail() {
           <div className="accent-rule mt-16" />
         </motion.div>
 
+        <ProjectSectionNav sections={sections} />
+
         {/* 2. OVERVIEW (lead paragraph + stat cards) */}
         {hasFacts && (
-          <ProjectSection first>
+          <ProjectSection id="overview" first>
             <div className="section-anchor mb-4" />
             <SectionLabel>Overview</SectionLabel>
             <p className="text-lg md:text-xl text-white/65 leading-relaxed max-w-3xl mb-14">
@@ -182,7 +201,7 @@ export default function ProjectDetail() {
         )}
 
         {/* 3. CAPABILITIES (grouped glass containers) */}
-        {content.features.length > 0 && (() => {
+        {hasFeatures && (() => {
           const grouped = content.features.reduce<Record<string, typeof content.features>>((acc, f) => {
             const g = f.group || 'Capabilities'
             if (!acc[g]) acc[g] = []
@@ -192,7 +211,7 @@ export default function ProjectDetail() {
           const groupNames = Object.keys(grouped)
           const groupAccents = ['#00f5ff', '#8b5cf6', '#ff0080', '#00f5ff', '#8b5cf6', '#ff0080']
           return (
-            <ProjectSection>
+            <ProjectSection id="capabilities">
               <div className="section-anchor mb-4" />
               <SectionLabel>Capabilities</SectionLabel>
               <SectionHeading>What it does</SectionHeading>
@@ -251,7 +270,7 @@ export default function ProjectDetail() {
 
         {/* 4. STACK (single glass panel) */}
         {content.techStack.length > 0 && (
-          <ProjectSection>
+          <ProjectSection id="stack">
             <div className="section-anchor mb-4" />
             <SectionLabel>Stack</SectionLabel>
             <div className="mb-10">
@@ -287,7 +306,7 @@ export default function ProjectDetail() {
 
         {/* 5. ARCHITECTURE (subtle glass per block) */}
         {hasArchitecture && (
-          <ProjectSection>
+          <ProjectSection id="architecture">
             <div className="section-anchor mb-4" />
             <SectionLabel>Architecture</SectionLabel>
             <SectionHeading>System design</SectionHeading>
@@ -338,7 +357,7 @@ export default function ProjectDetail() {
 
         {/* 6. IN ACTION (gallery) */}
         {hasGallery && (
-          <ProjectSection>
+          <ProjectSection id="gallery">
             <div className="section-anchor mb-4" />
             <SectionLabel>In Action</SectionLabel>
             <SectionHeading>
@@ -350,7 +369,7 @@ export default function ProjectDetail() {
 
         {/* 7. ENGINEERING DECISIONS (subtle glass + left accent) */}
         {hasChallenges && (
-          <ProjectSection>
+          <ProjectSection id="decisions">
             <div className="section-anchor mb-4" />
             <SectionLabel>Engineering Decisions</SectionLabel>
             <SectionHeading>How hard problems were solved</SectionHeading>
@@ -384,7 +403,7 @@ export default function ProjectDetail() {
 
         {/* 8. OUTCOMES (metric tiles OR icon pillars, auto-detect) */}
         {hasResults && (
-          <ProjectSection>
+          <ProjectSection id="outcomes">
             <div className="section-anchor mb-4" />
             <SectionLabel>Outcomes</SectionLabel>
             {hasMetrics ? (
@@ -420,7 +439,7 @@ export default function ProjectDetail() {
         )}
 
         {/* 9. NEXT STEPS (centered, no card, no border) */}
-        <ProjectSection>
+        <ProjectSection id="next-steps">
           <div className="accent-rule mb-20" />
           <div className="text-center max-w-2xl mx-auto py-8">
             <span className="section-label block mb-6">Next Steps</span>

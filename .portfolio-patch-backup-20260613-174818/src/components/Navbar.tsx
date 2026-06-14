@@ -112,8 +112,6 @@ export default function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
             aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-navigation"
           >
             {mobileOpen ? <HiX size={24} /> : <HiMenu size={24} />}
           </button>
@@ -126,7 +124,6 @@ export default function Navbar() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              id="mobile-navigation"
               className="md:hidden overflow-hidden mt-4 pt-4 border-t border-white/10"
             >
               <div className="flex flex-col gap-2 pb-2">

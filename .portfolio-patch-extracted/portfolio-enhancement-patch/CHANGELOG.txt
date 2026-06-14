@@ -1,0 +1,15 @@
+Changed files:
+- vite.config.ts
+- index.html
+- src/App.tsx
+- src/index.css
+- src/components/Hero.tsx
+- src/components/CursorFollower.tsx
+- src/components/AnimatedBackground.tsx
+- src/components/Navbar.tsx
+- src/components/ProjectCard.tsx
+- src/components/ImageGallery.tsx
+
+Validation performed:
+- TypeScript check passed with `npx tsc -b` on the patched source.
+- Full Vite build could not be completed inside the sandbox because the uploaded zip included a non-portable node_modules folder. The patch script includes `-CleanInstall` to fix that on Windows by reinstalling dependencies.

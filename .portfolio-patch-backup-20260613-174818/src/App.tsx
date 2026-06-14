@@ -2,19 +2,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import AnimatedBackground from './components/AnimatedBackground'
+import LoadingScreen from './components/LoadingScreen'
 import CursorFollower from './components/CursorFollower'
 
 const Home = lazy(() => import('./pages/Home'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
-const AnimatedBackground = lazy(() => import('./components/AnimatedBackground'))
 
 function App() {
   return (
     <BrowserRouter>
       <CursorFollower />
-      <Suspense fallback={null}>
-        <AnimatedBackground />
-      </Suspense>
+      <LoadingScreen />
+      <AnimatedBackground />
       <Navbar />
       <main>
         <Suspense

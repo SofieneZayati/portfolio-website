@@ -1,21 +1,20 @@
 import { useEffect, useState, useRef } from 'react'
-import type { CSSProperties, MouseEvent } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import { HiArrowRight, HiChevronDown, HiDownload } from 'react-icons/hi'
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import { HiArrowRight, HiChevronDown } from 'react-icons/hi'
 import { profile } from '../data/profile'
 
 function GlitchText({ text, useGradient = false }: { text: string; useGradient?: boolean }) {
   const [glitching, setGlitching] = useState(false)
-  const reduceMotion = useReducedMotion()
 
-  const triggerGlitch = () => {
-    if (reduceMotion) return
-    setGlitching(true)
-    window.setTimeout(() => setGlitching(false), 180)
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlitching(true)
+      setTimeout(() => setGlitching(false), 150)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
 
-  const gradientStyle: CSSProperties = useGradient
+  const gradientStyle: React.CSSProperties = useGradient
     ? {
         background: 'linear-gradient(135deg, #fff 0%, #00f5ff 30%, #ff0080 70%, #8b5cf6 100%)',
         WebkitBackgroundClip: 'text',
@@ -27,11 +26,15 @@ function GlitchText({ text, useGradient = false }: { text: string; useGradient?:
   return (
     <span
       className={`relative inline-block transition-all duration-75 ${
-        glitching ? 'opacity-90 blur-[1px] translate-x-[2px] skew-x-1' : ''
+        glitching
+          ? 'opacity-90 blur-[1px] translate-x-[2px] skew-x-1'
+          : ''
       }`}
       style={gradientStyle}
-      onMouseEnter={triggerGlitch}
-      onFocus={triggerGlitch}
+      onMouseEnter={() => {
+        setGlitching(true)
+        setTimeout(() => setGlitching(false), 200)
+      }}
     >
       {text}
     </span>
@@ -41,30 +44,23 @@ function GlitchText({ text, useGradient = false }: { text: string; useGradient?:
 function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
   const [displayed, setDisplayed] = useState('')
   const [showCursor, setShowCursor] = useState(true)
-  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
-    if (reduceMotion) {
-      setDisplayed(text)
-      setShowCursor(false)
-      return
-    }
-
-    const timeout = window.setTimeout(() => {
+    const timeout = setTimeout(() => {
       let i = 0
-      const interval = window.setInterval(() => {
+      const interval = setInterval(() => {
         setDisplayed(text.slice(0, i + 1))
         i++
         if (i >= text.length) {
-          window.clearInterval(interval)
-          window.setTimeout(() => setShowCursor(false), 2000)
+          clearInterval(interval)
+          // Blink cursor a few more times then hide
+          setTimeout(() => setShowCursor(false), 2000)
         }
       }, 60)
-      return () => window.clearInterval(interval)
+      return () => clearInterval(interval)
     }, delay)
-
-    return () => window.clearTimeout(timeout)
-  }, [text, delay, reduceMotion])
+    return () => clearTimeout(timeout)
+  }, [text, delay])
 
   return (
     <span>
@@ -87,10 +83,9 @@ function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
 
 function ProfilePhoto() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const reduceMotion = useReducedMotion()
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (reduceMotion || !containerRef.current) return
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20
@@ -110,27 +105,29 @@ function ProfilePhoto() {
       className="relative mx-auto mt-12 lg:mt-0"
       style={{ transition: 'transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99)', width: '400px', height: '400px', maxWidth: '100%' }}
     >
+      {/* Animated rotating gradient ring */}
       <div
         className="absolute inset-0 rounded-full"
         style={{
           background: 'conic-gradient(from 0deg, #00f5ff, #8b5cf6, #ff0080, #00f5ff)',
-          animation: reduceMotion ? 'none' : 'spin-slow 6s linear infinite',
+          animation: 'spin-slow 6s linear infinite',
           padding: '3px',
         }}
       >
         <div className="w-full h-full rounded-full" style={{ backgroundColor: '#050505' }} />
       </div>
 
+      {/* Glow behind photo */}
       <div
         className="absolute inset-0 rounded-full animate-glow-pulse"
         style={{
           background: 'radial-gradient(circle, rgba(0,245,255,0.15) 0%, rgba(139,92,246,0.1) 40%, transparent 70%)',
           filter: 'blur(30px)',
           transform: 'scale(1.3)',
-          animation: reduceMotion ? 'none' : undefined,
         }}
       />
 
+      {/* Photo */}
       <div
         className="absolute rounded-full overflow-hidden"
         style={{
@@ -146,6 +143,7 @@ function ProfilePhoto() {
         />
       </div>
 
+      {/* Floating accent orbs */}
       <div
         className="absolute rounded-full"
         style={{
@@ -153,7 +151,7 @@ function ProfilePhoto() {
           top: '-8px', right: '-8px',
           background: 'rgba(0,245,255,0.15)',
           filter: 'blur(20px)',
-          animation: reduceMotion ? 'none' : 'float 4s ease-in-out infinite',
+          animation: 'float 4s ease-in-out infinite',
         }}
       />
       <div
@@ -163,17 +161,15 @@ function ProfilePhoto() {
           bottom: '-12px', left: '-12px',
           background: 'rgba(139,92,246,0.12)',
           filter: 'blur(24px)',
-          animation: reduceMotion ? 'none' : 'float 5s ease-in-out infinite reverse',
+          animation: 'float 5s ease-in-out infinite reverse',
         }}
       />
+
     </div>
   )
 }
 
 export default function Hero() {
-  const github = profile.socials.find((social) => social.label === 'GitHub')?.url
-  const linkedIn = profile.socials.find((social) => social.label === 'LinkedIn')?.url
-
   return (
     <section
       id="home"
@@ -235,47 +231,9 @@ export default function Hero() {
                 Let's Talk
               </a>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.05 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mt-5"
-              aria-label="Professional links"
-            >
-              <a
-                href="/cv.pdf"
-                download="Sofiene_Zayati_CV.pdf"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-[#00f5ff] bg-[#00f5ff]/10 border border-[#00f5ff]/20 hover:bg-[#00f5ff]/20 transition-all duration-300"
-              >
-                <HiDownload />
-                Download CV
-              </a>
-              {github && (
-                <a
-                  href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white/70 bg-white/[0.04] border border-white/[0.06] hover:text-white hover:bg-white/[0.08] transition-all duration-300"
-                >
-                  <FaGithub />
-                  GitHub
-                </a>
-              )}
-              {linkedIn && (
-                <a
-                  href={linkedIn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white/70 bg-white/[0.04] border border-white/[0.06] hover:text-white hover:bg-white/[0.08] transition-all duration-300"
-                >
-                  <FaLinkedinIn />
-                  LinkedIn
-                </a>
-              )}
-            </motion.div>
           </div>
 
+          {/* Profile Photo — visible on large screens */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -285,6 +243,7 @@ export default function Hero() {
             <ProfilePhoto />
           </motion.div>
 
+          {/* Profile Photo — mobile (smaller) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -300,7 +259,7 @@ export default function Hero() {
       </div>
 
       <motion.a
-        href="#projects"
+        href="#skills"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}

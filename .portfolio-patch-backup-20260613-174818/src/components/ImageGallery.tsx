@@ -47,8 +47,6 @@ export default function ImageGallery({ images }: Props) {
         {images.map((img, i) => (
           <motion.button
             key={i}
-            type="button"
-            aria-label={`Open ${img.caption} image preview`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -85,8 +83,6 @@ export default function ImageGallery({ images }: Props) {
             onClick={close}
           >
             <button
-              type="button"
-              aria-label="Close image preview"
               onClick={close}
               className="absolute top-4 right-4 z-10 p-2 text-white/60 hover:text-white transition-colors"
             >
@@ -94,8 +90,6 @@ export default function ImageGallery({ images }: Props) {
             </button>
 
             <button
-              type="button"
-              aria-label="Previous image"
               onClick={(e) => { e.stopPropagation(); prev() }}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/60 hover:text-white transition-colors"
             >
@@ -103,8 +97,6 @@ export default function ImageGallery({ images }: Props) {
             </button>
 
             <button
-              type="button"
-              aria-label="Next image"
               onClick={(e) => { e.stopPropagation(); next() }}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/60 hover:text-white transition-colors"
             >

@@ -5,6 +5,7 @@ import { projects } from '../data/projects'
 import projectContent from '../data/projectContent'
 import ImageGallery from '../components/ImageGallery'
 import ProjectSectionNav from '../components/ProjectSectionNav'
+import SEO from '../components/SEO'
 
 function ProjectSection({
   children,
@@ -99,7 +100,15 @@ export default function ProjectDetail() {
   ]
 
   return (
-    <div className="min-h-screen pt-28 pb-24 px-4 sm:px-8">
+    <>
+      <SEO
+        title={`${project.title} | Sofiene Zayati`}
+        description={`${project.description} A project by Sofiene Zayati.`}
+        path={`/project/${project.id}`}
+        image={project.logo || '/images/og-image.png'}
+        type="article"
+      />
+      <div className="min-h-screen pt-28 pb-24 px-4 sm:px-8">
       <div className="max-w-[1000px] mx-auto">
         {/* Back link */}
         <motion.div
@@ -520,5 +529,6 @@ export default function ProjectDetail() {
         </motion.div>
       </div>
     </div>
+    </>
   )
 }

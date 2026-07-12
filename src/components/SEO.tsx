@@ -5,6 +5,7 @@ type SEOProps = {
   description: string
   path?: string
   image?: string
+  imageAlt?: string
   type?: 'website' | 'profile' | 'article'
   noindex?: boolean
 }
@@ -25,6 +26,7 @@ export default function SEO({
   description,
   path = '/',
   image = '/images/og-image.png',
+  imageAlt = 'Sofiene Zayati engineering portfolio',
   type = 'website',
   noindex = false,
 }: SEOProps) {
@@ -44,9 +46,11 @@ export default function SEO({
     setMeta('meta[property="og:type"]', { property: 'og:type', content: type })
     setMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl })
     setMeta('meta[property="og:image"]', { property: 'og:image', content: imageUrl })
+    setMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: imageAlt })
     setMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title })
     setMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description })
     setMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: imageUrl })
+    setMeta('meta[name="twitter:image:alt"]', { name: 'twitter:image:alt', content: imageAlt })
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     if (!canonical) {
@@ -55,7 +59,7 @@ export default function SEO({
       document.head.appendChild(canonical)
     }
     canonical.href = canonicalUrl
-  }, [title, description, path, image, type, noindex])
+  }, [title, description, path, image, imageAlt, type, noindex])
 
   return null
 }

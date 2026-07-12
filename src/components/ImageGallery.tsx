@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useId, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiX, HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 
@@ -13,6 +13,11 @@ interface Props {
 
 export default function ImageGallery({ images }: Props) {
   const [selected, setSelected] = useState<number | null>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const dialogLabelId = useId()
+  const isOpen = selected !== null
 
   const close = useCallback(() => setSelected(null), [])
 
@@ -25,19 +30,85 @@ export default function ImageGallery({ images }: Props) {
   }, [images.length])
 
   useEffect(() => {
-    if (selected === null) return
+    if (!isOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    const focusableSelector = [
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(',')
+
     const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close()
-      if (e.key === 'ArrowLeft') prev()
-      if (e.key === 'ArrowRight') next()
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        close()
+        return
+      }
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        prev()
+        return
+      }
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        next()
+        return
+      }
+
+      if (e.key !== 'Tab') return
+
+      const dialog = dialogRef.current
+      if (!dialog) return
+
+      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+        (element) => element.tabIndex >= 0
+      )
+
+      if (focusable.length === 0) {
+        e.preventDefault()
+        dialog.focus()
+        return
+      }
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement
+
+      if (e.shiftKey && (active === first || !dialog.contains(active))) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && (active === last || !dialog.contains(active))) {
+        e.preventDefault()
+        first.focus()
+      }
     }
-    window.addEventListener('keydown', handler)
+
+    const containFocus = (e: FocusEvent) => {
+      const dialog = dialogRef.current
+      if (dialog && !dialog.contains(e.target as Node)) {
+        closeButtonRef.current?.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handler)
+    document.addEventListener('focusin', containFocus)
     document.body.style.overflow = 'hidden'
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus())
+
     return () => {
-      window.removeEventListener('keydown', handler)
-      document.body.style.overflow = ''
+      window.cancelAnimationFrame(focusFrame)
+      document.removeEventListener('keydown', handler)
+      document.removeEventListener('focusin', containFocus)
+      document.body.style.overflow = previousOverflow
+      triggerRef.current?.focus()
     }
-  }, [selected, close, prev, next])
+  }, [isOpen, close, prev, next])
 
   if (images.length === 0) return null
 
@@ -53,21 +124,24 @@ export default function ImageGallery({ images }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.04 }}
-            onClick={() => setSelected(i)}
+            onClick={(event) => {
+              triggerRef.current = event.currentTarget
+              setSelected(i)
+            }}
             className="group cursor-pointer text-left"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-white/[0.04] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/[0.08]">
+            <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/[0.12]">
               <img
                 src={img.src}
                 alt={img.caption}
-                className="w-full h-56 md:h-64 object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                className="w-full h-56 md:h-64 object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                 loading="lazy"
                 onError={(e) => {
                   ;(e.target as HTMLImageElement).style.display = 'none'
                 }}
               />
             </div>
-            <p className="mt-3 text-xs text-white/40 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
+            <p className="mt-3 text-xs text-white/60 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
               {img.caption}
             </p>
           </motion.button>
@@ -77,6 +151,11 @@ export default function ImageGallery({ images }: Props) {
       <AnimatePresence>
         {selected !== null && (
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={dialogLabelId}
+            tabIndex={-1}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -85,12 +164,13 @@ export default function ImageGallery({ images }: Props) {
             onClick={close}
           >
             <button
+              ref={closeButtonRef}
               type="button"
               aria-label="Close image preview"
               onClick={close}
               className="absolute top-4 right-4 z-10 p-2 text-white/60 hover:text-white transition-colors"
             >
-              <HiX size={24} />
+              <HiX size={24} aria-hidden="true" />
             </button>
 
             <button
@@ -99,7 +179,7 @@ export default function ImageGallery({ images }: Props) {
               onClick={(e) => { e.stopPropagation(); prev() }}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/60 hover:text-white transition-colors"
             >
-              <HiChevronLeft size={32} />
+              <HiChevronLeft size={32} aria-hidden="true" />
             </button>
 
             <button
@@ -108,7 +188,7 @@ export default function ImageGallery({ images }: Props) {
               onClick={(e) => { e.stopPropagation(); next() }}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/60 hover:text-white transition-colors"
             >
-              <HiChevronRight size={32} />
+              <HiChevronRight size={32} aria-hidden="true" />
             </button>
 
             <motion.div
@@ -125,9 +205,13 @@ export default function ImageGallery({ images }: Props) {
                 alt={images[selected].caption}
                 className="max-w-full max-h-[80vh] object-contain rounded-2xl"
               />
-              <p className="mt-4 text-sm text-white/70">
+              <p
+                id={dialogLabelId}
+                aria-live="polite"
+                className="mt-4 text-sm text-white/70"
+              >
                 {images[selected].caption}
-                <span className="text-white/40 ml-2">
+                <span className="text-white/60 ml-2">
                   {selected + 1} / {images.length}
                 </span>
               </p>

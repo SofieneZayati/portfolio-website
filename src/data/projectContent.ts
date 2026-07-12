@@ -18,14 +18,14 @@ const content: Record<string, ProjectContent> = {
       { label: 'Type', value: 'AI-Powered SaaS' },
       { label: 'Roles', value: '4 (Agent / Admin / Client / Accountant)' },
       { label: 'Deployment', value: 'Kubernetes Microservices' },
-      { label: 'Stack', value: '28 Technologies' },
+      { label: 'Stack', value: 'Multi-Service Platform' },
     ],
     techStack: [
       {
         category: 'Frontend',
         items: [
           { name: 'React', description: 'Single-page application with role-based routing' },
-          { name: 'TailwindCSS', description: 'Utility-first styling system' },
+          { name: 'Tailwind CSS', description: 'Utility-first styling system' },
         ],
       },
       {
@@ -42,7 +42,7 @@ const content: Record<string, ProjectContent> = {
           { name: 'FastAPI', description: 'ML & computer-vision microservice' },
           { name: 'REST APIs', description: 'Service-to-service communication' },
           { name: 'JWT Auth', description: 'Stateless role-based authentication' },
-          { name: 'Socket.io', description: 'Realtime events & notifications' },
+          { name: 'Socket.IO', description: 'Real-time events & notifications' },
           { name: 'Stripe', description: 'Payment processing' },
           { name: 'Firebase', description: 'Push notifications & client messaging' },
         ],
@@ -110,25 +110,25 @@ const content: Record<string, ProjectContent> = {
       { group: 'AI & Automation', icon: '🖼️', title: 'AI Image Description Generation', desc: 'CLIP and BLIP analyze uploaded property photos and generate room-by-room listing copy, accelerating marketing content production.' },
       { group: 'AI & Automation', icon: '📄', title: 'OCR Document Analysis', desc: 'OCR.space extracts structured data from income, identity, and supporting documents to feed the solvency pipeline.' },
       { group: 'Trust & Matching', icon: '🛡️', title: 'Fraud Detection', desc: 'Income mismatch detection and cross-field validation flag suspicious applications before they reach the approval queue.' },
-      { group: 'Trust & Matching', icon: '⚖️', title: 'Solvency Analysis', desc: 'AI-driven risk scoring with affordability ratio, occupation validation, and 90%+ accuracy on credit decisions.' },
+      { group: 'Trust & Matching', icon: '⚖️', title: 'Solvency Analysis', desc: 'Prototype risk scoring that combines affordability ratios, occupation validation, and document evidence for review.' },
       { group: 'AI & Automation', icon: '🤖', title: 'AI Chat Assistant', desc: 'Groq-powered conversational agent that estimates budgets, answers property questions, and guides users through the platform.' },
       { group: 'AI & Automation', icon: '🎤', title: 'Voice-Enabled Navigation', desc: 'Hands-free search and navigation that listens to natural-language queries and routes users to the right view or listing.' },
       { group: 'Property Platform', icon: '🧭', title: 'Multi-Role Dashboards', desc: 'Tailored experiences for real-estate agents, admins, clients, and accountants — each with KPIs and quick actions specific to the role.' },
       { group: 'Operations & Analytics', icon: '📊', title: 'Engagement Analytics', desc: 'Per-property views, clicks, saves, and unique users tracked at the branch level to measure listing performance.' },
       { group: 'Property Platform', icon: '📅', title: 'Visit Request Management', desc: 'Multi-slot visit scheduling with date and time pickers, application status, and visit history for clients.' },
       { group: 'Property Platform', icon: '🗂️', title: 'Property Management Workflows', desc: 'Add-property flow with map-based location picking, image uploads, AI price estimation, and publish-to-market steps.' },
-      { group: 'Property Platform', icon: '⚡', title: 'Real-Time Updates', desc: 'Socket.io live notifications, dashboard refresh, and event broadcasting across roles for instant operational feedback.' },
+      { group: 'Property Platform', icon: '⚡', title: 'Real-Time Updates', desc: 'Socket.IO notifications, dashboard refresh, and event broadcasting across roles for immediate operational feedback.' },
     ],
     architecture: [
       {
         title: 'Microservices Architecture',
-        desc: 'Independent services communicating over REST and Socket.io, enabling horizontal scaling and isolated deployments per capability.',
+        desc: 'Independent services communicating over REST and Socket.IO, enabling horizontal scaling and isolated deployments per capability.',
         items: [
           { label: 'React SPA', desc: 'Role-based UI on Vercel' },
           { label: 'NestJS API Gateway', desc: 'Auth, business services, and orchestration' },
           { label: 'FastAPI ML Service', desc: 'Computer vision and ML inference' },
           { label: 'MongoDB Atlas', desc: 'Managed document store' },
-          { label: 'Socket.io Server', desc: 'Realtime events and notifications' },
+          { label: 'Socket.IO Server', desc: 'Real-time events and notifications' },
           { label: 'Cloudinary', desc: 'Image storage and transformation' },
         ],
       },
@@ -180,17 +180,17 @@ const content: Record<string, ProjectContent> = {
     ],
     challenges: [
       { title: 'Multi-Role Authorization', desc: 'Four distinct user roles (agent, admin, client, accountant) with overlapping yet isolated permissions, branches, and dashboards.' },
-      { title: 'Realtime at Scale', desc: 'Socket.io event broadcasting across roles for dashboard refresh, notifications, and engagement metrics without overwhelming the client.' },
+      { title: 'Real-Time Events', desc: 'Socket.IO event broadcasting across roles for dashboard refresh, notifications, and engagement metrics without overwhelming the client.' },
       { title: 'OCR + AI Pipeline Reliability', desc: 'Combining OCR.space extraction, XGBoost scoring, and rule-based validation into a single, auditable solvency analysis.' },
       { title: 'Computer Vision Cost', desc: 'CLIP and BLIP inference for image description generation had to be optimized to keep response time under 5 seconds per listing.' },
-      { title: 'Accessibility vs Density', desc: 'Shipping a feature-rich, data-dense dashboard product while keeping WCAG-friendly navigation, voice input, and high Lighthouse scores.' },
+      { title: 'Accessibility vs Density', desc: 'Balancing a feature-rich dashboard with keyboard-friendly navigation, voice input, readable structure, and accessible interaction patterns.' },
     ],
     results: [
-      { icon: '🎯', title: 'Valuation Accuracy', metric: '±5%', content: 'Property valuation accuracy from the XGBoost pricing model trained on historical Tunisian listings.' },
-      { icon: '🏠', title: 'Vacancy Reduction', metric: '40%', content: 'Reduction in vacancy through smart tenant matching and AI-driven property recommendations.' },
-      { icon: '⚙️', title: 'Admin Workload', metric: '50%', content: 'Reduction in administrative workload via workflow automation across branches and roles.' },
-      { icon: '🛡️', title: 'Credit Scoring', metric: '90%+', content: 'Accuracy on AI-driven credit scoring combining OCR document extraction and solvency analysis.' },
-      { icon: '♿', title: 'Accessibility', metric: '96', content: 'Lighthouse Accessibility Score — production-grade inclusivity across dashboards and flows.' },
+      { icon: '🎯', title: 'Valuation Model', metric: 'XGBoost', content: 'A prototype pricing model trained on historical Tunisian listings to support—not replace—human valuation.' },
+      { icon: '🏠', title: 'Tenant Matching', metric: 'Matching', content: 'Recommendation flows surface relevant properties using preferences, affordability, and listing data.' },
+      { icon: '⚙️', title: 'Operations', metric: 'Automation', content: 'OCR extraction and workflow automation reduce repetitive steps across administrative roles.' },
+      { icon: '🛡️', title: 'Solvency Review', metric: 'OCR + rules', content: 'Document extraction and rule-based signals create an auditable starting point for manual review.' },
+      { icon: '♿', title: 'Accessible Use', metric: 'Voice + text', content: 'Keyboard-aware flows, voice input, and image descriptions broaden how users can navigate the product.' },
     ],
     cta: {
       primary: { label: 'Watch Demo', url: 'https://youtu.be/z0v_b0Qgeng' },
@@ -203,7 +203,7 @@ const content: Record<string, ProjectContent> = {
     facts: [
       { label: 'Type', value: 'Internship Project' },
       { label: 'Domain', value: 'E-Commerce AI Automation' },
-      { label: 'Stack', value: '7 Technologies' },
+      { label: 'Stack', value: 'AI + Automation' },
       { label: 'Role', value: 'AI Workflow Engineer' },
     ],
     techStack: [
@@ -300,7 +300,7 @@ const content: Record<string, ProjectContent> = {
   innomall: {
     facts: [
       { label: 'Type', value: 'Full-Stack Platform' },
-      { label: 'Stack', value: '8 Technologies' },
+      { label: 'Stack', value: 'Desktop + Web + IoT' },
       { label: 'Hardware', value: 'ESP32 IoT Sensors' },
       { label: 'Architecture', value: 'JavaFX + Symfony 6' },
     ],
@@ -371,7 +371,7 @@ const content: Record<string, ProjectContent> = {
           { label: 'ESP32 microcontrollers', desc: 'Sensor management' },
           { label: 'Ultrasonic sensors', desc: 'Parking space detection' },
           { label: 'MQTT protocol', desc: 'Real-time data transmission' },
-          { label: 'WiFi connectivity', desc: 'With auto-reconnection' },
+          { label: 'Wi-Fi connectivity', desc: 'With auto-reconnection' },
           { label: 'Reservation system', desc: 'Online spot booking' },
           { label: 'Live monitoring', desc: 'Real-time occupancy display' },
         ],
@@ -387,13 +387,13 @@ const content: Record<string, ProjectContent> = {
     ],
     challenges: [
       { title: 'Real-Time Data Sync', desc: 'Real-time synchronization between IoT devices and web platform using MQTT with Redis caching for high-traffic environments.' },
-      { title: 'Secure Payments', desc: 'PCI-compliant payment processing with tokenization through Stripe API integration.' },
+      { title: 'Secure Payments', desc: 'Stripe tokenization keeps raw payment-card data outside the application while supporting online checkout.' },
       { title: 'Cross-Platform Compatibility', desc: 'Ensuring consistent behavior between JavaFX desktop and Symfony web interfaces with shared business logic.' },
       { title: 'IoT Reliability', desc: 'Offline fallback for parking sensors with automatic sync on reconnection to prevent data loss.' },
     ],
     results: [
-      { icon: '📈', title: 'Performance', content: '• 98.7% system uptime\n• 500ms average API response time\n• Supports 10,000+ concurrent users\n• Real-time parking allocation' },
-      { icon: '👥', title: 'Feedback', content: '"The admin dashboard transformed how we manage operations." — Mall Manager\n"Finding parking is now effortless!" — Customer' },
+      { icon: '📈', title: 'Performance', content: '• Real-time parking allocation\n• Asynchronous notifications\n• Caching and query optimization\n• Production load and uptime still require formal benchmarking' },
+      { icon: '🧩', title: 'Product Coverage', content: '• Administrator and customer workflows\n• Desktop and web interfaces\n• Connected parking operations\n• Payments, notifications, and analytics' },
     ],
     cta: {
       primary: { label: 'Watch Demo', url: 'https://youtu.be/Zs875HdhmJ8' },
@@ -443,7 +443,7 @@ const content: Record<string, ProjectContent> = {
       { group: 'Access & Authentication', icon: '🔍', title: 'License Plate Recognition', desc: 'Primary authentication via LPR cameras for automatic vehicle identification and barrier control.' },
       { group: 'Access & Authentication', icon: '📱', title: 'Flutter Mobile App', desc: 'Cross-platform mobile app with BLE fallback authentication when LPR is unavailable.' },
       { group: 'Hardware & Operations', icon: '🚧', title: 'WT32 Barrier Control', desc: 'Industry-grade WT32-ETH01 controllers with MQTT communication, real-time status, and emergency override.' },
-      { group: 'Access & Authentication', icon: '📡', title: 'Dual Communication', desc: 'MQTT/BLE with automatic Ethernet/WiFi failover ensuring 100% operational reliability.' },
+      { group: 'Access & Authentication', icon: '📡', title: 'Dual Communication', desc: 'MQTT and BLE with automatic Ethernet/Wi-Fi failover designed to preserve access during network interruptions.' },
       { group: 'Hardware & Operations', icon: '🔄', title: 'OTA Firmware Updates', desc: 'Over-the-air updates enabling remote maintenance, security patches, and feature deployments without physical access.' },
       { group: 'Hardware & Operations', icon: '📊', title: 'Real-Time Monitoring', desc: 'FastAPI backend with Dockerized services providing event logging, access history, and live dashboard.' },
     ],
@@ -456,7 +456,7 @@ const content: Record<string, ProjectContent> = {
     ],
     gallery: [],
     challenges: [
-      { title: 'Multi-Protocol Integration', desc: 'Synthesizing MQTT, BLE, Ethernet, and WiFi into a cohesive system with automatic failover between protocols.' },
+      { title: 'Multi-Protocol Integration', desc: 'Synthesizing MQTT, BLE, Ethernet, and Wi-Fi into a cohesive system with automatic failover between protocols.' },
       { title: 'Firmware Update Safety', desc: 'Developing a failsafe OTA update mechanism with rollback capability to prevent device bricking.' },
       { title: 'Real-Time Event Processing', desc: 'Handling concurrent barrier events with sub-second response time through the FastAPI event pipeline.' },
       { title: 'LPR Accuracy Optimization', desc: 'Fine-tuning license plate recognition for varied lighting conditions and plate formats.' },
@@ -572,7 +572,7 @@ const content: Record<string, ProjectContent> = {
       {
         category: 'IoT',
         items: [
-          { name: 'WiFi', description: 'Connectivity with auto-reconnect' },
+          { name: 'Wi-Fi', description: 'Connectivity with auto-reconnect' },
           { name: 'Power Management', description: 'Deep-sleep & scheduling' },
         ],
       },
@@ -634,9 +634,9 @@ const content: Record<string, ProjectContent> = {
     features: [
       { group: 'Security & Access', icon: '📱', title: 'BLE Authentication', desc: 'Secure Bluetooth Low Energy-based authentication using employee smartphones with multi-factor verification.' },
       { group: 'Security & Access', icon: '⚡', title: 'Instant Lock Control', desc: 'MQTT protocol enables sub-second lock/unlock commands from the mobile app to door hardware.' },
-      { group: 'Security & Access', icon: '🔒', title: 'AES-256 Security', desc: 'Military-grade encryption with rotating keys and secure handshake protocol for all communications.' },
+      { group: 'Security & Access', icon: '🔒', title: 'AES-256 Security', desc: 'Encrypted communication with rotating keys and a secure handshake protocol for access commands.' },
       { group: 'Operations', icon: '📊', title: 'Access Monitoring', desc: 'Real-time access logs with timestamps, user identification, and door status for security auditing.' },
-      { group: 'Operations', icon: '🔋', title: 'Low Power Operation', desc: 'Optimized BLE stack for months of battery life with quick wake-from-sleep capability.' },
+      { group: 'Operations', icon: '🔋', title: 'Low Power Operation', desc: 'A deep-sleep-oriented BLE design intended to extend battery life while preserving quick wake-up.' },
     ],
     architecture: [
       {
@@ -689,7 +689,7 @@ const content: Record<string, ProjectContent> = {
       { group: 'Parking Experience', icon: '📍', title: 'Real-Time Availability', desc: 'Live updates of parking space availability using IoT sensor data displayed on an interactive map.' },
       { group: 'Parking Experience', icon: '🗺️', title: 'Interactive Map', desc: 'Color-coded map showing available, occupied, and restricted parking spaces with navigation.' },
       { group: 'Smart Features', icon: '⏱️', title: 'Time Estimates', desc: 'Predictive insights showing when spaces are likely to become available based on historical patterns.' },
-      { group: 'Smart Features', icon: '🔔', title: 'Availability Alerts', desc: 'Push notifications when spaces become available in user&#39;s preferred parking areas.' },
+      { group: 'Smart Features', icon: '🔔', title: 'Availability Alerts', desc: "Push notifications when spaces become available in the user's preferred parking areas." },
     ],
     architecture: [
       {
@@ -734,7 +734,7 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     features: [
-      { group: 'Field Monitoring', icon: '🌡️', title: 'Real-Time Monitoring', desc: 'Continuous tracking of temperature and humidity with 0.5°C / 1% RH accuracy for precision agriculture.' },
+      { group: 'Field Monitoring', icon: '🌡️', title: 'Real-Time Monitoring', desc: 'Continuous DHT22 temperature and humidity readings for timely field monitoring.' },
       { group: 'Field Monitoring', icon: '📊', title: 'Data Visualization', desc: 'Interactive mobile charts showing historical trends and current environmental conditions.' },
       { group: 'Operations', icon: '⚠️', title: 'Alert System', desc: 'Instant push notifications when environmental conditions exceed optimal ranges for specific crops.' },
       { group: 'Operations', icon: '🔋', title: 'Solar-Powered Operation', desc: 'Low-power design with solar charging and battery backup for continuous field operation.' },
@@ -742,7 +742,7 @@ const content: Record<string, ProjectContent> = {
     architecture: [
       {
         title: 'End-to-End IoT Solution',
-        desc: 'ESP32 with DHT22 sensors collects environmental data, transmits via WiFi to Firebase, and is visualized in a mobile app for farmer insights.',
+        desc: 'ESP32 with DHT22 sensors collects environmental data, transmits via Wi-Fi to Firebase, and is visualized in a mobile app for farmer insights.',
       },
     ],
     gallery: [],

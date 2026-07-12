@@ -41,9 +41,12 @@ export default function ProjectSectionNav({ sections }: Props) {
 
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    if (!el) return false
+
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+    el.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' })
+    window.history.pushState(null, '', `#${encodeURIComponent(id)}`)
+    return true
   }, [])
 
   if (sections.length < 2) return null
@@ -58,7 +61,7 @@ export default function ProjectSectionNav({ sections }: Props) {
               onClick={() => scrollTo(section.id)}
               className={`project-nav-item ${i === activeIndex ? 'active' : ''}`}
               aria-label={`Scroll to ${section.label}`}
-              aria-current={i === activeIndex ? 'true' : undefined}
+              aria-current={i === activeIndex ? 'location' : undefined}
             >
               <span className="project-nav-label">{section.label}</span>
               <span
@@ -73,19 +76,22 @@ export default function ProjectSectionNav({ sections }: Props) {
       </nav>
 
       {/* Mobile: horizontal scrollable bar */}
-      <div className="project-nav-mobile" role="tablist" aria-label="Project sections">
+      <nav className="project-nav-mobile" aria-label="Project sections">
         {sections.map((section, i) => (
-          <button
+          <a
             key={section.id}
-            onClick={() => scrollTo(section.id)}
+            href={`#${section.id}`}
+            onClick={(event) => {
+              if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+              if (scrollTo(section.id)) event.preventDefault()
+            }}
             className={`project-nav-chip ${i === activeIndex ? 'active' : ''}`}
-            role="tab"
-            aria-selected={i === activeIndex}
+            aria-current={i === activeIndex ? 'location' : undefined}
           >
             {section.label}
-          </button>
+          </a>
         ))}
-      </div>
+      </nav>
     </>
   )
 }

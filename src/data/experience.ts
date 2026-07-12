@@ -18,7 +18,7 @@ export const experiences: Experience[] = [
   {
     period: 'Sep 2021 — Jun 2024',
     title: "Bachelor's Degree in Embedded and Mobile Systems",
-    organization: "Higher Institute of Technological Studies of Rades — Radis, Tunisia",
+    organization: "Higher Institute of Technological Studies of Radès — Radès, Tunisia",
     description:
       'Focused on microcontroller programming, IoT architectures, mobile development, and hardware-software integration.',
     type: 'education',
@@ -26,14 +26,14 @@ export const experiences: Experience[] = [
   {
     period: 'Sep 2017 — Jun 2021',
     title: 'Baccalaureate in Technical Sciences',
-    organization: 'Lycée Technique Farhat Hached Rades — Radis, Tunisia',
+    organization: 'Lycée Technique Farhat Hached Radès — Radès, Tunisia',
     description:
       'Foundation in technical sciences, mathematics, and introductory engineering concepts.',
     type: 'education',
   },
   {
     period: 'Jul 2025 — Aug 2025',
-    title: 'AI Automation & Full Stack Developer',
+    title: 'AI Automation & Full-Stack Developer',
     organization: 'Inspark Connect — Tunis, Tunisia',
     description:
       'Development of AI-powered workflows and intelligent assistants for the Prigado e-commerce platform using n8n, Laravel, Vue.js, MySQL, and Gemini.',

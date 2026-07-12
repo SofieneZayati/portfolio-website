@@ -27,7 +27,7 @@ function ProjectSection({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`mb-28 last:mb-0 ${first ? 'mt-10' : 'mt-24'} ${className}`}
+      className={`mb-20 md:mb-28 last:mb-0 ${first ? 'mt-8 md:mt-10' : 'mt-16 md:mt-24'} ${className}`}
       style={id ? { scrollMarginTop: '5rem' } : undefined}
     >
       {children}
@@ -42,7 +42,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function SectionHeading({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <h2
-      className={`text-2xl md:text-3xl font-display font-bold text-white max-w-2xl leading-[1.2] mb-10 ${className}`}
+      className={`text-2xl md:text-3xl font-display font-bold text-white max-w-2xl leading-[1.2] mb-8 md:mb-10 ${className}`}
     >
       {children}
     </h2>
@@ -60,17 +60,27 @@ export default function ProjectDetail() {
 
   if (!project || !content) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Project not found</h1>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-[#00f5ff] hover:underline"
-          >
-            <HiArrowLeft /> Back to home
-          </Link>
+      <>
+        <SEO
+          title="Project not found | Sofiene Zayati"
+          description="The requested project could not be found."
+          path={id ? `/project/${id}` : '/project'}
+          noindex
+        />
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <div className="text-center">
+            <span className="section-label block mb-4">404 / Project</span>
+            <h1 className="text-4xl font-bold text-white mb-4">Project not found</h1>
+            <p className="text-white/60 mb-8">The project may have moved or the link may be incorrect.</p>
+            <Link
+              to="/#projects"
+              className="inline-flex items-center gap-2 text-[#00f5ff] hover:underline"
+            >
+              <HiArrowLeft /> Back to selected work
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
@@ -87,6 +97,20 @@ export default function ProjectDetail() {
   const hasFacts = content.facts && content.facts.length > 0
   const hasMetrics = hasResults && content.results!.some((r) => r.metric)
   const hasFeatures = content.features.length > 0
+  const heroPreviewSrc = project.screenshots[0] ?? content.gallery[0]?.src
+  const heroPreviewCaption =
+    content.gallery.find((image) => image.src === heroPreviewSrc)?.caption ??
+    `${project.title} project preview`
+  const contentDemoLink = content.cta.primary &&
+    /demo|watch|live/i.test(`${content.cta.primary.label} ${content.cta.primary.url}`)
+    ? content.cta.primary.url
+    : undefined
+  const contentCodeLink = content.cta.secondary?.find((link) =>
+    /github|source|code|repository/i.test(`${link.label} ${link.url}`)
+  )?.url
+  const demoUrl = project.links.live ?? contentDemoLink
+  const codeUrl = project.links.github ?? contentCodeLink
+  const heroMetadata = [project.category, ...(content.status ?? [])].slice(0, 3)
 
   const sections = [
     ...(hasFacts ? [{ id: 'overview' as const, label: 'Overview' }] : []),
@@ -94,7 +118,7 @@ export default function ProjectDetail() {
     ...(content.techStack.length > 0 ? [{ id: 'stack' as const, label: 'Stack' }] : []),
     ...(hasArchitecture ? [{ id: 'architecture' as const, label: 'Architecture' }] : []),
     ...(hasGallery ? [{ id: 'gallery' as const, label: 'In Action' }] : []),
-    ...(hasChallenges ? [{ id: 'decisions' as const, label: 'Decisions' }] : []),
+    ...(hasChallenges ? [{ id: 'decisions' as const, label: 'Considerations' }] : []),
     ...(hasResults ? [{ id: 'outcomes' as const, label: 'Outcomes' }] : []),
     { id: 'next-steps' as const, label: 'Next Steps' },
   ]
@@ -106,37 +130,29 @@ export default function ProjectDetail() {
         description={`${project.description} A project by Sofiene Zayati.`}
         path={`/project/${project.id}`}
         image={project.logo || '/images/og-image.png'}
+        imageAlt={`${project.title} project by Sofiene Zayati`}
         type="article"
       />
-      <div className="min-h-screen pt-28 pb-24 px-4 sm:px-8">
+      <div className="min-h-screen pt-24 md:pt-28 pb-16 md:pb-24 px-4 sm:px-8">
       <div className="max-w-[1000px] mx-auto">
         {/* Back link */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div>
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#00f5ff] transition-colors mb-16"
+            className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-[#00f5ff] transition-colors mb-10 md:mb-16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60 rounded-lg"
           >
             <HiArrowLeft /> Back to projects
           </Link>
-        </motion.div>
+        </div>
 
         {/* 1. HERO */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-20"
-        >
-          <div className="flex items-center gap-3 mb-8">
+        <header className="mb-10 md:mb-16">
+          <div className="flex items-center gap-3 mb-6 md:mb-8">
             {project.logo ? (
               <img
                 src={project.logo}
-                alt={project.title}
-                className="w-9 h-9 object-contain opacity-90"
+                alt={`${project.title} logo`}
+                className="w-10 h-10 md:w-12 md:h-12 object-contain opacity-90"
                 onError={(e) => {
                   ;(e.target as HTMLImageElement).style.display = 'none'
                 }}
@@ -146,32 +162,89 @@ export default function ProjectDetail() {
                 {project.title.slice(0, 3).toUpperCase()}
               </span>
             )}
-            <span className="text-xs font-display tracking-[0.25em] uppercase text-white/40 font-semibold">
-              {project.tagline}
+            <span className="text-xs font-display tracking-[0.25em] uppercase text-white/55 font-semibold">
+              Selected project
             </span>
           </div>
 
-          <h1 className="heading-xl text-white mb-10 max-w-4xl">{project.title}</h1>
+          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-7xl leading-[0.98] tracking-[-0.04em] text-white mb-5 md:mb-6 max-w-4xl">
+            {project.title}
+          </h1>
+          <p className="text-lg md:text-2xl text-white/65 leading-relaxed max-w-3xl">
+            {project.tagline}
+          </p>
 
-          <div className="flex flex-wrap items-center gap-2">
-            {content.status?.map((s) => (
-              <span
-                key={s}
-                className="px-3 py-1.5 text-xs font-medium tracking-wider uppercase text-white/45 border border-white/[0.08] rounded-full"
-              >
-                {s}
-              </span>
-            ))}
-            <span className="px-3 py-1.5 text-xs font-medium tracking-wider uppercase text-white/45 border border-white/[0.08] rounded-full">
-              {totalTechs} Technologies
-            </span>
-            <span className="px-3 py-1.5 text-xs font-medium tracking-wider uppercase text-[#00f5ff]/80 border border-[#00f5ff]/20 rounded-full">
-              {project.category}
-            </span>
+          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+            <ul className="flex flex-wrap items-center gap-2" aria-label="Project highlights">
+              {heroMetadata.map((item, index) => (
+                <li
+                  key={item}
+                  className={`px-3 py-1.5 text-xs font-medium tracking-wider uppercase rounded-full border ${
+                    index === 0
+                      ? 'text-[#00f5ff]/90 border-[#00f5ff]/25 bg-[#00f5ff]/[0.05]'
+                      : 'text-white/60 border-white/[0.1] bg-white/[0.02]'
+                  }`}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            {(demoUrl || codeUrl) && (
+              <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Project links">
+                {demoUrl && (
+                  <a
+                    href={demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${project.title} demo (opens in a new tab)`}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-[#050505] rounded-xl bg-[#00f5ff] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60"
+                  >
+                    <HiExternalLink size={16} />
+                    View demo
+                  </a>
+                )}
+                {codeUrl && (
+                  <a
+                    href={codeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${project.title} source code (opens in a new tab)`}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white/80 rounded-xl border border-white/[0.12] bg-white/[0.03] hover:text-white hover:bg-white/[0.07] hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60"
+                  >
+                    <HiCode size={16} />
+                    View code
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
-          <div className="accent-rule mt-16" />
-        </motion.div>
+          {heroPreviewSrc && (
+            <figure className="mt-10 md:mt-14">
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.08] bg-white/[0.02] shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-[#00f5ff]/[0.05] via-transparent to-[#8b5cf6]/[0.06]"
+                  aria-hidden="true"
+                />
+                <img
+                  src={heroPreviewSrc}
+                  alt={heroPreviewCaption}
+                  className="relative z-10 w-full h-full object-contain"
+                  decoding="async"
+                  onError={(e) => {
+                    ;(e.target as HTMLImageElement).style.display = 'none'
+                  }}
+                />
+              </div>
+              <figcaption className="mt-3 text-xs text-white/55 leading-relaxed">
+                {heroPreviewCaption}
+              </figcaption>
+            </figure>
+          )}
+
+          <div className="accent-rule mt-10 md:mt-16" />
+        </header>
 
         <ProjectSectionNav sections={sections} />
 
@@ -180,7 +253,8 @@ export default function ProjectDetail() {
           <ProjectSection id="overview" first>
             <div className="section-anchor mb-4" />
             <SectionLabel>Overview</SectionLabel>
-            <p className="text-lg md:text-xl text-white/65 leading-relaxed max-w-3xl mb-14">
+            <h2 className="sr-only">Project overview</h2>
+            <p className="text-lg md:text-xl text-white/65 leading-relaxed max-w-3xl mb-10 md:mb-14">
               {project.description}
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -195,7 +269,7 @@ export default function ProjectDetail() {
                   <div key={i} className="stat-card">
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-[#00f5ff]/70">{iconMap[fact.label] || <HiCollection size={16} />}</span>
-                      <span className="text-[0.6875rem] font-display font-semibold tracking-[0.2em] uppercase text-white/30">
+                      <span className="text-[0.6875rem] font-display font-semibold tracking-[0.2em] uppercase text-white/55">
                         {fact.label}
                       </span>
                     </div>
@@ -262,7 +336,7 @@ export default function ProjectDetail() {
                                   {feat.title}
                                 </span>
                               </div>
-                              <p className="text-sm text-white/45 leading-relaxed">
+                              <p className="text-sm text-white/60 leading-relaxed">
                                 {feat.desc}
                               </p>
                             </div>
@@ -286,7 +360,7 @@ export default function ProjectDetail() {
               <h2 className="text-2xl md:text-3xl font-display font-bold text-white leading-[1.2]">
                 <span className="text-gradient-cyan">{totalTechs}</span>{' '}
                 <span className="text-white/85">technologies</span>{' '}
-                <span className="text-white/40 font-normal text-xl">across {totalCategories} categories</span>
+                <span className="text-white/60 font-normal text-xl">across {totalCategories} categories</span>
               </h2>
             </div>
             <div className="glass-card-elevated rounded-2xl p-6 md:p-8 hover:-translate-y-0.5 transition-transform duration-500">
@@ -302,6 +376,7 @@ export default function ProjectDetail() {
                         key={item.name}
                         className="tech-pill"
                         title={item.description}
+                        aria-label={item.description ? `${item.name}: ${item.description}` : item.name}
                       >
                         {item.name}
                       </span>
@@ -349,13 +424,14 @@ export default function ProjectDetail() {
                       </figure>
                     )}
                     {arch.items && arch.items.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-4">
+                      <ul className="architecture-items mt-5">
                         {arch.items.map((item, j) => (
-                          <span key={j} className="tech-tag">
-                            {item.label}
-                          </span>
+                          <li key={j}>
+                            <strong>{item.label}</strong>
+                            <span>{item.desc}</span>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     )}
                   </div>
                 </motion.div>
@@ -376,12 +452,12 @@ export default function ProjectDetail() {
           </ProjectSection>
         )}
 
-        {/* 7. ENGINEERING DECISIONS (subtle glass + left accent) */}
+        {/* 7. ENGINEERING CONSIDERATIONS */}
         {hasChallenges && (
           <ProjectSection id="decisions">
             <div className="section-anchor mb-4" />
-            <SectionLabel>Engineering Decisions</SectionLabel>
-            <SectionHeading>How hard problems were solved</SectionHeading>
+            <SectionLabel>Engineering Considerations</SectionLabel>
+            <SectionHeading>What had to be solved</SectionHeading>
             <div className="space-y-6 max-w-3xl">
               {content.challenges!.map((ch, i) => (
                 <motion.div
@@ -393,15 +469,12 @@ export default function ProjectDetail() {
                   className="group"
                 >
                   <div className="glass-card-elevated rounded-2xl p-6 md:p-8 decision-rule transition-transform duration-500">
-                    <span className="text-xs font-display font-semibold tracking-[0.25em] uppercase text-white/30 block mb-2">
-                      Challenge {pad2(i + 1)}
+                    <span className="text-xs font-display font-semibold tracking-[0.25em] uppercase text-white/55 block mb-2">
+                      Consideration {pad2(i + 1)}
                     </span>
                     <h3 className="text-lg font-semibold text-white mb-4 leading-snug">
                       {ch.title}
                     </h3>
-                    <span className="text-xs font-display font-semibold tracking-[0.25em] uppercase text-[#00f5ff]/70 block mb-2">
-                      Solution
-                    </span>
                     <p className="text-base text-white/65 leading-relaxed">{ch.desc}</p>
                   </div>
                 </motion.div>
@@ -415,12 +488,13 @@ export default function ProjectDetail() {
           <ProjectSection id="outcomes">
             <div className="section-anchor mb-4" />
             <SectionLabel>Outcomes</SectionLabel>
+            <SectionHeading>What the project demonstrates</SectionHeading>
             {hasMetrics ? (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-14">
                 {content.results!.map((r, i) => (
                   <div key={i} className="max-w-xs">
                     {r.metric && <div className="metric-figure mb-3">{r.metric}</div>}
-                    <div className="text-xs font-display font-semibold tracking-[0.2em] uppercase text-white/40 mb-3">
+                    <div className="text-xs font-display font-semibold tracking-[0.2em] uppercase text-white/60 mb-3">
                       {r.title}
                     </div>
                     <p className="text-sm text-white/55 leading-relaxed">{r.content}</p>
@@ -456,7 +530,7 @@ export default function ProjectDetail() {
               Want to dive deeper?
             </h2>
             <p className="text-base text-white/55 leading-relaxed mb-10 max-w-md mx-auto">
-              Watch the demo, explore the code, or get in touch to discuss the work.
+              Open the available project resources or get in touch to discuss the engineering behind it.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               {content.cta.primary && (
@@ -464,7 +538,7 @@ export default function ProjectDetail() {
                   href={content.cta.primary.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-[#00f5ff] to-[#ff0080] hover:-translate-y-1 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-[#050505] rounded-xl bg-[#00f5ff] hover:bg-white hover:-translate-y-1 transition-all duration-300"
                 >
                   <HiExternalLink size={16} />
                   {content.cta.primary.label}
@@ -499,9 +573,9 @@ export default function ProjectDetail() {
               to={`/project/${prevProject.id}`}
               className="group flex items-center gap-3 text-left"
             >
-              <HiArrowLeft className="text-white/30 group-hover:text-[#00f5ff] transition-colors shrink-0" />
+              <HiArrowLeft className="text-white/55 group-hover:text-[#00f5ff] transition-colors shrink-0" />
               <div>
-                <span className="text-xs text-white/30 block uppercase tracking-wider">Previous</span>
+                <span className="text-xs text-white/55 block uppercase tracking-wider">Previous</span>
                 <span className="text-lg font-bold text-white group-hover:text-[#00f5ff] transition-colors">
                   {prevProject.title}
                 </span>
@@ -516,12 +590,12 @@ export default function ProjectDetail() {
               className="group flex items-center gap-3 text-right sm:text-left justify-end"
             >
               <div>
-                <span className="text-xs text-white/30 block uppercase tracking-wider">Next</span>
+                <span className="text-xs text-white/55 block uppercase tracking-wider">Next</span>
                 <span className="text-lg font-bold text-white group-hover:text-[#ff0080] transition-colors">
                   {nextProject.title}
                 </span>
               </div>
-              <HiArrowRight className="text-white/30 group-hover:text-[#ff0080] transition-colors shrink-0" />
+              <HiArrowRight className="text-white/55 group-hover:text-[#ff0080] transition-colors shrink-0" />
             </Link>
           ) : (
             <div />

@@ -1,101 +1,108 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import ProjectCard from './ProjectCard'
 import { projects } from '../data/projects'
 
-const categories = ['all', 'web', 'embedded', 'mobile', 'ai'] as const
-type Category = (typeof categories)[number]
+const categories = [
+  { value: 'all', label: 'All work' },
+  { value: 'web', label: 'Web' },
+  { value: 'embedded', label: 'Embedded' },
+  { value: 'mobile', label: 'Mobile' },
+  { value: 'ai', label: 'AI' },
+] as const
 
-const categoryAccents: Record<string, string> = {
-  all: '#00f5ff',
-  web: '#00f5ff',
-  embedded: '#8b5cf6',
-  mobile: '#ff0080',
-  ai: '#8b5cf6',
-}
+type Category = (typeof categories)[number]['value']
+
+const selectedProjectIds = new Set(['smartproperty', 'prigado', 'innomall', 'macropark', 'secondchance'])
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState<Category>('all')
+  const [showAll, setShowAll] = useState(false)
 
   const filtered = activeCategory === 'all'
     ? projects
     : projects.filter(
-        (p) => p.category === activeCategory || (p.tags?.includes(activeCategory) ?? false)
+        (project) => project.category === activeCategory || project.tags?.includes(activeCategory),
       )
+  const visibleProjects = activeCategory === 'all' && !showAll
+    ? projects.filter((project) => selectedProjectIds.has(project.id))
+    : filtered
 
   return (
-    <section id="projects" className="relative py-32 px-4 sm:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+    <section id="projects" className="section-shell" aria-labelledby="projects-heading">
+      <div className="section-container">
+        <motion.header
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.55 }}
+          className="section-intro"
         >
-          <span className="section-label">Portfolio</span>
-          <h2 className="heading-lg mt-3 mb-4">
-            <span className="text-gradient">Featured Projects</span>
-          </h2>
-          <p className="text-white/50 max-w-xl mx-auto text-lg pt-2">
-            Each project reflects a commitment to building systems that matter
+          <div>
+            <span className="section-label">Selected work</span>
+            <h2 id="projects-heading" className="section-heading">
+              Systems built to solve <span>real problems.</span>
+            </h2>
+          </div>
+          <p>
+            A selection of connected products spanning embedded hardware, AI automation,
+            and full-stack platforms—each documented as an engineering case study.
           </p>
-        </motion.div>
+        </motion.header>
 
-        {/* Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className="relative px-5 py-2.5 text-xs font-semibold tracking-wider uppercase rounded-full transition-all duration-300"
-              style={{
-                color: activeCategory === cat ? '#fff' : 'rgba(255,255,255,0.4)',
-                background: activeCategory === cat ? `${categoryAccents[cat]}20` : 'rgba(255,255,255,0.03)',
-                borderColor: activeCategory === cat ? categoryAccents[cat] : 'rgba(255,255,255,0.08)',
-                borderWidth: 1,
-              }}
-            >
-              {cat}
-              {activeCategory === cat && (
-                <motion.div
-                  layoutId="activeCategory"
-                  className="absolute inset-0 rounded-full -z-10"
-                  style={{
-                    background: `${categoryAccents[cat]}15`,
-                    borderColor: categoryAccents[cat],
-                    borderWidth: 1,
-                  }}
-                  transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-                />
-              )}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
+        <div className="project-toolbar">
+          <div className="project-filters" aria-label="Filter projects">
+            {categories.map((category) => (
+              <button
+                key={category.value}
+                type="button"
+                onClick={() => {
+                  setActiveCategory(category.value)
+                  if (category.value !== 'all') setShowAll(false)
+                }}
+                aria-pressed={activeCategory === category.value}
+                className={activeCategory === category.value ? 'is-active' : ''}
               >
-                <ProjectCard project={project} index={i} />
-              </motion.div>
+                {category.label}
+              </button>
             ))}
+          </div>
+          <p className="project-count" aria-live="polite">
+            <strong>{visibleProjects.length}</strong>{activeCategory === 'all' && !showAll ? ' selected' : ''}{' '}
+            {visibleProjects.length === 1 ? 'project' : 'projects'}
+          </p>
+        </div>
+
+        <motion.div layout className="project-grid">
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project, index) => {
+              const featured = activeCategory === 'all' && index === 0
+              return (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.32, delay: Math.min(index * 0.035, 0.14) }}
+                  className={featured ? 'project-grid__featured' : ''}
+                >
+                  <ProjectCard project={project} index={index} featured={featured} />
+                </motion.div>
+              )
+            })}
           </AnimatePresence>
         </motion.div>
+
+        {activeCategory === 'all' && (
+          <div className="projects-more">
+            <button type="button" onClick={() => setShowAll((expanded) => !expanded)} aria-expanded={showAll}>
+              {showAll ? 'Show selected projects' : `View all ${projects.length} projects`}
+              {showAll ? <HiChevronUp aria-hidden="true" /> : <HiChevronDown aria-hidden="true" />}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

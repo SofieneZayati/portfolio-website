@@ -1,76 +1,52 @@
-import { motion } from 'framer-motion'
-import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi'
-import { FaGithub, FaLinkedinIn, FaFacebookF, FaXTwitter, FaInstagram } from 'react-icons/fa6'
+import { Link } from 'react-router-dom'
+import { HiArrowUp, HiMail } from 'react-icons/hi'
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
 import { profile } from '../data/profile'
 
-const socials = [
+const professionalLinks = [
   { href: `mailto:${profile.email}`, icon: HiMail, label: 'Email' },
-  { href: `tel:${profile.phone}`, icon: HiPhone, label: 'Phone' },
   { href: 'https://github.com/SofieneZayati', icon: FaGithub, label: 'GitHub' },
   { href: 'https://www.linkedin.com/in/sofiene-zayati', icon: FaLinkedinIn, label: 'LinkedIn' },
-  { href: 'https://www.facebook.com/Legacyyyyyyyy/', icon: FaFacebookF, label: 'Facebook' },
-  { href: 'https://x.com/sofiene_zayati', icon: FaXTwitter, label: 'Twitter' },
-  { href: 'https://www.instagram.com/sofiene_zayati/', icon: FaInstagram, label: 'Instagram' },
 ]
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] py-16 px-4 sm:px-8">
-      <div className="max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
-          <span className="font-display font-bold text-2xl text-gradient">SZ</span>
-          <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs text-white/40">
-            <span className="flex items-center gap-1.5">
-              <HiMail size={14} />
-              {profile.email}
+    <footer className="site-footer">
+      <div className="footer-shell">
+        <div className="footer-brand">
+          <Link to="/" className="brand" aria-label="Sofiene Zayati, home">
+            <span className="brand-mark" aria-hidden="true">SZ</span>
+            <span className="brand-copy">
+              <strong>{profile.name}</strong>
+              <small>Embedded &amp; full-stack engineering</small>
             </span>
-            <span className="flex items-center gap-1.5">
-              <HiPhone size={14} />
-              {profile.phone}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <HiLocationMarker size={14} />
-              {profile.location}
-            </span>
-          </div>
-        </motion.div>
+          </Link>
+          <p>Building connected products from firmware to interface.</p>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-4 mb-10"
-        >
-          {socials.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target={social.href.startsWith('http') ? '_blank' : undefined}
-              rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              aria-label={social.label}
-              className="w-11 h-11 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-white/50 hover:text-white hover:bg-gradient-to-br hover:from-[#00f5ff] hover:to-[#8b5cf6] hover:border-transparent hover:-translate-y-1.5 hover:shadow-[0_12px_25px_rgba(0,245,255,0.15)] transition-all duration-300"
-            >
-              <social.icon size={16} />
-            </a>
-          ))}
-        </motion.div>
+        <div className="footer-links" aria-label="Professional links">
+          {professionalLinks.map(({ href, icon: Icon, label }) => {
+            const external = href.startsWith('http')
+            return (
+              <a
+                key={label}
+                href={href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+              >
+                <Icon aria-hidden="true" /> {label}
+              </a>
+            )
+          })}
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-xs text-white/25"
-        >
-          &copy; {new Date().getFullYear()} {profile.name}. Crafted with care.
-        </motion.p>
+        <a href="#home" className="back-to-top">
+          Back to top <HiArrowUp aria-hidden="true" />
+        </a>
+      </div>
+      <div className="footer-meta">
+        <span>© {new Date().getFullYear()} {profile.name}</span>
+        <span>{profile.location} · Designed &amp; built with care</span>
       </div>
     </footer>
   )

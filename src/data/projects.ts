@@ -12,18 +12,10 @@ export interface Project {
   category: ProjectCategory
   tags?: ProjectCategory[]
   links: {
-    detail?: string
     github?: string
     live?: string
   }
 }
-
-export const TODO_SCREENSHOTS = [
-  'zenithhouse',
-  'smartunlock',
-  'sps',
-  'smartagri',
-] as const
 
 export const projects: Project[] = [
   {
@@ -36,14 +28,14 @@ export const projects: Project[] = [
       'SmartProperty is an AI-powered real estate platform built for the Tunisian real estate market. It centralizes property management for agencies, property owners, accountants, and tenants — combining machine learning, OCR-based document analysis, computer vision, voice-enabled navigation, and multi-role analytics dashboards. Asset management, smart valuation, smart tenant matching, AI-generated marketing, and solvency analysis are delivered through a microservices architecture deployed on Kubernetes with end-to-end CI/CD.',
     techStack: [
       'React',
-      'TailwindCSS',
+      'Tailwind CSS',
       'Zustand',
       'React Query',
       'NestJS',
       'FastAPI',
       'REST APIs',
       'JWT Auth',
-      'Socket.io',
+      'Socket.IO',
       'Stripe',
       'Firebase',
       'MongoDB',
@@ -88,7 +80,6 @@ export const projects: Project[] = [
     ],
     category: 'web',
     links: {
-      detail: '/project/smartproperty',
       live: 'https://youtu.be/z0v_b0Qgeng',
     },
   },
@@ -111,7 +102,6 @@ export const projects: Project[] = [
     ],
     category: 'ai',
     links: {
-      detail: '/project/prigado',
     },
   },
   {
@@ -135,7 +125,6 @@ export const projects: Project[] = [
     category: 'web',
     tags: ['embedded'],
     links: {
-      detail: '/project/innomall',
       github: 'https://github.com/Eya-ajimi/pi_symfony1',
       live: 'https://youtu.be/Zs875HdhmJ8',
     },
@@ -147,13 +136,12 @@ export const projects: Project[] = [
     description:
       'Multi-component smart parking system with LPR integration, WT32-based barrier controllers, Flutter mobile app, BLE fallback, and Dockerized backend services.',
     longDescription:
-      'MacroPark is a multi-component smart parking ecosystem including an admin platform, Flutter mobile application, IoT barrier controllers, and License Plate Recognition (LPR) integration. WT32-ETH01 microcontrollers manage barrier gates via MQTT with BLE and Ethernet/WiFi failover, OTA firmware updates, and real-time access management. The backend uses Python FastAPI with Dockerized services for REST APIs and real-time event monitoring.',
+      'MacroPark is a multi-component smart parking ecosystem including an admin platform, Flutter mobile application, IoT barrier controllers, and License Plate Recognition (LPR) integration. WT32-ETH01 microcontrollers manage barrier gates via MQTT with BLE and Ethernet/Wi-Fi failover, OTA firmware updates, and real-time access management. The backend uses Python FastAPI with Dockerized services for REST APIs and real-time event monitoring.',
     techStack: ['C++', 'Python FastAPI', 'MQTT', 'BLE', 'Docker', 'Flutter', 'REST APIs', 'WT32-ETH01', 'LPR'],
     logo: '/images/projects/macropark/macrologo.png',
     screenshots: ['/images/projects/macropark/macroparkimg.png'],
     category: 'embedded',
     links: {
-      detail: '/project/macropark',
       github: 'https://github.com/SofieneZayati/MacroPark',
     },
   },
@@ -171,7 +159,6 @@ export const projects: Project[] = [
     screenshots: [],
     category: 'embedded',
     links: {
-      detail: '/project/zenithhouse',
     },
   },
   {
@@ -196,7 +183,6 @@ export const projects: Project[] = [
     ],
     category: 'web',
     links: {
-      detail: '/project/secondchance',
     },
   },
   {
@@ -213,7 +199,6 @@ export const projects: Project[] = [
     screenshots: [],
     category: 'embedded',
     links: {
-      detail: '/project/smartunlock',
     },
   },
   {
@@ -230,7 +215,6 @@ export const projects: Project[] = [
     screenshots: [],
     category: 'mobile',
     links: {
-      detail: '/project/sps',
     },
   },
   {
@@ -247,7 +231,6 @@ export const projects: Project[] = [
     screenshots: [],
     category: 'embedded',
     links: {
-      detail: '/project/smartagri',
     },
   },
 ]

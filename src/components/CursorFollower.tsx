@@ -1,73 +1,78 @@
-import { useEffect, useRef, useState } from 'react'
-import { useReducedMotion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 export default function CursorFollower() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
-  const [clicking, setClicking] = useState(false)
-  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
-    if (reduceMotion) return
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (!finePointer.matches || reduceMotion.matches) return
 
     const dot = dotRef.current
     const ring = ringRef.current
     if (!dot || !ring) return
 
-    let mouseX = window.innerWidth / 2
-    let mouseY = window.innerHeight / 2
-    let dotX = mouseX
-    let dotY = mouseY
-    let ringX = mouseX
-    let ringY = mouseY
-    let raf = 0
+    let targetX = window.innerWidth / 2
+    let targetY = window.innerHeight / 2
+    let ringX = targetX
+    let ringY = targetY
+    let frame = 0
 
-    const handleMouse = (e: MouseEvent) => {
-      mouseX = e.clientX
-      mouseY = e.clientY
+    const show = () => {
+      dot.classList.add('is-visible')
+      ring.classList.add('is-visible')
     }
 
-    const handleMouseDown = () => setClicking(true)
-    const handleMouseUp = () => setClicking(false)
+    const hide = () => {
+      dot.classList.remove('is-visible')
+      ring.classList.remove('is-visible')
+    }
 
-    window.addEventListener('mousemove', handleMouse, { passive: true })
-    window.addEventListener('mousedown', handleMouseDown)
-    window.addEventListener('mouseup', handleMouseUp)
+    const handlePointerMove = (event: PointerEvent) => {
+      targetX = event.clientX
+      targetY = event.clientY
+      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`
+      show()
+    }
+
+    const handlePointerOver = (event: PointerEvent) => {
+      const target = event.target
+      const interactive = target instanceof Element && target.closest('a, button, input, textarea, [role="link"]')
+      ring.classList.toggle('is-active', Boolean(interactive))
+    }
+
+    const handlePointerDown = () => ring.classList.add('is-pressed')
+    const handlePointerUp = () => ring.classList.remove('is-pressed')
 
     const animate = () => {
-      dotX += (mouseX - dotX) * 0.15
-      dotY += (mouseY - dotY) * 0.15
-      ringX += (mouseX - ringX) * 0.08
-      ringY += (mouseY - ringY) * 0.08
-
-      dot.style.transform = `translate(${dotX - 4}px, ${dotY - 4}px)`
-      ring.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`
-
-      raf = requestAnimationFrame(animate)
+      ringX += (targetX - ringX) * 0.16
+      ringY += (targetY - ringY) * 0.16
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`
+      frame = window.requestAnimationFrame(animate)
     }
 
-    raf = requestAnimationFrame(animate)
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+    window.addEventListener('pointerover', handlePointerOver, { passive: true })
+    window.addEventListener('pointerdown', handlePointerDown)
+    window.addEventListener('pointerup', handlePointerUp)
+    document.documentElement.addEventListener('mouseleave', hide)
+    frame = window.requestAnimationFrame(animate)
 
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('mousemove', handleMouse)
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('mouseup', handleMouseUp)
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerover', handlePointerOver)
+      window.removeEventListener('pointerdown', handlePointerDown)
+      window.removeEventListener('pointerup', handlePointerUp)
+      document.documentElement.removeEventListener('mouseleave', hide)
     }
-  }, [reduceMotion])
-
-  if (reduceMotion) return null
+  }, [])
 
   return (
-    <div className="hidden md:block" aria-hidden="true">
-      <div
-        ref={dotRef}
-        className={`fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[100] transition-colors duration-200 ${clicking ? 'bg-[#ff0080]' : 'bg-[#00f5ff]'} mix-blend-screen shadow-[0_0_8px_rgba(0,245,255,0.8)]`}
-      />
-      <div
-        ref={ringRef}
-        className={`fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[99] border transition-all duration-300 ${clicking ? 'border-[#ff0080] scale-75 opacity-100' : 'border-[#00f5ff]/40 scale-100 opacity-50'} mix-blend-screen shadow-[0_0_15px_rgba(0,245,255,0.2)]`}
-      />
+    <div className="cursor-layer" aria-hidden="true">
+      <div ref={dotRef} className="cursor-dot" />
+      <div ref={ringRef} className="cursor-ring" />
     </div>
   )
 }

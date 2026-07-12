@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Sofiene Zayati | Embedded & Web Engineer"
-        description="Official portfolio of Sofiene Zayati, an embedded systems and web engineer in Tunisia building AI, IoT, full-stack, and intelligent hardware-software projects."
+        title="Sofiene Zayati | Embedded & Full-Stack Engineer"
+        description="Sofiene Zayati builds connected products from embedded firmware and AI services to modern web platforms. Explore selected engineering case studies."
         path="/"
         type="profile"
       />

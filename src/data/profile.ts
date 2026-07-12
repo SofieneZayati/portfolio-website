@@ -16,10 +16,10 @@ export interface Profile {
 }
 
 export const profile: Profile = {
-  name: 'Sofiene ZAYATI',
-  title: 'Embedded Systems Graduate & Web Technologies Engineering Student',
+  name: 'Sofiene Zayati',
+  title: 'Embedded Systems Graduate & Web Engineering Student',
   tagline:
-    'Engineering student passionate about fusing hardware and software into intelligent systems. Grounded in embedded programming with strong full-stack skills, I build end-to-end solutions applying AI/ML to smarter IoT devices and data-driven web platforms.',
+    'Embedded systems graduate and web engineering student turning real-world problems into connected products across firmware, AI services, and modern web platforms.',
   email: 'sofiene.zayati@gmail.com',
   phone: '+216 55 321 315',
   location: 'Tunisia',

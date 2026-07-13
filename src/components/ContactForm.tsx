@@ -61,15 +61,15 @@ export default function ContactForm() {
           <div className="contact-copy">
             <div className="availability-pill">
               <span className="availability-dot" aria-hidden="true" />
-              Open to internships and engineering roles
+              Open to web, full-stack and embedded opportunities
             </div>
             <span className="section-label">Let’s build something useful</span>
             <h2 id="contact-heading">
-              Have a problem worth <span>solving together?</span>
+              Have a role or product worth <span>building together?</span>
             </h2>
             <p>
-              I’m interested in embedded, IoT, AI automation, and full-stack opportunities—
-              in Tunisia or with remote teams.
+              I’m interested in product-focused web, full-stack, AI automation, and connected-
+              systems work in Tunisia or with international teams.
             </p>
 
             <div className="contact-links">

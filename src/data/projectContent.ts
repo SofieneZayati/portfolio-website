@@ -16,8 +16,8 @@ const content: Record<string, ProjectContent> = {
   smartproperty: {
     facts: [
       { label: 'Type', value: 'AI-Powered SaaS' },
-      { label: 'Roles', value: '4 (Agent / Admin / Client / Accountant)' },
-      { label: 'Deployment', value: 'Kubernetes Microservices' },
+      { label: 'Product', value: 'Multi-Role Platform' },
+      { label: 'Delivery', value: 'Docker + CI/CD Configuration' },
       { label: 'Stack', value: 'Multi-Service Platform' },
     ],
     techStack: [
@@ -32,7 +32,6 @@ const content: Record<string, ProjectContent> = {
         category: 'State Management',
         items: [
           { name: 'Zustand', description: 'Lightweight global state for UI & auth' },
-          { name: 'React Query', description: 'Server-state, caching & background sync' },
         ],
       },
       {
@@ -87,24 +86,22 @@ const content: Record<string, ProjectContent> = {
         category: 'DevOps',
         items: [
           { name: 'Docker', description: 'Containerized services' },
-          { name: 'Kubernetes', description: 'Cluster orchestration' },
-          { name: 'Jenkins', description: 'CI/CD pipelines' },
+          { name: 'Kubernetes', description: 'Deployment manifests and service configuration' },
+          { name: 'Jenkins', description: 'CI/CD pipeline configuration' },
           { name: 'SonarQube', description: 'Code quality & static analysis' },
         ],
       },
       {
-        category: 'Infrastructure',
+        category: 'Media',
         items: [
-          { name: 'Vercel', description: 'Frontend hosting & edge delivery' },
-          { name: 'Cloudflare', description: 'DNS, CDN & security' },
-          { name: 'Cloudinary', description: 'Image storage & optimization' },
+          { name: 'Cloudinary', description: 'Image storage and transformation' },
         ],
       },
     ],
     features: [
       { group: 'Property Platform', icon: '🏠', title: 'Property Listings Management', desc: 'Centralized listings with images, documents, location, and lifecycle status — managed by agents, owners, and admins across multiple branches.' },
-      { group: 'AI & Automation', icon: '🎯', title: 'Property Recommendation Engine', desc: 'AI-driven feed that scores properties against user preferences, behavior, and saved criteria to surface the most relevant listings.' },
-      { group: 'Trust & Matching', icon: '🤝', title: 'Smart Tenant Matching', desc: 'Compatibility scoring that pairs applicants to properties using income, occupation, and history signals to reduce vacancy.' },
+      { group: 'AI & Automation', icon: '🎯', title: 'Property Recommendation Engine', desc: 'A recommendation feed ranks listings using budget, preferences, property data, and location criteria.' },
+      { group: 'Trust & Matching', icon: '🤝', title: 'Application Review Signals', desc: 'Affordability, occupation, and document signals give reviewers structured context for an applicant decision.' },
       { group: 'AI & Automation', icon: '💰', title: 'AI Property Valuation', desc: 'XGBoost valuation model trained on historical data to predict optimal property prices and rental rates with market trend context.' },
       { group: 'AI & Automation', icon: '📈', title: 'Predictive Pricing', desc: 'Automatic rent estimation from amenities, location, and property type — filling in the price field on listings with one click.' },
       { group: 'AI & Automation', icon: '🖼️', title: 'AI Image Description Generation', desc: 'CLIP and BLIP analyze uploaded property photos and generate room-by-room listing copy, accelerating marketing content production.' },
@@ -122,9 +119,9 @@ const content: Record<string, ProjectContent> = {
     architecture: [
       {
         title: 'Microservices Architecture',
-        desc: 'Independent services communicating over REST and Socket.IO, enabling horizontal scaling and isolated deployments per capability.',
+        desc: 'Independent services communicate over REST and Socket.IO, separating product workflows from ML and computer-vision capabilities.',
         items: [
-          { label: 'React SPA', desc: 'Role-based UI on Vercel' },
+          { label: 'React SPA', desc: 'Role-based user interface' },
           { label: 'NestJS API Gateway', desc: 'Auth, business services, and orchestration' },
           { label: 'FastAPI ML Service', desc: 'Computer vision and ML inference' },
           { label: 'MongoDB Atlas', desc: 'Managed document store' },
@@ -141,18 +138,18 @@ const content: Record<string, ProjectContent> = {
           { label: 'CLIP + BLIP', desc: 'Image understanding and description' },
           { label: 'OCR.space', desc: 'Document text extraction' },
           { label: 'Solvency Engine', desc: 'Risk scoring and affordability' },
-          { label: 'Match Scorer', desc: 'Tenant-property compatibility' },
+          { label: 'Recommendation Ranker', desc: 'Budget, preference, property, and location criteria' },
         ],
       },
       {
         title: 'DevOps & Quality',
-        desc: 'Container-first delivery with automated quality gates and code analysis.',
+        desc: 'The repositories include container, CI/CD, quality-gate, and Kubernetes deployment configuration; production deployment is outside the case-study claim.',
         items: [
           { label: 'Docker', desc: 'Containerized services' },
-          { label: 'Kubernetes', desc: 'Cluster orchestration' },
+          { label: 'Kubernetes', desc: 'Deployment configuration' },
           { label: 'Jenkins', desc: 'CI/CD pipelines' },
           { label: 'SonarQube', desc: 'Static code analysis' },
-          { label: 'Cloudflare', desc: 'CDN, DNS, and security' },
+          { label: 'Deployment manifests', desc: 'Kubernetes service and workload configuration' },
           { label: 'Stripe', desc: 'Payment processing' },
         ],
       },
@@ -170,7 +167,7 @@ const content: Record<string, ProjectContent> = {
       { src: `${base}/smartproperty/clientpropertyadd.png`, caption: 'Add Property — Multi-step listing creation with map-based location picker' },
       { src: `${base}/smartproperty/clientrequestvisit.png`, caption: 'Visit Request — Multi-slot scheduling form for prospective clients' },
       { src: `${base}/smartproperty/engagements.png`, caption: 'Engagement Analytics — Per-property views, clicks, saves, and unique users' },
-      { src: `${base}/smartproperty/aifeedrecommendation.png`, caption: 'AI Recommendations — Match-score-ranked suggestions tailored to user behavior' },
+      { src: `${base}/smartproperty/aifeedrecommendation.png`, caption: 'AI Recommendations — Ranked suggestions from property and preference criteria' },
       { src: `${base}/smartproperty/aipriceestimation.png`, caption: 'AI Price Estimation — Automatic rent prediction from amenities and location' },
       { src: `${base}/smartproperty/aianalysis.png`, caption: 'AI Solvency Analysis — OCR extraction, risk score, affordability ratio' },
       { src: `${base}/smartproperty/aiimagedesc.png`, caption: 'AI Image Descriptions — Automatic room-by-room listing copy generation' },
@@ -182,12 +179,12 @@ const content: Record<string, ProjectContent> = {
       { title: 'Multi-Role Authorization', desc: 'Four distinct user roles (agent, admin, client, accountant) with overlapping yet isolated permissions, branches, and dashboards.' },
       { title: 'Real-Time Events', desc: 'Socket.IO event broadcasting across roles for dashboard refresh, notifications, and engagement metrics without overwhelming the client.' },
       { title: 'OCR + AI Pipeline Reliability', desc: 'Combining OCR.space extraction, XGBoost scoring, and rule-based validation into a single, auditable solvency analysis.' },
-      { title: 'Computer Vision Cost', desc: 'CLIP and BLIP inference for image description generation had to be optimized to keep response time under 5 seconds per listing.' },
+      { title: 'Computer Vision Latency', desc: 'CLIP and BLIP inference required careful user feedback and service boundaries so image-description generation remained understandable in the interface.' },
       { title: 'Accessibility vs Density', desc: 'Balancing a feature-rich dashboard with keyboard-friendly navigation, voice input, readable structure, and accessible interaction patterns.' },
     ],
     results: [
       { icon: '🎯', title: 'Valuation Model', metric: 'XGBoost', content: 'A prototype pricing model trained on historical Tunisian listings to support—not replace—human valuation.' },
-      { icon: '🏠', title: 'Tenant Matching', metric: 'Matching', content: 'Recommendation flows surface relevant properties using preferences, affordability, and listing data.' },
+      { icon: '🏠', title: 'Property Ranking', metric: 'Matching', content: 'Recommendation flows surface relevant properties using preferences, affordability, and listing data.' },
       { icon: '⚙️', title: 'Operations', metric: 'Automation', content: 'OCR extraction and workflow automation reduce repetitive steps across administrative roles.' },
       { icon: '🛡️', title: 'Solvency Review', metric: 'OCR + rules', content: 'Document extraction and rule-based signals create an auditable starting point for manual review.' },
       { icon: '♿', title: 'Accessible Use', metric: 'Voice + text', content: 'Keyboard-aware flows, voice input, and image descriptions broaden how users can navigate the product.' },
@@ -230,13 +227,12 @@ const content: Record<string, ProjectContent> = {
         category: 'AI & Automation',
         items: [
           { name: 'Google Gemini', description: 'Intent extraction & generation' },
-          { name: 'LangChain', description: 'Conversation memory & chaining' },
         ],
       },
       {
         category: 'Integrations',
         items: [
-          { name: 'SMTP', description: 'Transactional & campaign email' },
+          { name: 'SMTP', description: 'Marketing campaign email delivery' },
           { name: 'REST APIs', description: 'Service-to-service communication' },
         ],
       },
@@ -347,7 +343,7 @@ const content: Record<string, ProjectContent> = {
       { group: 'User Experience', icon: '🖥️', title: 'Dual Interface System', desc: 'JavaFX desktop for administrators and Symfony web for customers, providing tailored experiences for different user types.' },
       { group: 'Platform & Payments', icon: '🅿️', title: 'IoT Multi-Floor Parking', desc: 'Real-time parking availability tracking using IoT sensors with multi-floor support, live spot monitoring, and online reservation system.' },
       { group: 'Platform & Payments', icon: '💳', title: 'Integrated Payments', desc: 'Secure payment processing through Stripe API supporting multiple payment methods and automated transaction management.' },
-      { group: 'User Experience', icon: '🤖', title: 'AI Customer Support', desc: 'Gemini-powered chatbot providing 24/7 assistance with FAQs, store information, and personalized shopping recommendations.' },
+      { group: 'User Experience', icon: '🤖', title: 'AI Customer Support', desc: 'A Gemini-powered chatbot interface supports FAQs and store-information queries in the team prototype.' },
       { group: 'Analytics', icon: '📊', title: 'Analytics Dashboard', desc: 'Comprehensive analytics on customer behavior, sales trends, operational efficiency, and parking usage patterns.' },
       { group: 'User Experience', icon: '📱', title: 'Multi-Channel Notifications', desc: 'Automated Twilio SMS system for promotions, reservation confirmations, and important operational alerts.' },
     ],
@@ -386,18 +382,18 @@ const content: Record<string, ProjectContent> = {
       { src: `${base}/innomall/payment.png`, caption: 'Payment Integration' },
     ],
     challenges: [
-      { title: 'Real-Time Data Sync', desc: 'Real-time synchronization between IoT devices and web platform using MQTT with Redis caching for high-traffic environments.' },
+      { title: 'Real-Time Data Flow', desc: 'Connecting MQTT parking updates to customer and administrator interfaces while keeping occupancy state understandable.' },
       { title: 'Secure Payments', desc: 'Stripe tokenization keeps raw payment-card data outside the application while supporting online checkout.' },
       { title: 'Cross-Platform Compatibility', desc: 'Ensuring consistent behavior between JavaFX desktop and Symfony web interfaces with shared business logic.' },
-      { title: 'IoT Reliability', desc: 'Offline fallback for parking sensors with automatic sync on reconnection to prevent data loss.' },
+      { title: 'IoT Integration', desc: 'Coordinating parking sensors, reservation flows, live availability, and application state across the team system.' },
     ],
     results: [
-      { icon: '📈', title: 'Performance', content: '• Real-time parking allocation\n• Asynchronous notifications\n• Caching and query optimization\n• Production load and uptime still require formal benchmarking' },
+      { icon: '📈', title: 'Operational Flow', content: '• Live parking-state presentation\n• Reservation and notification workflows\n• Payment and analytics interfaces\n• Production load and uptime still require formal benchmarking' },
       { icon: '🧩', title: 'Product Coverage', content: '• Administrator and customer workflows\n• Desktop and web interfaces\n• Connected parking operations\n• Payments, notifications, and analytics' },
     ],
     cta: {
       primary: { label: 'Watch Demo', url: 'https://youtu.be/Zs875HdhmJ8' },
-      secondary: [{ label: 'GitHub Repository', url: 'https://github.com/Eya-ajimi/pi_symfony1' }],
+      secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
     status: ['Full-Stack Platform', 'IoT Integration', 'AI-Powered'],
   },
@@ -457,14 +453,14 @@ const content: Record<string, ProjectContent> = {
     gallery: [],
     challenges: [
       { title: 'Multi-Protocol Integration', desc: 'Synthesizing MQTT, BLE, Ethernet, and Wi-Fi into a cohesive system with automatic failover between protocols.' },
-      { title: 'Firmware Update Safety', desc: 'Developing a failsafe OTA update mechanism with rollback capability to prevent device bricking.' },
-      { title: 'Real-Time Event Processing', desc: 'Handling concurrent barrier events with sub-second response time through the FastAPI event pipeline.' },
-      { title: 'LPR Accuracy Optimization', desc: 'Fine-tuning license plate recognition for varied lighting conditions and plate formats.' },
+      { title: 'Remote Firmware Maintenance', desc: 'Adding an OTA update path so barrier-controller firmware can be maintained without routine physical access.' },
+      { title: 'Event Coordination', desc: 'Coordinating barrier events across device firmware, MQTT messaging, backend workflows, and the monitoring interface.' },
+      { title: 'LPR Integration', desc: 'Connecting the Quercus LPR component to access decisions and the rest of the parking workflow.' },
     ],
     cta: {
       primary: { label: 'Download Presentation', url: `${base}/macropark/MacroPark%20Presentation%20final.pptx` },
       secondary: [
-        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/MacroPark' },
+        { label: 'Firmware Repository', url: 'https://github.com/SofieneZayati/MacroPark' },
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
@@ -473,10 +469,10 @@ const content: Record<string, ProjectContent> = {
 
   secondchance: {
     facts: [
-      { label: 'Type', value: 'Social Impact Platform' },
+      { label: 'Type', value: 'Social Impact Prototype' },
       { label: 'Backend', value: 'FastAPI + MongoDB' },
-      { label: 'Real-time', value: 'WebSockets' },
-      { label: 'Auth', value: 'JWT (Role-Based)' },
+      { label: 'Views', value: 'Jinja2 + Static Prototypes' },
+      { label: 'Context', value: 'Academic Team Project' },
     ],
     techStack: [
       {
@@ -492,61 +488,57 @@ const content: Record<string, ProjectContent> = {
         items: [
           { name: 'MongoDB', description: 'Document data store' },
           { name: 'PyMongo', description: 'MongoDB driver' },
+          { name: 'Motor', description: 'Async MongoDB access' },
         ],
       },
       {
-        category: 'Real-time',
+        category: 'Prototype UI',
         items: [
-          { name: 'WebSockets', description: 'Community chat & live updates' },
-        ],
-      },
-      {
-        category: 'Security',
-        items: [
-          { name: 'JWT Auth', description: 'Role-based access control' },
+          { name: 'HTML / CSS', description: 'Support and community screens' },
+          { name: 'Static views', description: 'Jobs, training, support, and community concepts' },
         ],
       },
     ],
     features: [
-      { group: 'User Support', icon: '💼', title: 'Job Matching', desc: 'Curated job listings with application tracking and status updates tailored for reintegration.' },
-      { group: 'Community & Admin', icon: '💬', title: 'Secure Community Chat', desc: 'Real-time encrypted messaging with topic-based rooms and direct messaging for private conversations.' },
-      { group: 'User Support', icon: '🩺', title: 'Mental Health Support', desc: 'Directory of mental health professionals specializing in reintegration and trauma recovery.' },
-      { group: 'User Support', icon: '⚖️', title: 'Legal Assistance', desc: 'Access to legal professionals specializing in expungement, parole, and reintegration needs.' },
-      { group: 'User Support', icon: '📚', title: 'Training Resources', desc: 'Skill-building courses and certifications to improve employment opportunities.' },
-      { group: 'Community & Admin', icon: '🛡️', title: 'Admin Portal', desc: 'Comprehensive management interface for user approvals, content moderation, and analytics.' },
+      { group: 'User Support', icon: '💼', title: 'Job Opportunities', desc: 'A prototype directory presents employment opportunities and the product direction for reentry-focused job access.' },
+      { group: 'Community Concepts', icon: '💬', title: 'Community Space', desc: 'A static community interface explores how peer-support conversations could fit into the wider platform.' },
+      { group: 'User Support', icon: '🩺', title: 'Support Network', desc: 'Prototype screens organize mental-health and legal-support resources in one discoverable directory.' },
+      { group: 'User Support', icon: '📚', title: 'Training Resources', desc: 'Learning and skills content gives the prototype a practical path beyond job listings alone.' },
+      { group: 'Platform Prototype', icon: '👤', title: 'User Records', desc: 'FastAPI and MongoDB routes cover registration, login lookup, and core user data operations for the demo.' },
+      { group: 'Platform Prototype', icon: '🧭', title: 'Guided Dashboard', desc: 'A unified dashboard connects jobs, training, support, community, and assistant interface concepts.' },
     ],
     architecture: [
       {
-        title: 'Platform Architecture',
-        desc: 'FastAPI backend with MongoDB, JWT authentication, WebSocket-powered community chat, and role-based access control for privacy and security.',
+        title: 'Current Prototype Boundary',
+        desc: 'FastAPI, Jinja2, and MongoDB support the user and page flows, while jobs, resources, community, and assistant experiences are currently static interface prototypes. Production authentication, authorization, and realtime messaging remain future work.',
       },
     ],
     gallery: [
       { src: `${base}/secondchance/login.png`, caption: 'Login Page' },
       { src: `${base}/secondchance/homepage.png`, caption: 'Home Page' },
       { src: `${base}/secondchance/homedashboard.png`, caption: 'Dashboard — Activity Feed & Announcements' },
-      { src: `${base}/secondchance/community-chat.png`, caption: 'Community Chat — Secure Peer Support' },
+      { src: `${base}/secondchance/community-chat.png`, caption: 'Community interface concept — peer-support layout' },
       { src: `${base}/secondchance/support-network.png`, caption: 'Support Network — Doctors & Legal Professionals' },
       { src: `${base}/secondchance/job-opportunities.png`, caption: 'Job Opportunities — Curated Listings' },
       { src: `${base}/secondchance/training-resources.png`, caption: 'Training Resources — Skill Development' },
-      { src: `${base}/secondchance/assistant-chatbot.png`, caption: 'Assistant Chatbot — 24/7 Guidance' },
+      { src: `${base}/secondchance/assistant-chatbot.png`, caption: 'Assistant interface concept — guided support layout' },
     ],
     challenges: [
-      { title: 'Secure Real-Time Chat', desc: 'WebSocket encryption with message persistence and moderation for safe community interactions.' },
-      { title: 'Role-Based Access Control', desc: 'Granular permissions ensuring sensitive user data is only accessible to authorized roles.' },
-      { title: 'Job Matching Algorithm', desc: 'Automated matching considering legal restrictions, qualifications, and employer requirements.' },
+      { title: 'Sensitive Product Domain', desc: 'Designing support flows that feel respectful, clear, and useful for people navigating reentry.' },
+      { title: 'Prototype vs Production Security', desc: 'The current login flow is demonstrative; password hashing, tokens, authorization, moderation, and privacy controls are required before real use.' },
+      { title: 'Turning Static Concepts into Services', desc: 'Jobs, training, support, and community screens define the product direction but still need data models and backend workflows.' },
     ],
     cta: {
-      secondary: [{ label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/SecondChance' }],
+      secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Social Impact', 'FastAPI + MongoDB', 'Community Platform'],
+    status: ['Social Impact Prototype', 'FastAPI + MongoDB', 'Team Project'],
   },
 
   zenithhouse: {
     facts: [
-      { label: 'Type', value: 'IoT Home Automation' },
-      { label: 'Hardware', value: 'ESP32 per Room' },
-      { label: 'Cloud', value: 'Firebase Realtime' },
+      { label: 'Type', value: 'Smart Home Project' },
+      { label: 'Hardware', value: 'ESP32' },
+      { label: 'Cloud', value: 'Firebase' },
       { label: 'Controls', value: 'Climate / Lighting / Access' },
     ],
     techStack: [
@@ -554,7 +546,7 @@ const content: Record<string, ProjectContent> = {
         category: 'Embedded',
         items: [
           { name: 'C++', description: 'ESP32 firmware' },
-          { name: 'ESP32', description: 'Per-room microcontroller' },
+          { name: 'ESP32', description: 'Connected device controller' },
         ],
       },
       {
@@ -566,97 +558,83 @@ const content: Record<string, ProjectContent> = {
       {
         category: 'Cloud',
         items: [
-          { name: 'Firebase', description: 'Realtime database & auth' },
-        ],
-      },
-      {
-        category: 'IoT',
-        items: [
-          { name: 'Wi-Fi', description: 'Connectivity with auto-reconnect' },
-          { name: 'Power Management', description: 'Deep-sleep & scheduling' },
+          { name: 'Firebase', description: 'Device and application state synchronization' },
         ],
       },
     ],
     features: [
-      { group: 'Home Control', icon: '💡', title: 'Smart Lighting Control', desc: 'Per-room lighting with scheduling, motion detection, and adaptive brightness based on natural light levels.' },
-      { group: 'Home Control', icon: '🌡️', title: 'Climate Management', desc: 'Room-specific temperature control with learning algorithms that adapt to usage patterns for optimal comfort.' },
-      { group: 'Home Control', icon: '🔒', title: 'Access Security', desc: 'Smart locks with remote control, temporary access codes, and real-time entry notifications.' },
-      { group: 'Operations', icon: '📱', title: 'Mobile Integration', desc: 'Cross-platform app for real-time control and monitoring from anywhere with secure authentication.' },
-      { group: 'Operations', icon: '📊', title: 'Energy Analytics', desc: 'Usage reports with recommendations for optimizing consumption and reducing costs.' },
+      { group: 'Home Control', icon: '💡', title: 'Lighting Control', desc: 'ESP32-connected lighting controls form one part of the smart-home project scope.' },
+      { group: 'Home Control', icon: '🌡️', title: 'Climate Control', desc: 'The project explores room-level climate control through connected devices.' },
+      { group: 'Home Control', icon: '🔒', title: 'Access Control', desc: 'Door-access control extends the same device-to-application architecture.' },
+      { group: 'Application', icon: '📱', title: 'Mobile Interface', desc: 'A mobile application provides the user-facing control layer with Firebase state synchronization.' },
     ],
     architecture: [
       {
-        title: 'Distributed Smart Home Network',
-        desc: 'Each room has a dedicated ESP32 controller managing local devices, communicating with Firebase for state synchronization and remote access.',
+        title: 'Device-to-Mobile Concept',
+        desc: 'ESP32 firmware handles connected home controls while Firebase links device state to the mobile application. Detailed source material and new visuals are still being prepared for this archived project.',
       },
     ],
     gallery: [],
     challenges: [
-      { title: 'Power Optimization', desc: 'Implementing deep sleep modes while maintaining responsiveness to real-time Firebase updates.' },
-      { title: 'Network Reliability', desc: 'Local caching and automatic reconnection for seamless operation during network outages.' },
-      { title: 'Real-Time Sync', desc: 'Consistent device state across multiple controllers with minimal latency for instantaneous feedback.' },
+      { title: 'Hardware–Application Boundary', desc: 'Coordinating device commands, cloud state, and mobile feedback across the connected-home flow.' },
+      { title: 'Case-Study Documentation', desc: 'The CV verifies the project scope, while source files and updated screenshots still need to be added to this portfolio archive.' },
     ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['ESP32 Microcontrollers', 'Firebase Sync', 'IoT Home'],
+    status: ['Archived Project', 'ESP32 + Firebase', 'Visuals Pending'],
   },
 
   smartunlock: {
     facts: [
-      { label: 'Type', value: 'Keyless Access System' },
-      { label: 'Auth', value: 'BLE + AES-256' },
-      { label: 'Hardware', value: 'ESP32 Locks' },
-      { label: 'Messaging', value: 'MQTT' },
+      { label: 'Type', value: 'BLE Access Proof of Concept' },
+      { label: 'Signal', value: 'Eddystone BLE Beacon' },
+      { label: 'Hardware', value: 'ESP32 WROOM-32' },
+      { label: 'Events', value: 'MQTT / Mosquitto' },
     ],
     techStack: [
       {
         category: 'Embedded',
         items: [
           { name: 'C++', description: 'ESP32 lock firmware' },
-          { name: 'ESP32', description: 'Lock controller' },
+          { name: 'ESP32 WROOM-32', description: 'BLE scanner and access proof hardware' },
         ],
       },
       {
         category: 'IoT',
         items: [
-          { name: 'BLE', description: 'Mobile authentication' },
-          { name: 'MQTT', description: 'Backend messaging' },
-        ],
-      },
-      {
-        category: 'Security',
-        items: [
-          { name: 'AES-256', description: 'Encrypted handshake & rotating keys' },
+          { name: 'Eddystone BLE', description: 'Beacon UID / URL scanning and filtering' },
+          { name: 'MQTT', description: 'Access event and device-status messaging' },
+          { name: 'Mosquitto', description: 'MQTT broker used in the prototype' },
         ],
       },
     ],
     features: [
-      { group: 'Security & Access', icon: '📱', title: 'BLE Authentication', desc: 'Secure Bluetooth Low Energy-based authentication using employee smartphones with multi-factor verification.' },
-      { group: 'Security & Access', icon: '⚡', title: 'Instant Lock Control', desc: 'MQTT protocol enables sub-second lock/unlock commands from the mobile app to door hardware.' },
-      { group: 'Security & Access', icon: '🔒', title: 'AES-256 Security', desc: 'Encrypted communication with rotating keys and a secure handshake protocol for access commands.' },
-      { group: 'Operations', icon: '📊', title: 'Access Monitoring', desc: 'Real-time access logs with timestamps, user identification, and door status for security auditing.' },
-      { group: 'Operations', icon: '🔋', title: 'Low Power Operation', desc: 'A deep-sleep-oriented BLE design intended to extend battery life while preserving quick wake-up.' },
+      { group: 'BLE Access Flow', icon: '📡', title: 'Beacon Scanning', desc: 'ESP32 firmware scans nearby Eddystone advertisements and filters the expected beacon identifier.' },
+      { group: 'BLE Access Flow', icon: '🔎', title: 'Identifier Check', desc: 'The proof of concept compares detected UID or URL data before allowing the hardware response.' },
+      { group: 'Hardware Proof', icon: '💡', title: 'Relay Simulation', desc: 'An LED represents the door-relay action so the access decision can be tested safely on the bench.' },
+      { group: 'Hardware Proof', icon: '↗', title: 'MQTT Status', desc: 'Mosquitto messaging publishes access events and prototype device status for remote observation.' },
+      { group: 'Testing', icon: '📱', title: 'Beacon Simulator', desc: 'A phone-side beacon simulator provides repeatable BLE advertisements for testing the scanner flow.' },
     ],
     architecture: [
       {
         title: 'System Architecture',
-        desc: 'ESP32-driven lock hardware communicates via MQTT with the backend, while the mobile app uses BLE for local authentication. AES-256 encryption secures all channels.',
+        desc: 'A phone beacon simulator broadcasts an Eddystone identifier. The ESP32 scans and filters the advertisement, triggers an LED as the lock-relay proof, and publishes event or status messages to Mosquitto over MQTT.',
       },
     ],
     gallery: [],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['BLE & MQTT', 'Enterprise Security', 'ESP32'],
+    status: ['Internship Prototype', 'BLE Beacon', 'ESP32 + MQTT'],
   },
 
   sps: {
     facts: [
-      { label: 'Type', value: 'Android App' },
-      { label: 'Backend', value: 'Firebase Realtime' },
-      { label: 'Maps', value: 'Google Maps API' },
-      { label: 'Sensors', value: 'IoT Parking' },
+      { label: 'Type', value: 'Android Parking Prototype' },
+      { label: 'Platform', value: 'Native Android / Java' },
+      { label: 'Data', value: 'Firebase' },
+      { label: 'Views', value: 'Parking + Vehicle Records' },
     ],
     techStack: [
       {
@@ -664,95 +642,345 @@ const content: Record<string, ProjectContent> = {
         items: [
           { name: 'Java', description: 'Android development' },
           { name: 'Android', description: 'Native mobile platform' },
+          { name: 'XML', description: 'Native Android layouts' },
         ],
       },
       {
         category: 'Cloud',
         items: [
-          { name: 'Firebase', description: 'Realtime database & auth' },
-        ],
-      },
-      {
-        category: 'Integrations',
-        items: [
-          { name: 'Google Maps API', description: 'Navigation & spot display' },
-        ],
-      },
-      {
-        category: 'IoT',
-        items: [
-          { name: 'IoT Sensors', description: 'Parking space detection' },
+          { name: 'Firebase', description: 'Application data and account support in the compiled prototype' },
         ],
       },
     ],
     features: [
-      { group: 'Parking Experience', icon: '📍', title: 'Real-Time Availability', desc: 'Live updates of parking space availability using IoT sensor data displayed on an interactive map.' },
-      { group: 'Parking Experience', icon: '🗺️', title: 'Interactive Map', desc: 'Color-coded map showing available, occupied, and restricted parking spaces with navigation.' },
-      { group: 'Smart Features', icon: '⏱️', title: 'Time Estimates', desc: 'Predictive insights showing when spaces are likely to become available based on historical patterns.' },
-      { group: 'Smart Features', icon: '🔔', title: 'Availability Alerts', desc: "Push notifications when spaces become available in the user's preferred parking areas." },
+      { group: 'Account Flow', icon: '👤', title: 'Login & Registration', desc: 'Native Android screens support account entry and creation in the prototype journey.' },
+      { group: 'Parking Flow', icon: '🅿️', title: 'Parking-Space View', desc: 'A dedicated mobile view presents the current parking-space information available to the application.' },
+      { group: 'Vehicle Records', icon: '🚗', title: 'Cars & Plates', desc: 'Vehicle, plate, and owner records are organized into a mobile-friendly list.' },
+      { group: 'Account Flow', icon: '↩', title: 'Session Exit', desc: 'The documented four-page journey includes a clear logout path.' },
     ],
     architecture: [
       {
-        title: 'System Architecture',
-        desc: 'Android app connects to Firebase Realtime Database which aggregates data from IoT parking sensors deployed across monitored parking areas.',
+        title: 'Android + Firebase Prototype',
+        desc: 'The native Java application covers account, parking, and vehicle-record views with Firebase included in the compiled prototype. Sensor ingestion, mapping, predictions, and alert services are outside the verified scope.',
       },
     ],
     gallery: [],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Android App', 'Firebase Realtime', 'IoT Sensors'],
+    status: ['Android Prototype', 'Java + Firebase', 'Parking UI'],
   },
 
   smartagri: {
     facts: [
-      { label: 'Type', value: 'IoT Field Monitoring' },
-      { label: 'Sensors', value: 'DHT22 (Temp + RH)' },
-      { label: 'Power', value: 'Solar + Battery' },
-      { label: 'Cloud', value: 'Firebase' },
+      { label: 'Type', value: 'Archived IoT Concept' },
+      { label: 'Domain', value: 'Agricultural Monitoring' },
+      { label: 'Media', value: 'Logo Placeholder' },
+      { label: 'Status', value: 'Source Details Pending' },
     ],
-    techStack: [
-      {
-        category: 'Embedded',
-        items: [
-          { name: 'C++', description: 'ESP32 firmware' },
-          { name: 'ESP32', description: 'Field microcontroller' },
-        ],
-      },
-      {
-        category: 'IoT & Hardware',
-        items: [
-          { name: 'DHT22', description: 'Temperature & humidity sensor' },
-          { name: 'Solar Power', description: 'Off-grid energy' },
-        ],
-      },
-      {
-        category: 'Cloud',
-        items: [
-          { name: 'Firebase', description: 'Realtime data sync' },
-        ],
-      },
-    ],
+    techStack: [],
     features: [
-      { group: 'Field Monitoring', icon: '🌡️', title: 'Real-Time Monitoring', desc: 'Continuous DHT22 temperature and humidity readings for timely field monitoring.' },
-      { group: 'Field Monitoring', icon: '📊', title: 'Data Visualization', desc: 'Interactive mobile charts showing historical trends and current environmental conditions.' },
-      { group: 'Operations', icon: '⚠️', title: 'Alert System', desc: 'Instant push notifications when environmental conditions exceed optimal ranges for specific crops.' },
-      { group: 'Operations', icon: '🔋', title: 'Solar-Powered Operation', desc: 'Low-power design with solar charging and battery backup for continuous field operation.' },
+      { group: 'Concept', icon: '🌱', title: 'Agricultural Monitoring', desc: 'The archived project explored how a connected system could surface environmental field information to a user.' },
+      { group: 'Portfolio Archive', icon: '🖼️', title: 'Documentation Pending', desc: 'The local project folder does not currently contain source files or screenshots, so implementation details are intentionally not claimed.' },
     ],
     architecture: [
       {
-        title: 'End-to-End IoT Solution',
-        desc: 'ESP32 with DHT22 sensors collects environmental data, transmits via Wi-Fi to Firebase, and is visualized in a mobile app for farmer insights.',
+        title: 'Archived Concept',
+        desc: 'This entry preserves the project in the portfolio archive without inventing hardware, cloud, power, or alert details that are not present in the supplied source folder.',
       },
     ],
     gallery: [],
     cta: {
+      secondary: [{ label: 'Contact Me', url: '/#contact' }],
+    },
+    status: ['Archived Concept', 'Details Pending', 'Visual Placeholder'],
+  },
+
+  geniuspmo: {
+    facts: [
+      { label: 'Context', value: 'HR Frontend Prototype' },
+      { label: 'Role', value: 'Frontend Engineer' },
+      { label: 'Scope', value: 'HR-Manager View' },
+      { label: 'Data', value: 'Mock / Local State' },
+    ],
+    techStack: [
+      {
+        category: 'Application',
+        items: [
+          { name: 'Next.js 15', description: 'App Router frontend architecture' },
+          { name: 'React 19', description: 'Interactive HR workflows and local state' },
+          { name: 'TypeScript', description: 'Typed HR domain and component contracts' },
+        ],
+      },
+      {
+        category: 'Interface',
+        items: [
+          { name: 'Tailwind CSS 4', description: 'Responsive application styling' },
+          { name: 'Lucide', description: 'Consistent interface iconography' },
+          { name: 'EN / FR', description: 'Persisted bilingual interface preference' },
+        ],
+      },
+      {
+        category: 'Documents & Data',
+        items: [
+          { name: 'PDF generation', description: 'Dependency-free draft payslip output' },
+          { name: 'CSV export', description: 'UTF-8 workforce and operations exports' },
+          { name: 'Mock data', description: 'Explicitly labeled prototype dataset' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Daily Operations', icon: '📊', title: 'HR Overview', desc: 'A compact daily cockpit for workforce presence, payroll readiness, document gaps, leave, requests, and exception queues.' },
+      { group: 'Daily Operations', icon: '⏱️', title: 'Attendance Review', desc: 'Schedule variance, late or missing scans, source filters, exceptions, and an HR review workflow.' },
+      { group: 'People & Compliance', icon: '👥', title: 'Employee Records', desc: 'Searchable employee directory and detailed records covering assignment, schedule, documents, payroll, skills, and history.' },
+      { group: 'People & Compliance', icon: '📁', title: 'Document Health', desc: 'Required-document tracking, employee checklists, reminders, and clearly simulated upload or status actions.' },
+      { group: 'Payroll & Requests', icon: '🧾', title: 'Draft Payroll', desc: 'Period preparation with attendance adjustments, readiness checks, previews, and individual or batch draft payslips.' },
+      { group: 'Payroll & Requests', icon: '✅', title: 'HR Case Center', desc: 'Requests organized by priority, owner, SLA, activity timeline, response draft, status, and resolution.' },
+      { group: 'Reporting & Access', icon: '📈', title: 'Reports & Exports', desc: 'Accessible workforce charts with working UTF-8 CSV exports and operational summaries.' },
+      { group: 'Reporting & Access', icon: '🌐', title: 'Bilingual & Responsive', desc: 'Persisted English/French and light/dark preferences across desktop and mobile dashboard layouts.' },
+    ],
+    architecture: [
+      {
+        title: 'Frontend Prototype Boundary',
+        desc: 'Next.js routes and shared dashboard components are backed by a typed client-side provider and mock HR data. The API boundary is prepared for future FastAPI integration, while every simulated workflow remains visibly labeled.',
+        items: [
+          { label: 'Routes', desc: 'One focused page per HR operations module.' },
+          { label: 'Shared state', desc: 'Client provider coordinates employees, leave, payroll, documents, and feedback.' },
+          { label: 'Output', desc: 'Browser-side PDF and CSV generation keeps the prototype fully interactive.' },
+        ],
+      },
+    ],
+    gallery: [
+      { src: `${base}/geniuspmo/dashboard.png`, caption: 'HR overview — workforce status, quick actions, attendance plan, and focus queue' },
+    ],
+    challenges: [
+      { title: 'Dense Workflow Clarity', desc: 'Organizing many HR modules without turning the product into a collection of oversized, disconnected dashboard cards.' },
+      { title: 'Honest Prototype States', desc: 'Making biometric, payroll, upload, and notification simulations useful while clearly distinguishing them from connected production behavior.' },
+      { title: 'Operational Responsiveness', desc: 'Keeping data-heavy tables, drawers, filters, and navigation usable on smaller screens.' },
+    ],
+    results: [
+      { icon: '✓', title: 'Coherent HR Workspace', content: 'A navigable prototype that demonstrates the complete HR-manager journey across daily operations.' },
+      { icon: '↔', title: 'Reusable Frontend Boundary', content: 'Typed domain models and API helper placeholders make the backend handoff explicit.' },
+      { icon: '◎', title: 'Credible Demo Scope', content: 'Working interactions, exports, themes, and language preferences without disguising mock data as production infrastructure.' },
+    ],
+    cta: {
+      secondary: [{ label: 'Contact Me', url: '/#contact' }],
+    },
+    status: ['Frontend Prototype', 'Next.js 15', 'Mock Data'],
+  },
+
+  greencoffee: {
+    facts: [
+      { label: 'Type', value: 'Interactive SaaS Prototype' },
+      { label: 'Role', value: 'Product + Frontend' },
+      { label: 'Personas', value: '5 Demo Roles' },
+      { label: 'Persistence', value: 'Browser Storage' },
+    ],
+    techStack: [
+      {
+        category: 'Frontend',
+        items: [
+          { name: 'React 19', description: 'Role-focused application flows and shared UI state' },
+          { name: 'Vite 8', description: 'Development and production build tooling' },
+          { name: 'JavaScript', description: 'Product logic and interactive workflows' },
+        ],
+      },
+      {
+        category: 'Design System',
+        items: [
+          { name: 'Custom CSS', description: 'Responsive visual system without a UI framework' },
+          { name: 'Lucide', description: 'Application iconography' },
+          { name: 'Light / Dark', description: 'Persisted theme modes' },
+        ],
+      },
+      {
+        category: 'Prototype State',
+        items: [
+          { name: 'LocalStorage', description: 'Shared coffee-shop operational data' },
+          { name: 'SessionStorage', description: 'Current demo actor and session' },
+          { name: 'Role guards', description: 'Owner, manager, barista, floor, and customer routes' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Shop Operations', icon: '☕', title: 'Live Order Board', desc: 'QR and staff-entered orders move through new, preparing, ready, and served states with barista and KDS views.' },
+      { group: 'Shop Operations', icon: '🪑', title: 'Floor & Reservations', desc: 'Table sessions, occupancy, secure table QR flows, reservations, calendar, waitlist, guest messages, and event bookings.' },
+      { group: 'Menu & Customers', icon: '🥐', title: 'Menu Management', desc: 'Categories, stock, modifiers, allergens, availability, featured products, and customer menu preview.' },
+      { group: 'Menu & Customers', icon: '💚', title: 'CRM & Loyalty', desc: 'Customer profiles, preferences, receipt history, rewards, VIP tiers, birthdays, and referrals.' },
+      { group: 'Growth & Insight', icon: '📣', title: 'Campaign Workflows', desc: 'Segments, coupons, feedback QR, ratings, and prototype WhatsApp, email, and push campaign experiences.' },
+      { group: 'Growth & Insight', icon: '📈', title: 'Operational Analytics', desc: 'Revenue, order, product, reservation, QR-scan, customer, and peak-hour views for decision support.' },
+    ],
+    architecture: [
+      {
+        title: 'Shared Interactive Frontend',
+        desc: 'React modules share one browser-persisted shop dataset so changing demo roles feels like working in the same café. Role guards and session state shape each workspace, while production services remain an explicit future boundary.',
+      },
+    ],
+    gallery: [
+      { src: `${base}/greencoffee/dashboard.png`, caption: 'Role-based demo entry — owner, manager, barista, floor staff, and customer experiences' },
+    ],
+    challenges: [
+      { title: 'Turning Scope into Product', desc: 'Converting a large capability inventory into coherent navigation and workflows rather than a feature checklist.' },
+      { title: 'Shared Multi-Role State', desc: 'Making role switching feel connected while keeping the implementation honest as a browser-only prototype.' },
+      { title: 'Operational Density', desc: 'Balancing fast staff workflows with readable detail across desktop, tablet, and mobile layouts.' },
+    ],
+    results: [
+      { icon: '5', title: 'Role-Focused Journeys', content: 'Five distinct demo experiences demonstrate how one product can serve the whole coffee-shop operation.' },
+      { icon: '↻', title: 'Connected Demo State', content: 'Orders, menu availability, tables, reservations, and automations persist across staff role changes.' },
+      { icon: '◫', title: 'Product-Ready UI Direction', content: 'A polished, responsive interface that provides a concrete foundation for backend discovery and implementation.' },
+    ],
+    cta: {
       secondary: [
+        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/CoffeeShop-SaaS' },
         { label: 'Contact Me', url: '/#contact' },
-        { label: 'View on GitHub', url: 'https://github.com/SofieneZayati' },
       ],
     },
-    status: ['IoT Sensors', 'Firebase Realtime', 'Solar Powered'],
+    status: ['Frontend Prototype', 'React 19', '5 Demo Roles'],
+  },
+
+  tounsiads: {
+    facts: [
+      { label: 'Type', value: 'Full-Stack AI MVP' },
+      { label: 'Role', value: 'Product + Engineering' },
+      { label: 'Audio', value: 'Gemini TTS → WAV' },
+      { label: 'Data', value: 'Local Campaign Drafts' },
+    ],
+    techStack: [
+      {
+        category: 'Frontend',
+        items: [
+          { name: 'React 19', description: 'Editable campaign workspace' },
+          { name: 'Vite 6', description: 'Frontend tooling and production build' },
+          { name: 'Web Speech API', description: 'Optional browser speech-to-text input' },
+          { name: 'LocalStorage', description: 'Campaign history and workspace preferences' },
+        ],
+      },
+      {
+        category: 'Server',
+        items: [
+          { name: 'Node.js', description: 'Runtime for the TTS service' },
+          { name: 'Express', description: 'Server-side POST /api/tts route' },
+          { name: 'dotenv', description: 'API key kept outside the browser bundle' },
+        ],
+      },
+      {
+        category: 'AI & Audio',
+        items: [
+          { name: 'Gemini TTS', description: 'Prompt-directed voice generation' },
+          { name: 'Google GenAI SDK', description: 'Server-side model client' },
+          { name: 'PCM → WAV', description: 'Browser-playable and downloadable output' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Campaign Creation', icon: '✦', title: 'Dynamic Drafts', desc: 'Business, offer, audience, tone, duration, and call-to-action inputs create an editable campaign structure.' },
+      { group: 'Campaign Creation', icon: '✎', title: 'Editable Workspace', desc: 'Concept, audience, tone, individual scenes, and final transcript remain editable after generation.' },
+      { group: 'Workspace', icon: '▦', title: 'Templates & Brand Kit', desc: 'Starter prompts, reusable brand details, team prototype, settings, help, and campaign history in one workspace.' },
+      { group: 'Workspace', icon: '🎙️', title: 'Speech Input', desc: 'Browser speech-to-text can capture a brief in supported browsers, alongside typed prompts and attachments.' },
+      { group: 'Voice Generation', icon: '🔊', title: 'Tunisian Voiceover', desc: 'Selectable Gemini voices and delivery directions generate playable audio through a protected server route.' },
+      { group: 'Voice Generation', icon: '↓', title: 'WAV Download', desc: 'Raw model audio is converted into a standard WAV file for native playback and export.' },
+    ],
+    architecture: [
+      {
+        title: 'Browser Workspace + Server-Side TTS',
+        desc: 'React manages campaign editing and local history. Vite proxies audio requests to an Express API, where the Gemini credential remains server-side. The response is converted to WAV and returned for browser playback or download.',
+        items: [
+          { label: 'Browser', desc: 'Campaign editing, persistence, speech input, playback, and downloads.' },
+          { label: 'Express API', desc: 'Validates the request and protects provider credentials.' },
+          { label: 'Gemini TTS', desc: 'Generates raw audio from text, voice, and delivery direction.' },
+        ],
+      },
+    ],
+    gallery: [
+      { src: `${base}/tounsiads/studio.png`, caption: 'Campaign creation workspace — templates, local history, prompt controls, and Tunisian voice direction' },
+    ],
+    challenges: [
+      { title: 'Credential Boundary', desc: 'Keeping the model key out of the React bundle while preserving a simple local full-stack development flow.' },
+      { title: 'Editable AI Output', desc: 'Treating generated content as a draft that users can inspect and refine, rather than an opaque final result.' },
+      { title: 'Dialect Variability', desc: 'Supporting Arabic, Tunisian Latin/Arabizi, and mixed French wording while making pronunciation limitations visible.' },
+    ],
+    results: [
+      { icon: '→', title: 'Brief to Playable Audio', content: 'One connected MVP flow turns a local campaign idea into editable copy and a downloadable voiceover.' },
+      { icon: '🔐', title: 'Safer AI Integration', content: 'Provider credentials stay on the Node server rather than being exposed through Vite environment variables.' },
+      { icon: '✎', title: 'Human-in-the-Loop Workflow', content: 'Every generated concept, scene, and transcript remains editable before voice generation.' },
+    ],
+    cta: {
+      secondary: [{ label: 'Contact Me', url: '/#contact' }],
+    },
+    status: ['Personal MVP', 'Gemini TTS', 'React + Node'],
+  },
+
+  digiservice: {
+    facts: [
+      { label: 'Context', value: 'Team Microservices Project' },
+      { label: 'Ownership', value: 'Reviews Service' },
+      { label: 'Runtime', value: 'Java 17 / Spring Boot' },
+      { label: 'Integration', value: 'Eureka + Gateway' },
+    ],
+    techStack: [
+      {
+        category: 'Service',
+        items: [
+          { name: 'Java 17', description: 'Service implementation language' },
+          { name: 'Spring Boot', description: 'REST API and application runtime' },
+          { name: 'Spring Data JPA', description: 'Review and response persistence layer' },
+          { name: 'Bean Validation', description: 'Request and domain validation' },
+        ],
+      },
+      {
+        category: 'Integration',
+        items: [
+          { name: 'OpenFeign', description: 'Linked user and artisan service calls' },
+          { name: 'Eureka', description: 'Service discovery registration' },
+          { name: 'API Gateway', description: 'Platform routing boundary' },
+          { name: 'Actuator', description: 'Health and runtime endpoints' },
+        ],
+      },
+      {
+        category: 'API & Data',
+        items: [
+          { name: 'OpenAPI / Swagger', description: 'Interactive API documentation' },
+          { name: 'H2', description: 'Local in-memory service database' },
+          { name: 'Angular 18', description: 'Shared marketplace frontend' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Reviews API', icon: '★', title: 'Review Lifecycle', desc: 'Create, read, update, delete, and filter reviews by artisan, client, status, or minimum rating.' },
+      { group: 'Reviews API', icon: '↩', title: 'Response Lifecycle', desc: 'Separate endpoints manage replies to reviews by review or responding user.' },
+      { group: 'Ratings & Quality', icon: '📊', title: 'Rating Statistics', desc: 'Average rating and one-to-five-star distributions provide a reusable artisan reputation summary.' },
+      { group: 'Ratings & Quality', icon: '✓', title: 'Input Validation', desc: 'Rating ranges, required identifiers, response content, and request shapes are validated at the API boundary.' },
+      { group: 'Platform Integration', icon: '⇄', title: 'Cross-Service Checks', desc: 'Feign clients validate linked users and artisans against adjacent platform services.' },
+      { group: 'Platform Integration', icon: '◉', title: 'Discovery & Health', desc: 'Eureka registration, gateway routing, Actuator health, and OpenAPI documentation support service operation.' },
+    ],
+    architecture: [
+      {
+        title: 'Owned Service in a Team Platform',
+        desc: 'The Angular marketplace calls a Spring Cloud gateway. Eureka routes requests to domain services, including the reviews service I built. That service owns review and response data while using Feign clients for cross-domain validation.',
+        items: [
+          { label: 'Gateway', desc: 'Single frontend entry point for platform APIs.' },
+          { label: 'Reviews service', desc: 'Independent review, response, and rating-statistics domain.' },
+          { label: 'Adjacent services', desc: 'User and artisan records remain owned by their respective team services.' },
+        ],
+      },
+    ],
+    gallery: [
+      { src: `${base}/digiservice/marketplace.jpg`, caption: 'DigiService marketplace interface — the reviews service supports reputation workflows within the wider team platform' },
+    ],
+    challenges: [
+      { title: 'Clear Service Ownership', desc: 'Keeping reviews and responses independent while referencing users and artisans owned by other services.' },
+      { title: 'Cross-Service Validation', desc: 'Providing useful validation without duplicating user or artisan domain data inside the reviews service.' },
+      { title: 'Discoverable API Contract', desc: 'Documenting filters, statistics, response shapes, health, and error behavior for team integration.' },
+    ],
+    results: [
+      { icon: 'API', title: 'Complete Domain API', content: 'A focused reviews service covers CRUD, responses, filters, and reputation statistics.' },
+      { icon: '↔', title: 'Team-Ready Integration', content: 'Discovery, gateway routing, Feign boundaries, and OpenAPI documentation align the service with the wider platform.' },
+      { icon: '◎', title: 'Explicit Contribution', content: 'The case study separates my reviews-service ownership from the broader application built by the team.' },
+    ],
+    cta: {
+      secondary: [{ label: 'Contact Me', url: '/#contact' }],
+    },
+    status: ['Academic Team Project', 'Owned Reviews Service', 'Spring Boot'],
   },
 }
 

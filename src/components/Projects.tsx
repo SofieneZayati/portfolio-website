@@ -6,15 +6,13 @@ import { projects } from '../data/projects'
 
 const categories = [
   { value: 'all', label: 'All work' },
-  { value: 'web', label: 'Web' },
-  { value: 'embedded', label: 'Embedded' },
+  { value: 'web', label: 'Web & SaaS' },
+  { value: 'embedded', label: 'Embedded & IoT' },
   { value: 'mobile', label: 'Mobile' },
-  { value: 'ai', label: 'AI' },
+  { value: 'ai', label: 'AI & automation' },
 ] as const
 
 type Category = (typeof categories)[number]['value']
-
-const selectedProjectIds = new Set(['smartproperty', 'prigado', 'innomall', 'macropark', 'secondchance'])
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState<Category>('all')
@@ -26,7 +24,7 @@ export default function Projects() {
         (project) => project.category === activeCategory || project.tags?.includes(activeCategory),
       )
   const visibleProjects = activeCategory === 'all' && !showAll
-    ? projects.filter((project) => selectedProjectIds.has(project.id))
+    ? projects.filter((project) => project.featured)
     : filtered
 
   return (
@@ -46,8 +44,8 @@ export default function Projects() {
             </h2>
           </div>
           <p>
-            A selection of connected products spanning embedded hardware, AI automation,
-            and full-stack platforms—each documented as an engineering case study.
+            A focused selection of professional, academic, and personal work. Each case study
+            states the context, my contribution, and the project&apos;s current scope.
           </p>
         </motion.header>
 
@@ -88,7 +86,7 @@ export default function Projects() {
                   transition={{ duration: 0.32, delay: Math.min(index * 0.035, 0.14) }}
                   className={featured ? 'project-grid__featured' : ''}
                 >
-                  <ProjectCard project={project} index={index} featured={featured} />
+                  <ProjectCard project={project} featured={featured} />
                 </motion.div>
               )
             })}

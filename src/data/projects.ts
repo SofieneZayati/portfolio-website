@@ -6,6 +6,11 @@ export interface Project {
   tagline: string
   description: string
   longDescription: string
+  year: string
+  role: string
+  context: string
+  scope?: string
+  featured?: boolean
   techStack: string[]
   logo: string
   screenshots: string[]
@@ -13,6 +18,7 @@ export interface Project {
   tags?: ProjectCategory[]
   links: {
     github?: string
+    githubLabel?: string
     live?: string
   }
 }
@@ -23,38 +29,24 @@ export const projects: Project[] = [
     title: 'SmartProperty',
     tagline: 'AI-Powered Real Estate SaaS',
     description:
-      'AI-powered real estate SaaS for the Tunisian market — centralizing property management with ML-driven valuation, OCR, computer vision, and accessibility features for multiple user roles.',
+      'A team-built, multi-role real estate platform for the Tunisian market, combining property operations with recommendation, valuation, document analysis, and accessible AI features.',
     longDescription:
-      'SmartProperty is an AI-powered real estate platform built for the Tunisian real estate market. It centralizes property management for agencies, property owners, accountants, and tenants — combining machine learning, OCR-based document analysis, computer vision, voice-enabled navigation, and multi-role analytics dashboards. Asset management, smart valuation, smart tenant matching, AI-generated marketing, and solvency analysis are delivered through a microservices architecture deployed on Kubernetes with end-to-end CI/CD.',
+      'SmartProperty is a multi-role real estate platform for agencies, owners, accountants, and clients. I contributed to application workflows, interface and notification improvements, solvency-analysis integration, testing, and cross-branch integration within a larger team system spanning web services, machine learning, OCR, and computer vision.',
+    year: '2026',
+    role: 'Full-stack & AI contributor',
+    context: 'Academic team project',
+    scope: 'Team-built product prototype',
+    featured: true,
     techStack: [
       'React',
-      'Tailwind CSS',
-      'Zustand',
-      'React Query',
       'NestJS',
       'FastAPI',
-      'REST APIs',
-      'JWT Auth',
-      'Socket.IO',
-      'Stripe',
-      'Firebase',
       'MongoDB',
-      'MongoDB Atlas',
       'XGBoost',
-      'Groq LLM',
-      'CLIP',
-      'BLIP',
-      'OCR.space',
-      'Leaflet',
-      'OpenStreetMap',
-      'Pannellum',
+      'Socket.IO',
       'Docker',
       'Kubernetes',
       'Jenkins',
-      'SonarQube',
-      'Vercel',
-      'Cloudflare',
-      'Cloudinary',
     ],
     logo: '/images/projects/smartproperty/SmartPropertyLogo.png',
     screenshots: [
@@ -79,18 +71,22 @@ export const projects: Project[] = [
       '/images/projects/smartproperty/aihandsfreenavigationvoiceassistant.png',
     ],
     category: 'web',
-    links: {
-      live: 'https://youtu.be/z0v_b0Qgeng',
-    },
+    tags: ['ai'],
+    links: { live: 'https://youtu.be/z0v_b0Qgeng' },
   },
   {
     id: 'prigado',
     title: 'Prigado AI',
     tagline: 'Intelligent E-Commerce Automation',
     description:
-      'AI-powered workflow automation for e-commerce using n8n, Laravel, Vue.js, MySQL, and Gemini — building conversational AI assistants for product enrichment, sales analytics, and logistics.',
+      'AI workflow automation for an e-commerce platform, with conversational assistants supporting product enrichment, analytics, marketing, and logistics operations.',
     longDescription:
-      'At Inspark Connect, I developed AI-powered workflow automation for the Prigado e-commerce platform using n8n, Laravel, Vue.js, MySQL, and Google Gemini. The system features conversational AI assistants for product enrichment, sales analytics, marketing automation, and logistics prediction. I designed AI Router workflows with intent extraction, JSON sanitization, SQL aggregation for structured agent inputs, and automated email campaigns via SMTP.',
+      'During my Inspark Connect placement, I developed AI-powered workflows and assistants for the Prigado e-commerce platform. The work included n8n routing, intent extraction, JSON sanitization, structured SQL aggregation, Gemini integrations, and automated email flows connected to a Laravel and Vue.js product.',
+    year: '2025',
+    role: 'AI automation & full-stack developer',
+    context: 'Professional placement',
+    scope: 'Integrated into an existing platform',
+    featured: true,
     techStack: ['n8n', 'Laravel', 'Vue.js', 'MySQL', 'Gemini', 'SMTP', 'REST APIs'],
     logo: '/images/projects/prigado/n8nlogo.jpg',
     screenshots: [
@@ -101,17 +97,102 @@ export const projects: Project[] = [
       '/images/projects/prigado/workflow-product-creation.png',
     ],
     category: 'ai',
+    tags: ['web'],
+    links: {},
+  },
+  {
+    id: 'tounsiads',
+    title: 'TounsiAds',
+    tagline: 'Tunisian-Dialect Campaign & Voice Studio',
+    description:
+      'A React and Node MVP that turns a local business brief into an editable advertising campaign, then generates playable Tunisian-dialect voiceovers through server-side Gemini TTS.',
+    longDescription:
+      'TounsiAds is a personal full-stack MVP for building local advertising campaigns. Users can draft and edit concepts and scenes, manage brand and template settings, use browser speech input, and generate or download WAV voiceovers. The Gemini key remains on an Express server route, while drafts and workspace preferences are persisted locally for the prototype.',
+    year: '2026',
+    role: 'Product designer & full-stack developer',
+    context: 'Personal AI product MVP',
+    scope: 'Working MVP · Local persistence',
+    featured: true,
+    techStack: ['React', 'Vite', 'Node.js', 'Express', 'Gemini TTS', 'Web Speech API', 'WAV'],
+    logo: '',
+    screenshots: ['/images/projects/tounsiads/studio.png'],
+    category: 'ai',
+    tags: ['web'],
+    links: {},
+  },
+  {
+    id: 'macropark',
+    title: 'MacroPark',
+    tagline: 'Smart Parking Ecosystem',
+    description:
+      'A connected parking system combining license-plate recognition, WT32 barrier controllers, a Flutter mobile app, MQTT communication, BLE fallback, and backend services.',
+    longDescription:
+      'Built during my graduation internship at Scheidt & Bachmann, MacroPark combines an administration platform, mobile access, barrier hardware, and license-plate recognition. WT32-ETH01 controllers communicate through MQTT, with BLE and network fallback paths, OTA firmware support, and FastAPI services for application and device workflows.',
+    year: '2024',
+    role: 'Embedded systems & software developer',
+    context: 'Graduation internship',
+    scope: 'End-to-end connected-system prototype',
+    featured: true,
+    techStack: ['C++', 'FastAPI', 'MQTT', 'BLE', 'Flutter', 'WT32-ETH01', 'LPR', 'Docker'],
+    logo: '/images/projects/macropark/macrologo.png',
+    screenshots: ['/images/projects/macropark/macroparkimg.png'],
+    category: 'embedded',
+    tags: ['mobile', 'web'],
     links: {
+      github: 'https://github.com/SofieneZayati/MacroPark',
+      githubLabel: 'Firmware',
     },
+  },
+  {
+    id: 'geniuspmo',
+    title: 'Genius PMO HRMS',
+    tagline: 'HR Operations Dashboard Prototype',
+    description:
+      'A bilingual Next.js HR workspace covering workforce status, employee records, attendance, leave, draft payroll, documents, requests, reports, and biometric-enrollment simulation.',
+    longDescription:
+      'Genius PMO HRMS is a high-fidelity HR-manager frontend prototype built around realistic day-to-day operations. It includes responsive workflows, English and French modes, light and dark themes, accessible charts, CSV export, draft payslip generation, and carefully labeled demo interactions. The current version uses mock data and does not claim production authentication or a connected backend.',
+    year: '2026',
+    role: 'Frontend engineer',
+    context: 'Client-facing frontend prototype',
+    scope: 'Interactive prototype · Mock data',
+    featured: true,
+    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'PDF generation', 'CSV export'],
+    logo: '/images/projects/geniuspmo/logo.png',
+    screenshots: ['/images/projects/geniuspmo/dashboard.png'],
+    category: 'web',
+    links: {},
+  },
+  {
+    id: 'greencoffee',
+    title: 'Green Coffee OS',
+    tagline: 'Coffee Shop Operations SaaS Prototype',
+    description:
+      'A high-fidelity React product prototype modelling live orders, menus, reservations, table operations, CRM and loyalty, campaigns, analytics, and role-focused workspaces.',
+    longDescription:
+      'Green Coffee OS translates a broad coffee-shop feature set into a coherent, responsive product experience. The prototype supports owner, manager, barista, floor-staff, and customer demo journeys with shared local data, protected demo routes, light and dark themes, and detailed operational modules. Production authentication, payments, messaging, realtime sync, and AI integrations remain clear next-step backend work.',
+    year: '2026',
+    role: 'Product designer & frontend engineer',
+    context: 'Interactive SaaS prototype',
+    scope: 'Frontend prototype · Browser persistence',
+    featured: true,
+    techStack: ['React 19', 'Vite', 'JavaScript', 'CSS', 'LocalStorage', 'SessionStorage'],
+    logo: '',
+    screenshots: ['/images/projects/greencoffee/dashboard.png'],
+    category: 'web',
+    links: { github: 'https://github.com/SofieneZayati/CoffeeShop-SaaS' },
   },
   {
     id: 'innomall',
     title: 'InnoMall',
     tagline: 'Integrated Mall Management Ecosystem',
     description:
-      'Full-stack mall management platform with JavaFX desktop and Symfony web interfaces, IoT multi-floor parking with real-time sensor tracking, Stripe payments, and AI chatbot.',
+      'A team-built mall management platform with JavaFX and Symfony interfaces, IoT parking, reservations, payments, customer support automation, and analytics.',
     longDescription:
-      'InnoMall is a comprehensive mall management platform developed with a JavaFX desktop application for administrators and a Symfony 6 web interface for customers and shop owners. The system features an IoT multi-floor parking system with real-time sensor tracking, live spot monitoring, and online reservations. Integrated Stripe payment processing, a Gemini-powered AI chatbot for customer support, Twilio SMS notifications, and detailed analytics dashboards.',
+      'InnoMall combines a JavaFX administration application and a Symfony web platform for customers and shop owners. I contributed to a team system that connected multi-floor parking sensors, live availability, online reservations, Stripe payment flows, a Gemini assistant, Twilio notifications, and operational analytics.',
+    year: '2025',
+    role: 'Full-stack & IoT contributor',
+    context: 'Academic team project',
+    scope: 'Multi-application team prototype',
     techStack: ['Symfony 6', 'Java', 'JavaFX', 'MySQL', 'Stripe API', 'Gemini API', 'Twilio', 'IoT Sensors'],
     logo: '/images/projects/innomall/innologo.png',
     screenshots: [
@@ -124,52 +205,39 @@ export const projects: Project[] = [
     ],
     category: 'web',
     tags: ['embedded'],
-    links: {
-      github: 'https://github.com/Eya-ajimi/pi_symfony1',
-      live: 'https://youtu.be/Zs875HdhmJ8',
-    },
+    links: { live: 'https://youtu.be/Zs875HdhmJ8' },
   },
   {
-    id: 'macropark',
-    title: 'MacroPark',
-    tagline: 'Smart Parking Ecosystem',
+    id: 'digiservice',
+    title: 'DigiService Reviews',
+    tagline: 'Service Marketplace Microservice',
     description:
-      'Multi-component smart parking system with LPR integration, WT32-based barrier controllers, Flutter mobile app, BLE fallback, and Dockerized backend services.',
+      'My contribution to a team microservices platform: a Spring Boot reviews service supporting ratings, responses, filters, artisan statistics, OpenAPI documentation, and service discovery.',
     longDescription:
-      'MacroPark is a multi-component smart parking ecosystem including an admin platform, Flutter mobile application, IoT barrier controllers, and License Plate Recognition (LPR) integration. WT32-ETH01 microcontrollers manage barrier gates via MQTT with BLE and Ethernet/Wi-Fi failover, OTA firmware updates, and real-time access management. The backend uses Python FastAPI with Dockerized services for REST APIs and real-time event monitoring.',
-    techStack: ['C++', 'Python FastAPI', 'MQTT', 'BLE', 'Docker', 'Flutter', 'REST APIs', 'WT32-ETH01', 'LPR'],
-    logo: '/images/projects/macropark/macrologo.png',
-    screenshots: ['/images/projects/macropark/macroparkimg.png'],
-    category: 'embedded',
-    links: {
-      github: 'https://github.com/SofieneZayati/MacroPark',
-    },
-  },
-  {
-    id: 'zenithhouse',
-    title: 'ZenithHouse',
-    tagline: 'Smart Home Automation System',
-    description:
-      'IoT smart home system for climate, lighting, and access control using ESP32 microcontrollers with Firebase real-time sync and mobile app control.',
-    longDescription:
-      'ZenithHouse is a smart home automation system that controls climate, lighting, and door access across rooms using ESP32 microcontrollers. A mobile app communicates with Firebase for real-time state synchronization and user management, enabling residents to control their environment from anywhere. The system features energy-efficient scheduling, motion-based lighting, and secure remote access.',
-    techStack: ['C++', 'Firebase', 'ESP32', 'IoT', 'Mobile App'],
-    logo: '/images/projects/zenithhouse/zenithlogo.png',
-    // TODO: screenshots — drop 2-4 image paths here (hardware, mobile app, dashboard)
-    screenshots: [],
-    category: 'embedded',
-    links: {
-    },
+      'DigiService is a team-built marketplace for connecting clients with local service professionals. I owned the reviews and evaluations service: a Java 17 Spring Boot API with review and response lifecycles, validation, filters, rating statistics, OpenAPI documentation, health endpoints, Eureka registration, and gateway-ready integration with other services.',
+    year: '2025',
+    role: 'Reviews microservice developer',
+    context: 'Academic team project',
+    scope: 'Owned backend service in a larger platform',
+    techStack: ['Java 17', 'Spring Boot', 'Spring Data JPA', 'OpenFeign', 'Eureka', 'OpenAPI', 'Angular'],
+    logo: '/images/projects/digiservice/logo.png',
+    screenshots: ['/images/projects/digiservice/marketplace.jpg'],
+    category: 'web',
+    links: {},
   },
   {
     id: 'secondchance',
     title: 'SecondChance',
-    tagline: 'Reintegration Platform for Reentry',
+    tagline: 'Reintegration Support Platform',
     description:
-      'Reintegration platform for formerly incarcerated individuals. Provides job matching, mental health resources, community chat, and admin oversight — built with FastAPI and MongoDB.',
+      'A team-built social-impact platform connecting formerly incarcerated people with job opportunities, training, support resources, community chat, and administrative tools.',
     longDescription:
-      'SecondChance is a reintegration platform designed to reduce recidivism by providing formerly incarcerated individuals with job opportunities, mental health support, training resources, and a community network. The backend is built with FastAPI and MongoDB, featuring role-based access, JWT authentication, WebSocket-powered community chat, and a comprehensive admin dashboard.',
-    techStack: ['FastAPI', 'MongoDB', 'PyMongo', 'JWT Auth', 'WebSockets', 'Jinja2', 'Pydantic'],
+      'SecondChance is a reintegration platform prototype designed around access to employment, training, support resources, and peer-community concepts. My work centered on FastAPI, MongoDB, server-rendered application flows, and the prototype user journey within the team project.',
+    year: '2025',
+    role: 'Backend & application contributor',
+    context: 'Academic team project',
+    scope: 'Social-impact platform prototype',
+    techStack: ['FastAPI', 'MongoDB', 'PyMongo', 'Motor', 'Jinja2', 'Pydantic'],
     logo: '/images/projects/secondchance/secondchancelogo.png',
     screenshots: [
       '/images/projects/secondchance/homepage.png',
@@ -182,55 +250,81 @@ export const projects: Project[] = [
       '/images/projects/secondchance/community-chat.png',
     ],
     category: 'web',
-    links: {
-    },
+    links: {},
+  },
+  {
+    id: 'zenithhouse',
+    title: 'ZenithHouse',
+    tagline: 'Smart Home Automation System',
+    description:
+      'A connected-home prototype for room-level climate, lighting, and access control using ESP32 devices, a mobile interface, and Firebase realtime synchronization.',
+    longDescription:
+      'ZenithHouse explores distributed home automation with ESP32 controllers assigned to room-level devices. A mobile application and Firebase provide user access, state synchronization, and remote control for climate, lighting, and door-access functions.',
+    year: '2024',
+    role: 'Embedded & mobile developer',
+    context: 'Embedded systems project',
+    scope: 'IoT prototype',
+    techStack: ['C++', 'Firebase', 'ESP32', 'IoT', 'Mobile App'],
+    logo: '/images/projects/zenithhouse/zenithlogo.png',
+    screenshots: [],
+    category: 'embedded',
+    tags: ['mobile'],
+    links: {},
   },
   {
     id: 'smartunlock',
     title: 'Smart Unlock',
     tagline: 'Keyless BLE Employee Access',
     description:
-      'Secure keyless door access system using BLE mobile authentication and MQTT communication to instantly control ESP32-driven door lock hardware.',
+      'A BLE beacon access-control proof of concept using ESP32 scanning, Eddystone identifier checks, an LED relay simulation, and MQTT status messaging.',
     longDescription:
-      'Smart Unlock replaces traditional keys with a BLE-enabled mobile app. Employees authenticate through the app, which sends commands via MQTT to ESP32-controlled door locks. The system provides instant, secure, and auditable access control with AES-256 encrypted communication, rotating security keys, and an admin dashboard for user management.',
-    techStack: ['C++', 'BLE', 'MQTT', 'ESP32', 'AES-256'],
+      'Created during an internship at Scheidt & Bachmann, Smart Unlock uses a phone beacon simulator and an ESP32 WROOM-32 scanner to test a keyless access decision. A matched Eddystone identifier triggers an LED as the door-relay proof and publishes status through Mosquitto MQTT.',
+    year: '2023',
+    role: 'Hardware & software developer',
+    context: 'Embedded systems internship',
+    scope: 'Connected access prototype',
+    techStack: ['C++', 'ESP32', 'Eddystone BLE', 'MQTT', 'Mosquitto'],
     logo: '/images/projects/smartunlock/smartunlocklogo.png',
-    // TODO: screenshots — drop 2-4 image paths here (hardware, mobile app, admin)
     screenshots: [],
     category: 'embedded',
-    links: {
-    },
+    links: {},
   },
   {
     id: 'sps',
     title: 'SPS',
-    tagline: 'Smart Parking Solution Mobile App',
+    tagline: 'Smart Parking Mobile Application',
     description:
-      'Android application displaying real-time parking availability using IoT sensors and Firebase to minimize search time and reduce traffic congestion.',
+      'A native Android prototype for account access, parking-space presentation, and vehicle, plate, and owner records using Java, XML, and Firebase.',
     longDescription:
-      'Smart Parking Solution (SPS) is an Android application built with Java that connects to IoT parking sensors to show real-time slot availability. Users can quickly locate open spots, receive notifications when spaces open up, and navigate to available parking using Google Maps integration. Firebase provides real-time data synchronization and user authentication.',
-    techStack: ['Java', 'Firebase', 'XML', 'Android', 'Google Maps API'],
+      'Smart Parking Solution is a native Android project built with Java and XML. The documented prototype covers login, account creation, a parking-space view, logout, and vehicle records, with Firebase included in the application build.',
+    year: '2023',
+    role: 'Android & IoT developer',
+    context: 'Mobile systems project',
+    scope: 'Android prototype',
+    techStack: ['Java', 'Android', 'XML', 'Firebase'],
     logo: '/images/projects/sps/spslogo.png',
-    // TODO: screenshots — drop 2-4 image paths here (android screens, map, sensors)
     screenshots: [],
     category: 'mobile',
-    links: {
-    },
+    tags: ['embedded'],
+    links: {},
   },
   {
     id: 'smartagri',
     title: 'Smart Agri',
-    tagline: 'IoT Agricultural Monitoring',
+    tagline: 'Agricultural Monitoring Concept',
     description:
-      'IoT-based agricultural monitoring system using ESP32 and environmental sensors to track temperature and humidity with real-time mobile data visualization.',
+      'An archived agricultural-monitoring concept retained in the portfolio while its source files, implementation notes, and screenshots are being recovered.',
     longDescription:
-      'Smart Agri is an IoT-based agricultural monitoring system that uses ESP32 microcontrollers with DHT22 environmental sensors to track temperature and humidity in real-time. Data streams to Firebase and is visualized in a mobile app, enabling farmers to react quickly to changing conditions. The system features solar-powered operation, low-power deep sleep modes, and configurable alert thresholds.',
-    techStack: ['C++', 'IoT Sensors', 'Firebase', 'ESP32', 'DHT22', 'Solar Power'],
+      'The supplied Smart Agri folder is currently empty, so this archive entry intentionally avoids claiming a specific hardware, cloud, or mobile implementation until the original source and documentation are available.',
+    year: 'Archive',
+    role: 'Original implementation details pending',
+    context: 'Archived project concept',
+    scope: 'Source details pending',
+    techStack: [],
     logo: '/images/projects/smartagri/smartagrilogo.png',
-    // TODO: screenshots — drop 2-4 image paths here (hardware, mobile app, dashboard)
     screenshots: [],
     category: 'embedded',
-    links: {
-    },
+    tags: ['mobile'],
+    links: {},
   },
 ]

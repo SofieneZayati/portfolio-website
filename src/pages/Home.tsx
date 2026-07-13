@@ -1,4 +1,5 @@
 import Hero from '../components/Hero'
+import EngineeringProfile from '../components/EngineeringProfile'
 import Skills from '../components/Skills'
 import Projects from '../components/Projects'
 import Timeline from '../components/Timeline'
@@ -13,13 +14,14 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Sofiene Zayati | Embedded & Full-Stack Engineer"
-        description="Sofiene Zayati builds connected products from embedded firmware and AI services to modern web platforms. Explore selected engineering case studies."
+        title="Sofiene Zayati | Full-Stack Developer & Embedded Systems Graduate"
+        description="Sofiene Zayati builds full-stack web products, AI workflows, and connected systems with React, FastAPI, Spring Boot, ESP32, MQTT, and BLE."
         path="/"
         type="profile"
       />
       <Hero />
       <Projects />
+      <EngineeringProfile />
       <Timeline education={education} experience={work} />
       <Skills />
       <ContactForm />

@@ -1,11 +1,12 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { HiArrowLeft, HiArrowRight, HiExternalLink, HiCollection, HiUsers, HiServer, HiCode } from 'react-icons/hi'
+import { HiArrowLeft, HiArrowRight, HiDownload, HiExternalLink, HiCollection, HiUsers, HiServer, HiCode } from 'react-icons/hi'
 import { projects } from '../data/projects'
 import projectContent from '../data/projectContent'
 import ImageGallery from '../components/ImageGallery'
 import ProjectSectionNav from '../components/ProjectSectionNav'
 import SEO from '../components/SEO'
+import ProjectArtwork from '../components/ProjectArtwork'
 
 function ProjectSection({
   children,
@@ -110,7 +111,12 @@ export default function ProjectDetail() {
   )?.url
   const demoUrl = project.links.live ?? contentDemoLink
   const codeUrl = project.links.github ?? contentCodeLink
-  const heroMetadata = [project.category, ...(content.status ?? [])].slice(0, 3)
+  const codeLabel = project.links.githubLabel ?? 'View code'
+  const primaryIsDownload = Boolean(
+    content.cta.primary &&
+    (/download/i.test(content.cta.primary.label) || /\.(?:pdf|pptx)(?:$|\?)/i.test(content.cta.primary.url)),
+  )
+  const heroMetadata = [project.context, project.year, project.scope ?? content.status?.[0]].filter(Boolean).slice(0, 3) as string[]
 
   const sections = [
     ...(hasFacts ? [{ id: 'overview' as const, label: 'Overview' }] : []),
@@ -129,7 +135,7 @@ export default function ProjectDetail() {
         title={`${project.title} | Sofiene Zayati`}
         description={`${project.description} A project by Sofiene Zayati.`}
         path={`/project/${project.id}`}
-        image={project.logo || '/images/og-image.png'}
+        image={project.screenshots[0] || project.logo || '/images/og-image.png'}
         imageAlt={`${project.title} project by Sofiene Zayati`}
         type="article"
       />
@@ -213,35 +219,31 @@ export default function ProjectDetail() {
                     className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white/80 rounded-xl border border-white/[0.12] bg-white/[0.03] hover:text-white hover:bg-white/[0.07] hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60"
                   >
                     <HiCode size={16} />
-                    View code
+                    {codeLabel}
                   </a>
                 )}
               </div>
             )}
           </div>
 
-          {heroPreviewSrc && (
-            <figure className="mt-10 md:mt-14">
-              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.08] bg-white/[0.02] shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-[#00f5ff]/[0.05] via-transparent to-[#8b5cf6]/[0.06]"
-                  aria-hidden="true"
-                />
-                <img
-                  src={heroPreviewSrc}
-                  alt={heroPreviewCaption}
-                  className="relative z-10 w-full h-full object-contain"
-                  decoding="async"
-                  onError={(e) => {
-                    ;(e.target as HTMLImageElement).style.display = 'none'
-                  }}
-                />
-              </div>
-              <figcaption className="mt-3 text-xs text-white/55 leading-relaxed">
-                {heroPreviewCaption}
-              </figcaption>
-            </figure>
-          )}
+          <figure className="mt-10 md:mt-14">
+            <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.08] bg-white/[0.02] shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-[#00f5ff]/[0.05] via-transparent to-[#8b5cf6]/[0.06]"
+                aria-hidden="true"
+              />
+              <ProjectArtwork
+                project={project}
+                src={heroPreviewSrc}
+                alt={heroPreviewSrc ? heroPreviewCaption : ''}
+                eager
+                className="relative z-10 w-full h-full object-contain"
+              />
+            </div>
+            <figcaption className="mt-3 text-xs text-white/55 leading-relaxed">
+              {heroPreviewSrc ? heroPreviewCaption : `${project.title} — designed placeholder until project visuals are added`}
+            </figcaption>
+          </figure>
 
           <div className="accent-rule mt-10 md:mt-16" />
         </header>
@@ -255,8 +257,15 @@ export default function ProjectDetail() {
             <SectionLabel>Overview</SectionLabel>
             <h2 className="sr-only">Project overview</h2>
             <p className="text-lg md:text-xl text-white/65 leading-relaxed max-w-3xl mb-10 md:mb-14">
-              {project.description}
+              {project.longDescription}
             </p>
+            <div className="project-contribution mb-10 md:mb-12">
+              <div>
+                <span>My contribution</span>
+                <strong>{project.role}</strong>
+              </div>
+              <p>{project.context}{project.scope ? ` · ${project.scope}` : ''}</p>
+            </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {content.facts.map((fact, i) => {
                 const iconMap: Record<string, React.ReactNode> = {
@@ -536,26 +545,30 @@ export default function ProjectDetail() {
               {content.cta.primary && (
                 <a
                   href={content.cta.primary.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={primaryIsDownload ? undefined : '_blank'}
+                  rel={primaryIsDownload ? undefined : 'noopener noreferrer'}
+                  download={primaryIsDownload ? true : undefined}
                   className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-[#050505] rounded-xl bg-[#00f5ff] hover:bg-white hover:-translate-y-1 transition-all duration-300"
                 >
-                  <HiExternalLink size={16} />
+                  {primaryIsDownload ? <HiDownload size={16} /> : <HiExternalLink size={16} />}
                   {content.cta.primary.label}
                 </a>
               )}
-              {content.cta.secondary?.map((link, i) => (
-                <a
-                  key={i}
-                  href={link.url}
-                  target={link.url.startsWith('http') ? '_blank' : undefined}
-                  rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white/80 rounded-xl border border-white/[0.12] hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-300"
-                >
-                  <HiExternalLink size={16} />
-                  {link.label}
-                </a>
-              ))}
+              {content.cta.secondary?.map((link, i) => {
+                const external = link.url.startsWith('http')
+                return (
+                  <a
+                    key={i}
+                    href={link.url}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
+                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white/80 rounded-xl border border-white/[0.12] hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-300"
+                  >
+                    {external ? <HiExternalLink size={16} /> : <HiArrowRight size={16} />}
+                    {link.label}
+                  </a>
+                )
+              })}
             </div>
           </div>
         </ProjectSection>

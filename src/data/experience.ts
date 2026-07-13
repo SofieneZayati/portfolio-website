@@ -4,6 +4,7 @@ export interface Experience {
   organization: string
   description: string
   type: 'education' | 'work'
+  technologies?: string[]
 }
 
 export const experiences: Experience[] = [
@@ -38,6 +39,7 @@ export const experiences: Experience[] = [
     description:
       'Development of AI-powered workflows and intelligent assistants for the Prigado e-commerce platform using n8n, Laravel, Vue.js, MySQL, and Gemini.',
     type: 'work',
+    technologies: ['n8n', 'Laravel', 'Vue.js', 'MySQL', 'Gemini'],
   },
   {
     period: 'Feb 2024 — May 2024',
@@ -46,14 +48,16 @@ export const experiences: Experience[] = [
     description:
       'Created MacroPark: a smart parking system using License Plate Recognition (LPR) and mobile app access with BLE fallback, MQTT communication, and ESP32-controlled barriers.',
     type: 'work',
+    technologies: ['C++', 'FastAPI', 'MQTT', 'BLE', 'Flutter'],
   },
   {
     period: 'Jan 2023 — Feb 2023',
-    title: 'Internship — Hardware & Software Project Manager',
+    title: 'Internship — Hardware & Software Developer',
     organization: 'Scheidt & Bachmann — Megrine, Tunisia',
     description:
       'Created Smart Unlock: a secure keyless door access system using BLE mobile authentication, MQTT communication, and ESP32 hardware control.',
     type: 'work',
+    technologies: ['ESP32', 'C++', 'BLE', 'MQTT'],
   },
   {
     period: 'Jan 2022 — Feb 2022',

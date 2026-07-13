@@ -3,12 +3,12 @@ import { skillCategories } from '../data/skills'
 import { profile } from '../data/profile'
 
 const categoryNotes: Record<string, string> = {
+  'Frontend & Product': 'Responsive, accessible interfaces shaped around real user workflows.',
+  'Backend & APIs': 'Typed services, authentication, integrations, and real-time application logic.',
   'Embedded & IoT': 'Firmware, connectivity, and sensor-driven systems.',
-  'Programming Languages': 'A practical toolbox from low-level control to application logic.',
-  'AI & Machine Learning': 'Applied models and AI services integrated into usable products.',
-  'Frameworks & Full-Stack': 'Accessible interfaces backed by maintainable services.',
-  'Cloud & DevOps': 'Repeatable delivery from repository to production.',
-  'Databases & APIs': 'Reliable data flows, persistence, and service integrations.',
+  'AI & Automation': 'Applied models and AI services integrated into usable products.',
+  'Data & Delivery': 'Reliable persistence and repeatable delivery from repository to production.',
+  'Engineering Tools': 'The practical environment behind maintainable, collaborative delivery.',
 }
 
 export default function Skills() {
@@ -29,8 +29,8 @@ export default function Skills() {
             </h2>
           </div>
           <p>
-            I work across the product stack—from microcontroller firmware and data pipelines
-            to AI-assisted services and the interfaces people use.
+            My toolkit spans product interfaces, backend services, applied AI, and connected
+            devices—with the strongest emphasis on shipping coherent web products.
           </p>
         </motion.header>
 

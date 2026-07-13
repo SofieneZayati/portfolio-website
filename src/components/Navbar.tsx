@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiDownload, HiMenu, HiX } from 'react-icons/hi'
 
 const links = [
-  { href: '/', label: 'Home', section: 'home' },
   { href: '/#projects', label: 'Work', section: 'projects' },
+  { href: '/#about', label: 'Profile', section: 'about' },
   { href: '/#experience', label: 'Experience', section: 'experience' },
-  { href: '/#skills', label: 'Skills', section: 'skills' },
+  { href: '/#skills', label: 'Toolkit', section: 'skills' },
   { href: '/#contact', label: 'Contact', section: 'contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState('')
   const [scrollProgress, setScrollProgress] = useState(0)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
   const { pathname } = useLocation()
 
   useEffect(() => {
@@ -42,11 +44,39 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!mobileOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMobileOpen(false)
+      if (event.key === 'Escape') {
+        setMobileOpen(false)
+        toggleRef.current?.focus()
+        return
+      }
+
+      if (event.key !== 'Tab') return
+      const links = Array.from(mobileMenuRef.current?.querySelectorAll<HTMLAnchorElement>('a') ?? [])
+      if (links.length === 0) return
+      const first = links[0]
+      const last = links[links.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
     }
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      mobileMenuRef.current?.querySelector<HTMLAnchorElement>('a')?.focus()
+    })
     window.addEventListener('keydown', closeOnEscape)
-    return () => window.removeEventListener('keydown', closeOnEscape)
+    return () => {
+      window.cancelAnimationFrame(focusFrame)
+      window.removeEventListener('keydown', closeOnEscape)
+      document.body.style.overflow = previousOverflow
+    }
   }, [mobileOpen])
 
   const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -62,11 +92,11 @@ export default function Navbar() {
   return (
     <nav className="site-nav" aria-label="Primary navigation">
       <div className={`nav-shell ${scrolled ? 'is-scrolled' : ''}`}>
-        <Link to="/" className="brand" aria-label="Sofiene Zayati, home" onClick={() => setMobileOpen(false)}>
+        <Link to="/" className="brand" aria-label="SZ, Sofiene Zayati — home" onClick={() => setMobileOpen(false)}>
           <span className="brand-mark" aria-hidden="true">SZ</span>
           <span className="brand-copy">
             <strong>Sofiene Zayati</strong>
-            <small>Device to dashboard</small>
+            <small>Web · Embedded · AI</small>
           </span>
         </Link>
 
@@ -91,6 +121,7 @@ export default function Navbar() {
         </div>
 
         <button
+          ref={toggleRef}
           type="button"
           onClick={() => setMobileOpen((open) => !open)}
           className="nav-toggle"
@@ -104,6 +135,7 @@ export default function Navbar() {
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
+              ref={mobileMenuRef}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}

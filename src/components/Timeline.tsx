@@ -21,6 +21,11 @@ function TimelineCard({ item, index }: { item: Experience; index: number }) {
       <h4>{item.title}</h4>
       <p className="timeline-item__organization">{item.organization}</p>
       <p className="timeline-item__description">{item.description}</p>
+      {item.technologies && (
+        <ul className="timeline-item__stack" aria-label={`${item.title} technologies`}>
+          {item.technologies.map((technology) => <li key={technology}>{technology}</li>)}
+        </ul>
+      )}
     </motion.article>
   )
 }
@@ -68,12 +73,12 @@ export default function Timeline({ education, experience }: Props) {
           <div>
             <span className="section-label">Experience</span>
             <h2 id="experience-heading" className="section-heading">
-              Learning by building, <span>then building better.</span>
+              From embedded systems to <span>web engineering.</span>
             </h2>
           </div>
           <p>
-            A path through embedded engineering, web technologies, and hands-on product work
-            across internships and multidisciplinary projects.
+            Professional placements and engineering studies that connect firmware, application
+            development, AI automation, and full-stack product delivery.
           </p>
         </motion.header>
 

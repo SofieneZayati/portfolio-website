@@ -133,7 +133,7 @@ export default function ImageGallery({ images }: Props) {
             <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/[0.12]">
               <img
                 src={img.src}
-                alt={img.caption}
+                alt=""
                 className="w-full h-56 md:h-64 object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                 loading="lazy"
                 onError={(e) => {

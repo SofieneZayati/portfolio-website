@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Sofiene Zayati engineering portfolio</title>
+  <desc id="desc">Full-stack developer and embedded systems graduate. Web products, AI workflows, and connected systems.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070a0e" />
+      <stop offset="0.6" stop-color="#091018" />
+      <stop offset="1" stop-color="#0c0b16" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#67e8f9" />
+      <stop offset="1" stop-color="#a78bfa" />
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#67e8f9" stop-opacity=".2" />
+      <stop offset="1" stop-color="#67e8f9" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0V52" fill="none" stroke="#ffffff" stroke-opacity=".035" />
+    </pattern>
+    <filter id="blur"><feGaussianBlur stdDeviation="30" /></filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <circle cx="1050" cy="72" r="260" fill="url(#glow)" filter="url(#blur)" />
+  <circle cx="110" cy="650" r="220" fill="#a78bfa" opacity=".055" filter="url(#blur)" />
+
+  <g transform="translate(74 66)" font-family="Inter, Arial, sans-serif">
+    <rect width="54" height="54" rx="14" fill="#67e8f9" fill-opacity=".08" stroke="#67e8f9" stroke-opacity=".35" />
+    <text x="27" y="34" fill="#67e8f9" text-anchor="middle" font-size="17" font-weight="700">SZ</text>
+    <text x="72" y="21" fill="#f4f7fb" font-size="16" font-weight="700">SOFIENE ZAYATI</text>
+    <text x="72" y="44" fill="#8f9aa8" font-size="12" font-weight="600" letter-spacing="1.4">ENGINEERING PORTFOLIO</text>
+  </g>
+
+  <g transform="translate(74 201)" font-family="Inter, Arial, sans-serif">
+    <text y="0" fill="#a7b0bd" font-size="16" font-weight="600" letter-spacing="2.5">FULL-STACK DEVELOPER</text>
+    <text y="72" fill="#f4f7fb" font-size="56" font-weight="750">Web products built with</text>
+    <text y="139" fill="url(#accent)" font-size="56" font-weight="750">systems thinking.</text>
+    <text y="197" fill="#b5beca" font-size="19">Embedded systems graduate building across interfaces, services,</text>
+    <text y="227" fill="#b5beca" font-size="19">AI workflows, and connected devices.</text>
+  </g>
+
+  <g transform="translate(74 512)" font-family="Inter, Arial, sans-serif">
+    <rect width="153" height="38" rx="19" fill="#ffffff" fill-opacity=".035" stroke="#ffffff" stroke-opacity=".1" />
+    <text x="76.5" y="24" fill="#cbd2db" text-anchor="middle" font-size="12" font-weight="650">WEB &amp; SAAS</text>
+    <rect x="164" width="164" height="38" rx="19" fill="#ffffff" fill-opacity=".035" stroke="#ffffff" stroke-opacity=".1" />
+    <text x="246" y="24" fill="#cbd2db" text-anchor="middle" font-size="12" font-weight="650">AI AUTOMATION</text>
+    <rect x="339" width="174" height="38" rx="19" fill="#ffffff" fill-opacity=".035" stroke="#ffffff" stroke-opacity=".1" />
+    <text x="426" y="24" fill="#cbd2db" text-anchor="middle" font-size="12" font-weight="650">EMBEDDED &amp; IOT</text>
+  </g>
+
+  <g transform="translate(825 160)" font-family="Inter, Arial, sans-serif">
+    <rect width="300" height="336" rx="28" fill="#ffffff" fill-opacity=".028" stroke="#ffffff" stroke-opacity=".11" />
+    <path d="M54 85H91M209 85H246M150 111V146M150 205V239" stroke="#67e8f9" stroke-opacity=".38" stroke-width="2" />
+    <circle cx="150" cy="83" r="36" fill="#67e8f9" fill-opacity=".08" stroke="#67e8f9" stroke-opacity=".32" />
+    <rect x="91" y="146" width="118" height="59" rx="15" fill="#a78bfa" fill-opacity=".08" stroke="#a78bfa" stroke-opacity=".3" />
+    <circle cx="150" cy="266" r="36" fill="#67e8f9" fill-opacity=".08" stroke="#67e8f9" stroke-opacity=".32" />
+    <text x="150" y="78" fill="#67e8f9" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.2">DEVICE</text>
+    <text x="150" y="94" fill="#cbd2db" text-anchor="middle" font-size="10">ESP32 · MQTT</text>
+    <text x="150" y="172" fill="#b9a8ff" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.2">SERVICES</text>
+    <text x="150" y="188" fill="#cbd2db" text-anchor="middle" font-size="10">APIs · AI · DATA</text>
+    <text x="150" y="261" fill="#67e8f9" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.2">EXPERIENCE</text>
+    <text x="150" y="277" fill="#cbd2db" text-anchor="middle" font-size="10">REACT · NEXT.JS</text>
+    <text x="150" y="316" fill="#7f8b98" text-anchor="middle" font-size="10" letter-spacing="1.2">DEVICE → DASHBOARD</text>
+  </g>
+
+  <text x="1126" y="584" fill="#8f9aa8" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">sofienezayati.tn</text>
+  <rect x="0" y="627" width="1200" height="3" fill="url(#accent)" />
+</svg>

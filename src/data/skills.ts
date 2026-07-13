@@ -5,27 +5,27 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
+    category: 'Frontend & Product',
+    items: ['React', 'Next.js', 'Angular', 'TypeScript', 'JavaScript', 'Tailwind CSS'],
+  },
+  {
+    category: 'Backend & APIs',
+    items: ['NestJS', 'FastAPI', 'Spring Boot', 'Laravel', 'Node.js', 'REST APIs', 'WebSockets'],
+  },
+  {
     category: 'Embedded & IoT',
-    items: ['ESP32', 'WT32', 'Arduino', 'MQTT', 'BLE', 'IoT Systems', 'Embedded C/C++'],
+    items: ['Embedded C/C++', 'ESP32', 'WT32', 'Arduino', 'MQTT', 'BLE', 'IoT Sensors'],
   },
   {
-    category: 'Programming Languages',
-    items: ['C/C++', 'Python', 'TypeScript', 'Java'],
+    category: 'AI & Automation',
+    items: ['n8n', 'Gemini', 'LLM Integration', 'PyTorch', 'XGBoost', 'Computer Vision', 'OCR'],
   },
   {
-    category: 'AI & Machine Learning',
-    items: ['PyTorch', 'XGBoost', 'Computer Vision', 'OCR', 'LLM Integration'],
+    category: 'Data & Delivery',
+    items: ['MongoDB', 'MySQL', 'Firebase', 'Docker', 'Kubernetes', 'Jenkins', 'CI/CD'],
   },
   {
-    category: 'Frameworks & Full-Stack',
-    items: ['React', 'Angular', 'NestJS', 'FastAPI', 'Symfony'],
-  },
-  {
-    category: 'Cloud & DevOps',
-    items: ['Docker', 'Kubernetes', 'Jenkins', 'CI/CD', 'Vercel', 'Cloudflare'],
-  },
-  {
-    category: 'Databases & APIs',
-    items: ['MongoDB', 'MySQL', 'Firebase', 'REST APIs'],
+    category: 'Engineering Tools',
+    items: ['Git', 'GitHub', 'Linux', 'Vercel', 'Cloudflare', 'SonarQube'],
   },
 ]

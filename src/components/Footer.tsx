@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { HiArrowUp, HiMail } from 'react-icons/hi'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
 import { profile } from '../data/profile'
@@ -10,11 +10,13 @@ const professionalLinks = [
 ]
 
 export default function Footer() {
+  const { pathname } = useLocation()
+
   return (
     <footer className="site-footer">
       <div className="footer-shell">
         <div className="footer-brand">
-          <Link to="/" className="brand" aria-label="Sofiene Zayati, home">
+          <Link to="/" className="brand" aria-label="SZ, Sofiene Zayati — home">
             <span className="brand-mark" aria-hidden="true">SZ</span>
             <span className="brand-copy">
               <strong>{profile.name}</strong>
@@ -40,7 +42,7 @@ export default function Footer() {
           })}
         </div>
 
-        <a href="#home" className="back-to-top">
+        <a href={pathname === '/' ? '#home' : '#main-content'} className="back-to-top">
           Back to top <HiArrowUp aria-hidden="true" />
         </a>
       </div>

@@ -29,13 +29,6 @@ export default function CursorFollower() {
       ring.classList.remove('is-visible')
     }
 
-    const handlePointerMove = (event: PointerEvent) => {
-      targetX = event.clientX
-      targetY = event.clientY
-      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`
-      show()
-    }
-
     const handlePointerOver = (event: PointerEvent) => {
       const target = event.target
       const interactive = target instanceof Element && target.closest('a, button, input, textarea, [role="link"]')
@@ -49,7 +42,24 @@ export default function CursorFollower() {
       ringX += (targetX - ringX) * 0.16
       ringY += (targetY - ringY) * 0.16
       ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`
+
+      if (Math.abs(targetX - ringX) < 0.1 && Math.abs(targetY - ringY) < 0.1) {
+        ringX = targetX
+        ringY = targetY
+        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`
+        frame = 0
+        return
+      }
+
       frame = window.requestAnimationFrame(animate)
+    }
+
+    const handlePointerMove = (event: PointerEvent) => {
+      targetX = event.clientX
+      targetY = event.clientY
+      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`
+      show()
+      if (frame === 0) frame = window.requestAnimationFrame(animate)
     }
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true })
@@ -57,10 +67,9 @@ export default function CursorFollower() {
     window.addEventListener('pointerdown', handlePointerDown)
     window.addEventListener('pointerup', handlePointerUp)
     document.documentElement.addEventListener('mouseleave', hide)
-    frame = window.requestAnimationFrame(animate)
 
     return () => {
-      window.cancelAnimationFrame(frame)
+      if (frame !== 0) window.cancelAnimationFrame(frame)
       window.removeEventListener('pointermove', handlePointerMove)
       window.removeEventListener('pointerover', handlePointerOver)
       window.removeEventListener('pointerdown', handlePointerDown)

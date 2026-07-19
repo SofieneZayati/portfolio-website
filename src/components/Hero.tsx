@@ -1,4 +1,5 @@
-import { HiArrowRight, HiDownload, HiLocationMarker } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
+import { HiArrowRight, HiDocumentText, HiDownload, HiLocationMarker } from 'react-icons/hi'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import { profile } from '../data/profile'
 import { projects } from '../data/projects'
@@ -10,7 +11,10 @@ const proofPoints = [
     value: String(experiences.filter((experience) => experience.type === 'work').length).padStart(2, '0'),
     label: 'Professional placements',
   },
-  { value: String(profile.languages.length).padStart(2, '0'), label: 'Working languages' },
+  {
+    value: String(projects.reduce((total, project) => total + project.screenshots.length, 0)).padStart(2, '0'),
+    label: 'Project screens',
+  },
 ]
 
 export default function Hero() {
@@ -45,6 +49,10 @@ export default function Hero() {
               <HiDownload aria-hidden="true" />
               Download CV
             </a>
+            <Link to="/project-dossier" className="button-link">
+              <HiDocumentText aria-hidden="true" />
+              Project dossier
+            </Link>
           </div>
 
           <dl className="hero-proof" aria-label="Portfolio highlights">

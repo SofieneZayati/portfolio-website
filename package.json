@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "generate:dossier": "npm run build && node scripts/generate-project-dossier.mjs && npm run build",
     "typecheck": "tsc -b --pretty false",
     "validate:content": "node scripts/validate-content.mjs",
     "lint": "eslint .",
@@ -29,6 +30,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "playwright-core": "^1.61.1",
     "tailwindcss": "^4.3.2",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",

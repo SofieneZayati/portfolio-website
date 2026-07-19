@@ -13,6 +13,291 @@ export interface ProjectContent {
 const base = '/images/projects'
 
 const content: Record<string, ProjectContent> = {
+  machetamache: {
+    facts: [
+      { label: 'Type', value: 'Local-First Full-Stack Product' },
+      { label: 'Client', value: 'Working Chef' },
+      { label: 'Storage', value: 'Shared SQLite Cookbook' },
+      { label: 'Delivery', value: 'Portable Windows Release' },
+    ],
+    techStack: [
+      {
+        category: 'Product Interface',
+        items: [
+          { name: 'React 19', description: 'Responsive recipe, costing, settings, and print experiences' },
+          { name: 'TypeScript', description: 'Shared domain models across browser and server' },
+          { name: 'React Router', description: 'Recipe, ingredient, and settings workflows' },
+          { name: 'Vite', description: 'Modern and legacy-compatible web bundles' },
+        ],
+      },
+      {
+        category: 'Backend & Data',
+        items: [
+          { name: 'Express 5', description: 'Same-origin JSON API and static production server' },
+          { name: 'SQLite', description: 'Portable local persistence with better-sqlite3' },
+          { name: 'Helmet', description: 'Security headers and explicit content policy' },
+          { name: 'Integer money model', description: 'Milli-euro storage avoids floating-point rounding errors' },
+        ],
+      },
+      {
+        category: 'Quality & Distribution',
+        items: [
+          { name: 'Vitest', description: 'Domain and interface-level verification' },
+          { name: 'Supertest', description: 'API and security behavior checks' },
+          { name: 'PowerShell + WPF', description: 'Visible local server control panel' },
+          { name: 'C# launcher', description: 'Branded one-click Windows startup and shutdown' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Culinary Workflow', icon: 'R', title: 'Recipe Library', desc: 'Photos, search, filters, categories, favorites, archive, duplication, ordered steps, and production notes.' },
+      { group: 'Culinary Workflow', icon: 'x', title: 'Portion Scaling', desc: 'Non-destructive quantity scaling with the option to preserve the result as a recipe variation.' },
+      { group: 'Cost & Profit', icon: 'EUR', title: 'Exact Food Costing', desc: 'Ingredient price normalization, extra expenses, per-portion cost, revenue, profit, and margin calculations.' },
+      { group: 'Cost & Profit', icon: 'S', title: 'Sub-Recipes & Versions', desc: 'Reusable preparations and version history support practical kitchen iteration.' },
+      { group: 'Kitchen Delivery', icon: 'P', title: 'Print-Ready Sheets', desc: 'Kitchen and price-free print modes produce useful handoff documents instead of browser screenshots.' },
+      { group: 'Kitchen Delivery', icon: 'LAN', title: 'Private Wi-Fi Access', desc: 'The same cookbook opens on the Windows host and phones connected to its private network.' },
+      { group: 'Reliability', icon: 'B', title: 'Backup & Restore', desc: 'Full JSON export and restore protects the cookbook independently from the application package.' },
+      { group: 'Reliability', icon: 'W', title: 'Portable Windows Package', desc: 'A branded launcher, bundled runtime, visible control panel, and external app-data storage make deployment approachable.' },
+    ],
+    architecture: [
+      {
+        title: 'One Cookbook, Two Device Classes',
+        desc: 'A React client on the Windows PC and private-network phones talks to one Express server. The server owns the SQLite database, static production bundle, security checks, and controlled shutdown behavior.',
+        items: [
+          { label: 'Browser clients', desc: 'Responsive desktop and touch interfaces share the same culinary workflows.' },
+          { label: 'Express server', desc: 'Validates private hosts, same-origin mutations, API input, and lifecycle controls.' },
+          { label: 'SQLite file', desc: 'Lives under Windows app data so replacing the portable package does not remove recipes.' },
+        ],
+      },
+      {
+        title: 'Practical Local-First Distribution',
+        desc: 'The launcher discovers the current private IP, starts the server, opens the local browser, and shows the phone URL. Modern and legacy bundles, UUID fallback behavior, and an early preflight screen cover real private-HTTP phone constraints.',
+      },
+    ],
+    gallery: [
+      { src: `${base}/machetamache/recipe-library.png`, caption: 'Desktop recipe library with search, lifecycle filters, featured content, and exact per-portion costs' },
+      { src: `${base}/machetamache/product-overview.png`, caption: 'Product overview combining the desktop cookbook and compact mobile workflow' },
+      { src: `${base}/machetamache/mobile-recipe.png`, caption: 'Touch-focused recipe detail designed for a phone on the same private Wi-Fi network' },
+    ],
+    challenges: [
+      { title: 'Money Without Rounding Drift', desc: 'Food-cost and margin calculations use integer milli-euros rather than floating-point currency values.' },
+      { title: 'Private HTTP on Real Phones', desc: 'Fallback UUID generation, a legacy bundle, compatible content security rules, and early error reporting address browser differences outside localhost.' },
+      { title: 'Desktop-Grade Delivery from a Web Stack', desc: 'The product needed one-click Windows startup, visible server control, persistent data, and safe shutdown without asking the chef to use a terminal.' },
+    ],
+    results: [
+      { icon: '1', title: 'One Shared Cookbook', content: 'PC and phone clients work against the same local data without cloud hosting or recurring infrastructure.' },
+      { icon: 'QA', title: 'Verified Full Stack', content: 'Type checks, unit tests, API tests, production builds, and release packaging are part of the repository workflow.' },
+      { icon: 'UX', title: 'Built Around Kitchen Work', content: 'Scaling, costing, printing, backups, and touch layouts solve daily operational tasks rather than presenting a static recipe catalog.' },
+      { icon: 'WIN', title: 'Distributable Product', content: 'A portable Windows release packages the server, runtime, launchers, control panel, and user guidance.' },
+    ],
+    cta: {
+      secondary: [
+        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/Machetamache' },
+        { label: 'Contact Me', url: '/#contact' },
+      ],
+    },
+    status: ['Full-Stack Product', 'Real User Workflow', 'Automated Tests', 'Windows Release'],
+  },
+
+  aurelle: {
+    facts: [
+      { label: 'Type', value: 'Premium Client Experience' },
+      { label: 'Focus', value: 'Conversion + Retention' },
+      { label: 'Journeys', value: 'Consultation, Booking, Portal' },
+      { label: 'Quality', value: 'Automated Accessibility + Visual QA' },
+    ],
+    techStack: [
+      {
+        category: 'Experience',
+        items: [
+          { name: 'React 19', description: 'Public experience and member portal' },
+          { name: 'React Router', description: 'Marketing and member-space routes' },
+          { name: 'Motion', description: 'Responsive transitions with reduced-motion support' },
+          { name: 'Custom CSS', description: 'Editorial, image-led responsive art direction' },
+        ],
+      },
+      {
+        category: 'State & Quality',
+        items: [
+          { name: 'LocalStorage', description: 'Demo booking persists into the member portal' },
+          { name: 'Playwright Core', description: 'Desktop and mobile visual journey checks' },
+          { name: 'axe-core', description: 'Automated accessibility audit coverage' },
+          { name: 'Vite', description: 'Fast development and deployable production output' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Acquisition', icon: 'A', title: 'Editorial Landing Experience', desc: 'A premium visual system communicates trust, restraint, treatment philosophy, and clear next actions.' },
+      { group: 'Acquisition', icon: 'Q', title: 'Guided Consultation', desc: 'Goal-based questions lead to contextual recommendations while maintaining clear non-medical boundaries.' },
+      { group: 'Conversion', icon: 'B', title: 'Demo Booking Flow', desc: 'Treatment context, date and time selection, confirmation, and persistence create a complete conversion journey.' },
+      { group: 'Retention', icon: 'M', title: 'Member Care Portal', desc: 'Upcoming care, credits, routine, timeline, preparation notes, billing, and concierge messaging live in one space.' },
+      { group: 'Quality', icon: 'A11Y', title: 'Accessible Interaction', desc: 'Semantic controls, focus states, mobile navigation, reduced motion, and automated checks support inclusive use.' },
+      { group: 'Quality', icon: 'QA', title: 'Browser Smoke Journeys', desc: 'Automated desktop and mobile flows cover discovery, consultation, booking, portal navigation, and overflow checks.' },
+    ],
+    architecture: [
+      {
+        title: 'Connected Frontend Product Story',
+        desc: 'The public experience, guided consultation, booking drawer, and member route share a small browser persistence layer. This makes the concept testable as one client journey while keeping production API, authentication, scheduling, and payment boundaries explicit.',
+      },
+    ],
+    gallery: [
+      { src: `${base}/aurelle/home-desktop.png`, caption: 'Image-led landing experience with premium editorial direction and clear consultation entry points' },
+      { src: `${base}/aurelle/consultation-result.png`, caption: 'Guided consultation result connecting stated goals to a safe, contextual next step' },
+      { src: `${base}/aurelle/member-portal.png`, caption: 'Member portal supporting care preparation, credits, routine, timeline, and concierge needs' },
+      { src: `${base}/aurelle/home-mobile.png`, caption: 'Responsive mobile composition retaining hierarchy and conversion actions' },
+    ],
+    challenges: [
+      { title: 'Premium Without Friction', desc: 'The visual language needed to feel editorial while keeping navigation, calls to action, and text legible.' },
+      { title: 'Safe Medical UX', desc: 'The consultation experience provides useful orientation without presenting a frontend concept as clinical advice.' },
+      { title: 'One Continuous Journey', desc: 'A demo appointment selected on the public site must remain visible and meaningful inside the member portal.' },
+    ],
+    results: [
+      { icon: '3', title: 'Three Connected Journeys', content: 'Discovery, consultation and booking, and ongoing member care form one coherent product narrative.' },
+      { icon: 'QA', title: 'Repeatable Browser Verification', content: 'Visual smoke checks exercise the key desktop and mobile journeys instead of relying on static screenshots alone.' },
+      { icon: 'A11Y', title: 'Accessibility Included', content: 'Automated axe checks and interaction-level accessibility decisions are built into the prototype workflow.' },
+    ],
+    cta: { secondary: [{ label: 'Contact Me', url: '/#contact' }] },
+    status: ['Client-Ready Concept', 'Responsive', 'Automated QA'],
+  },
+
+  pitchly: {
+    facts: [
+      { label: 'Type', value: 'Two-Sided Marketplace Prototype' },
+      { label: 'Actors', value: 'Players + Venue Managers' },
+      { label: 'Core Flow', value: 'Discover to Approve' },
+      { label: 'Data', value: 'Shared Browser State' },
+    ],
+    techStack: [
+      {
+        category: 'Frontend',
+        items: [
+          { name: 'React 19', description: 'Player and manager workspaces' },
+          { name: 'TypeScript', description: 'Typed venues, bookings, roles, and states' },
+          { name: 'Vite', description: 'Development and production build pipeline' },
+          { name: 'Lucide', description: 'Consistent interface iconography' },
+        ],
+      },
+      {
+        category: 'Prototype State',
+        items: [
+          { name: 'LocalStorage', description: 'Shared reservation state across both demo roles' },
+          { name: 'URL state', description: 'Direct role and page entry for reviewable flows' },
+          { name: 'Responsive CSS', description: 'Desktop, tablet, and mobile navigation patterns' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Player', icon: 'P', title: 'Venue Discovery', desc: 'Search, filters, favorites, list and map views, amenities, formats, ratings, distance, and pricing.' },
+      { group: 'Player', icon: 'B', title: 'Reservation Workflow', desc: 'Date, time, duration, note, price, confirmation, cancellation, and status-aware booking details.' },
+      { group: 'Player', icon: 'T', title: 'Team Space', desc: 'Roster, captain status, join code, invitations, next match, and team performance context.' },
+      { group: 'Shared', icon: 'C', title: 'Calendar & Notifications', desc: 'Month and week schedule views connect booking changes to visible player and manager follow-up.' },
+      { group: 'Manager', icon: 'A', title: 'Approval Queue', desc: 'Venue staff review the same pending requests and can approve or decline them from focused operational views.' },
+      { group: 'Manager', icon: 'KPI', title: 'Venue Operations', desc: 'KPIs, revenue signals, occupancy, schedule, venue settings, hours, and availability support the supply side.' },
+    ],
+    architecture: [
+      {
+        title: 'One Prototype, Two Operational Perspectives',
+        desc: 'A shared booking domain powers player and manager presentations. URL parameters make either role directly reviewable, while local persistence lets approvals and cancellations carry between the two views during a demo.',
+        items: [
+          { label: 'Player workspace', desc: 'Discovery, booking, calendar, booking history, and team coordination.' },
+          { label: 'Shared state', desc: 'Venue and reservation records with explicit lifecycle status.' },
+          { label: 'Manager workspace', desc: 'Requests, schedule, operational overview, and venue maintenance.' },
+        ],
+      },
+    ],
+    gallery: [
+      { src: `${base}/pitchly/player-dashboard.png`, caption: 'Player overview combining the next match, booking metrics, venue discovery, and upcoming schedule' },
+      { src: `${base}/pitchly/find-a-pitch.png`, caption: 'Search and discovery experience with venue details, availability, favorites, and booking entry points' },
+      { src: `${base}/pitchly/manager-dashboard.png`, caption: 'Venue manager overview with operational KPIs, incoming requests, schedule, and revenue context' },
+      { src: `${base}/pitchly/manager-requests.png`, caption: 'Manager approval queue showing shared reservation state and decisive actions' },
+      { src: `${base}/pitchly/player-mobile.png`, caption: 'Compact player dashboard with mobile navigation and touch-friendly booking actions' },
+    ],
+    challenges: [
+      { title: 'Two Sides of One Booking', desc: 'Player and manager views needed to read as different tools while remaining consistent about status and schedule.' },
+      { title: 'Operational Density on Mobile', desc: 'Calendars, status details, teams, and approval actions required responsive information prioritization.' },
+      { title: 'Prototype Honesty', desc: 'The interface simulates shared state but clearly identifies authentication, payments, concurrency, and server-side slot locking as backend work.' },
+    ],
+    results: [
+      { icon: '2', title: 'Complete Two-Sided Narrative', content: 'Both marketplace demand and supply workflows can be demonstrated from the same frontend.' },
+      { icon: '5', title: 'Five Booking States', content: 'Pending, confirmed, declined, completed, and cancelled states shape the relevant actions and messaging.' },
+      { icon: 'RWD', title: 'Responsive Product System', content: 'Desktop, tablet, and mobile layouts support both role families without reducing the demo to a dashboard image.' },
+    ],
+    cta: {
+      secondary: [
+        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/StadiumSaaS' },
+        { label: 'Contact Me', url: '/#contact' },
+      ],
+    },
+    status: ['Interactive Prototype', 'Two-Sided Workflow', 'Responsive'],
+  },
+
+  interna: {
+    facts: [
+      { label: 'Type', value: 'Education Operations SaaS' },
+      { label: 'Actors', value: 'University Team + Student' },
+      { label: 'Coverage', value: 'Full Internship Lifecycle' },
+      { label: 'Scope', value: 'API-Ready Frontend' },
+    ],
+    techStack: [
+      {
+        category: 'Frontend',
+        items: [
+          { name: 'React 19', description: 'Administration and student workspaces' },
+          { name: 'JavaScript', description: 'Interactive modules and realistic demo state' },
+          { name: 'Vite', description: 'Build and local preview workflow' },
+          { name: 'Lucide', description: 'Accessible product icon system' },
+        ],
+      },
+      {
+        category: 'Product Design',
+        items: [
+          { name: 'Responsive CSS', description: 'Dense desktop administration and compact mobile views' },
+          { name: 'Role-based navigation', description: 'Distinct information architecture for administrators and students' },
+          { name: 'Local demo data', description: 'Cohorts, placements, documents, journals, attendance, and evaluations' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Program Office', icon: 'KPI', title: 'Cohort Overview', desc: 'Lifecycle pipeline, active placements, approval rates, attendance, deadlines, and an action center.' },
+      { group: 'Program Office', icon: 'I', title: 'Placement & Application Pipeline', desc: 'Students, companies, supervisors, dates, progress, stages, and attention states in connected views.' },
+      { group: 'Follow-Up', icon: 'J', title: 'Journals & Validations', desc: 'Daily entries, review queues, milestones, supervisor feedback, and pending validation work.' },
+      { group: 'Follow-Up', icon: 'A', title: 'Attendance Operations', desc: 'Program-level rate, exceptions, late arrivals, absences, and justification follow-up.' },
+      { group: 'Assessment', icon: 'D', title: 'Documents & Evaluations', desc: 'Conventions, certificates, signatures, due dates, grading states, and final assessment.' },
+      { group: 'Assessment', icon: 'AI', title: 'AI-Assisted Reports', desc: 'Report readiness, draft organization, progress inputs, and a dedicated assisted-writing workspace.' },
+      { group: 'Student', icon: 'S', title: 'Personal Internship Workspace', desc: 'Individual progress, next steps, journal, attendance, deadlines, documents, and report readiness.' },
+    ],
+    architecture: [
+      {
+        title: 'Dual Information Architecture',
+        desc: 'One React application switches between the university program office and the individual student perspective. Navigation, page metadata, dashboards, and task emphasis change by role while sharing a coherent internship domain.',
+      },
+    ],
+    gallery: [
+      { src: `${base}/interna/admin-overview.png`, caption: 'University overview with cohort pipeline, attention queue, attendance trend, deadlines, and live placements' },
+      { src: `${base}/interna/internships.png`, caption: 'Placement management view connecting students, companies, supervisors, dates, progress, and health' },
+      { src: `${base}/interna/ai-reports.png`, caption: 'AI-assisted report workspace and readiness tracking within the broader assessment flow' },
+      { src: `${base}/interna/student-portal.png`, caption: 'Student workspace focusing the same domain on individual progress and next actions' },
+      { src: `${base}/interna/student-mobile.png`, caption: 'Responsive student experience for internship follow-up away from a desktop' },
+    ],
+    challenges: [
+      { title: 'A Long Lifecycle, One Mental Model', desc: 'Applications, conventions, attendance, journals, validations, documents, and grades needed to feel connected rather than like separate tools.' },
+      { title: 'Role-Appropriate Density', desc: 'Program administrators need portfolio-level oversight while students need a calm personal task view.' },
+      { title: 'Useful AI Placement', desc: 'Assistance is positioned inside report readiness and validated journal evidence rather than as an isolated chatbot.' },
+    ],
+    results: [
+      { icon: '2', title: 'Two Complete Workspaces', content: 'A program administrator and a student can each demonstrate a role-specific end-to-end experience.' },
+      { icon: '8', title: 'Eight Lifecycle Domains', content: 'Placements, applications, journals, attendance, validations, documents, reports, and evaluations share one system.' },
+      { icon: 'API', title: 'Clear Backend Boundary', content: 'The current frontend communicates a realistic product model while remaining explicit about the API work required for production.' },
+    ],
+    cta: {
+      secondary: [
+        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/Interna' },
+        { label: 'Contact Me', url: '/#contact' },
+      ],
+    },
+    status: ['Frontend Prototype', 'Dual Role', 'AI-Assisted Workflow'],
+  },
+
   smartproperty: {
     facts: [
       { label: 'Type', value: 'AI-Powered SaaS' },
@@ -400,71 +685,112 @@ const content: Record<string, ProjectContent> = {
 
   macropark: {
     facts: [
-      { label: 'Type', value: 'Embedded System' },
-      { label: 'Hardware', value: 'WT32-ETH01 + LPR' },
-      { label: 'Mobile', value: 'Flutter (BLE Fallback)' },
-      { label: 'Backend', value: 'Python FastAPI' },
+      { label: 'Context', value: 'Graduation Project' },
+      { label: 'Host', value: 'Scheidt & Bachmann Maghreb' },
+      { label: 'Team', value: '2-Person Development Team' },
+      { label: 'Delivery', value: '5 Scrum Sprints' },
     ],
     techStack: [
       {
-        category: 'Embedded',
+        category: 'Product Applications',
         items: [
-          { name: 'C++', description: 'Firmware for barrier controllers' },
+          { name: 'Admin platform', description: 'FastAPI and Jinja interface for parking supervision' },
+          { name: 'Flutter', description: 'Android access, profile, guest registration, and history flows' },
+          { name: 'REST + Swagger', description: 'Documented APIs shared across product components' },
         ],
       },
       {
-        category: 'Backend',
+        category: 'Services & Data',
         items: [
-          { name: 'Python FastAPI', description: 'REST APIs and event pipeline' },
-          { name: 'Docker', description: 'Containerized services' },
+          { name: 'FastAPI', description: 'Backend, Core, and LPR/Bridge service workflows' },
+          { name: 'Mosquitto MQTT', description: 'Camera, decision, controller, and audit messaging' },
+          { name: 'MongoDB + SQLite', description: 'Application and local service persistence' },
+          { name: 'Docker Compose', description: 'Coordinated deployment of three servers and the MQTT broker' },
         ],
       },
       {
-        category: 'Mobile',
+        category: 'Embedded Controller',
         items: [
-          { name: 'Flutter', description: 'Cross-platform app with BLE fallback' },
+          { name: 'C++ / Arduino', description: 'WT32-ETH01 barrier-control firmware' },
+          { name: 'Ethernet + Wi-Fi', description: 'Wired operation with an access-point configuration path' },
+          { name: 'BLE', description: 'Proximity access commands from the mobile application' },
+          { name: 'SPIFFS + OTA', description: 'Persistent configuration and remote firmware maintenance' },
         ],
       },
       {
-        category: 'IoT & Hardware',
+        category: 'Vision & Hardware',
         items: [
-          { name: 'WT32-ETH01', description: 'Barrier gate controller' },
-          { name: 'MQTT', description: 'Realtime device messaging' },
-          { name: 'BLE', description: 'Bluetooth Low Energy auth' },
-          { name: 'LPR', description: 'License Plate Recognition' },
+          { name: 'Quercus SmartLPR', description: 'Camera-based vehicle plate capture and recognition' },
+          { name: 'WT32-ETH01', description: 'Networked edge controller for barrier commands' },
+          { name: 'Four relay channels', description: 'Independent open and close outputs for four barriers' },
         ],
       },
     ],
     features: [
-      { group: 'Access & Authentication', icon: '🔍', title: 'License Plate Recognition', desc: 'Primary authentication via LPR cameras for automatic vehicle identification and barrier control.' },
-      { group: 'Access & Authentication', icon: '📱', title: 'Flutter Mobile App', desc: 'Cross-platform mobile app with BLE fallback authentication when LPR is unavailable.' },
-      { group: 'Hardware & Operations', icon: '🚧', title: 'WT32 Barrier Control', desc: 'Industry-grade WT32-ETH01 controllers with MQTT communication, real-time status, and emergency override.' },
-      { group: 'Access & Authentication', icon: '📡', title: 'Dual Communication', desc: 'MQTT and BLE with automatic Ethernet/Wi-Fi failover designed to preserve access during network interruptions.' },
-      { group: 'Hardware & Operations', icon: '🔄', title: 'OTA Firmware Updates', desc: 'Over-the-air updates enabling remote maintenance, security patches, and feature deployments without physical access.' },
-      { group: 'Hardware & Operations', icon: '📊', title: 'Real-Time Monitoring', desc: 'FastAPI backend with Dockerized services providing event logging, access history, and live dashboard.' },
+      { group: 'Parking Supervision', icon: '▦', title: 'Administration Platform', desc: 'A central dashboard connects user, guest, entry-history, barrier, emergency-control, and barrier-event modules.' },
+      { group: 'Parking Supervision', icon: '👥', title: 'Users & Guest Access', desc: 'Administrators manage registered employees, license plates, invited visitors, approvals, and access credentials.' },
+      { group: 'Parking Supervision', icon: '◎', title: 'Traceable Entry History', desc: 'Every access record can include user, method, device, time, recognized plate, and captured LPR evidence.' },
+      { group: 'Parking Supervision', icon: '🚧', title: 'Barrier Operations', desc: 'Installed barriers, individual command channels, emergency actions, and controller event logs are managed from the web platform.' },
+      { group: 'Driver Access', icon: '▣', title: 'Camera-Based Entry', desc: 'A Quercus SmartLPR camera captures plates, passes them through Bridge and Core services, and triggers an approved barrier command.' },
+      { group: 'Driver Access', icon: '📱', title: 'Flutter BLE Entry', desc: 'Authenticated drivers can request barrier access from the Android app, then review their profile and camera or phone access history.' },
+      { group: 'Edge Controller', icon: '4', title: 'Four-Barrier Firmware', desc: 'The WT32 firmware drives four independent open/close relay pairs and supports timed automatic closing for mobile commands.' },
+      { group: 'Edge Controller', icon: '⚙', title: 'Provisioning & Persistence', desc: 'A local configuration portal manages IP and MQTT settings; SPIFFS preserves network and company-ID configuration across restarts.' },
+      { group: 'Edge Controller', icon: '↻', title: 'OTA Maintenance', desc: 'Arduino OTA handlers and the controller web portal provide a practical remote firmware-update workflow.' },
+      { group: 'Delivery', icon: '◇', title: 'Containerized Service Stack', desc: 'Docker Compose starts the Backend, Core, LPR/Bridge, and Mosquitto services together with explicit ports and topics.' },
     ],
     architecture: [
       {
-        title: 'System Components Overview',
-        image: `${base}/macropark/macroparkimg.png`,
-        desc: 'The system integrates LPR cameras, WT32 barrier controllers, Flutter mobile app, and Dockerized backend services into a resilient parking ecosystem.',
+        title: 'Two Access Paths, One Parking System',
+        image: `${base}/macropark/system-architecture.jpeg`,
+        desc: 'MacroPark is the complete product. Its architecture map shows how the admin platform, mobile app, Quercus camera, Bridge server, Core server, Backend server, databases, Mosquitto broker, WT32 controller, and physical barrier work together.',
+        items: [
+          { label: 'Camera path', desc: 'The LPR camera sends a plate event through Bridge and Core services for backend verification before an MQTT barrier command.' },
+          { label: 'Mobile path', desc: 'The Flutter app authenticates through the backend and broadcasts a BLE command that the WT32 validates and records through MQTT.' },
+          { label: 'Operations path', desc: 'The admin interface manages records and emergency commands while access and controller actions remain traceable.' },
+        ],
+      },
+      {
+        title: 'WT32 Edge-Control Boundary',
+        image: `${base}/macropark/barrier-controller-hardware.png`,
+        desc: 'The WT32-ETH01 connects network communication to physical relay outputs. The supplied 566-line firmware covers Ethernet and Wi-Fi setup, MQTT subscriptions, BLE scanning, four barrier channels, timed closing, SPIFFS configuration, reset behavior, and OTA updates.',
       },
     ],
-    gallery: [],
+    gallery: [
+      { src: `${base}/macropark/admin-dashboard.png`, caption: 'MacroPark admin home — the real product dashboard for users, guests, entry history, barriers, emergency testing, and events' },
+      { src: `${base}/macropark/admin-users.png`, caption: 'User administration — registered drivers, contact details, multiple plates, and account actions' },
+      { src: `${base}/macropark/access-history-lpr.png`, caption: 'Access evidence — entry history linked to the recognized license-plate image captured by the LPR system' },
+      { src: `${base}/macropark/emergency-barrier-controls.png`, caption: 'Emergency barrier operations — direct open, close, lock, and unlock controls for an installed controller' },
+      { src: `${base}/macropark/barrier-events.png`, caption: 'Barrier event history — timestamped controller actions and operating state changes' },
+      { src: `${base}/macropark/mobile-barrier-access.png`, caption: 'Flutter driver experience — authenticated BLE connection and a focused barrier-opening action' },
+      { src: `${base}/macropark/mobile-access-history.jpeg`, caption: 'Mobile access history — camera and phone events with license, device, date, time, and plate evidence' },
+      { src: `${base}/macropark/controller-portal.png`, caption: 'WT32 controller portal — entry point for configuration, device information, reset, and firmware update' },
+      { src: `${base}/macropark/controller-network-config.png`, caption: 'Controller provisioning — Wi-Fi, static network, and MQTT broker configuration from the local web portal' },
+      { src: `${base}/macropark/controller-device-info.png`, caption: 'WT32 device information — network, system, memory, chip, and runtime details exposed for maintenance' },
+      { src: `${base}/macropark/controller-ota-update.png`, caption: 'Firmware maintenance — browser-based OTA upload workflow for the installed controller' },
+      { src: `${base}/macropark/access-path-validation.png`, caption: 'Hardware validation — serial evidence of barrier opening from camera/MQTT and mobile/BLE paths' },
+      { src: `${base}/macropark/company-id-configuration.png`, caption: 'Dynamic BLE configuration — company ID published over MQTT and confirmed by the WT32 firmware' },
+    ],
     challenges: [
-      { title: 'Multi-Protocol Integration', desc: 'Synthesizing MQTT, BLE, Ethernet, and Wi-Fi into a cohesive system with automatic failover between protocols.' },
-      { title: 'Remote Firmware Maintenance', desc: 'Adding an OTA update path so barrier-controller firmware can be maintained without routine physical access.' },
-      { title: 'Event Coordination', desc: 'Coordinating barrier events across device firmware, MQTT messaging, backend workflows, and the monitoring interface.' },
-      { title: 'LPR Integration', desc: 'Connecting the Quercus LPR component to access decisions and the rest of the parking workflow.' },
+      { title: 'Coordinating a Distributed Product', desc: 'The working system required three application servers, an MQTT broker, databases, a camera, a mobile client, and an embedded controller to agree on access decisions and logs.' },
+      { title: 'Two Access Paths, Consistent Control', desc: 'Camera/MQTT and phone/BLE entry had to converge on the same physical barrier behavior while preserving the source and evidence for each event.' },
+      { title: 'Reliable Edge Configuration', desc: 'The controller needed to remain configurable when infrastructure changed, persist critical network and company settings, and expose a reset path.' },
+      { title: 'From Software to Physical Validation', desc: 'Relay wiring, four control channels, timed closing, permissions, BLE payloads, MQTT topics, and actual barrier responses were tested as one system.' },
+    ],
+    results: [
+      { icon: '4', title: 'Four Integrated Product Layers', content: 'Admin web, Flutter mobile, LPR services, and embedded barrier control form one complete parking product.' },
+      { icon: '2', title: 'Two Verified Entry Methods', content: 'The presentation and report document successful camera/MQTT and mobile/BLE barrier-opening paths.' },
+      { icon: '5', title: 'Five-Sprint Delivery', content: 'Implementation progressed through platform, mobile, controller, LPR, and test-and-validation sprints.' },
+      { icon: '✓', title: 'Hardware-Backed Prototype', content: 'Controller configuration, relays, BLE events, MQTT commands, OTA behavior, and access history were validated beyond static interface mockups.' },
     ],
     cta: {
-      primary: { label: 'Download Presentation', url: `${base}/macropark/MacroPark%20Presentation%20final.pptx` },
+      primary: { label: 'Read Full Project Report', url: `${base}/macropark/Rapport-PFE-MacroPark-2024.pdf` },
       secondary: [
-        { label: 'Firmware Repository', url: 'https://github.com/SofieneZayati/MacroPark' },
+        { label: 'Download Presentation', url: `${base}/macropark/MacroPark%20Presentation%20final.pptx` },
+        { label: 'WT32 Firmware', url: 'https://github.com/SofieneZayati/MacroPark' },
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
-    status: ['Embedded System', 'LPR Integration', 'Flutter Mobile'],
+    status: ['Full Graduation Project', 'Two-Person Team', 'End-to-End IoT', 'Hardware Validated'],
   },
 
   secondchance: {
@@ -698,10 +1024,10 @@ const content: Record<string, ProjectContent> = {
 
   geniuspmo: {
     facts: [
-      { label: 'Context', value: 'HR Frontend Prototype' },
-      { label: 'Role', value: 'Frontend Engineer' },
-      { label: 'Scope', value: 'HR-Manager View' },
-      { label: 'Data', value: 'Mock / Local State' },
+      { label: 'Context', value: 'HR Product Prototype' },
+      { label: 'Role', value: 'Product + Frontend' },
+      { label: 'Scope', value: '4 Demo Workspaces' },
+      { label: 'Foundation', value: 'FastAPI + PostgreSQL' },
     ],
     techStack: [
       {
@@ -728,30 +1054,49 @@ const content: Record<string, ProjectContent> = {
           { name: 'Mock data', description: 'Explicitly labeled prototype dataset' },
         ],
       },
+      {
+        category: 'Backend Foundation',
+        items: [
+          { name: 'FastAPI', description: 'Health, readiness, and future API boundary' },
+          { name: 'SQLAlchemy', description: 'Backend persistence foundation' },
+          { name: 'Alembic', description: 'Database migration workflow' },
+          { name: 'PostgreSQL', description: 'Docker-based local database target' },
+        ],
+      },
     ],
     features: [
       { group: 'Daily Operations', icon: '📊', title: 'HR Overview', desc: 'A compact daily cockpit for workforce presence, payroll readiness, document gaps, leave, requests, and exception queues.' },
       { group: 'Daily Operations', icon: '⏱️', title: 'Attendance Review', desc: 'Schedule variance, late or missing scans, source filters, exceptions, and an HR review workflow.' },
       { group: 'People & Compliance', icon: '👥', title: 'Employee Records', desc: 'Searchable employee directory and detailed records covering assignment, schedule, documents, payroll, skills, and history.' },
+      { group: 'People & Compliance', icon: '◫', title: 'Teams & Project Staffing', desc: 'Team structure, capacity, project assignments, role coverage, and skills help connect people records to active delivery work.' },
       { group: 'People & Compliance', icon: '📁', title: 'Document Health', desc: 'Required-document tracking, employee checklists, reminders, and clearly simulated upload or status actions.' },
       { group: 'Payroll & Requests', icon: '🧾', title: 'Draft Payroll', desc: 'Period preparation with attendance adjustments, readiness checks, previews, and individual or batch draft payslips.' },
       { group: 'Payroll & Requests', icon: '✅', title: 'HR Case Center', desc: 'Requests organized by priority, owner, SLA, activity timeline, response draft, status, and resolution.' },
       { group: 'Reporting & Access', icon: '📈', title: 'Reports & Exports', desc: 'Accessible workforce charts with working UTF-8 CSV exports and operational summaries.' },
+      { group: 'Reporting & Access', icon: '◎', title: 'Four Demo Workspaces', desc: 'Dedicated HR, manager, employee, and executive entry points demonstrate how the same operations adapt to different responsibilities.' },
       { group: 'Reporting & Access', icon: '🌐', title: 'Bilingual & Responsive', desc: 'Persisted English/French and light/dark preferences across desktop and mobile dashboard layouts.' },
     ],
     architecture: [
       {
-        title: 'Frontend Prototype Boundary',
-        desc: 'Next.js routes and shared dashboard components are backed by a typed client-side provider and mock HR data. The API boundary is prepared for future FastAPI integration, while every simulated workflow remains visibly labeled.',
+        title: 'Interactive Frontend + Backend Foundation',
+        desc: 'Next.js routes and shared dashboard components use a typed client-side provider and explicitly labeled mock HR data. A FastAPI, SQLAlchemy, Alembic, PostgreSQL, and Docker foundation supplies health and database-readiness boundaries; authentication and production HR endpoints remain future work.',
         items: [
           { label: 'Routes', desc: 'One focused page per HR operations module.' },
           { label: 'Shared state', desc: 'Client provider coordinates employees, leave, payroll, documents, and feedback.' },
-          { label: 'Output', desc: 'Browser-side PDF and CSV generation keeps the prototype fully interactive.' },
+          { label: 'Backend foundation', desc: 'FastAPI health checks and PostgreSQL readiness establish the server-side integration point.' },
+          { label: 'Outputs', desc: 'Browser-side PDF and CSV generation keeps the prototype fully interactive.' },
         ],
       },
     ],
     gallery: [
       { src: `${base}/geniuspmo/dashboard.png`, caption: 'HR overview — workforce status, quick actions, attendance plan, and focus queue' },
+      { src: `${base}/geniuspmo/employees.png`, caption: 'Employee directory — searchable records, work status, team context, and profile access' },
+      { src: `${base}/geniuspmo/teams.png`, caption: 'Teams workspace — capacity, project staffing, role coverage, and skills visibility' },
+      { src: `${base}/geniuspmo/attendance.png`, caption: 'Attendance review — schedules, source filters, exceptions, and HR follow-up actions' },
+      { src: `${base}/geniuspmo/biometrics.png`, caption: 'Biometric operations — terminal health, scan activity, exceptions, and integration status' },
+      { src: `${base}/geniuspmo/payroll.png`, caption: 'Payroll preparation — period readiness, attendance adjustments, and draft payslip workflow' },
+      { src: `${base}/geniuspmo/reports.png`, caption: 'Workforce reports — operational summaries, accessible charts, and export actions' },
+      { src: `${base}/geniuspmo/mobile-dashboard.png`, caption: 'Responsive HR workspace — daily priorities and navigation adapted for mobile use' },
     ],
     challenges: [
       { title: 'Dense Workflow Clarity', desc: 'Organizing many HR modules without turning the product into a collection of oversized, disconnected dashboard cards.' },
@@ -759,14 +1104,14 @@ const content: Record<string, ProjectContent> = {
       { title: 'Operational Responsiveness', desc: 'Keeping data-heavy tables, drawers, filters, and navigation usable on smaller screens.' },
     ],
     results: [
-      { icon: '✓', title: 'Coherent HR Workspace', content: 'A navigable prototype that demonstrates the complete HR-manager journey across daily operations.' },
-      { icon: '↔', title: 'Reusable Frontend Boundary', content: 'Typed domain models and API helper placeholders make the backend handoff explicit.' },
+      { icon: '✓', title: 'Coherent HR Workspace', content: 'A navigable prototype that demonstrates role-aware journeys across daily workforce operations.' },
+      { icon: '↔', title: 'Explicit Integration Boundary', content: 'Typed domain models and a working backend foundation make the next production integration step clear.' },
       { icon: '◎', title: 'Credible Demo Scope', content: 'Working interactions, exports, themes, and language preferences without disguising mock data as production infrastructure.' },
     ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Frontend Prototype', 'Next.js 15', 'Mock Data'],
+    status: ['Interactive Prototype', '4 Demo Roles', 'Backend Foundation', 'Next.js 15'],
   },
 
   greencoffee: {
@@ -817,7 +1162,13 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/greencoffee/dashboard.png`, caption: 'Role-based demo entry — owner, manager, barista, floor staff, and customer experiences' },
+      { src: `${base}/greencoffee/owner-dashboard.png`, caption: 'Owner overview — revenue, service health, live orders, loyalty, and the floor in one operational view' },
+      { src: `${base}/greencoffee/barista-orders.png`, caption: 'Barista workspace — a focused, role-restricted board for moving live drinks through preparation' },
+      { src: `${base}/greencoffee/customer-menu.png`, caption: 'Customer experience — mobile ordering, menu discovery, basket actions, and loyalty context' },
+      { src: `${base}/greencoffee/orders.png`, caption: 'Live order board supporting the New → Preparing → Ready → Served workflow' },
+      { src: `${base}/greencoffee/floor-plan.png`, caption: 'Interactive floor operations for table state, service flow, and shared staff context' },
+      { src: `${base}/greencoffee/analytics.png`, caption: 'Analytics workspace for revenue, orders, products, reservations, and customer behavior' },
+      { src: `${base}/greencoffee/owner-mobile.png`, caption: 'Responsive owner workspace with compact navigation and mobile-priority metrics' },
     ],
     challenges: [
       { title: 'Turning Scope into Product', desc: 'Converting a large capability inventory into coherent navigation and workflows rather than a feature checklist.' },
@@ -892,7 +1243,13 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/tounsiads/studio.png`, caption: 'Campaign creation workspace — templates, local history, prompt controls, and Tunisian voice direction' },
+      { src: `${base}/tounsiads/campaign-overview.png`, caption: 'Generated campaign overview — concept, audience, tone, duration, and editable creative direction' },
+      { src: `${base}/tounsiads/campaign-script.png`, caption: 'Scene-by-scene editor — editable Tunisian copy, visual direction, timing, and final transcript' },
+      { src: `${base}/tounsiads/voice-studio.png`, caption: 'Voice studio — speaker selection, delivery direction, playback, and WAV download workflow' },
+      { src: `${base}/tounsiads/templates.png`, caption: 'Campaign templates — reusable starting points for offers, launches, events, and local services' },
+      { src: `${base}/tounsiads/brand-kits.png`, caption: 'Brand kit workspace — reusable business identity and campaign voice settings' },
+      { src: `${base}/tounsiads/studio.png`, caption: 'Campaign creation workspace — local history, prompt controls, attachments, and Tunisian voice direction' },
+      { src: `${base}/tounsiads/mobile-studio.png`, caption: 'Responsive campaign studio — the same brief-to-draft workflow adapted for mobile' },
     ],
     challenges: [
       { title: 'Credential Boundary', desc: 'Keeping the model key out of the React bundle while preserving a simple local full-stack development flow.' },

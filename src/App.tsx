@@ -8,6 +8,7 @@ import AnimatedBackground from './components/AnimatedBackground'
 import Home from './pages/Home'
 
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
+const ProjectDossier = lazy(() => import('./pages/ProjectDossier'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 function ScrollManager() {
@@ -83,6 +84,7 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/project-dossier" element={<ProjectDossier />} />
               <Route path="/project/:id" element={<ProjectDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

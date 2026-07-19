@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import ProjectCard from './ProjectCard'
-import { projects } from '../data/projects'
+import { featuredProjectIds, projects } from '../data/projects'
 
 const categories = [
   { value: 'all', label: 'All work' },
@@ -14,6 +14,11 @@ const categories = [
 
 type Category = (typeof categories)[number]['value']
 
+const featuredProjects = featuredProjectIds.flatMap((id) => {
+  const project = projects.find((candidate) => candidate.id === id)
+  return project ? [project] : []
+})
+
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState<Category>('all')
   const [showAll, setShowAll] = useState(false)
@@ -24,7 +29,7 @@ export default function Projects() {
         (project) => project.category === activeCategory || project.tags?.includes(activeCategory),
       )
   const visibleProjects = activeCategory === 'all' && !showAll
-    ? projects.filter((project) => project.featured)
+    ? featuredProjects
     : filtered
 
   return (

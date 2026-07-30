@@ -128,13 +128,17 @@ export default function ImageGallery({ images }: Props) {
               triggerRef.current = event.currentTarget
               setSelected(i)
             }}
-            className="group cursor-pointer text-left"
+            className={`group cursor-pointer text-left ${
+              i === 0 && images.length > 2 ? 'sm:col-span-2 lg:col-span-2' : ''
+            }`}
           >
             <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/[0.12]">
               <img
                 src={img.src}
                 alt=""
-                className="w-full h-56 md:h-64 object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                className={`w-full object-contain transition-transform duration-700 group-hover:scale-[1.02] ${
+                  i === 0 && images.length > 2 ? 'h-72 md:h-[30rem]' : 'h-56 md:h-64'
+                }`}
                 loading="lazy"
                 onError={(e) => {
                   ;(e.target as HTMLImageElement).style.display = 'none'

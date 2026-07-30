@@ -1,13 +1,14 @@
-import { existsSync } from 'node:fs'
+import { copyFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright-core'
 import { preview } from 'vite'
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
-const output = resolve(root, 'public', 'Sofiene_Zayati_Project_Dossier.pdf')
+const output = resolve(root, 'public', 'cv.pdf')
+const namedOutput = resolve(root, 'public', 'Sofiene_Zayati_CV_Germany.pdf')
 const host = '127.0.0.1'
-const port = 4187
+const port = 4188
 
 const edgeCandidates = [
   process.env['PROGRAMFILES(X86)'] && resolve(process.env['PROGRAMFILES(X86)'], 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
@@ -18,7 +19,7 @@ const edgeCandidates = [
 const executablePath = edgeCandidates.find((candidate) => existsSync(candidate))
 
 if (!executablePath) {
-  throw new Error('Microsoft Edge was not found. Install Edge or update the browser candidates in generate-project-dossier.mjs.')
+  throw new Error('Microsoft Edge was not found. Install Edge or update the browser candidates in generate-germany-cv.mjs.')
 }
 
 const server = await preview({
@@ -36,13 +37,18 @@ try {
   })
 
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
-  await page.goto(`http://${host}:${port}/project-dossier`, { waitUntil: 'networkidle' })
-  await page.waitForFunction(() => Array.from(document.images).every((image) => image.complete))
+  const response = await page.goto(`http://${host}:${port}/cv-germany.html`, { waitUntil: 'networkidle' })
 
-  const projectCount = await page.locator('.dossier-project').count()
-  if (projectCount === 0) throw new Error('No project records were rendered in the dossier.')
+  if (!response?.ok()) {
+    throw new Error(`CV source returned HTTP ${response?.status() ?? 'unknown'}.`)
+  }
 
-  const pdf = await page.pdf({
+  await page.waitForFunction(() => Array.from(document.images).every((image) => image.complete && image.naturalWidth > 0))
+
+  const pageCount = await page.locator('.page').count()
+  if (pageCount !== 2) throw new Error(`Expected two CV pages in the source, found ${pageCount}.`)
+
+  await page.pdf({
     path: output,
     format: 'A4',
     printBackground: true,
@@ -50,8 +56,9 @@ try {
     margin: { top: '0', right: '0', bottom: '0', left: '0' },
   })
 
-  console.log(`Generated ${output} (${projectCount} projects, ${Math.round(pdf.length / 1024)} KB).`)
+  copyFileSync(output, namedOutput)
+  console.log(`Generated ${output} and ${namedOutput}.`)
 } finally {
-  await browser?.close()
+  if (browser) await browser.close()
   await server.close()
 }

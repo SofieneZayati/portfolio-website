@@ -10,10 +10,15 @@ export interface Project {
   role: string
   context: string
   scope?: string
+  progress?: {
+    available: string
+    next: string
+  }
   featured?: boolean
   techStack: string[]
   logo: string
   screenshots: string[]
+  visualFit?: 'contain' | 'cover'
   category: ProjectCategory
   tags?: ProjectCategory[]
   links: {
@@ -27,10 +32,9 @@ export const featuredProjectIds = [
   'machetamache',
   'smartproperty',
   'prigado',
-  'greencoffee',
-  'geniuspmo',
-  'macropark',
   'tounsiads',
+  'macropark',
+  'smartagri',
 ] as const
 
 export const projects: Project[] = [
@@ -61,15 +65,15 @@ export const projects: Project[] = [
   {
     id: 'smartproperty',
     title: 'SmartProperty',
-    tagline: 'AI-Powered Real Estate SaaS',
+    tagline: 'AI-Powered Real Estate Platform',
     description:
-      'A team-built, multi-role real estate platform for the Tunisian market, combining property operations with recommendation, valuation, document analysis, and accessible AI features.',
+      'A solo-built, end-to-end real estate platform combining multi-role property operations with recommendation, valuation, document intelligence, automation, and accessible AI.',
     longDescription:
-      'SmartProperty is a multi-role real estate platform for agencies, owners, accountants, and clients. I contributed to application workflows, interface and notification improvements, solvency-analysis integration, testing, and cross-branch integration within a larger team system spanning web services, machine learning, OCR, and computer vision.',
+      'As the sole builder, I designed and engineered SmartProperty end to end across the React product experience, NestJS and FastAPI services, MongoDB data layer, real-time workflows, AI and machine-learning features, OCR solvency analysis, computer vision, deployment configuration, and role-specific journeys for agents, administrators, clients, and accountants.',
     year: '2026',
-    role: 'Full-stack & AI contributor',
-    context: 'Academic team project',
-    scope: 'Team-built product prototype',
+    role: 'Sole full-stack & AI engineer',
+    context: 'End-to-end AI product',
+    scope: 'Solo-built · Complete platform',
     featured: true,
     techStack: [
       'React',
@@ -77,35 +81,27 @@ export const projects: Project[] = [
       'FastAPI',
       'MongoDB',
       'XGBoost',
-      'Socket.IO',
+      'Groq',
+      'Computer Vision',
       'Docker',
-      'Kubernetes',
-      'Jenkins',
     ],
     logo: '/images/projects/smartproperty/SmartPropertyLogo.png',
     screenshots: [
-      '/images/projects/smartproperty/landingpage.png',
-      '/images/projects/smartproperty/homepage.png',
-      '/images/projects/smartproperty/propertysearch.png',
-      '/images/projects/smartproperty/realestatepropertydetails.png',
-      '/images/projects/smartproperty/clientpropertydetails.png',
       '/images/projects/smartproperty/realestatedashboard.png',
+      '/images/projects/smartproperty/propertysearch.png',
+      '/images/projects/smartproperty/aianalysis.png',
+      '/images/projects/smartproperty/homepage.png',
       '/images/projects/smartproperty/admindashboard.png',
-      '/images/projects/smartproperty/clientdashboard.png',
-      '/images/projects/smartproperty/accountantdash.png',
-      '/images/projects/smartproperty/clientpropertyadd.png',
-      '/images/projects/smartproperty/clientrequestvisit.png',
-      '/images/projects/smartproperty/engagements.png',
+      '/images/projects/smartproperty/clientpropertydetails.png',
       '/images/projects/smartproperty/aifeedrecommendation.png',
       '/images/projects/smartproperty/aipriceestimation.png',
-      '/images/projects/smartproperty/aianalysis.png',
       '/images/projects/smartproperty/aiimagedesc.png',
-      '/images/projects/smartproperty/clienttrustscore.png',
       '/images/projects/smartproperty/chatbotaiaigent.png',
       '/images/projects/smartproperty/aihandsfreenavigationvoiceassistant.png',
+      '/images/projects/smartproperty/engagements.png',
     ],
-    category: 'web',
-    tags: ['ai'],
+    category: 'ai',
+    tags: ['web'],
     links: { live: 'https://youtu.be/z0v_b0Qgeng' },
   },
   {
@@ -115,11 +111,15 @@ export const projects: Project[] = [
     description:
       'A conversion-focused clinic concept that connects editorial brand storytelling with a guided treatment consultation, demo booking flow, and persistent member-care portal.',
     longDescription:
-      'Aurelle is a portfolio-grade React product concept for a premium aesthetics clinic. I designed and built the full responsive experience around two business goals: converting mobile visitors into consultation requests and supporting retention through an organized member space. It includes guided goal discovery, appointment selection, browser persistence, accessible motion, medical disclaimers, and automated accessibility and visual smoke checks.',
+      'I designed and built Aurelle as a complete premium client experience around two business goals: converting mobile visitors into consultation requests and supporting retention through an organized member space. It includes guided goal discovery, appointment selection, persistent member care, accessible motion, medical disclaimers, and automated accessibility and visual smoke checks, with production clinic services planned as the next release.',
     year: '2026',
-    role: 'Product designer & frontend engineer',
-    context: 'Client-ready product concept',
-    scope: 'Interactive frontend · Automated QA',
+    role: 'Product & experience engineer',
+    context: 'Client-ready aesthetics product',
+    scope: 'Responsive product experience · Active development',
+    progress: {
+      available: 'Complete consultation, booking, and member-care journeys with automated interaction checks.',
+      next: 'Connect scheduling, identity, content, and clinic operations services.',
+    },
     featured: false,
     techStack: ['React 19', 'React Router', 'JavaScript', 'Motion', 'Playwright', 'axe-core', 'Vite'],
     logo: '',
@@ -140,11 +140,15 @@ export const projects: Project[] = [
     description:
       'A polished reservation product connecting players and venue managers through discovery, availability, approval workflows, calendars, team spaces, and operational dashboards.',
     longDescription:
-      'Pitchly is a responsive two-sided product prototype for football-pitch reservations. Players can discover venues, choose slots, manage bookings, and coordinate a team; venue managers can review the same requests, approve or decline them, manage schedules, inspect revenue signals, and maintain venue information. Shared browser data makes both roles feel like one coherent system while keeping the current frontend-only scope explicit.',
+      'I designed and built Pitchly as a complete two-sided football-pitch reservation product. Players discover venues, choose slots, manage bookings, and coordinate a team; venue managers review the same requests, control schedules, inspect revenue signals, and maintain venue information. The connected product model is ready for production identity, payments, concurrency, and booking services.',
     year: '2026',
-    role: 'Product designer & frontend engineer',
-    context: 'Interactive marketplace prototype',
-    scope: 'Responsive frontend · Shared demo state',
+    role: 'Product engineer',
+    context: 'Two-sided sports marketplace',
+    scope: 'Complete product flows · Active development',
+    progress: {
+      available: 'Responsive player and venue-manager journeys with connected booking state.',
+      next: 'Add production identity, payments, concurrency, and server-side slot locking.',
+    },
     featured: false,
     techStack: ['React 19', 'TypeScript', 'Vite', 'Lucide', 'LocalStorage', 'Responsive CSS'],
     logo: '',
@@ -166,11 +170,15 @@ export const projects: Project[] = [
     description:
       'A role-based university workspace for internship placements, applications, attendance, journals, documents, validations, evaluations, and AI-assisted report preparation.',
     longDescription:
-      'Interna translates the full internship lifecycle into a responsive administration and student experience. University teams can follow cohorts, placements, approval pipelines, attendance exceptions, documents, validations, and evaluations, while students see their own progress, deadlines, journal, and report readiness. The current version is an API-ready frontend prototype backed by realistic local demo data.',
+      'I designed and built Interna around the complete university internship lifecycle. Program teams follow cohorts, placements, approval pipelines, attendance exceptions, documents, validations, and evaluations, while students manage progress, deadlines, journals, and report readiness. The product model and role-specific workflows are structured for the next production-service integration.',
     year: '2026',
-    role: 'Product designer & frontend engineer',
-    context: 'Education SaaS prototype',
-    scope: 'Dual-role frontend · API-ready',
+    role: 'Product systems engineer',
+    context: 'University operations product',
+    scope: 'Dual-role product system · Active development',
+    progress: {
+      available: 'Complete program-office and student workflows across the internship lifecycle.',
+      next: 'Connect authentication, institutional data, document storage, and report services.',
+    },
     featured: false,
     techStack: ['React 19', 'JavaScript', 'Vite', 'Lucide', 'Responsive CSS', 'Local demo data'],
     logo: '',
@@ -199,7 +207,7 @@ export const projects: Project[] = [
     scope: 'Integrated into an existing platform',
     featured: true,
     techStack: ['n8n', 'Laravel', 'Vue.js', 'MySQL', 'Gemini', 'SMTP', 'REST APIs'],
-    logo: '/images/projects/prigado/n8nlogo.jpg',
+    logo: '',
     screenshots: [
       '/images/projects/prigado/architecture-globale.png',
       '/images/projects/prigado/usecase-general.png',
@@ -246,17 +254,17 @@ export const projects: Project[] = [
     description:
       'A complete parking management and supervision project combining an admin platform, Flutter mobile access, Quercus license-plate recognition, WT32 barrier control, MQTT orchestration, and containerized backend services.',
     longDescription:
-      'MacroPark was my 2024 graduation project at Scheidt & Bachmann Maghreb, co-developed in a two-person engineering team across five Scrum sprints. It delivers the complete parking workflow: administrators manage users, guests, access evidence, barriers, emergency commands, and event logs; drivers enter through camera-based plate recognition or the Flutter app over BLE; FastAPI, Core, Bridge, MQTT, and database services coordinate decisions; and WT32-ETH01 firmware controls four barrier channels with persistent configuration, Ethernet/Wi-Fi connectivity, and OTA maintenance.',
+      'MacroPark was my 2024 graduation project at Scheidt & Bachmann Maghreb, delivered across five Scrum sprints. I engineered and validated its administration, Flutter access, LPR/MQTT, and embedded barrier-control workflows. Administrators manage users, guests, access evidence, barriers, emergency commands, and event logs; drivers enter through camera-based plate recognition or the mobile app over BLE; and WT32-ETH01 firmware controls four barrier channels with persistent configuration and OTA maintenance.',
     year: '2024',
-    role: 'Co-developer in a two-person engineering team',
+    role: 'Embedded systems & software engineer',
     context: 'Graduation project at Scheidt & Bachmann',
     scope: 'Complete multi-application IoT system',
     featured: true,
     techStack: ['C++ / Arduino', 'WT32-ETH01', 'Flutter', 'FastAPI', 'MQTT', 'BLE', 'Quercus SmartLPR', 'Docker Compose'],
     logo: '/images/projects/macropark/macrologo.png',
     screenshots: [
-      '/images/projects/macropark/admin-dashboard.png',
       '/images/projects/macropark/system-architecture.jpeg',
+      '/images/projects/macropark/admin-dashboard.png',
       '/images/projects/macropark/admin-users.png',
       '/images/projects/macropark/access-history-lpr.png',
       '/images/projects/macropark/emergency-barrier-controls.png',
@@ -281,15 +289,19 @@ export const projects: Project[] = [
   {
     id: 'geniuspmo',
     title: 'Genius PMO HRMS',
-    tagline: 'HR Operations Dashboard Prototype',
+    tagline: 'Bilingual HR Operations System',
     description:
       'A bilingual Next.js HR operations workspace with four demo roles, workforce status, employee records, teams, attendance, leave, biometrics, payroll, documents, requests, and reports.',
     longDescription:
-      'Genius PMO HRMS is a high-fidelity HR product prototype built around realistic day-to-day operations. The updated frontend provides four role-specific demo workspaces, responsive English and French modes, light and dark themes, accessible charts, CSV export, draft payslip generation, and carefully labeled interactions. A FastAPI, SQLAlchemy, Alembic, and PostgreSQL backend foundation supplies health and database plumbing while authentication and HR business endpoints remain explicit future work.',
+      'I designed and built Genius PMO HRMS around realistic daily workforce operations. Four role-specific workspaces, English and French modes, accessible charts, CSV export, draft payslip generation, and responsive workflows sit on a FastAPI, SQLAlchemy, Alembic, PostgreSQL, and Docker foundation. Production authentication and HR business services are the next delivery milestone.',
     year: '2026',
-    role: 'Product & frontend engineer',
-    context: 'Client-facing frontend prototype',
-    scope: 'Interactive frontend · Backend foundation',
+    role: 'Product engineer',
+    context: 'Client-facing HR product',
+    scope: 'Operational product system · Active development',
+    progress: {
+      available: 'Four role-focused workspaces, bilingual UX, exports, draft payroll, and backend readiness.',
+      next: 'Connect production authentication, HR endpoints, document storage, and payroll services.',
+    },
     featured: true,
     techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'PDF generation', 'CSV export'],
     logo: '/images/projects/geniuspmo/logo.png',
@@ -309,19 +321,24 @@ export const projects: Project[] = [
   {
     id: 'greencoffee',
     title: 'Green Coffee OS',
-    tagline: 'Coffee Shop Operations SaaS Prototype',
+    tagline: 'Coffee Shop Operations Platform',
     description:
-      'A high-fidelity React product prototype modelling live orders, menus, reservations, table operations, CRM and loyalty, campaigns, analytics, and role-focused workspaces.',
+      'A high-fidelity operations product connecting live orders, menus, reservations, tables, CRM and loyalty, campaigns, analytics, and role-focused workspaces.',
     longDescription:
-      'Green Coffee OS translates a broad coffee-shop feature set into a coherent, responsive product experience. The prototype supports owner, manager, barista, floor-staff, and customer demo journeys with shared local data, protected demo routes, light and dark themes, and detailed operational modules. Production authentication, payments, messaging, realtime sync, and AI integrations remain clear next-step backend work.',
+      'I designed and built Green Coffee OS as one connected operating experience for owners, managers, baristas, floor staff, and customers. Live order states, menus, tables, reservations, CRM, loyalty, campaigns, and analytics share a coherent product model across responsive light and dark workspaces. Production identity, payments, messaging, realtime synchronization, and AI services form the next release.',
     year: '2026',
-    role: 'Product designer & frontend engineer',
-    context: 'Interactive SaaS prototype',
-    scope: 'Frontend prototype · Browser persistence',
+    role: 'Product systems engineer',
+    context: 'Coffee operations product',
+    scope: 'Multi-role product system · Active development',
+    progress: {
+      available: 'Five connected operational journeys with persistent order, menu, table, and customer state.',
+      next: 'Connect production identity, payments, messaging, realtime synchronization, and AI services.',
+    },
     featured: true,
     techStack: ['React 19', 'Vite', 'JavaScript', 'CSS', 'LocalStorage', 'SessionStorage'],
     logo: '',
     screenshots: [
+      '/images/projects/greencoffee/dashboard.png',
       '/images/projects/greencoffee/owner-dashboard.png',
       '/images/projects/greencoffee/orders.png',
       '/images/projects/greencoffee/floor-plan.png',
@@ -338,20 +355,20 @@ export const projects: Project[] = [
     title: 'InnoMall',
     tagline: 'Integrated Mall Management Ecosystem',
     description:
-      'A team-built mall management platform with JavaFX and Symfony interfaces, IoT parking, reservations, payments, customer support automation, and analytics.',
+      'A full-stack mall management platform with JavaFX and Symfony interfaces, IoT parking, reservations, payments, customer-support automation, and analytics.',
     longDescription:
-      'InnoMall combines a JavaFX administration application and a Symfony web platform for customers and shop owners. I contributed to a team system that connected multi-floor parking sensors, live availability, online reservations, Stripe payment flows, a Gemini assistant, Twilio notifications, and operational analytics.',
+      'I developed the full-stack and IoT workflows connecting multi-floor parking sensors, live availability, online reservations, Stripe payments, a Gemini assistant, Twilio notifications, and operational analytics across JavaFX and Symfony applications.',
     year: '2025',
-    role: 'Full-stack & IoT contributor',
-    context: 'Academic team project',
-    scope: 'Multi-application team prototype',
+    role: 'Full-stack & IoT engineer',
+    context: 'Academic product project',
+    scope: 'Desktop, web & IoT prototype',
     techStack: ['Symfony 6', 'Java', 'JavaFX', 'MySQL', 'Stripe API', 'Gemini API', 'Twilio', 'IoT Sensors'],
     logo: '/images/projects/innomall/innologo.png',
     screenshots: [
+      '/images/projects/innomall/parking.png',
       '/images/projects/innomall/admin.png',
       '/images/projects/innomall/analytics.png',
       '/images/projects/innomall/payment.png',
-      '/images/projects/innomall/parking.png',
       '/images/projects/innomall/web.png',
       '/images/projects/innomall/chatbot.png',
     ],
@@ -364,15 +381,15 @@ export const projects: Project[] = [
     title: 'DigiService Reviews',
     tagline: 'Service Marketplace Microservice',
     description:
-      'My contribution to a team microservices platform: a Spring Boot reviews service supporting ratings, responses, filters, artisan statistics, OpenAPI documentation, and service discovery.',
+      'A Spring Boot reviews service for a microservices marketplace, supporting ratings, responses, filters, artisan statistics, OpenAPI documentation, and service discovery.',
     longDescription:
-      'DigiService is a team-built marketplace for connecting clients with local service professionals. I owned the reviews and evaluations service: a Java 17 Spring Boot API with review and response lifecycles, validation, filters, rating statistics, OpenAPI documentation, health endpoints, Eureka registration, and gateway-ready integration with other services.',
+      'I designed and built DigiService’s reviews and evaluations service: a Java 17 Spring Boot API with review and response lifecycles, validation, filters, rating statistics, OpenAPI documentation, health endpoints, Eureka registration, and gateway integration.',
     year: '2025',
     role: 'Reviews microservice developer',
-    context: 'Academic team project',
-    scope: 'Owned backend service in a larger platform',
+    context: 'Academic microservices project',
+    scope: 'End-to-end ownership of the reviews service',
     techStack: ['Java 17', 'Spring Boot', 'Spring Data JPA', 'OpenFeign', 'Eureka', 'OpenAPI', 'Angular'],
-    logo: '/images/projects/digiservice/logo.png',
+    logo: '/images/projects/digiservice/logo.svg',
     screenshots: ['/images/projects/digiservice/marketplace.jpg'],
     category: 'web',
     links: {},
@@ -382,12 +399,12 @@ export const projects: Project[] = [
     title: 'SecondChance',
     tagline: 'Reintegration Support Platform',
     description:
-      'A team-built social-impact platform connecting formerly incarcerated people with job opportunities, training, support resources, community chat, and administrative tools.',
+      'A social-impact platform connecting formerly incarcerated people with job opportunities, training, support resources, community concepts, and administrative tools.',
     longDescription:
-      'SecondChance is a reintegration platform prototype designed around access to employment, training, support resources, and peer-community concepts. My work centered on FastAPI, MongoDB, server-rendered application flows, and the prototype user journey within the team project.',
+      'I built the FastAPI and MongoDB application foundation, server-rendered flows, user-data operations, and prototype journey for employment, training, support, and community resources.',
     year: '2025',
-    role: 'Backend & application contributor',
-    context: 'Academic team project',
+    role: 'Backend & application developer',
+    context: 'Academic social-impact project',
     scope: 'Social-impact platform prototype',
     techStack: ['FastAPI', 'MongoDB', 'PyMongo', 'Motor', 'Jinja2', 'Pydantic'],
     logo: '/images/projects/secondchance/secondchancelogo.png',
@@ -411,14 +428,15 @@ export const projects: Project[] = [
     description:
       'A connected-home prototype for room-level climate, lighting, and access control using ESP32 devices, a mobile interface, and Firebase realtime synchronization.',
     longDescription:
-      'ZenithHouse explores distributed home automation with ESP32 controllers assigned to room-level devices. A mobile application and Firebase provide user access, state synchronization, and remote control for climate, lighting, and door-access functions.',
+      'I designed ZenithHouse as a distributed home-automation system with ESP32 controllers assigned to room-level devices. A mobile application and Firebase coordinate user access, realtime state synchronization, and remote control for climate, lighting, and door-access functions.',
     year: '2024',
     role: 'Embedded & mobile developer',
     context: 'Embedded systems project',
     scope: 'IoT prototype',
     techStack: ['C++', 'Firebase', 'ESP32', 'IoT', 'Mobile App'],
     logo: '/images/projects/zenithhouse/zenithlogo.png',
-    screenshots: [],
+    screenshots: ['/images/projects/zenithhouse/connected-home-concept.png'],
+    visualFit: 'cover',
     category: 'embedded',
     tags: ['mobile'],
     links: {},
@@ -430,14 +448,18 @@ export const projects: Project[] = [
     description:
       'A BLE beacon access-control proof of concept using ESP32 scanning, Eddystone identifier checks, an LED relay simulation, and MQTT status messaging.',
     longDescription:
-      'Created during an internship at Scheidt & Bachmann, Smart Unlock uses a phone beacon simulator and an ESP32 WROOM-32 scanner to test a keyless access decision. A matched Eddystone identifier triggers an LED as the door-relay proof and publishes status through Mosquitto MQTT.',
+      'I built Smart Unlock during my internship at Scheidt & Bachmann. A phone beacon simulator and an ESP32 WROOM-32 scanner test a keyless access decision; a matched Eddystone identifier triggers the door-relay proof and publishes status through Mosquitto MQTT.',
     year: '2023',
     role: 'Hardware & software developer',
     context: 'Embedded systems internship',
     scope: 'Connected access prototype',
     techStack: ['C++', 'ESP32', 'Eddystone BLE', 'MQTT', 'Mosquitto'],
     logo: '/images/projects/smartunlock/smartunlocklogo.png',
-    screenshots: [],
+    screenshots: [
+      '/images/projects/smartunlock/prototype-access-granted.jpg',
+      '/images/projects/smartunlock/prototype-hardware-enclosure.jpg',
+      '/images/projects/smartunlock/prototype-hardware-open.jpg',
+    ],
     category: 'embedded',
     links: {},
   },
@@ -448,14 +470,15 @@ export const projects: Project[] = [
     description:
       'A native Android prototype for account access, parking-space presentation, and vehicle, plate, and owner records using Java, XML, and Firebase.',
     longDescription:
-      'Smart Parking Solution is a native Android project built with Java and XML. The documented prototype covers login, account creation, a parking-space view, logout, and vehicle records, with Firebase included in the application build.',
+      'I built Smart Parking Solution as a native Android project with Java, XML, and Firebase. The application covers login, account creation, parking-space presentation, logout, and vehicle, plate, and owner records in one focused mobile flow.',
     year: '2023',
     role: 'Android & IoT developer',
     context: 'Mobile systems project',
     scope: 'Android prototype',
     techStack: ['Java', 'Android', 'XML', 'Firebase'],
     logo: '/images/projects/sps/spslogo.png',
-    screenshots: [],
+    screenshots: ['/images/projects/sps/android-parking-concept.png'],
+    visualFit: 'cover',
     category: 'mobile',
     tags: ['embedded'],
     links: {},
@@ -463,18 +486,19 @@ export const projects: Project[] = [
   {
     id: 'smartagri',
     title: 'Smart Agri',
-    tagline: 'Agricultural Monitoring Concept',
+    tagline: 'Connected Crop Monitoring',
     description:
-      'An archived agricultural-monitoring concept retained in the portfolio while its source files, implementation notes, and screenshots are being recovered.',
+      'An ESP32 agriculture-monitoring system that reads temperature, humidity, and soil moisture, sends telemetry to Blynk, and drives local status indicators.',
     longDescription:
-      'The supplied Smart Agri folder is currently empty, so this archive entry intentionally avoids claiming a specific hardware, cloud, or mobile implementation until the original source and documentation are available.',
-    year: 'Archive',
-    role: 'Original implementation details pending',
-    context: 'Archived project concept',
-    scope: 'Source details pending',
-    techStack: [],
+      'I built Smart Agri as a connected sensing prototype around an ESP32, DHT11 climate sensor, analog soil-moisture probe, Wi-Fi, and Blynk. The firmware publishes field readings to remote widgets and drives local LED indicators for temperature, humidity, and moisture conditions, creating a compact device-to-cloud monitoring loop.',
+    year: '2023',
+    role: 'IoT & embedded developer',
+    context: 'Connected agriculture project',
+    scope: 'ESP32 sensing · Blynk telemetry',
+    techStack: ['C++ / Arduino', 'ESP32', 'DHT11', 'Soil Moisture Sensor', 'Blynk', 'Wi-Fi'],
     logo: '/images/projects/smartagri/smartagrilogo.png',
-    screenshots: [],
+    screenshots: ['/images/projects/smartagri/system-cover.png'],
+    visualFit: 'cover',
     category: 'embedded',
     tags: ['mobile'],
     links: {},

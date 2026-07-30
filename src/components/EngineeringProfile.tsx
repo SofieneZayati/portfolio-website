@@ -21,10 +21,10 @@ const focusAreas = [
   {
     icon: HiLightningBolt,
     title: 'Applied intelligence',
-    label: 'Product accelerator',
+    label: 'Core capability',
     description:
-      'AI automation, ML services, OCR, and conversational workflows integrated where they improve a product experience.',
-    tools: ['n8n & Gemini', 'XGBoost', 'Computer vision'],
+      'AI-assisted decisions, document intelligence, and automation designed around explainability, resilience, and human control.',
+    tools: ['n8n & Gemini', 'OCR & document AI', 'Groq & fallback logic'],
   },
 ]
 
@@ -49,15 +49,14 @@ export default function EngineeringProfile() {
           <div>
             <span className="section-label">Engineering profile</span>
             <h2 id="profile-heading" className="section-heading">
-              Full-stack by focus. <span>Systems-minded by training.</span>
+              Product-focused by default. <span>Systems-minded by training.</span>
             </h2>
           </div>
           <div className="profile-intro__copy">
             <p>
-              I am an embedded systems graduate currently completing an engineering degree in
-              web and internet technologies. That combination helps me see the whole product:
-              the constraints at the device, the data moving between services, and the experience
-              people finally use.
+              I combine full-stack product engineering with applied AI and an embedded-systems
+              foundation. That range helps me own the complete workflow: the data and decision
+              logic, the services that move it, and the interface people finally use.
             </p>
             <p className="profile-principle">
               My strongest work lives where reliable engineering and useful product design meet.

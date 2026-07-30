@@ -136,8 +136,8 @@ const content: Record<string, ProjectContent> = {
     ],
     architecture: [
       {
-        title: 'Connected Frontend Product Story',
-        desc: 'The public experience, guided consultation, booking drawer, and member route share a small browser persistence layer. This makes the concept testable as one client journey while keeping production API, authentication, scheduling, and payment boundaries explicit.',
+        title: 'Connected Client Journey',
+        desc: 'The public experience, guided consultation, booking flow, and member route share one product model. The next release connects the journey to production identity, scheduling, content, and payment services.',
       },
     ],
     gallery: [
@@ -148,13 +148,13 @@ const content: Record<string, ProjectContent> = {
     ],
     challenges: [
       { title: 'Premium Without Friction', desc: 'The visual language needed to feel editorial while keeping navigation, calls to action, and text legible.' },
-      { title: 'Safe Medical UX', desc: 'The consultation experience provides useful orientation without presenting a frontend concept as clinical advice.' },
+      { title: 'Safe Medical UX', desc: 'The consultation experience provides useful orientation without presenting a digital product as clinical advice.' },
       { title: 'One Continuous Journey', desc: 'A demo appointment selected on the public site must remain visible and meaningful inside the member portal.' },
     ],
     results: [
       { icon: '3', title: 'Three Connected Journeys', content: 'Discovery, consultation and booking, and ongoing member care form one coherent product narrative.' },
       { icon: 'QA', title: 'Repeatable Browser Verification', content: 'Visual smoke checks exercise the key desktop and mobile journeys instead of relying on static screenshots alone.' },
-      { icon: 'A11Y', title: 'Accessibility Included', content: 'Automated axe checks and interaction-level accessibility decisions are built into the prototype workflow.' },
+      { icon: 'A11Y', title: 'Accessibility Included', content: 'Automated axe checks and interaction-level accessibility decisions are built into the product workflow.' },
     ],
     cta: { secondary: [{ label: 'Contact Me', url: '/#contact' }] },
     status: ['Client-Ready Concept', 'Responsive', 'Automated QA'],
@@ -162,7 +162,7 @@ const content: Record<string, ProjectContent> = {
 
   pitchly: {
     facts: [
-      { label: 'Type', value: 'Two-Sided Marketplace Prototype' },
+      { label: 'Type', value: 'Two-Sided Marketplace Product' },
       { label: 'Actors', value: 'Players + Venue Managers' },
       { label: 'Core Flow', value: 'Discover to Approve' },
       { label: 'Data', value: 'Shared Browser State' },
@@ -178,7 +178,7 @@ const content: Record<string, ProjectContent> = {
         ],
       },
       {
-        category: 'Prototype State',
+        category: 'Connected Product State',
         items: [
           { name: 'LocalStorage', description: 'Shared reservation state across both demo roles' },
           { name: 'URL state', description: 'Direct role and page entry for reviewable flows' },
@@ -196,8 +196,8 @@ const content: Record<string, ProjectContent> = {
     ],
     architecture: [
       {
-        title: 'One Prototype, Two Operational Perspectives',
-        desc: 'A shared booking domain powers player and manager presentations. URL parameters make either role directly reviewable, while local persistence lets approvals and cancellations carry between the two views during a demo.',
+        title: 'One Product, Two Operational Perspectives',
+        desc: 'A shared booking domain powers player and manager journeys. Direct role entry and persistent state let approvals and cancellations carry between both views while production services are integrated.',
         items: [
           { label: 'Player workspace', desc: 'Discovery, booking, calendar, booking history, and team coordination.' },
           { label: 'Shared state', desc: 'Venue and reservation records with explicit lifecycle status.' },
@@ -215,10 +215,10 @@ const content: Record<string, ProjectContent> = {
     challenges: [
       { title: 'Two Sides of One Booking', desc: 'Player and manager views needed to read as different tools while remaining consistent about status and schedule.' },
       { title: 'Operational Density on Mobile', desc: 'Calendars, status details, teams, and approval actions required responsive information prioritization.' },
-      { title: 'Prototype Honesty', desc: 'The interface simulates shared state but clearly identifies authentication, payments, concurrency, and server-side slot locking as backend work.' },
+      { title: 'Production Integration Path', desc: 'Authentication, payments, concurrency, and server-side slot locking are defined as the next service-integration milestone.' },
     ],
     results: [
-      { icon: '2', title: 'Complete Two-Sided Narrative', content: 'Both marketplace demand and supply workflows can be demonstrated from the same frontend.' },
+      { icon: '2', title: 'Complete Two-Sided Narrative', content: 'Both marketplace demand and supply workflows operate inside the same product system.' },
       { icon: '5', title: 'Five Booking States', content: 'Pending, confirmed, declined, completed, and cancelled states shape the relevant actions and messaging.' },
       { icon: 'RWD', title: 'Responsive Product System', content: 'Desktop, tablet, and mobile layouts support both role families without reducing the demo to a dashboard image.' },
     ],
@@ -228,15 +228,15 @@ const content: Record<string, ProjectContent> = {
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
-    status: ['Interactive Prototype', 'Two-Sided Workflow', 'Responsive'],
+    status: ['Active Development', 'Two-Sided Workflow', 'Responsive Product'],
   },
 
   interna: {
     facts: [
       { label: 'Type', value: 'Education Operations SaaS' },
-      { label: 'Actors', value: 'University Team + Student' },
+      { label: 'Actors', value: 'University Staff + Student' },
       { label: 'Coverage', value: 'Full Internship Lifecycle' },
-      { label: 'Scope', value: 'API-Ready Frontend' },
+      { label: 'Scope', value: 'Production Integration Ready' },
     ],
     techStack: [
       {
@@ -287,7 +287,7 @@ const content: Record<string, ProjectContent> = {
     results: [
       { icon: '2', title: 'Two Complete Workspaces', content: 'A program administrator and a student can each demonstrate a role-specific end-to-end experience.' },
       { icon: '8', title: 'Eight Lifecycle Domains', content: 'Placements, applications, journals, attendance, validations, documents, reports, and evaluations share one system.' },
-      { icon: 'API', title: 'Clear Backend Boundary', content: 'The current frontend communicates a realistic product model while remaining explicit about the API work required for production.' },
+      { icon: 'API', title: 'Production Integration Path', content: 'The product domain and role workflows define a clear contract for authentication, institutional data, documents, and report services.' },
     ],
     cta: {
       secondary: [
@@ -295,190 +295,141 @@ const content: Record<string, ProjectContent> = {
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
-    status: ['Frontend Prototype', 'Dual Role', 'AI-Assisted Workflow'],
+    status: ['Active Development', 'Dual Role', 'AI-Assisted Workflow'],
   },
 
   smartproperty: {
     facts: [
-      { label: 'Type', value: 'AI-Powered SaaS' },
-      { label: 'Product', value: 'Multi-Role Platform' },
-      { label: 'Delivery', value: 'Docker + CI/CD Configuration' },
-      { label: 'Stack', value: 'Multi-Service Platform' },
+      { label: 'Type', value: 'End-to-End AI Real Estate Platform' },
+      { label: 'Ownership', value: 'Sole Builder · Product to Deployment' },
+      { label: 'Roles', value: 'Agent, Admin, Client, Accountant' },
+      { label: 'Delivery', value: 'Multi-Service Product System' },
     ],
     techStack: [
       {
-        category: 'Frontend',
+        category: 'Product Experience',
         items: [
-          { name: 'React', description: 'Single-page application with role-based routing' },
-          { name: 'Tailwind CSS', description: 'Utility-first styling system' },
+          { name: 'React', description: 'Role-specific product journeys and dashboards' },
+          { name: 'Tailwind CSS', description: 'Responsive interface and design system' },
+          { name: 'Zustand', description: 'Global product and authentication state' },
+          { name: 'Pannellum', description: 'Interactive 360-degree property tours' },
         ],
       },
       {
-        category: 'State Management',
+        category: 'Platform Services',
         items: [
-          { name: 'Zustand', description: 'Lightweight global state for UI & auth' },
+          { name: 'NestJS', description: 'API gateway, authentication, and business services' },
+          { name: 'FastAPI', description: 'Machine-learning and computer-vision services' },
+          { name: 'REST APIs', description: 'Product and service communication' },
+          { name: 'Socket.IO', description: 'Realtime events and notifications' },
+          { name: 'Stripe', description: 'Payment workflows' },
         ],
       },
       {
-        category: 'Backend',
+        category: 'AI & Intelligence',
         items: [
-          { name: 'NestJS', description: 'API gateway with auth & business services' },
-          { name: 'FastAPI', description: 'ML & computer-vision microservice' },
-          { name: 'REST APIs', description: 'Service-to-service communication' },
-          { name: 'JWT Auth', description: 'Stateless role-based authentication' },
-          { name: 'Socket.IO', description: 'Real-time events & notifications' },
-          { name: 'Stripe', description: 'Payment processing' },
-          { name: 'Firebase', description: 'Push notifications & client messaging' },
+          { name: 'XGBoost', description: 'Property valuation and rent prediction' },
+          { name: 'Groq', description: 'Conversational assistance and decision rationale' },
+          { name: 'CLIP + BLIP', description: 'Property-image understanding and descriptions' },
+          { name: 'OCR.space', description: 'Applicant-document extraction and solvency analysis' },
+          { name: 'Recommendation engine', description: 'Preference, budget, and property matching' },
         ],
       },
       {
-        category: 'Database',
+        category: 'Data, Maps & Delivery',
         items: [
-          { name: 'MongoDB', description: 'Document-based primary store' },
-          { name: 'MongoDB Atlas', description: 'Managed cloud database' },
-        ],
-      },
-      {
-        category: 'AI & ML',
-        items: [
-          { name: 'XGBoost', description: 'Property valuation & rent prediction' },
-          { name: 'Groq LLM', description: 'Conversational AI agent' },
-          { name: 'CLIP', description: 'Image-text understanding for listings' },
-          { name: 'BLIP', description: 'Automatic room image descriptions' },
-        ],
-      },
-      {
-        category: 'OCR',
-        items: [
-          { name: 'OCR.space', description: 'Document extraction for solvency analysis' },
-        ],
-      },
-      {
-        category: 'Maps',
-        items: [
-          { name: 'Leaflet', description: 'Interactive map renderer' },
-          { name: 'OpenStreetMap', description: 'Open map data' },
-          { name: 'CARTO', description: 'Map tile styling' },
-        ],
-      },
-      {
-        category: '3D Tours',
-        items: [
-          { name: 'Pannellum', description: '360° virtual tour viewer' },
-        ],
-      },
-      {
-        category: 'DevOps',
-        items: [
-          { name: 'Docker', description: 'Containerized services' },
-          { name: 'Kubernetes', description: 'Deployment manifests and service configuration' },
-          { name: 'Jenkins', description: 'CI/CD pipeline configuration' },
-          { name: 'SonarQube', description: 'Code quality & static analysis' },
-        ],
-      },
-      {
-        category: 'Media',
-        items: [
-          { name: 'Cloudinary', description: 'Image storage and transformation' },
+          { name: 'MongoDB Atlas', description: 'Primary product data and analysis outputs' },
+          { name: 'Leaflet + OpenStreetMap', description: 'Location-aware property discovery' },
+          { name: 'Cloudinary', description: 'Property media storage and transformation' },
+          { name: 'Docker + Kubernetes', description: 'Container and orchestration configuration' },
+          { name: 'Jenkins + SonarQube', description: 'Delivery automation and quality gates' },
         ],
       },
     ],
     features: [
-      { group: 'Property Platform', icon: '🏠', title: 'Property Listings Management', desc: 'Centralized listings with images, documents, location, and lifecycle status — managed by agents, owners, and admins across multiple branches.' },
-      { group: 'AI & Automation', icon: '🎯', title: 'Property Recommendation Engine', desc: 'A recommendation feed ranks listings using budget, preferences, property data, and location criteria.' },
-      { group: 'Trust & Matching', icon: '🤝', title: 'Application Review Signals', desc: 'Affordability, occupation, and document signals give reviewers structured context for an applicant decision.' },
-      { group: 'AI & Automation', icon: '💰', title: 'AI Property Valuation', desc: 'XGBoost valuation model trained on historical data to predict optimal property prices and rental rates with market trend context.' },
-      { group: 'AI & Automation', icon: '📈', title: 'Predictive Pricing', desc: 'Automatic rent estimation from amenities, location, and property type — filling in the price field on listings with one click.' },
-      { group: 'AI & Automation', icon: '🖼️', title: 'AI Image Description Generation', desc: 'CLIP and BLIP analyze uploaded property photos and generate room-by-room listing copy, accelerating marketing content production.' },
-      { group: 'AI & Automation', icon: '📄', title: 'OCR Document Analysis', desc: 'OCR.space extracts structured data from income, identity, and supporting documents to feed the solvency pipeline.' },
-      { group: 'Trust & Matching', icon: '🛡️', title: 'Fraud Detection', desc: 'Income mismatch detection and cross-field validation flag suspicious applications before they reach the approval queue.' },
-      { group: 'Trust & Matching', icon: '⚖️', title: 'Solvency Analysis', desc: 'Prototype risk scoring that combines affordability ratios, occupation validation, and document evidence for review.' },
-      { group: 'AI & Automation', icon: '🤖', title: 'AI Chat Assistant', desc: 'Groq-powered conversational agent that estimates budgets, answers property questions, and guides users through the platform.' },
-      { group: 'AI & Automation', icon: '🎤', title: 'Voice-Enabled Navigation', desc: 'Hands-free search and navigation that listens to natural-language queries and routes users to the right view or listing.' },
-      { group: 'Property Platform', icon: '🧭', title: 'Multi-Role Dashboards', desc: 'Tailored experiences for real-estate agents, admins, clients, and accountants — each with KPIs and quick actions specific to the role.' },
-      { group: 'Operations & Analytics', icon: '📊', title: 'Engagement Analytics', desc: 'Per-property views, clicks, saves, and unique users tracked at the branch level to measure listing performance.' },
-      { group: 'Property Platform', icon: '📅', title: 'Visit Request Management', desc: 'Multi-slot visit scheduling with date and time pickers, application status, and visit history for clients.' },
-      { group: 'Property Platform', icon: '🗂️', title: 'Property Management Workflows', desc: 'Add-property flow with map-based location picking, image uploads, AI price estimation, and publish-to-market steps.' },
-      { group: 'Property Platform', icon: '⚡', title: 'Real-Time Updates', desc: 'Socket.IO notifications, dashboard refresh, and event broadcasting across roles for immediate operational feedback.' },
+      { group: 'Property Operations', icon: '🏠', title: 'Listing Lifecycle', desc: 'Create, publish, discover, compare, visit, apply for, and manage properties across one connected workflow.' },
+      { group: 'Property Operations', icon: '◎', title: 'Multi-Role Dashboards', desc: 'Dedicated operational views for real-estate agents, administrators, clients, and accountants.' },
+      { group: 'Property Operations', icon: '📅', title: 'Visits & Applications', desc: 'Multi-slot visit scheduling, application tracking, status history, and decisive follow-up actions.' },
+      { group: 'AI Discovery', icon: '🎯', title: 'Recommendation Engine', desc: 'Ranks properties using budget, preferences, listing attributes, and location criteria.' },
+      { group: 'AI Discovery', icon: '📈', title: 'Predictive Valuation', desc: 'XGBoost estimates sale and rental pricing from property attributes and historical market data.' },
+      { group: 'AI Discovery', icon: '🖼', title: 'Image Intelligence', desc: 'CLIP and BLIP interpret property photos and generate room-by-room listing descriptions.' },
+      { group: 'Trust & Decisions', icon: '📄', title: 'Document Intelligence', desc: 'OCR extracts identity, income, and supporting evidence for applicant verification.' },
+      { group: 'Trust & Decisions', icon: '⚖', title: 'Solvency & Fraud Signals', desc: 'Affordability, mismatches, occupation, document quality, and reuse checks produce explainable review evidence.' },
+      { group: 'Trust & Decisions', icon: '✓', title: 'Human-Controlled Decisions', desc: 'Approve, review, or reject recommendations stay visible and require an explicit agent action.' },
+      { group: 'Assisted Experience', icon: '🤖', title: 'AI Property Assistant', desc: 'Groq-powered conversation answers property questions, estimates budgets, and guides users through the platform.' },
+      { group: 'Assisted Experience', icon: '🎤', title: 'Voice Navigation', desc: 'Natural-language voice input supports hands-free search and navigation.' },
+      { group: 'Operations & Delivery', icon: '⚡', title: 'Realtime Analytics', desc: 'Socket.IO updates and branch-level engagement signals connect daily operations to measurable listing activity.' },
     ],
     architecture: [
       {
-        title: 'Microservices Architecture',
-        desc: 'Independent services communicate over REST and Socket.IO, separating product workflows from ML and computer-vision capabilities.',
+        title: 'Role-Based Product Platform',
+        desc: 'The React application presents focused journeys for agents, administrators, clients, and accountants while NestJS coordinates authentication, business services, media, payments, and realtime events.',
         items: [
-          { label: 'React SPA', desc: 'Role-based user interface' },
-          { label: 'NestJS API Gateway', desc: 'Auth, business services, and orchestration' },
-          { label: 'FastAPI ML Service', desc: 'Computer vision and ML inference' },
-          { label: 'MongoDB Atlas', desc: 'Managed document store' },
-          { label: 'Socket.IO Server', desc: 'Real-time events and notifications' },
-          { label: 'Cloudinary', desc: 'Image storage and transformation' },
+          { label: 'React product', desc: 'Search, dashboards, listings, visits, applications, analytics, and assisted experiences.' },
+          { label: 'NestJS services', desc: 'Role-aware APIs, authentication, business rules, payments, and orchestration.' },
+          { label: 'MongoDB Atlas', desc: 'Users, branches, properties, applications, analytics, and AI outputs.' },
+          { label: 'Socket.IO', desc: 'Live notifications and operational refresh across roles.' },
+          { label: 'Cloudinary', desc: 'Listing imagery and media transformation.' },
+          { label: 'Stripe', desc: 'Payment and transaction workflows.' },
         ],
       },
       {
-        title: 'AI & OCR Pipeline',
-        desc: 'Specialized models and OCR services feeding recommendations, valuation, and solvency flows.',
+        title: 'AI, Vision & Document Pipeline',
+        desc: 'Specialized services turn property data, user preferences, uploaded documents, and listing imagery into explainable product assistance.',
         items: [
-          { label: 'XGBoost', desc: 'Pricing and valuation prediction' },
-          { label: 'Groq LLM', desc: 'Conversational AI agent' },
-          { label: 'CLIP + BLIP', desc: 'Image understanding and description' },
-          { label: 'OCR.space', desc: 'Document text extraction' },
-          { label: 'Solvency Engine', desc: 'Risk scoring and affordability' },
-          { label: 'Recommendation Ranker', desc: 'Budget, preference, property, and location criteria' },
+          { label: 'XGBoost', desc: 'Property valuation and predictive pricing.' },
+          { label: 'Recommendation layer', desc: 'Budget, preference, property, and location-aware ranking.' },
+          { label: 'CLIP + BLIP', desc: 'Image understanding and room-description generation.' },
+          { label: 'OCR + solvency engine', desc: 'Document extraction, affordability, anomaly signals, and explainable recommendations.' },
+          { label: 'Groq assistant', desc: 'Conversational guidance, budget support, and concise rationale.' },
+          { label: 'Voice layer', desc: 'Natural-language navigation and search.' },
         ],
       },
       {
-        title: 'DevOps & Quality',
-        desc: 'The repositories include container, CI/CD, quality-gate, and Kubernetes deployment configuration; production deployment is outside the case-study claim.',
+        title: 'Delivery & Quality System',
+        desc: 'Container, orchestration, automation, and quality configuration support the multi-service product as one maintainable engineering system.',
         items: [
-          { label: 'Docker', desc: 'Containerized services' },
-          { label: 'Kubernetes', desc: 'Deployment configuration' },
-          { label: 'Jenkins', desc: 'CI/CD pipelines' },
-          { label: 'SonarQube', desc: 'Static code analysis' },
-          { label: 'Deployment manifests', desc: 'Kubernetes service and workload configuration' },
-          { label: 'Stripe', desc: 'Payment processing' },
+          { label: 'Docker', desc: 'Repeatable service environments.' },
+          { label: 'Kubernetes', desc: 'Workload and service configuration.' },
+          { label: 'Jenkins', desc: 'Automated delivery pipelines.' },
+          { label: 'SonarQube', desc: 'Static analysis and quality gates.' },
+          { label: 'REST contracts', desc: 'Clear boundaries between product, platform, and intelligence services.' },
         ],
       },
     ],
     gallery: [
-      { src: `${base}/smartproperty/landingpage.png`, caption: 'Public Landing — Marketing site for SmartProperty' },
-      { src: `${base}/smartproperty/homepage.png`, caption: 'Authenticated Home — Personalized search with voice-enabled input' },
-      { src: `${base}/smartproperty/propertysearch.png`, caption: 'Property Search — Map-based discovery with filters and radius search' },
-      { src: `${base}/smartproperty/realestatepropertydetails.png`, caption: 'Agent Listing View — Analytics, 3D Tour, visit scheduling, applications' },
-      { src: `${base}/smartproperty/clientpropertydetails.png`, caption: 'Client Listing View — Virtual staging, apply / visit / compare actions' },
-      { src: `${base}/smartproperty/realestatedashboard.png`, caption: 'Real Estate Agent Dashboard — Portfolio KPIs, application pipeline, weekly visits' },
-      { src: `${base}/smartproperty/admindashboard.png`, caption: 'Admin Dashboard — Platform health, branches, support queue, quick access' },
-      { src: `${base}/smartproperty/clientdashboard.png`, caption: 'Client Dashboard — Activity pulse, saved properties, applications, upcoming visits' },
-      { src: `${base}/smartproperty/accountantdash.png`, caption: 'Accountant Dashboard — Revenue, collection rate, invoices, financial reports' },
-      { src: `${base}/smartproperty/clientpropertyadd.png`, caption: 'Add Property — Multi-step listing creation with map-based location picker' },
-      { src: `${base}/smartproperty/clientrequestvisit.png`, caption: 'Visit Request — Multi-slot scheduling form for prospective clients' },
-      { src: `${base}/smartproperty/engagements.png`, caption: 'Engagement Analytics — Per-property views, clicks, saves, and unique users' },
-      { src: `${base}/smartproperty/aifeedrecommendation.png`, caption: 'AI Recommendations — Ranked suggestions from property and preference criteria' },
-      { src: `${base}/smartproperty/aipriceestimation.png`, caption: 'AI Price Estimation — Automatic rent prediction from amenities and location' },
-      { src: `${base}/smartproperty/aianalysis.png`, caption: 'AI Solvency Analysis — OCR extraction, risk score, affordability ratio' },
-      { src: `${base}/smartproperty/aiimagedesc.png`, caption: 'AI Image Descriptions — Automatic room-by-room listing copy generation' },
-      { src: `${base}/smartproperty/clienttrustscore.png`, caption: 'Client Trust Score — Aggregated from visits, no-shows, and applications' },
-      { src: `${base}/smartproperty/chatbotaiaigent.png`, caption: 'Smart AI Agent — Conversational budget estimator and property assistant' },
-      { src: `${base}/smartproperty/aihandsfreenavigationvoiceassistant.png`, caption: 'Voice Assistant — Hands-free navigation and natural-language search' },
+      { src: `${base}/smartproperty/realestatedashboard.png`, caption: 'Real-estate agent command center with portfolio KPIs, applications, visits, and operational priorities' },
+      { src: `${base}/smartproperty/propertysearch.png`, caption: 'Map-based property discovery with location, radius, price, and listing filters' },
+      { src: `${base}/smartproperty/aianalysis.png`, caption: 'AI solvency analysis combining OCR evidence, affordability, anomaly signals, and an explainable recommendation' },
+      { src: `${base}/smartproperty/homepage.png`, caption: 'Personalized property discovery with intelligent search and voice-enabled input' },
+      { src: `${base}/smartproperty/admindashboard.png`, caption: 'Administration workspace for platform health, branches, support queues, and rapid actions' },
+      { src: `${base}/smartproperty/clientpropertydetails.png`, caption: 'Client property detail with virtual viewing, comparison, application, and visit actions' },
+      { src: `${base}/smartproperty/aifeedrecommendation.png`, caption: 'AI-ranked property feed built around the client profile, preferences, budget, and listing signals' },
+      { src: `${base}/smartproperty/aipriceestimation.png`, caption: 'Predictive pricing workflow for estimating rent from amenities, type, and location' },
+      { src: `${base}/smartproperty/aiimagedesc.png`, caption: 'Computer-vision workflow generating useful room-by-room property descriptions' },
+      { src: `${base}/smartproperty/chatbotaiaigent.png`, caption: 'Conversational property assistant for questions, budget guidance, and product navigation' },
+      { src: `${base}/smartproperty/aihandsfreenavigationvoiceassistant.png`, caption: 'Voice assistant supporting hands-free navigation and natural-language property search' },
+      { src: `${base}/smartproperty/engagements.png`, caption: 'Listing engagement analytics covering views, clicks, saves, and unique visitors' },
     ],
     challenges: [
-      { title: 'Multi-Role Authorization', desc: 'Four distinct user roles (agent, admin, client, accountant) with overlapping yet isolated permissions, branches, and dashboards.' },
-      { title: 'Real-Time Events', desc: 'Socket.IO event broadcasting across roles for dashboard refresh, notifications, and engagement metrics without overwhelming the client.' },
-      { title: 'OCR + AI Pipeline Reliability', desc: 'Combining OCR.space extraction, XGBoost scoring, and rule-based validation into a single, auditable solvency analysis.' },
-      { title: 'Computer Vision Latency', desc: 'CLIP and BLIP inference required careful user feedback and service boundaries so image-description generation remained understandable in the interface.' },
-      { title: 'Accessibility vs Density', desc: 'Balancing a feature-rich dashboard with keyboard-friendly navigation, voice input, readable structure, and accessible interaction patterns.' },
+      { title: 'One Platform, Four Operational Roles', desc: 'Each role needed focused information and permissions without fragmenting the shared property, visit, application, and financial lifecycle.' },
+      { title: 'AI That Supports Decisions', desc: 'Valuation, recommendations, image understanding, and solvency analysis had to expose useful evidence instead of presenting opaque model output.' },
+      { title: 'Reliable Multi-Service Boundaries', desc: 'Product APIs, realtime events, ML services, media, maps, payments, and document extraction needed clear contracts and resilient failure behavior.' },
+      { title: 'Dense Workflows, Accessible Interaction', desc: 'Feature-rich dashboards still needed readable hierarchy, keyboard-aware controls, voice input, and understandable feedback.' },
+      { title: 'Human Control in High-Stakes Flows', desc: 'Solvency recommendations remain reviewable and require an explicit agent action before application state changes.' },
     ],
     results: [
-      { icon: '🎯', title: 'Valuation Model', metric: 'XGBoost', content: 'A prototype pricing model trained on historical Tunisian listings to support—not replace—human valuation.' },
-      { icon: '🏠', title: 'Property Ranking', metric: 'Matching', content: 'Recommendation flows surface relevant properties using preferences, affordability, and listing data.' },
-      { icon: '⚙️', title: 'Operations', metric: 'Automation', content: 'OCR extraction and workflow automation reduce repetitive steps across administrative roles.' },
-      { icon: '🛡️', title: 'Solvency Review', metric: 'OCR + rules', content: 'Document extraction and rule-based signals create an auditable starting point for manual review.' },
-      { icon: '♿', title: 'Accessible Use', metric: 'Voice + text', content: 'Keyboard-aware flows, voice input, and image descriptions broaden how users can navigate the product.' },
+      { icon: '4', title: 'Role-Specific Workspaces', metric: '4 roles', content: 'Agents, administrators, clients, and accountants each receive a focused operational journey.' },
+      { icon: 'AI', title: 'Connected Intelligence Layer', metric: '5 flows', content: 'Recommendation, valuation, image description, solvency analysis, and conversational assistance work inside the product.' },
+      { icon: '◎', title: 'Complete Property Lifecycle', metric: 'End to end', content: 'Discovery, listing, visits, applications, decisions, payments, analytics, and administration connect as one system.' },
+      { icon: '⚡', title: 'Realtime Operations', metric: 'Live', content: 'Notifications and dashboard signals keep role-specific work aligned with platform activity.' },
+      { icon: '⚖', title: 'Explainable Trust Decisions', metric: 'Human led', content: 'Document evidence, anomaly signals, and explicit recommendations support rather than replace the reviewer.' },
     ],
     cta: {
       primary: { label: 'Watch Demo', url: 'https://youtu.be/z0v_b0Qgeng' },
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['AI-Powered', 'Multi-Role SaaS', 'Microservices', 'OCR', 'Accessibility'],
+    status: ['Solo-Built', 'End-to-End Ownership', 'Multi-Role SaaS', 'AI + Computer Vision', 'OCR', 'Microservices'],
   },
 
   prigado: {
@@ -628,7 +579,7 @@ const content: Record<string, ProjectContent> = {
       { group: 'User Experience', icon: '🖥️', title: 'Dual Interface System', desc: 'JavaFX desktop for administrators and Symfony web for customers, providing tailored experiences for different user types.' },
       { group: 'Platform & Payments', icon: '🅿️', title: 'IoT Multi-Floor Parking', desc: 'Real-time parking availability tracking using IoT sensors with multi-floor support, live spot monitoring, and online reservation system.' },
       { group: 'Platform & Payments', icon: '💳', title: 'Integrated Payments', desc: 'Secure payment processing through Stripe API supporting multiple payment methods and automated transaction management.' },
-      { group: 'User Experience', icon: '🤖', title: 'AI Customer Support', desc: 'A Gemini-powered chatbot interface supports FAQs and store-information queries in the team prototype.' },
+      { group: 'User Experience', icon: '🤖', title: 'AI Customer Support', desc: 'A Gemini-powered chatbot interface supports FAQs and store-information queries in the working prototype.' },
       { group: 'Analytics', icon: '📊', title: 'Analytics Dashboard', desc: 'Comprehensive analytics on customer behavior, sales trends, operational efficiency, and parking usage patterns.' },
       { group: 'User Experience', icon: '📱', title: 'Multi-Channel Notifications', desc: 'Automated Twilio SMS system for promotions, reservation confirmations, and important operational alerts.' },
     ],
@@ -670,7 +621,7 @@ const content: Record<string, ProjectContent> = {
       { title: 'Real-Time Data Flow', desc: 'Connecting MQTT parking updates to customer and administrator interfaces while keeping occupancy state understandable.' },
       { title: 'Secure Payments', desc: 'Stripe tokenization keeps raw payment-card data outside the application while supporting online checkout.' },
       { title: 'Cross-Platform Compatibility', desc: 'Ensuring consistent behavior between JavaFX desktop and Symfony web interfaces with shared business logic.' },
-      { title: 'IoT Integration', desc: 'Coordinating parking sensors, reservation flows, live availability, and application state across the team system.' },
+      { title: 'IoT Integration', desc: 'Coordinating parking sensors, reservation flows, live availability, and application state across the multi-application system.' },
     ],
     results: [
       { icon: '📈', title: 'Operational Flow', content: '• Live parking-state presentation\n• Reservation and notification workflows\n• Payment and analytics interfaces\n• Production load and uptime still require formal benchmarking' },
@@ -687,7 +638,7 @@ const content: Record<string, ProjectContent> = {
     facts: [
       { label: 'Context', value: 'Graduation Project' },
       { label: 'Host', value: 'Scheidt & Bachmann Maghreb' },
-      { label: 'Team', value: '2-Person Development Team' },
+      { label: 'Role', value: 'Embedded Systems & Software Engineer' },
       { label: 'Delivery', value: '5 Scrum Sprints' },
     ],
     techStack: [
@@ -790,7 +741,7 @@ const content: Record<string, ProjectContent> = {
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
-    status: ['Full Graduation Project', 'Two-Person Team', 'End-to-End IoT', 'Hardware Validated'],
+    status: ['Full Graduation Project', 'Five-Sprint Delivery', 'End-to-End IoT', 'Hardware Validated'],
   },
 
   secondchance: {
@@ -798,7 +749,7 @@ const content: Record<string, ProjectContent> = {
       { label: 'Type', value: 'Social Impact Prototype' },
       { label: 'Backend', value: 'FastAPI + MongoDB' },
       { label: 'Views', value: 'Jinja2 + Static Prototypes' },
-      { label: 'Context', value: 'Academic Team Project' },
+      { label: 'Context', value: 'Academic Social-Impact Project' },
     ],
     techStack: [
       {
@@ -857,7 +808,7 @@ const content: Record<string, ProjectContent> = {
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Social Impact Prototype', 'FastAPI + MongoDB', 'Team Project'],
+    status: ['Social Impact Prototype', 'FastAPI + MongoDB', 'Application Prototype'],
   },
 
   zenithhouse: {
@@ -896,19 +847,27 @@ const content: Record<string, ProjectContent> = {
     ],
     architecture: [
       {
-        title: 'Device-to-Mobile Concept',
-        desc: 'ESP32 firmware handles connected home controls while Firebase links device state to the mobile application. Detailed source material and new visuals are still being prepared for this archived project.',
+        title: 'Connected Home Architecture',
+        desc: 'ESP32 firmware handles room-level controls while Firebase synchronizes device state with the mobile application for remote lighting, climate, and access actions.',
       },
     ],
-    gallery: [],
+    gallery: [
+      { src: `${base}/zenithhouse/connected-home-concept.png`, caption: 'Concept visualization of the documented ESP32 and Firebase architecture connecting room-level lighting, climate, access, and mobile control' },
+    ],
     challenges: [
       { title: 'Hardware–Application Boundary', desc: 'Coordinating device commands, cloud state, and mobile feedback across the connected-home flow.' },
-      { title: 'Case-Study Documentation', desc: 'The CV verifies the project scope, while source files and updated screenshots still need to be added to this portfolio archive.' },
+      { title: 'Realtime State Consistency', desc: 'The mobile interface and physical device state need a clear source of truth when connectivity changes.' },
+      { title: 'Room-Level Modularity', desc: 'Lighting, climate, and access controls need reusable device patterns without tightly coupling every room.' },
+    ],
+    results: [
+      { icon: '3', title: 'Three Control Domains', content: 'Lighting, climate, and access share one connected-home architecture.' },
+      { icon: '↔', title: 'Cloud-Synchronized State', content: 'Firebase links device actions and mobile control in one realtime model.' },
+      { icon: 'ESP', title: 'Distributed Controllers', content: 'ESP32 nodes keep room-level control close to the physical devices.' },
     ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Archived Project', 'ESP32 + Firebase', 'Visuals Pending'],
+    status: ['Connected Home', 'ESP32 + Firebase', 'Mobile Control'],
   },
 
   smartunlock: {
@@ -948,7 +907,21 @@ const content: Record<string, ProjectContent> = {
         desc: 'A phone beacon simulator broadcasts an Eddystone identifier. The ESP32 scans and filters the advertisement, triggers an LED as the lock-relay proof, and publishes event or status messages to Mosquitto over MQTT.',
       },
     ],
-    gallery: [],
+    gallery: [
+      { src: `${base}/smartunlock/prototype-access-granted.jpg`, caption: 'Real prototype enclosure with the green access indicator active after a recognized BLE beacon' },
+      { src: `${base}/smartunlock/prototype-hardware-enclosure.jpg`, caption: 'Bench-tested Smart Unlock enclosure with the external status indicator and power connection' },
+      { src: `${base}/smartunlock/prototype-hardware-open.jpg`, caption: 'Inside the real prototype enclosure: ESP32 board, status LED, wiring, and USB power connection' },
+    ],
+    challenges: [
+      { title: 'BLE Signal Filtering', desc: 'Nearby advertisements must be scanned and filtered reliably before an access action is allowed.' },
+      { title: 'Safe Hardware Validation', desc: 'An LED represents the lock relay so access decisions can be tested without driving a real door mechanism.' },
+      { title: 'Remote Observability', desc: 'MQTT messages expose device and access status beyond the physical enclosure.' },
+    ],
+    results: [
+      { icon: 'BLE', title: 'Identifier-Based Access', content: 'The ESP32 recognizes the expected Eddystone advertisement before triggering the hardware proof.' },
+      { icon: 'MQTT', title: 'Connected Status Path', content: 'Mosquitto carries device and access events for remote observation.' },
+      { icon: 'HW', title: 'Real Hardware Proof', content: 'The complete scanner, enclosure, indicator, and firmware flow was bench tested.' },
+    ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
@@ -990,7 +963,19 @@ const content: Record<string, ProjectContent> = {
         desc: 'The native Java application covers account, parking, and vehicle-record views with Firebase included in the compiled prototype. Sensor ingestion, mapping, predictions, and alert services are outside the verified scope.',
       },
     ],
-    gallery: [],
+    gallery: [
+      { src: `${base}/sps/android-parking-concept.png`, caption: 'Visual summary of the documented Android and Firebase parking flow; the image is a system concept and does not imply a production interface' },
+    ],
+    challenges: [
+      { title: 'Compact Mobile Flow', desc: 'Account access, parking visibility, and vehicle records needed a simple navigation path on small Android screens.' },
+      { title: 'Structured Vehicle Data', desc: 'Plate, model, and owner records needed a consistent Firebase-backed representation.' },
+      { title: 'IoT Integration Boundary', desc: 'The mobile product defines the parking view while sensor ingestion and live occupancy remain the next connected-system milestone.' },
+    ],
+    results: [
+      { icon: '4', title: 'Core Mobile Views', content: 'Login, registration, parking, and vehicle-record journeys form one native Android application.' },
+      { icon: 'F', title: 'Cloud-Backed Records', content: 'Firebase supports account and application data for the documented build.' },
+      { icon: '→', title: 'Clear Expansion Path', content: 'The product structure leaves room for live sensors, maps, alerts, and predictive parking services.' },
+    ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
@@ -999,34 +984,75 @@ const content: Record<string, ProjectContent> = {
 
   smartagri: {
     facts: [
-      { label: 'Type', value: 'Archived IoT Concept' },
-      { label: 'Domain', value: 'Agricultural Monitoring' },
-      { label: 'Media', value: 'Logo Placeholder' },
-      { label: 'Status', value: 'Source Details Pending' },
+      { label: 'Type', value: 'Connected Agriculture System' },
+      { label: 'Hardware', value: 'ESP32' },
+      { label: 'Sensors', value: 'DHT11 + Soil Moisture' },
+      { label: 'Telemetry', value: 'Blynk over Wi-Fi' },
     ],
-    techStack: [],
+    techStack: [
+      {
+        category: 'Embedded',
+        items: [
+          { name: 'C++ / Arduino', description: 'Sensor sampling, thresholds, and local indicators' },
+          { name: 'ESP32', description: 'Connected controller and Wi-Fi runtime' },
+          { name: 'DHT11', description: 'Temperature and humidity sensing' },
+          { name: 'Soil moisture probe', description: 'Analog soil-condition input' },
+        ],
+      },
+      {
+        category: 'Telemetry & Feedback',
+        items: [
+          { name: 'Blynk', description: 'Remote temperature, humidity, and moisture telemetry' },
+          { name: 'Wi-Fi', description: 'Device-to-cloud connectivity' },
+          { name: 'Virtual pins', description: 'Structured sensor channels for the mobile dashboard' },
+          { name: 'LED indicators', description: 'Local threshold feedback for field conditions' },
+        ],
+      },
+    ],
     features: [
-      { group: 'Concept', icon: '🌱', title: 'Agricultural Monitoring', desc: 'The archived project explored how a connected system could surface environmental field information to a user.' },
-      { group: 'Portfolio Archive', icon: '🖼️', title: 'Documentation Pending', desc: 'The local project folder does not currently contain source files or screenshots, so implementation details are intentionally not claimed.' },
+      { group: 'Environmental Sensing', icon: 'T', title: 'Temperature Monitoring', desc: 'The DHT11 feeds temperature readings into the connected monitoring loop.' },
+      { group: 'Environmental Sensing', icon: 'H', title: 'Humidity Monitoring', desc: 'Air humidity is sampled alongside temperature for a more useful crop-environment view.' },
+      { group: 'Environmental Sensing', icon: 'M', title: 'Soil Moisture Input', desc: 'An analog probe adds soil-condition information to the same device workflow.' },
+      { group: 'Connected Feedback', icon: 'B', title: 'Blynk Telemetry', desc: 'Three environmental signals are published over Wi-Fi to remote Blynk widgets.' },
+      { group: 'Connected Feedback', icon: 'LED', title: 'Local Status Indicators', desc: 'Dedicated LEDs translate sensor thresholds into immediate device-side feedback.' },
     ],
     architecture: [
       {
-        title: 'Archived Concept',
-        desc: 'This entry preserves the project in the portfolio archive without inventing hardware, cloud, power, or alert details that are not present in the supplied source folder.',
+        title: 'Device-to-Cloud Sensing Loop',
+        desc: 'The ESP32 samples climate and soil inputs, publishes the readings to Blynk, and evaluates thresholds for local LED feedback.',
+        items: [
+          { label: 'DHT11', desc: 'Provides temperature and humidity readings.' },
+          { label: 'Soil probe', desc: 'Provides the analog moisture input.' },
+          { label: 'ESP32 firmware', desc: 'Coordinates sampling, connectivity, telemetry, and indicators.' },
+          { label: 'Blynk', desc: 'Presents the remote monitoring channels.' },
+          { label: 'LED bank', desc: 'Shows local temperature, humidity, and moisture states.' },
+        ],
       },
     ],
-    gallery: [],
+    gallery: [
+      { src: `${base}/smartagri/system-cover.png`, caption: 'Concept visualization based on the implemented ESP32 sensing loop for temperature, humidity, soil moisture, Blynk telemetry, and local indicators' },
+    ],
+    challenges: [
+      { title: 'Sensor Calibration', desc: 'Analog moisture readings and environmental thresholds need calibration against the actual soil, enclosure, and crop conditions.' },
+      { title: 'Connected and Local Feedback', desc: 'Remote telemetry and on-device indicators must describe the same condition without conflicting states.' },
+      { title: 'Configuration Hardening', desc: 'A production revision should externalize network and provider credentials, rotate device tokens, and validate failed-sensor behavior.' },
+    ],
+    results: [
+      { icon: '3', title: 'Environmental Signals', metric: '3 inputs', content: 'Temperature, humidity, and soil moisture share one monitoring workflow.' },
+      { icon: '↗', title: 'Remote Telemetry', metric: 'Blynk', content: 'The ESP32 publishes readings over Wi-Fi for remote observation.' },
+      { icon: '●', title: 'Immediate Local Feedback', metric: 'LED', content: 'Threshold indicators keep essential status visible at the device.' },
+    ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Archived Concept', 'Details Pending', 'Visual Placeholder'],
+    status: ['Embedded IoT', 'ESP32', 'Blynk Telemetry', '3 Sensor Signals'],
   },
 
   geniuspmo: {
     facts: [
-      { label: 'Context', value: 'HR Product Prototype' },
-      { label: 'Role', value: 'Product + Frontend' },
-      { label: 'Scope', value: '4 Demo Workspaces' },
+      { label: 'Context', value: 'HR Operations Product' },
+      { label: 'Role', value: 'Product Engineering' },
+      { label: 'Scope', value: '4 Role-Focused Workspaces' },
       { label: 'Foundation', value: 'FastAPI + PostgreSQL' },
     ],
     techStack: [
@@ -1051,7 +1077,7 @@ const content: Record<string, ProjectContent> = {
         items: [
           { name: 'PDF generation', description: 'Dependency-free draft payslip output' },
           { name: 'CSV export', description: 'UTF-8 workforce and operations exports' },
-          { name: 'Mock data', description: 'Explicitly labeled prototype dataset' },
+          { name: 'Product dataset', description: 'Realistic HR records for complete workflow validation' },
         ],
       },
       {
@@ -1078,13 +1104,13 @@ const content: Record<string, ProjectContent> = {
     ],
     architecture: [
       {
-        title: 'Interactive Frontend + Backend Foundation',
-        desc: 'Next.js routes and shared dashboard components use a typed client-side provider and explicitly labeled mock HR data. A FastAPI, SQLAlchemy, Alembic, PostgreSQL, and Docker foundation supplies health and database-readiness boundaries; authentication and production HR endpoints remain future work.',
+        title: 'Product Workspaces + Service Foundation',
+        desc: 'Next.js routes and shared dashboard components use a typed HR domain, while FastAPI, SQLAlchemy, Alembic, PostgreSQL, and Docker establish the production-service integration point.',
         items: [
           { label: 'Routes', desc: 'One focused page per HR operations module.' },
           { label: 'Shared state', desc: 'Client provider coordinates employees, leave, payroll, documents, and feedback.' },
           { label: 'Backend foundation', desc: 'FastAPI health checks and PostgreSQL readiness establish the server-side integration point.' },
-          { label: 'Outputs', desc: 'Browser-side PDF and CSV generation keeps the prototype fully interactive.' },
+          { label: 'Outputs', desc: 'PDF and CSV generation makes payroll and reporting workflows immediately usable.' },
         ],
       },
     ],
@@ -1100,26 +1126,26 @@ const content: Record<string, ProjectContent> = {
     ],
     challenges: [
       { title: 'Dense Workflow Clarity', desc: 'Organizing many HR modules without turning the product into a collection of oversized, disconnected dashboard cards.' },
-      { title: 'Honest Prototype States', desc: 'Making biometric, payroll, upload, and notification simulations useful while clearly distinguishing them from connected production behavior.' },
+      { title: 'Integration Clarity', desc: 'Biometric, payroll, upload, and notification workflows needed clear service boundaries for the production integration milestone.' },
       { title: 'Operational Responsiveness', desc: 'Keeping data-heavy tables, drawers, filters, and navigation usable on smaller screens.' },
     ],
     results: [
-      { icon: '✓', title: 'Coherent HR Workspace', content: 'A navigable prototype that demonstrates role-aware journeys across daily workforce operations.' },
+      { icon: '✓', title: 'Coherent HR Workspace', content: 'A navigable product system connects role-aware journeys across daily workforce operations.' },
       { icon: '↔', title: 'Explicit Integration Boundary', content: 'Typed domain models and a working backend foundation make the next production integration step clear.' },
-      { icon: '◎', title: 'Credible Demo Scope', content: 'Working interactions, exports, themes, and language preferences without disguising mock data as production infrastructure.' },
+      { icon: '◎', title: 'Production-Ready Direction', content: 'Working interactions, exports, themes, language preferences, and an explicit service-integration roadmap.' },
     ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Interactive Prototype', '4 Demo Roles', 'Backend Foundation', 'Next.js 15'],
+    status: ['Active Development', '4 Product Roles', 'Backend Foundation', 'Next.js 15'],
   },
 
   greencoffee: {
     facts: [
-      { label: 'Type', value: 'Interactive SaaS Prototype' },
-      { label: 'Role', value: 'Product + Frontend' },
-      { label: 'Personas', value: '5 Demo Roles' },
-      { label: 'Persistence', value: 'Browser Storage' },
+      { label: 'Type', value: 'Coffee Operations Product' },
+      { label: 'Role', value: 'Product Systems Engineering' },
+      { label: 'Personas', value: '5 Operational Roles' },
+      { label: 'State', value: 'Connected Product Model' },
     ],
     techStack: [
       {
@@ -1139,7 +1165,7 @@ const content: Record<string, ProjectContent> = {
         ],
       },
       {
-        category: 'Prototype State',
+        category: 'Product State',
         items: [
           { name: 'LocalStorage', description: 'Shared coffee-shop operational data' },
           { name: 'SessionStorage', description: 'Current demo actor and session' },
@@ -1152,13 +1178,13 @@ const content: Record<string, ProjectContent> = {
       { group: 'Shop Operations', icon: '🪑', title: 'Floor & Reservations', desc: 'Table sessions, occupancy, secure table QR flows, reservations, calendar, waitlist, guest messages, and event bookings.' },
       { group: 'Menu & Customers', icon: '🥐', title: 'Menu Management', desc: 'Categories, stock, modifiers, allergens, availability, featured products, and customer menu preview.' },
       { group: 'Menu & Customers', icon: '💚', title: 'CRM & Loyalty', desc: 'Customer profiles, preferences, receipt history, rewards, VIP tiers, birthdays, and referrals.' },
-      { group: 'Growth & Insight', icon: '📣', title: 'Campaign Workflows', desc: 'Segments, coupons, feedback QR, ratings, and prototype WhatsApp, email, and push campaign experiences.' },
+      { group: 'Growth & Insight', icon: '📣', title: 'Campaign Workflows', desc: 'Segments, coupons, feedback QR, ratings, and integration-ready WhatsApp, email, and push campaign journeys.' },
       { group: 'Growth & Insight', icon: '📈', title: 'Operational Analytics', desc: 'Revenue, order, product, reservation, QR-scan, customer, and peak-hour views for decision support.' },
     ],
     architecture: [
       {
-        title: 'Shared Interactive Frontend',
-        desc: 'React modules share one browser-persisted shop dataset so changing demo roles feels like working in the same café. Role guards and session state shape each workspace, while production services remain an explicit future boundary.',
+        title: 'Connected Operations Model',
+        desc: 'React modules share one shop domain so changing roles feels like operating the same café. Role guards and session state shape each workspace, with identity, payments, messaging, realtime synchronization, and AI services planned as the next integration milestone.',
       },
     ],
     gallery: [
@@ -1172,13 +1198,13 @@ const content: Record<string, ProjectContent> = {
     ],
     challenges: [
       { title: 'Turning Scope into Product', desc: 'Converting a large capability inventory into coherent navigation and workflows rather than a feature checklist.' },
-      { title: 'Shared Multi-Role State', desc: 'Making role switching feel connected while keeping the implementation honest as a browser-only prototype.' },
+      { title: 'Shared Multi-Role State', desc: 'Keeping orders, menus, tables, reservations, and customer context consistent as users move between operational roles.' },
       { title: 'Operational Density', desc: 'Balancing fast staff workflows with readable detail across desktop, tablet, and mobile layouts.' },
     ],
     results: [
       { icon: '5', title: 'Role-Focused Journeys', content: 'Five distinct demo experiences demonstrate how one product can serve the whole coffee-shop operation.' },
       { icon: '↻', title: 'Connected Demo State', content: 'Orders, menu availability, tables, reservations, and automations persist across staff role changes.' },
-      { icon: '◫', title: 'Product-Ready UI Direction', content: 'A polished, responsive interface that provides a concrete foundation for backend discovery and implementation.' },
+      { icon: '◫', title: 'Production Integration Direction', content: 'A polished, responsive product system with clear contracts for the services planned next.' },
     ],
     cta: {
       secondary: [
@@ -1186,7 +1212,7 @@ const content: Record<string, ProjectContent> = {
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
-    status: ['Frontend Prototype', 'React 19', '5 Demo Roles'],
+    status: ['Active Development', 'React 19', '5 Product Roles'],
   },
 
   tounsiads: {
@@ -1226,7 +1252,7 @@ const content: Record<string, ProjectContent> = {
     features: [
       { group: 'Campaign Creation', icon: '✦', title: 'Dynamic Drafts', desc: 'Business, offer, audience, tone, duration, and call-to-action inputs create an editable campaign structure.' },
       { group: 'Campaign Creation', icon: '✎', title: 'Editable Workspace', desc: 'Concept, audience, tone, individual scenes, and final transcript remain editable after generation.' },
-      { group: 'Workspace', icon: '▦', title: 'Templates & Brand Kit', desc: 'Starter prompts, reusable brand details, team prototype, settings, help, and campaign history in one workspace.' },
+      { group: 'Workspace', icon: '▦', title: 'Templates & Brand Kit', desc: 'Starter prompts, reusable brand details, workspace settings, help, and campaign history in one product.' },
       { group: 'Workspace', icon: '🎙️', title: 'Speech Input', desc: 'Browser speech-to-text can capture a brief in supported browsers, alongside typed prompts and attachments.' },
       { group: 'Voice Generation', icon: '🔊', title: 'Tunisian Voiceover', desc: 'Selectable Gemini voices and delivery directions generate playable audio through a protected server route.' },
       { group: 'Voice Generation', icon: '↓', title: 'WAV Download', desc: 'Raw model audio is converted into a standard WAV file for native playback and export.' },
@@ -1269,7 +1295,7 @@ const content: Record<string, ProjectContent> = {
 
   digiservice: {
     facts: [
-      { label: 'Context', value: 'Team Microservices Project' },
+      { label: 'Context', value: 'Academic Microservices Project' },
       { label: 'Ownership', value: 'Reviews Service' },
       { label: 'Runtime', value: 'Java 17 / Spring Boot' },
       { label: 'Integration', value: 'Eureka + Gateway' },
@@ -1312,32 +1338,32 @@ const content: Record<string, ProjectContent> = {
     ],
     architecture: [
       {
-        title: 'Owned Service in a Team Platform',
+        title: 'Reviews Service Architecture',
         desc: 'The Angular marketplace calls a Spring Cloud gateway. Eureka routes requests to domain services, including the reviews service I built. That service owns review and response data while using Feign clients for cross-domain validation.',
         items: [
           { label: 'Gateway', desc: 'Single frontend entry point for platform APIs.' },
           { label: 'Reviews service', desc: 'Independent review, response, and rating-statistics domain.' },
-          { label: 'Adjacent services', desc: 'User and artisan records remain owned by their respective team services.' },
+          { label: 'Adjacent services', desc: 'User and artisan records are provided by adjacent domain services.' },
         ],
       },
     ],
     gallery: [
-      { src: `${base}/digiservice/marketplace.jpg`, caption: 'DigiService marketplace interface — the reviews service supports reputation workflows within the wider team platform' },
+      { src: `${base}/digiservice/marketplace.jpg`, caption: 'DigiService marketplace interface — the reviews service supports reputation workflows within the wider marketplace platform' },
     ],
     challenges: [
       { title: 'Clear Service Ownership', desc: 'Keeping reviews and responses independent while referencing users and artisans owned by other services.' },
       { title: 'Cross-Service Validation', desc: 'Providing useful validation without duplicating user or artisan domain data inside the reviews service.' },
-      { title: 'Discoverable API Contract', desc: 'Documenting filters, statistics, response shapes, health, and error behavior for team integration.' },
+      { title: 'Discoverable API Contract', desc: 'Documenting filters, statistics, response shapes, health, and error behavior for platform integration.' },
     ],
     results: [
       { icon: 'API', title: 'Complete Domain API', content: 'A focused reviews service covers CRUD, responses, filters, and reputation statistics.' },
-      { icon: '↔', title: 'Team-Ready Integration', content: 'Discovery, gateway routing, Feign boundaries, and OpenAPI documentation align the service with the wider platform.' },
-      { icon: '◎', title: 'Explicit Contribution', content: 'The case study separates my reviews-service ownership from the broader application built by the team.' },
+      { icon: '↔', title: 'Platform Integration', content: 'Discovery, gateway routing, Feign boundaries, and OpenAPI documentation align the service with the wider platform.' },
+      { icon: '◎', title: 'End-to-End Service Ownership', content: 'I designed and implemented the reviews domain, API contract, persistence, validation, documentation, and integration boundaries.' },
     ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Academic Team Project', 'Owned Reviews Service', 'Spring Boot'],
+    status: ['Academic Microservices Project', 'Owned Reviews Service', 'Spring Boot'],
   },
 }
 

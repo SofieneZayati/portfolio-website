@@ -96,7 +96,7 @@ export default function Navbar() {
           <span className="brand-mark" aria-hidden="true">SZ</span>
           <span className="brand-copy">
             <strong>Sofiene Zayati</strong>
-            <small>Web · Embedded · AI</small>
+            <small>Full-Stack · AI · IoT</small>
           </span>
         </Link>
 
@@ -115,13 +115,6 @@ export default function Navbar() {
               </a>
             )
           })}
-          <Link
-            to="/project-dossier"
-            className={pathname === '/project-dossier' ? 'is-active' : ''}
-            aria-current={pathname === '/project-dossier' ? 'page' : undefined}
-          >
-            Dossier
-          </Link>
           <a href="/cv.pdf" download="Sofiene_Zayati_CV.pdf" className="nav-cv">
             <HiDownload aria-hidden="true" /> CV
           </a>
@@ -165,15 +158,6 @@ export default function Navbar() {
                   </a>
                 )
               })}
-              <Link
-                to="/project-dossier"
-                onClick={() => setMobileOpen(false)}
-                className={pathname === '/project-dossier' ? 'is-active' : ''}
-                aria-current={pathname === '/project-dossier' ? 'page' : undefined}
-              >
-                Project dossier
-                <span aria-hidden="true">↗</span>
-              </Link>
               <a href="/cv.pdf" download="Sofiene_Zayati_CV.pdf" className="mobile-nav__cv">
                 <HiDownload aria-hidden="true" /> Download CV
               </a>

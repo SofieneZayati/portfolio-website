@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.png" />
+    <title>Sofiene Zayati — Curriculum Vitae</title>
+    <style>
+      :root {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #142033;
+        background: #e8edf2;
+        font-synthesis: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-size: 9pt;
+        line-height: 1.32;
+      }
+
+      a {
+        color: #175e98;
+        text-decoration: none;
+      }
+
+      .page {
+        position: relative;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 12mm auto;
+        padding: 11mm 15mm 15mm;
+        background: #ffffff;
+        box-shadow: 0 4mm 14mm rgba(18, 35, 56, 0.14);
+        page-break-after: always;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 30mm;
+        gap: 7mm;
+        align-items: center;
+        padding-bottom: 4mm;
+        border-bottom: 1.2mm solid #1b5f93;
+      }
+
+      .eyebrow {
+        margin: 0 0 1.1mm;
+        color: #1b5f93;
+        font-size: 7.5pt;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        color: #10243c;
+        font-size: 23pt;
+        line-height: 1;
+        letter-spacing: -0.025em;
+      }
+
+      .headline {
+        margin: 1.6mm 0 1.2mm;
+        color: #24435f;
+        font-size: 10.2pt;
+        font-weight: 700;
+      }
+
+      .relocation {
+        margin: 0;
+        color: #536477;
+        font-size: 8.2pt;
+      }
+
+      .portrait {
+        width: 27mm;
+        height: 30mm;
+        border: 0.7mm solid #d4dee7;
+        border-radius: 3mm;
+        background: #1c1d21;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1mm 3.2mm;
+        margin-top: 2.8mm;
+        padding: 2.1mm 0;
+        border-bottom: 0.3mm solid #dbe3ea;
+        color: #33495e;
+        font-size: 8pt;
+      }
+
+      .contact-row span:not(:last-child)::after {
+        content: "";
+        display: inline-block;
+        width: 0.35mm;
+        height: 0.35mm;
+        margin-left: 3.2mm;
+        vertical-align: middle;
+        border-radius: 50%;
+        background: #8fa4b7;
+      }
+
+      .section {
+        margin-top: 4mm;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0 0 2.5mm;
+        color: #10243c;
+        font-size: 10.8pt;
+        line-height: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 0.35mm;
+        background: #cad7e2;
+      }
+
+      .summary {
+        margin: 0;
+        color: #2b3c4e;
+        font-size: 8.85pt;
+        line-height: 1.38;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 2.8mm;
+      }
+
+      .entry {
+        display: grid;
+        grid-template-columns: 26mm minmax(0, 1fr);
+        gap: 4mm;
+        break-inside: avoid;
+      }
+
+      .entry-date {
+        color: #1b5f93;
+        font-size: 7.9pt;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .entry-content {
+        padding-left: 3.2mm;
+        border-left: 0.65mm solid #d5e0e8;
+      }
+
+      .entry h3,
+      .project h3 {
+        margin: 0;
+        color: #15283d;
+        font-size: 9.4pt;
+        line-height: 1.25;
+      }
+
+      .entry-meta {
+        margin: 0.35mm 0 0.7mm;
+        color: #5b6c7d;
+        font-size: 7.85pt;
+      }
+
+      ul {
+        margin: 0.6mm 0 0;
+        padding-left: 4.2mm;
+      }
+
+      li {
+        margin: 0.3mm 0;
+        padding-left: 0.5mm;
+      }
+
+      .compact .entry {
+        gap: 3mm;
+      }
+
+      .compact .entry-content {
+        padding-bottom: 0.3mm;
+      }
+
+      .continuation-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 5mm;
+        padding-bottom: 3mm;
+        border-bottom: 1mm solid #1b5f93;
+      }
+
+      .continuation-header strong {
+        color: #10243c;
+        font-size: 16pt;
+      }
+
+      .continuation-header span {
+        color: #526578;
+        font-size: 8.6pt;
+      }
+
+      .projects {
+        display: grid;
+        gap: 3mm;
+      }
+
+      .project {
+        padding: 2.5mm 3.5mm 2.3mm;
+        border-left: 1mm solid #1b5f93;
+        background: #f5f8fa;
+        break-inside: avoid;
+      }
+
+      .project-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 4mm;
+      }
+
+      .project-year {
+        flex: none;
+        color: #1b5f93;
+        font-size: 8.2pt;
+        font-weight: 700;
+      }
+
+      .project-role {
+        margin: 0.4mm 0 0.6mm;
+        color: #53677a;
+        font-size: 7.75pt;
+      }
+
+      .project ul {
+        margin-top: 0.5mm;
+      }
+
+      .project-link {
+        display: inline-block;
+        margin-top: 0.7mm;
+        font-size: 7.6pt;
+        font-weight: 700;
+      }
+
+      .skill-grid {
+        display: grid;
+        grid-template-columns: 34mm minmax(0, 1fr);
+        gap: 1.7mm 4mm;
+        margin: 0;
+      }
+
+      .skill-grid dt {
+        color: #1b5f93;
+        font-weight: 700;
+      }
+
+      .skill-grid dd {
+        margin: 0;
+        color: #2f4357;
+      }
+
+      .language-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.2mm;
+      }
+
+      .language {
+        padding: 2.1mm 2.5mm;
+        border: 0.3mm solid #d8e2ea;
+        border-radius: 1.5mm;
+        background: #f8fafb;
+      }
+
+      .language strong {
+        display: block;
+        color: #15283d;
+        font-size: 9pt;
+      }
+
+      .language span {
+        color: #5a6c7d;
+        font-size: 8pt;
+      }
+
+      .additional {
+        margin: 1.8mm 0 0;
+        color: #44586b;
+        font-size: 8.1pt;
+      }
+
+      .footer {
+        position: absolute;
+        right: 15mm;
+        bottom: 6mm;
+        left: 15mm;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 2.2mm;
+        border-top: 0.3mm solid #dce4eb;
+        color: #718091;
+        font-size: 7.3pt;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        :root,
+        body {
+          background: #ffffff;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .page {
+          margin: 0;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article class="page" aria-label="Curriculum vitae page 1">
+        <header class="hero">
+          <div>
+            <p class="eyebrow">Curriculum Vitae</p>
+            <h1>Sofiene Zayati</h1>
+            <p class="headline">Full-Stack &amp; AI Engineer | Embedded Systems Background</p>
+            <p class="relocation">Tunisia · Open to relocation to Germany</p>
+          </div>
+          <img class="portrait" src="/images/cv/sofiene-zayati.png" alt="Portrait of Sofiene Zayati" />
+        </header>
+
+        <div class="contact-row" aria-label="Contact information">
+          <span><a href="mailto:sofiene.zayati@gmail.com">sofiene.zayati@gmail.com</a></span>
+          <span><a href="tel:+21655321315">+216 55 321 315</a></span>
+          <span><a href="https://sofienezayati.tn">sofienezayati.tn</a></span>
+          <span><a href="https://www.linkedin.com/in/sofiene-zayati">LinkedIn</a></span>
+          <span><a href="https://github.com/SofieneZayati">GitHub</a></span>
+        </div>
+
+        <section class="section" aria-labelledby="profile-heading">
+          <h2 id="profile-heading" class="section-title">Professional Profile</h2>
+          <p class="summary">
+            Full-stack and AI engineer pursuing an Engineering Degree in Web and Internet Technologies at
+            ESPRIT. I build complete products, document-intelligence workflows, automation, Python and Node.js
+            services, and connected C++ devices using MQTT, BLE, and ESP32/WT32. My work spans interfaces,
+            APIs, data, decision logic, deployment, and hardware integration. Goethe-Zertifikat A2; targeting
+            software, AI automation, or IoT roles in Germany.
+          </p>
+        </section>
+
+        <section class="section" aria-labelledby="experience-heading">
+          <h2 id="experience-heading" class="section-title">Professional Experience</h2>
+          <div class="timeline">
+            <article class="entry">
+              <div class="entry-date">Jul 2025 – Aug 2025</div>
+              <div class="entry-content">
+                <h3>AI Automation &amp; Full-Stack Developer</h3>
+                <p class="entry-meta">Inspark Connect · Tunis, Tunisia · Professional placement</p>
+                <ul>
+                  <li>Built n8n and Gemini assistants integrated into an existing Laravel, Vue.js, and MySQL e-commerce platform.</li>
+                  <li>Designed intent routing, JSON validation, SQL aggregation, product enrichment, campaign, sales, and logistics workflows.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="entry-date">Feb 2024 – May 2024</div>
+              <div class="entry-content">
+                <h3>Embedded Systems &amp; Software Developer</h3>
+                <p class="entry-meta">Scheidt &amp; Bachmann Maghreb · Mégrine, Tunisia · Graduation internship</p>
+                <ul>
+                  <li>Engineered and validated MacroPark’s admin platform, Flutter access, LPR/MQTT integration, and WT32 barrier control across five Scrum sprints.</li>
+                  <li>Implemented and tested BLE/MQTT access paths, persistent controller configuration, OTA maintenance, and Docker Compose deployment.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="entry-date">Jan 2023 – Feb 2023</div>
+              <div class="entry-content">
+                <h3>Hardware &amp; Software Project Intern</h3>
+                <p class="entry-meta">Scheidt &amp; Bachmann Maghreb · Mégrine, Tunisia</p>
+                <ul>
+                  <li>Designed and prototyped a connected smart-lock system for the company.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="entry-date">Jan 2022 – Feb 2022</div>
+              <div class="entry-content">
+                <h3>Web Development Intern</h3>
+                <p class="entry-meta">Sotunol · Mégrine, Tunisia</p>
+                <ul>
+                  <li>Developed and improved the company’s web platform.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section compact" aria-labelledby="education-heading">
+          <h2 id="education-heading" class="section-title">Education</h2>
+          <div class="timeline">
+            <article class="entry">
+              <div class="entry-date">Sep 2024 – Present</div>
+              <div class="entry-content">
+                <h3>Engineering Degree in Web and Internet Technologies (TWIN)</h3>
+                <p class="entry-meta">ESPRIT School of Engineering · Ariana, Tunisia</p>
+              </div>
+            </article>
+            <article class="entry">
+              <div class="entry-date">Sep 2021 – Jun 2024</div>
+              <div class="entry-content">
+                <h3>Bachelor’s Degree in Embedded and Mobile Systems</h3>
+                <p class="entry-meta">Higher Institute of Technological Studies of Radès · Radès, Tunisia</p>
+              </div>
+            </article>
+            <article class="entry">
+              <div class="entry-date">Sep 2017 – Jun 2021</div>
+              <div class="entry-content">
+                <h3>Technical Sciences Baccalaureate</h3>
+                <p class="entry-meta">Lycée Technique Farhat Hached · Radès, Tunisia</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span>Sofiene Zayati · Curriculum Vitae</span>
+          <span>Page 1 / 2</span>
+        </footer>
+      </article>
+
+      <article class="page" aria-label="Curriculum vitae page 2">
+        <header class="continuation-header">
+          <strong>Sofiene Zayati</strong>
+          <span>Full-Stack &amp; AI Engineer · Embedded Systems Background</span>
+        </header>
+
+        <section class="section" aria-labelledby="projects-heading">
+          <h2 id="projects-heading" class="section-title">Selected Technical Projects</h2>
+          <div class="projects">
+            <article class="project">
+              <div class="project-head">
+                <h3>Machetamache — Local-First Recipe &amp; Food-Costing Product</h3>
+                <span class="project-year">2026</span>
+              </div>
+              <p class="project-role">Product designer &amp; full-stack engineer · Personal product for a working chef</p>
+              <ul>
+                <li>Designed and built a React 19, TypeScript, Express 5, and SQLite product for recipes, exact food costing, portion scaling, printing, backups, and PC/phone LAN access.</li>
+                <li>Added integer-based currency calculations, Vitest/Supertest coverage, network-safety controls, legacy-phone fallbacks, and a portable Windows release.</li>
+              </ul>
+              <a class="project-link" href="https://sofienezayati.tn/project/machetamache">Case study: sofienezayati.tn/project/machetamache</a>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>SmartProperty — AI-Powered Real Estate Platform</h3>
+                <span class="project-year">2026</span>
+              </div>
+              <p class="project-role">Sole full-stack &amp; AI engineer · End-to-end product ownership</p>
+              <ul>
+                <li>Independently designed and built the complete multi-role product for agents, administrators, clients, and accountants across listings, discovery, visits, applications, payments, analytics, and operations.</li>
+                <li>Engineered React, NestJS, FastAPI, MongoDB, Socket.IO, XGBoost valuation, recommendation, CLIP/BLIP image intelligence, OCR solvency analysis, Groq assistance, and containerized delivery.</li>
+              </ul>
+              <a class="project-link" href="https://sofienezayati.tn/project/smartproperty">Case study: sofienezayati.tn/project/smartproperty</a>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>Prigado AI — Intelligent E-Commerce Automation</h3>
+                <span class="project-year">2025</span>
+              </div>
+              <p class="project-role">AI automation &amp; full-stack developer · Inspark Connect placement</p>
+              <ul>
+                <li>Built conversational workflows for product creation, enrichment, marketing, sales reporting, and logistics analysis.</li>
+                <li>Used n8n, Gemini, Laravel, Vue.js, MySQL, SMTP, REST APIs, guarded JSON outputs, and structured SQL aggregation.</li>
+              </ul>
+              <a class="project-link" href="https://sofienezayati.tn/project/prigado">Case study: sofienezayati.tn/project/prigado</a>
+            </article>
+
+            <article class="project">
+              <div class="project-head">
+                <h3>MacroPark — Connected Parking Access &amp; Supervision</h3>
+                <span class="project-year">2024</span>
+              </div>
+              <p class="project-role">Embedded systems &amp; software engineer · Graduation project at Scheidt &amp; Bachmann Maghreb</p>
+              <ul>
+                <li>Delivered a complete admin, Flutter mobile, Quercus LPR, FastAPI/MQTT, and WT32-ETH01 parking system across five Scrum sprints.</li>
+                <li>Validated camera/MQTT and phone/BLE entry paths, four barrier channels, SPIFFS persistence, OTA updates, and physical relay control.</li>
+              </ul>
+              <a class="project-link" href="https://sofienezayati.tn/project/macropark">Case study: sofienezayati.tn/project/macropark</a>
+            </article>
+          </div>
+          <p class="additional">
+            Additional documented work includes Green Coffee OS, Genius PMO HRMS, TounsiAds, Interna,
+            InnoMall, Smart Agri, and embedded IoT systems. Explore the full portfolio at
+            <a href="https://sofienezayati.tn">sofienezayati.tn</a>.
+          </p>
+        </section>
+
+        <section class="section" aria-labelledby="skills-heading">
+          <h2 id="skills-heading" class="section-title">Technical Skills</h2>
+          <dl class="skill-grid">
+            <dt>Programming</dt>
+            <dd>TypeScript, JavaScript, Python, Java, C, C++, SQL</dd>
+            <dt>Frontend</dt>
+            <dd>React, Angular, Vue.js, JavaFX, HTML, CSS, responsive interfaces</dd>
+            <dt>Backend &amp; Automation</dt>
+            <dd>Node.js, NestJS, Express, FastAPI, Spring Boot, Symfony, Laravel, n8n, REST APIs, WebSockets</dd>
+            <dt>Data &amp; Applied AI</dt>
+            <dd>MySQL, MongoDB, SQLite, Firebase, XGBoost, CLIP/BLIP, OCR, Gemini, Groq, LLM integration, explainable scoring</dd>
+            <dt>Embedded &amp; IoT</dt>
+            <dd>ESP32, WT32-ETH01, MQTT, BLE, Ethernet/Wi-Fi, OTA updates, relay and sensor integration</dd>
+            <dt>DevOps &amp; Tools</dt>
+            <dd>Git, GitHub, Docker, Docker Compose, Kubernetes, Jenkins, CI/CD, Linux</dd>
+          </dl>
+        </section>
+
+        <section class="section" aria-labelledby="languages-heading">
+          <h2 id="languages-heading" class="section-title">Languages</h2>
+          <div class="language-grid">
+            <div class="language"><strong>Arabic</strong><span>Native</span></div>
+            <div class="language"><strong>English</strong><span>Fluent · self-assessed</span></div>
+            <div class="language"><strong>French</strong><span>Fluent · self-assessed</span></div>
+            <div class="language"><strong>German</strong><span>A2 · Goethe-Zertifikat</span></div>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span>Updated July 2026 · Tunisia · Open to relocation to Germany</span>
+          <span>Page 2 / 2</span>
+        </footer>
+      </article>
+    </main>
+  </body>
+</html>

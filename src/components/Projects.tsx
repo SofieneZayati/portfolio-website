@@ -50,7 +50,7 @@ export default function Projects() {
           </div>
           <p>
             A focused selection of professional, academic, and personal work. Each case study
-            states the context, my contribution, and the project&apos;s current scope.
+            shows what I built, the engineering decisions behind it, and what comes next.
           </p>
         </motion.header>
 

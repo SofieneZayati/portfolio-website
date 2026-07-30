@@ -58,7 +58,13 @@ export default function CursorFollower() {
       targetX = event.clientX
       targetY = event.clientY
       dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`
-      show()
+      const nearViewportEdge =
+        targetX < 24 ||
+        targetY < 24 ||
+        targetX > window.innerWidth - 24 ||
+        targetY > window.innerHeight - 24
+      if (nearViewportEdge) hide()
+      else show()
       if (frame === 0) frame = window.requestAnimationFrame(animate)
     }
 

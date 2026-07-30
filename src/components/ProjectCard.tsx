@@ -18,12 +18,17 @@ const categoryLabels: Record<Project['category'], string> = {
 export default function ProjectCard({ project, featured = false }: Props) {
   const detailPath = `/project/${project.id}`
   const preview = project.screenshots[0]
-  const techLimit = featured ? 6 : 4
+  const techLimit = 3
 
   return (
     <article className={`project-card ${featured ? 'project-card--featured' : ''}`}>
       <Link to={detailPath} className="project-card__media" aria-label={`View ${project.title} case study`}>
-        <ProjectArtwork project={project} src={preview} eager={featured} />
+        <ProjectArtwork
+          project={project}
+          src={preview}
+          eager={featured}
+          className={project.visualFit === 'cover' ? 'project-artwork-fit-cover' : ''}
+        />
         <div className="project-card__media-shade" aria-hidden="true" />
         <span className="project-card__category">{categoryLabels[project.category]}</span>
         {project.logo && preview && (
@@ -41,12 +46,12 @@ export default function ProjectCard({ project, featured = false }: Props) {
         <h3>
           <Link to={detailPath}>{project.title}</Link>
         </h3>
-        <p className="project-card__tagline">{project.tagline}</p>
         <p className="project-card__description">{project.description}</p>
 
         <div className="project-card__role">
-          <span>My contribution</span>
+          <span>Role &amp; ownership</span>
           <strong>{project.role}</strong>
+          {project.scope && <small>{project.scope}</small>}
         </div>
 
         {project.techStack.length > 0 && (

@@ -17,9 +17,9 @@ export interface Profile {
 
 export const profile: Profile = {
   name: 'Sofiene Zayati',
-  title: 'Full-Stack Web Engineer & Embedded Systems Graduate',
+  title: 'Full-Stack & AI Engineer',
   tagline:
-    'I build full-stack platforms, AI-powered workflows, and connected products—combining modern web engineering with a practical embedded-systems foundation.',
+    'I design and engineer full-stack products, applied AI workflows, and connected systems—turning complex requirements into clear, usable software.',
   email: 'sofiene.zayati@gmail.com',
   phone: '+216 55 321 315',
   location: 'Tunisia',

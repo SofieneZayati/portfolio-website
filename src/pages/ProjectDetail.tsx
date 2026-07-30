@@ -89,19 +89,21 @@ export default function ProjectDetail() {
   const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
   const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
 
-  const totalTechs = content.techStack.reduce((sum, g) => sum + g.items.length, 0)
-  const totalCategories = content.techStack.length
-  const hasGallery = content.gallery && content.gallery.length > 0
   const hasArchitecture = content.architecture && content.architecture.length > 0
   const hasChallenges = content.challenges && content.challenges.length > 0
   const hasResults = content.results && content.results.length > 0
   const hasFacts = content.facts && content.facts.length > 0
   const hasMetrics = hasResults && content.results!.some((r) => r.metric)
   const hasFeatures = content.features.length > 0
-  const heroPreviewSrc = project.screenshots[0] ?? content.gallery[0]?.src
+  const heroPreviewSources = Array.from(
+    new Set([...project.screenshots, ...content.gallery.map((image) => image.src)]),
+  ).slice(0, 3)
+  const heroPreviewSrc = heroPreviewSources[0]
   const heroPreviewCaption =
     content.gallery.find((image) => image.src === heroPreviewSrc)?.caption ??
     `${project.title} project preview`
+  const detailGallery = content.gallery.filter((image) => !heroPreviewSources.includes(image.src))
+  const hasGallery = detailGallery.length > 0
   const contentDemoLink = content.cta.primary &&
     /demo|watch|live/i.test(`${content.cta.primary.label} ${content.cta.primary.url}`)
     ? content.cta.primary.url
@@ -116,7 +118,7 @@ export default function ProjectDetail() {
     content.cta.primary &&
     (/download/i.test(content.cta.primary.label) || /\.(?:pdf|pptx)(?:$|\?)/i.test(content.cta.primary.url)),
   )
-  const heroMetadata = [project.context, project.year, project.scope ?? content.status?.[0]].filter(Boolean).slice(0, 3) as string[]
+  const heroMetadata = [project.role, project.year, project.scope ?? content.status?.[0]].filter(Boolean).slice(0, 3) as string[]
 
   const sections = [
     ...(hasFacts ? [{ id: 'overview' as const, label: 'Overview' }] : []),
@@ -124,9 +126,9 @@ export default function ProjectDetail() {
     ...(content.techStack.length > 0 ? [{ id: 'stack' as const, label: 'Stack' }] : []),
     ...(hasArchitecture ? [{ id: 'architecture' as const, label: 'Architecture' }] : []),
     ...(hasGallery ? [{ id: 'gallery' as const, label: 'In Action' }] : []),
-    ...(hasChallenges ? [{ id: 'decisions' as const, label: 'Considerations' }] : []),
+    ...(hasChallenges ? [{ id: 'decisions' as const, label: 'Decisions' }] : []),
     ...(hasResults ? [{ id: 'outcomes' as const, label: 'Outcomes' }] : []),
-    { id: 'next-steps' as const, label: 'Next Steps' },
+    { id: 'next-steps' as const, label: project.progress ? 'Roadmap' : 'Explore' },
   ]
 
   return (
@@ -169,7 +171,7 @@ export default function ProjectDetail() {
               </span>
             )}
             <span className="text-xs font-display tracking-[0.25em] uppercase text-white/55 font-semibold">
-              Selected project
+              Project case study
             </span>
           </div>
 
@@ -178,6 +180,9 @@ export default function ProjectDetail() {
           </h1>
           <p className="text-lg md:text-2xl text-white/65 leading-relaxed max-w-3xl">
             {project.tagline}
+          </p>
+          <p className="mt-4 text-sm md:text-base text-white/50 leading-relaxed max-w-3xl">
+            {project.description}
           </p>
 
           <div className="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
@@ -227,21 +232,31 @@ export default function ProjectDetail() {
           </div>
 
           <figure className="mt-10 md:mt-14">
-            <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.08] bg-white/[0.02] shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-[#00f5ff]/[0.05] via-transparent to-[#8b5cf6]/[0.06]"
-                aria-hidden="true"
-              />
-              <ProjectArtwork
-                project={project}
-                src={heroPreviewSrc}
-                alt={heroPreviewSrc ? heroPreviewCaption : ''}
-                eager
-                className="relative z-10 w-full h-full object-contain"
-              />
+            <div className={`project-hero-visual ${heroPreviewSources.length > 1 ? 'is-mosaic' : 'is-single'}`}>
+              {(heroPreviewSources.length > 0 ? heroPreviewSources : [undefined]).map((src, index) => {
+                const caption =
+                  content.gallery.find((image) => image.src === src)?.caption ??
+                  `${project.title} project view ${index + 1}`
+                return (
+                  <div
+                    key={src ?? 'project-placeholder'}
+                    className={`project-hero-visual__item ${index === 0 ? 'is-primary' : ''}`}
+                  >
+                    <ProjectArtwork
+                      project={project}
+                      src={src}
+                      alt={src ? caption : ''}
+                      eager={index === 0}
+                      className={`w-full h-full ${
+                        project.visualFit === 'cover' && index === 0 ? 'object-cover' : 'object-contain'
+                      }`}
+                    />
+                  </div>
+                )
+              })}
             </div>
             <figcaption className="mt-3 text-xs text-white/55 leading-relaxed">
-              {heroPreviewSrc ? heroPreviewCaption : `${project.title} — designed placeholder until project visuals are added`}
+              {heroPreviewSrc ? heroPreviewCaption : `${project.title} — visual overview`}
             </figcaption>
           </figure>
 
@@ -259,13 +274,25 @@ export default function ProjectDetail() {
             <p className="text-lg md:text-xl text-white/65 leading-relaxed max-w-3xl mb-10 md:mb-14">
               {project.longDescription}
             </p>
-            <div className="project-contribution mb-10 md:mb-12">
+            <div className={`project-ownership ${project.progress ? 'mb-5' : 'mb-10 md:mb-12'}`}>
               <div>
-                <span>My contribution</span>
+                <span>Role &amp; ownership</span>
                 <strong>{project.role}</strong>
               </div>
               <p>{project.context}{project.scope ? ` · ${project.scope}` : ''}</p>
             </div>
+            {project.progress && (
+              <div className="project-progress mb-10 md:mb-12">
+                <article>
+                  <span>Available now</span>
+                  <p>{project.progress.available}</p>
+                </article>
+                <article>
+                  <span>Next milestone</span>
+                  <p>{project.progress.next}</p>
+                </article>
+              </div>
+            )}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {content.facts.map((fact, i) => {
                 const iconMap: Record<string, React.ReactNode> = {
@@ -306,7 +333,7 @@ export default function ProjectDetail() {
             <ProjectSection id="capabilities">
               <div className="section-anchor mb-4" />
               <SectionLabel>Capabilities</SectionLabel>
-              <SectionHeading>What it does</SectionHeading>
+              <SectionHeading>Core product capabilities</SectionHeading>
               <div className="grid md:grid-cols-2 gap-6">
                 {groupNames.map((gName, gi) => {
                   const accentColor = groupAccents[gi % groupAccents.length]
@@ -367,9 +394,10 @@ export default function ProjectDetail() {
             <SectionLabel>Stack</SectionLabel>
             <div className="mb-10">
               <h2 className="text-2xl md:text-3xl font-display font-bold text-white leading-[1.2]">
-                <span className="text-gradient-cyan">{totalTechs}</span>{' '}
-                <span className="text-white/85">technologies</span>{' '}
-                <span className="text-white/60 font-normal text-xl">across {totalCategories} categories</span>
+                <span className="text-white/85">Technology stack</span>
+                <span className="block mt-2 text-white/50 font-normal text-base md:text-lg">
+                  The tools, services, and engineering layers behind the product.
+                </span>
               </h2>
             </div>
             <div className="glass-card-elevated rounded-2xl p-6 md:p-8 hover:-translate-y-0.5 transition-transform duration-500">
@@ -402,7 +430,7 @@ export default function ProjectDetail() {
           <ProjectSection id="architecture">
             <div className="section-anchor mb-4" />
             <SectionLabel>Architecture</SectionLabel>
-            <SectionHeading>System design</SectionHeading>
+            <SectionHeading>How the system fits together</SectionHeading>
             <div className="space-y-6 max-w-[860px] mx-auto">
               {content.architecture.map((arch, i) => (
                 <motion.div
@@ -455,9 +483,9 @@ export default function ProjectDetail() {
             <div className="section-anchor mb-4" />
             <SectionLabel>In Action</SectionLabel>
             <SectionHeading>
-              {content.gallery.length} screenshot{content.gallery.length !== 1 ? 's' : ''}
+              Product walkthrough
             </SectionHeading>
-            <ImageGallery images={content.gallery} />
+            <ImageGallery images={detailGallery} />
           </ProjectSection>
         )}
 
@@ -466,7 +494,7 @@ export default function ProjectDetail() {
           <ProjectSection id="decisions">
             <div className="section-anchor mb-4" />
             <SectionLabel>Engineering Considerations</SectionLabel>
-            <SectionHeading>What had to be solved</SectionHeading>
+            <SectionHeading>Engineering decisions and trade-offs</SectionHeading>
             <div className="space-y-6 max-w-3xl">
               {content.challenges!.map((ch, i) => (
                 <motion.div
@@ -497,7 +525,7 @@ export default function ProjectDetail() {
           <ProjectSection id="outcomes">
             <div className="section-anchor mb-4" />
             <SectionLabel>Outcomes</SectionLabel>
-            <SectionHeading>What the project demonstrates</SectionHeading>
+            <SectionHeading>What I delivered</SectionHeading>
             {hasMetrics ? (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-14">
                 {content.results!.map((r, i) => (
@@ -534,12 +562,16 @@ export default function ProjectDetail() {
         <ProjectSection id="next-steps">
           <div className="accent-rule mb-20" />
           <div className="text-center max-w-2xl mx-auto py-8">
-            <span className="section-label block mb-6">Next Steps</span>
+            <span className="section-label block mb-6">
+              {project.progress ? 'Development roadmap' : 'Explore further'}
+            </span>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white leading-[1.15] mb-5">
-              Want to dive deeper?
+              {project.progress ? 'The next milestone is defined.' : `Explore ${project.title} in more depth.`}
             </h2>
             <p className="text-base text-white/55 leading-relaxed mb-10 max-w-md mx-auto">
-              Open the available project resources or get in touch to discuss the engineering behind it.
+              {project.progress
+                ? project.progress.next
+                : 'Open the available project resources or get in touch to discuss the engineering behind it.'}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               {content.cta.primary && (

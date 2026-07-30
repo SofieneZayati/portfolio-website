@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Sofiene Zayati | Full-Stack Developer & Embedded Systems Graduate"
-        description="Sofiene Zayati builds full-stack web products, AI workflows, and connected systems with React, FastAPI, Spring Boot, ESP32, MQTT, and BLE."
+        title="Sofiene Zayati | Full-Stack & AI Engineer"
+        description="Sofiene Zayati designs and engineers full-stack products, applied AI workflows, and connected systems with React, NestJS, FastAPI, OCR, n8n, ESP32, and MQTT."
         path="/"
         type="profile"
       />

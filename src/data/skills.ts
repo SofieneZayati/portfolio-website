@@ -18,7 +18,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     category: 'AI & Automation',
-    items: ['n8n', 'Gemini', 'LLM Integration', 'PyTorch', 'XGBoost', 'Computer Vision', 'OCR'],
+    items: ['n8n', 'Gemini', 'Groq', 'LLM Integration', 'OCR', 'Document Intelligence', 'Explainable Scoring'],
   },
   {
     category: 'Data & Delivery',

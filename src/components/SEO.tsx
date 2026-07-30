@@ -25,8 +25,8 @@ export default function SEO({
   title,
   description,
   path = '/',
-  image = '/images/og-image.png',
-  imageAlt = 'Sofiene Zayati engineering portfolio',
+  image = '/og.png',
+  imageAlt = 'Sofiene Zayati — Full-Stack and AI Engineer portfolio',
   type = 'website',
   noindex = false,
 }: SEOProps) {

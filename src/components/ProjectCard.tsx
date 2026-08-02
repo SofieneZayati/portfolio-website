@@ -49,7 +49,7 @@ export default function ProjectCard({ project, featured = false }: Props) {
         <p className="project-card__description">{project.description}</p>
 
         <div className="project-card__role">
-          <span>Role &amp; ownership</span>
+          <span>Role &amp; focus</span>
           <strong>{project.role}</strong>
           {project.scope && <small>{project.scope}</small>}
         </div>

@@ -49,8 +49,8 @@ export default function Projects() {
             </h2>
           </div>
           <p>
-            A focused selection of professional, academic, and personal work. Each case study
-            shows what I built, the engineering decisions behind it, and what comes next.
+            A focused selection of product and engineering work. Each case study covers the
+            product scope, engineering decisions, and next steps.
           </p>
         </motion.header>
 

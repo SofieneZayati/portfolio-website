@@ -115,7 +115,7 @@ export default function Navbar() {
               </a>
             )
           })}
-          <a href="/cv.pdf" download="Sofiene_Zayati_CV.pdf" className="nav-cv">
+          <a href="/Sofiene_Zayati_CV.pdf" download="Sofiene_Zayati_CV.pdf" className="nav-cv">
             <HiDownload aria-hidden="true" /> CV
           </a>
         </div>
@@ -158,7 +158,7 @@ export default function Navbar() {
                   </a>
                 )
               })}
-              <a href="/cv.pdf" download="Sofiene_Zayati_CV.pdf" className="mobile-nav__cv">
+              <a href="/Sofiene_Zayati_CV.pdf" download="Sofiene_Zayati_CV.pdf" className="mobile-nav__cv">
                 <HiDownload aria-hidden="true" /> Download CV
               </a>
             </motion.div>

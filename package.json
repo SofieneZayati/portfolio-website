@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "generate:cv": "npm run build && node scripts/generate-germany-cv.mjs && npm run build",
+    "generate:cv": "npm run build && node scripts/generate-cv.mjs && npm run build",
     "typecheck": "tsc -b --pretty false",
     "validate:content": "node scripts/validate-content.mjs",
     "lint": "eslint .",

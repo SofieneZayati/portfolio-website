@@ -48,7 +48,7 @@ export const projects: Project[] = [
       'Machetamache is a complete local-first product built for a real chef. It centralizes recipes, ingredient prices, portion scaling, production notes, profitability, photos, printing, and backups without requiring a cloud subscription. I engineered the React interface, Express API, SQLite data model, network-safety controls, automated tests, legacy-phone fallbacks, and branded Windows packaging from end to end.',
     year: '2026',
     role: 'Product designer & full-stack engineer',
-    context: 'Personal product for a working chef',
+    context: 'Culinary product for a working chef',
     scope: 'Full-stack local product · Windows release',
     featured: true,
     techStack: ['React 19', 'TypeScript', 'Express 5', 'SQLite', 'Vitest', 'Supertest', 'Vite', 'PowerShell'],
@@ -67,13 +67,13 @@ export const projects: Project[] = [
     title: 'SmartProperty',
     tagline: 'AI-Powered Real Estate Platform',
     description:
-      'A solo-built, end-to-end real estate platform combining multi-role property operations with recommendation, valuation, document intelligence, automation, and accessible AI.',
+      'An end-to-end real estate platform combining multi-role property operations with recommendation, valuation, document intelligence, automation, and accessible AI.',
     longDescription:
-      'As the sole builder, I designed and engineered SmartProperty end to end across the React product experience, NestJS and FastAPI services, MongoDB data layer, real-time workflows, AI and machine-learning features, OCR solvency analysis, computer vision, deployment configuration, and role-specific journeys for agents, administrators, clients, and accountants.',
+      'SmartProperty connects a React product experience with NestJS and FastAPI services, MongoDB data, real-time workflows, AI and machine-learning capabilities, OCR solvency analysis, computer vision, deployment configuration, and role-specific journeys for agents, administrators, clients, and accountants.',
     year: '2026',
-    role: 'Sole full-stack & AI engineer',
-    context: 'End-to-end AI product',
-    scope: 'Solo-built · Complete platform',
+    role: 'Full-stack & AI engineer',
+    context: 'AI-powered real estate platform',
+    scope: 'Complete multi-service platform',
     featured: true,
     techStack: [
       'React',
@@ -226,10 +226,10 @@ export const projects: Project[] = [
     description:
       'A React and Node MVP that turns a local business brief into an editable advertising campaign, then generates playable Tunisian-dialect voiceovers through server-side Gemini TTS.',
     longDescription:
-      'TounsiAds is a personal full-stack MVP for building local advertising campaigns. Users can draft and edit concepts and scenes, manage brand and template settings, use browser speech input, and generate or download WAV voiceovers. The Gemini key remains on an Express server route, while drafts and workspace preferences are persisted locally for the prototype.',
+      'TounsiAds is a full-stack MVP for building local advertising campaigns. Users can draft and edit concepts and scenes, manage brand and template settings, use browser speech input, and generate or download WAV voiceovers. The Gemini key remains on an Express server route, while drafts and workspace preferences are persisted locally for the prototype.',
     year: '2026',
     role: 'Product designer & full-stack developer',
-    context: 'Personal AI product MVP',
+    context: 'AI campaign product MVP',
     scope: 'Working MVP · Local persistence',
     featured: true,
     techStack: ['React', 'Vite', 'Node.js', 'Express', 'Gemini TTS', 'Web Speech API', 'WAV'],
@@ -383,11 +383,11 @@ export const projects: Project[] = [
     description:
       'A Spring Boot reviews service for a microservices marketplace, supporting ratings, responses, filters, artisan statistics, OpenAPI documentation, and service discovery.',
     longDescription:
-      'I designed and built DigiService’s reviews and evaluations service: a Java 17 Spring Boot API with review and response lifecycles, validation, filters, rating statistics, OpenAPI documentation, health endpoints, Eureka registration, and gateway integration.',
+      'DigiService’s reviews and evaluations domain is a Java 17 Spring Boot API with review and response lifecycles, validation, filters, rating statistics, OpenAPI documentation, health endpoints, Eureka registration, and gateway integration.',
     year: '2025',
     role: 'Reviews microservice developer',
     context: 'Academic microservices project',
-    scope: 'End-to-end ownership of the reviews service',
+    scope: 'Reviews domain · API, data & integration',
     techStack: ['Java 17', 'Spring Boot', 'Spring Data JPA', 'OpenFeign', 'Eureka', 'OpenAPI', 'Angular'],
     logo: '/images/projects/digiservice/logo.svg',
     screenshots: ['/images/projects/digiservice/marketplace.jpg'],

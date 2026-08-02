@@ -7,6 +7,7 @@ import ImageGallery from '../components/ImageGallery'
 import ProjectSectionNav from '../components/ProjectSectionNav'
 import SEO from '../components/SEO'
 import ProjectArtwork from '../components/ProjectArtwork'
+import ProjectSystemDiagram from '../components/ProjectSystemDiagram'
 
 function ProjectSection({
   children,
@@ -276,7 +277,7 @@ export default function ProjectDetail() {
             </p>
             <div className={`project-ownership ${project.progress ? 'mb-5' : 'mb-10 md:mb-12'}`}>
               <div>
-                <span>Role &amp; ownership</span>
+                <span>Role &amp; focus</span>
                 <strong>{project.role}</strong>
               </div>
               <p>{project.context}{project.scope ? ` · ${project.scope}` : ''}</p>
@@ -431,6 +432,7 @@ export default function ProjectDetail() {
             <div className="section-anchor mb-4" />
             <SectionLabel>Architecture</SectionLabel>
             <SectionHeading>How the system fits together</SectionHeading>
+            {content.diagram && <ProjectSystemDiagram diagram={content.diagram} />}
             <div className="space-y-6 max-w-[860px] mx-auto">
               {content.architecture.map((arch, i) => (
                 <motion.div

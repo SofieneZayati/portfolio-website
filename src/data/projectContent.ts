@@ -1,8 +1,112 @@
+export type ProjectDiagramIconKey =
+  | 'desktop'
+  | 'mobile'
+  | 'browser'
+  | 'wifi'
+  | 'react'
+  | 'api'
+  | 'server'
+  | 'database'
+  | 'backup'
+  | 'launcher'
+  | 'package'
+  | 'agent'
+  | 'admin'
+  | 'user'
+  | 'accounting'
+  | 'realtime'
+  | 'payment'
+  | 'media'
+  | 'map'
+  | 'property'
+  | 'preferences'
+  | 'document'
+  | 'image'
+  | 'prediction'
+  | 'recommendation'
+  | 'ocr'
+  | 'vision'
+  | 'chat'
+  | 'docker'
+  | 'kubernetes'
+  | 'jenkins'
+  | 'quality'
+  | 'workflow'
+  | 'router'
+  | 'code'
+  | 'product'
+  | 'analytics'
+  | 'logistics'
+  | 'email'
+  | 'ble'
+  | 'microchip'
+  | 'identifier'
+  | 'led'
+  | 'mqtt'
+  | 'lock'
+  | 'camera'
+  | 'barrier'
+  | 'bluetooth'
+  | 'history'
+  | 'container'
+  | 'temperature'
+  | 'moisture'
+  | 'cloud'
+  | 'microphone'
+  | 'audio'
+  | 'waveform'
+  | 'download'
+  | 'gateway'
+  | 'discovery'
+  | 'spring'
+  | 'persistence'
+  | 'health'
+  | 'star'
+  | 'reply'
+  | 'rating'
+  | 'artisan'
+
+export interface ProjectDiagramNode {
+  label: string
+  detail?: string
+  kind?: 'actor' | 'device' | 'screen' | 'service' | 'data' | 'ai' | 'output'
+  icon?: ProjectDiagramIconKey
+  media?: {
+    src: string
+    alt: string
+    fit?: 'cover' | 'contain'
+    position?: string
+  }
+}
+
+export interface ProjectDiagramStage {
+  label: string
+  nodes: ProjectDiagramNode[]
+  connector?: string
+}
+
+export interface ProjectDiagramLane {
+  label: string
+  stages: ProjectDiagramStage[]
+}
+
+export interface ProjectDiagram {
+  layout: 'flow' | 'ecosystem'
+  title: string
+  description: string
+  lanes: ProjectDiagramLane[]
+  shared?: {
+    label: string
+    nodes: ProjectDiagramNode[]
+  }
+}
+
 export interface ProjectContent {
   facts: { label: string; value: string }[]
   techStack: { category: string; items: { name: string; description?: string }[] }[]
   features: { group?: string; icon: string; title: string; desc: string }[]
   architecture: { title: string; image?: string; desc: string; items?: { label: string; desc: string }[] }[]
+  diagram?: ProjectDiagram
   gallery: { src: string; caption: string }[]
   challenges?: { title: string; desc: string }[]
   results?: { icon?: string; title: string; content: string; metric?: string }[]
@@ -59,6 +163,81 @@ const content: Record<string, ProjectContent> = {
       { group: 'Reliability', icon: 'B', title: 'Backup & Restore', desc: 'Full JSON export and restore protects the cookbook independently from the application package.' },
       { group: 'Reliability', icon: 'W', title: 'Portable Windows Package', desc: 'A branded launcher, bundled runtime, visible control panel, and external app-data storage make deployment approachable.' },
     ],
+    diagram: {
+      layout: 'ecosystem',
+      title: 'Local-first cookbook ecosystem',
+      description: 'Desktop and phone clients share one private-network application, one exact costing model, and one portable data store.',
+      lanes: [
+        {
+          label: 'Kitchen product flow',
+          stages: [
+            {
+              label: 'Client devices',
+              nodes: [
+                {
+                  label: 'Windows browser',
+                  detail: 'Desktop recipe and costing workspace',
+                  kind: 'screen',
+                  icon: 'desktop',
+                  media: {
+                    src: `${base}/machetamache/recipe-library.png`,
+                    alt: 'Machetamache desktop recipe library and costing workspace',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+                {
+                  label: 'Phone browser',
+                  detail: 'Touch workflow over private Wi-Fi',
+                  kind: 'screen',
+                  icon: 'mobile',
+                  media: {
+                    src: `${base}/machetamache/mobile-recipe.png`,
+                    alt: 'Machetamache recipe workflow on a phone',
+                    fit: 'contain',
+                  },
+                },
+              ],
+              connector: 'Private LAN',
+            },
+            {
+              label: 'Application',
+              nodes: [
+                {
+                  label: 'React interface',
+                  detail: 'Recipes, ingredients, costing and print views',
+                  kind: 'screen',
+                  icon: 'react',
+                  media: {
+                    src: `${base}/machetamache/product-overview.png`,
+                    alt: 'Machetamache product overview with its desktop cookbook interface',
+                    fit: 'cover',
+                    position: 'right center',
+                  },
+                },
+                { label: 'Express API', detail: 'Validation, security and lifecycle controls', kind: 'service', icon: 'api' },
+              ],
+              connector: 'Read / write',
+            },
+            {
+              label: 'Local data',
+              nodes: [
+                { label: 'SQLite cookbook', detail: 'Recipes, prices, versions and settings', kind: 'data', icon: 'database' },
+                { label: 'JSON backups', detail: 'Portable export and restore path', kind: 'data', icon: 'backup' },
+              ],
+            },
+          ],
+        },
+      ],
+      shared: {
+        label: 'Windows delivery layer',
+        nodes: [
+          { label: 'C# launcher', detail: 'One-click startup and shutdown', kind: 'service', icon: 'launcher' },
+          { label: 'WPF control panel', detail: 'Server status and phone URL', kind: 'screen', icon: 'desktop' },
+          { label: 'Portable runtime', detail: 'No separate cloud subscription', kind: 'service', icon: 'package' },
+        ],
+      },
+    },
     architecture: [
       {
         title: 'One Cookbook, Two Device Classes',
@@ -301,7 +480,7 @@ const content: Record<string, ProjectContent> = {
   smartproperty: {
     facts: [
       { label: 'Type', value: 'End-to-End AI Real Estate Platform' },
-      { label: 'Ownership', value: 'Sole Builder · Product to Deployment' },
+      { label: 'Engineering scope', value: 'Product, AI Services & Deployment' },
       { label: 'Roles', value: 'Agent, Admin, Client, Accountant' },
       { label: 'Delivery', value: 'Multi-Service Product System' },
     ],
@@ -360,6 +539,204 @@ const content: Record<string, ProjectContent> = {
       { group: 'Assisted Experience', icon: '🎤', title: 'Voice Navigation', desc: 'Natural-language voice input supports hands-free search and navigation.' },
       { group: 'Operations & Delivery', icon: '⚡', title: 'Realtime Analytics', desc: 'Socket.IO updates and branch-level engagement signals connect daily operations to measurable listing activity.' },
     ],
+    diagram: {
+      layout: 'ecosystem',
+      title: 'SmartProperty product ecosystem',
+      description: 'Role-specific experiences share one platform layer while specialized services handle valuation, recommendations, documents, imagery, and assisted interaction.',
+      lanes: [
+        {
+          label: 'Property operations',
+          stages: [
+            {
+              label: 'Role workspaces',
+              nodes: [
+                {
+                  label: 'Agent',
+                  detail: 'Listings, visits, applications and analytics',
+                  kind: 'actor',
+                  icon: 'agent',
+                  media: {
+                    src: `${base}/smartproperty/realestatedashboard.png`,
+                    alt: 'SmartProperty real-estate agent dashboard',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+                {
+                  label: 'Administrator',
+                  detail: 'Branches, users, support and platform health',
+                  kind: 'actor',
+                  icon: 'admin',
+                  media: {
+                    src: `${base}/smartproperty/admindashboard.png`,
+                    alt: 'SmartProperty administrator dashboard',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+                {
+                  label: 'Client',
+                  detail: 'Discovery, visits, applications and assistance',
+                  kind: 'actor',
+                  icon: 'user',
+                  media: {
+                    src: `${base}/smartproperty/clientdashboard.png`,
+                    alt: 'SmartProperty client dashboard',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+                {
+                  label: 'Accountant',
+                  detail: 'Payment and financial workflows',
+                  kind: 'actor',
+                  icon: 'accounting',
+                  media: {
+                    src: `${base}/smartproperty/accountantdash.png`,
+                    alt: 'SmartProperty accountant financial dashboard',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+              ],
+              connector: 'Role-aware API',
+            },
+            {
+              label: 'Platform services',
+              nodes: [
+                { label: 'NestJS', detail: 'Authentication, business rules and orchestration', kind: 'service', icon: 'api' },
+                { label: 'Socket.IO', detail: 'Realtime notifications and updates', kind: 'service', icon: 'realtime' },
+                { label: 'Stripe', detail: 'Payment workflows', kind: 'service', icon: 'payment' },
+              ],
+              connector: 'Data and media',
+            },
+            {
+              label: 'Platform resources',
+              nodes: [
+                { label: 'MongoDB Atlas', detail: 'Users, properties, applications and outputs', kind: 'data', icon: 'database' },
+                { label: 'Cloudinary', detail: 'Listing imagery and transformation', kind: 'service', icon: 'media' },
+                { label: 'OpenStreetMap', detail: 'Location-aware property discovery', kind: 'service', icon: 'map' },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Applied intelligence',
+          stages: [
+            {
+              label: 'Product inputs',
+              nodes: [
+                {
+                  label: 'Property data',
+                  detail: 'Attributes, location and market context',
+                  kind: 'data',
+                  icon: 'property',
+                  media: {
+                    src: `${base}/smartproperty/realestatepropertydetails.png`,
+                    alt: 'SmartProperty listing details with property attributes and media',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+                {
+                  label: 'User preferences',
+                  detail: 'Budget, criteria and interaction signals',
+                  kind: 'data',
+                  icon: 'preferences',
+                  media: {
+                    src: `${base}/smartproperty/propertysearch.png`,
+                    alt: 'SmartProperty preference and location-aware search interface',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+                {
+                  label: 'Documents and images',
+                  detail: 'Applicant evidence and listing media',
+                  kind: 'data',
+                  icon: 'document',
+                  media: {
+                    src: `${base}/smartproperty/clientpropertyadd.png`,
+                    alt: 'SmartProperty listing creation flow with uploaded property information and media',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+              ],
+              connector: 'FastAPI services',
+            },
+            {
+              label: 'Intelligence layer',
+              nodes: [
+                { label: 'XGBoost', detail: 'Sale and rental valuation', kind: 'ai', icon: 'prediction' },
+                { label: 'Recommendation engine', detail: 'Preference and budget matching', kind: 'ai', icon: 'recommendation' },
+                { label: 'OCR + solvency', detail: 'Evidence extraction and review signals', kind: 'ai', icon: 'ocr' },
+                { label: 'CLIP + BLIP', detail: 'Property-image understanding', kind: 'ai', icon: 'vision' },
+              ],
+              connector: 'Explainable output',
+            },
+            {
+              label: 'Assisted decisions',
+              nodes: [
+                {
+                  label: 'Ranked properties',
+                  detail: 'Relevant discovery results',
+                  kind: 'output',
+                  icon: 'recommendation',
+                  media: {
+                    src: `${base}/smartproperty/aifeedrecommendation.png`,
+                    alt: 'SmartProperty AI-ranked property recommendations',
+                    fit: 'contain',
+                  },
+                },
+                {
+                  label: 'Valuation guidance',
+                  detail: 'Predictive price estimates',
+                  kind: 'output',
+                  icon: 'prediction',
+                  media: {
+                    src: `${base}/smartproperty/aipriceestimation.png`,
+                    alt: 'SmartProperty predictive rent estimation result',
+                    fit: 'contain',
+                  },
+                },
+                {
+                  label: 'Review evidence',
+                  detail: 'Human-controlled solvency decisions',
+                  kind: 'output',
+                  icon: 'document',
+                  media: {
+                    src: `${base}/smartproperty/aianalysis.png`,
+                    alt: 'SmartProperty explainable solvency analysis and review evidence',
+                    fit: 'contain',
+                  },
+                },
+                {
+                  label: 'Groq assistant',
+                  detail: 'Conversation and product guidance',
+                  kind: 'output',
+                  icon: 'chat',
+                  media: {
+                    src: `${base}/smartproperty/chatbotaiaigent.png`,
+                    alt: 'SmartProperty conversational budget assistant',
+                    fit: 'contain',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      shared: {
+        label: 'Delivery and quality',
+        nodes: [
+          { label: 'Docker', detail: 'Repeatable service environments', kind: 'service', icon: 'docker' },
+          { label: 'Kubernetes', detail: 'Workload configuration', kind: 'service', icon: 'kubernetes' },
+          { label: 'Jenkins', detail: 'Delivery automation', kind: 'service', icon: 'jenkins' },
+          { label: 'SonarQube', detail: 'Static analysis and quality gates', kind: 'service', icon: 'quality' },
+        ],
+      },
+    },
     architecture: [
       {
         title: 'Role-Based Product Platform',
@@ -429,7 +806,7 @@ const content: Record<string, ProjectContent> = {
       primary: { label: 'Watch Demo', url: 'https://youtu.be/z0v_b0Qgeng' },
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Solo-Built', 'End-to-End Ownership', 'Multi-Role SaaS', 'AI + Computer Vision', 'OCR', 'Microservices'],
+    status: ['End-to-End Platform', 'Multi-Role SaaS', 'AI + Computer Vision', 'OCR', 'Microservices'],
   },
 
   prigado: {
@@ -481,6 +858,133 @@ const content: Record<string, ProjectContent> = {
       { group: 'Conversational AI', icon: '📊', title: 'SQL Aggregation for AI', desc: 'Aggregate nodes consolidate relational SQL rows into structured arrays, ensuring AI agents receive clean, readable inputs for accurate responses.' },
       { group: 'Conversational AI', icon: '✅', title: 'Business-Ready Outputs', desc: 'Reports, recommendations, and campaign content delivered in formats ready for decision-makers without manual processing.' },
     ],
+    diagram: {
+      layout: 'flow',
+      title: 'Prigado automation flow',
+      description: 'A structured request is routed through guarded n8n branches that combine platform data, Gemini, and business integrations into usable commerce outputs.',
+      lanes: [
+        {
+          label: 'Intent-to-business-output path',
+          stages: [
+            {
+              label: 'Product request',
+              nodes: [
+                {
+                  label: 'Conversational input',
+                  detail: 'Product, marketing or logistics request',
+                  kind: 'screen',
+                  icon: 'chat',
+                  media: {
+                    src: `${base}/prigado/path-a-chat-confirmations.png`,
+                    alt: 'Prigado conversational request and confirmation path',
+                    fit: 'contain',
+                  },
+                },
+              ],
+              connector: 'Intent and parameters',
+            },
+            {
+              label: 'Guarded orchestration',
+              nodes: [
+                {
+                  label: 'n8n AI router',
+                  detail: 'Selects a specialized workflow branch',
+                  kind: 'ai',
+                  icon: 'router',
+                  media: {
+                    src: `${base}/prigado/flowchart-multi-path.png`,
+                    alt: 'Prigado intent-driven multi-path workflow routing',
+                    fit: 'cover',
+                    position: 'center',
+                  },
+                },
+                { label: 'JSON sanitizer', detail: 'Normalizes model output for downstream nodes', kind: 'service', icon: 'code' },
+              ],
+              connector: 'Routed branch',
+            },
+            {
+              label: 'Specialized automation',
+              nodes: [
+                {
+                  label: 'Product creation',
+                  detail: 'Enrichment, categorization and insertion',
+                  kind: 'ai',
+                  icon: 'product',
+                  media: {
+                    src: `${base}/prigado/workflow-product-creation.png`,
+                    alt: 'Prigado n8n product-creation workflow',
+                    fit: 'cover',
+                    position: 'center',
+                  },
+                },
+                {
+                  label: 'Prigado Boost',
+                  detail: 'Campaigns, reports and social content',
+                  kind: 'ai',
+                  icon: 'analytics',
+                  media: {
+                    src: `${base}/prigado/workflow-boost.png`,
+                    alt: 'Prigado Boost sales and marketing automation workflow',
+                    fit: 'cover',
+                    position: 'center',
+                  },
+                },
+                {
+                  label: 'Logistics intelligence',
+                  detail: 'Peak, trend and customer-risk analysis',
+                  kind: 'ai',
+                  icon: 'logistics',
+                  media: {
+                    src: `${base}/prigado/workflow-logistics.png`,
+                    alt: 'Prigado logistics intelligence automation workflow',
+                    fit: 'cover',
+                    position: 'center',
+                  },
+                },
+              ],
+              connector: 'Structured result',
+            },
+            {
+              label: 'Business outputs',
+              nodes: [
+                {
+                  label: 'Product and support response',
+                  detail: 'Structured results returned to the platform',
+                  kind: 'output',
+                  icon: 'product',
+                  media: {
+                    src: `${base}/prigado/path-b-list-products.png`,
+                    alt: 'Prigado structured product-list response',
+                    fit: 'contain',
+                  },
+                },
+                {
+                  label: 'Reports and campaigns',
+                  detail: 'Decision-ready analytics and communication',
+                  kind: 'output',
+                  icon: 'email',
+                  media: {
+                    src: `${base}/prigado/mail-offer-drop-example.png`,
+                    alt: 'Email campaign generated by the Prigado automation flow',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      shared: {
+        label: 'Platform and integrations',
+        nodes: [
+          { label: 'Laravel + Vue.js', detail: 'Existing commerce platform', kind: 'service', icon: 'api' },
+          { label: 'MySQL', detail: 'Products, users, orders and analytics', kind: 'data', icon: 'database' },
+          { label: 'Google Gemini', detail: 'Intent extraction and generation', kind: 'ai', icon: 'chat' },
+          { label: 'SMTP + external APIs', detail: 'Campaign delivery and enrichment', kind: 'service', icon: 'email' },
+        ],
+      },
+    },
     architecture: [
       {
         title: 'System Architecture',
@@ -689,6 +1193,152 @@ const content: Record<string, ProjectContent> = {
       { group: 'Edge Controller', icon: '↻', title: 'OTA Maintenance', desc: 'Arduino OTA handlers and the controller web portal provide a practical remote firmware-update workflow.' },
       { group: 'Delivery', icon: '◇', title: 'Containerized Service Stack', desc: 'Docker Compose starts the Backend, Core, LPR/Bridge, and Mosquitto services together with explicit ports and topics.' },
     ],
+    diagram: {
+      layout: 'flow',
+      title: 'MacroPark access and control ecosystem',
+      description: 'Camera and mobile access paths converge on the same services, controller, physical barriers, and traceable operating history.',
+      lanes: [
+        {
+          label: 'Camera access path',
+          stages: [
+            {
+              label: 'Vehicle detection',
+              nodes: [
+                {
+                  label: 'Quercus SmartLPR',
+                  detail: 'Captures and recognizes the license plate',
+                  kind: 'device',
+                  icon: 'camera',
+                  media: {
+                    src: `${base}/macropark/access-history-lpr.png`,
+                    alt: 'MacroPark access history with recognized plate evidence',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+              ],
+              connector: 'LPR event',
+            },
+            {
+              label: 'Service decision',
+              nodes: [
+                { label: 'Bridge server', detail: 'Receives the camera event', kind: 'service', icon: 'server' },
+                { label: 'Core server', detail: 'Coordinates verification and MQTT flow', kind: 'service', icon: 'workflow' },
+                { label: 'Backend server', detail: 'Checks users, plates and permissions', kind: 'service', icon: 'api' },
+              ],
+              connector: 'MQTT command',
+            },
+            {
+              label: 'Physical access',
+              nodes: [
+                {
+                  label: 'WT32-ETH01',
+                  detail: 'Validates the command and drives relays',
+                  kind: 'device',
+                  icon: 'microchip',
+                  media: {
+                    src: `${base}/macropark/barrier-controller-hardware.png`,
+                    alt: 'MacroPark WT32 controller, relay channels and barrier wiring',
+                    fit: 'contain',
+                  },
+                },
+                { label: 'Barrier', detail: 'Opens, closes and reports controller state', kind: 'device', icon: 'barrier' },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Mobile access path',
+          stages: [
+            {
+              label: 'Driver application',
+              nodes: [
+                {
+                  label: 'Flutter app',
+                  detail: 'Authentication, access request and history',
+                  kind: 'screen',
+                  icon: 'mobile',
+                  media: {
+                    src: `${base}/macropark/mobile-barrier-access.png`,
+                    alt: 'MacroPark Flutter barrier-access screen with Bluetooth connected',
+                    fit: 'contain',
+                  },
+                },
+              ],
+              connector: 'BLE command',
+            },
+            {
+              label: 'Edge validation',
+              nodes: [
+                { label: 'WT32 BLE scanner', detail: 'Checks the configured company identifier', kind: 'device', icon: 'bluetooth' },
+                {
+                  label: 'Controller firmware',
+                  detail: 'Maps the request to a barrier channel',
+                  kind: 'service',
+                  icon: 'microchip',
+                  media: {
+                    src: `${base}/macropark/controller-device-info.png`,
+                    alt: 'MacroPark WT32 controller device-information portal',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+              ],
+              connector: 'Relay action',
+            },
+            {
+              label: 'Recorded access',
+              nodes: [
+                { label: 'Physical barrier', detail: 'Executes the open and timed-close sequence', kind: 'device', icon: 'barrier' },
+                {
+                  label: 'MQTT event',
+                  detail: 'Reports the action for operational history',
+                  kind: 'output',
+                  icon: 'history',
+                  media: {
+                    src: `${base}/macropark/barrier-events.png`,
+                    alt: 'MacroPark barrier-event history with open, close, lock and unlock actions',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      shared: {
+        label: 'Operations foundation',
+        nodes: [
+          {
+            label: 'Mosquitto MQTT',
+            detail: 'Commands, status and audit messages',
+            kind: 'service',
+            icon: 'mqtt',
+            media: {
+              src: `${base}/macropark/company-id-configuration.png`,
+              alt: 'MacroPark MQTT Explorer company-identifier configuration',
+              fit: 'cover',
+              position: 'center',
+            },
+          },
+          {
+            label: 'Admin platform',
+            detail: 'Users, barriers, emergency actions and history',
+            kind: 'screen',
+            icon: 'admin',
+            media: {
+              src: `${base}/macropark/emergency-barrier-controls.png`,
+              alt: 'MacroPark administrator emergency barrier controls',
+              fit: 'cover',
+              position: 'center top',
+            },
+          },
+          { label: 'MongoDB + SQLite', detail: 'Application and local service persistence', kind: 'data', icon: 'database' },
+          { label: 'Docker Compose', detail: 'Coordinated multi-service deployment', kind: 'service', icon: 'container' },
+        ],
+      },
+    },
     architecture: [
       {
         title: 'Two Access Paths, One Parking System',
@@ -901,6 +1551,74 @@ const content: Record<string, ProjectContent> = {
       { group: 'Hardware Proof', icon: '↗', title: 'MQTT Status', desc: 'Mosquitto messaging publishes access events and prototype device status for remote observation.' },
       { group: 'Testing', icon: '📱', title: 'Beacon Simulator', desc: 'A phone-side beacon simulator provides repeatable BLE advertisements for testing the scanner flow.' },
     ],
+    diagram: {
+      layout: 'flow',
+      title: 'Smart Unlock access flow',
+      description: 'A phone beacon becomes a verified hardware action and a remotely observable access event.',
+      lanes: [
+        {
+          label: 'BLE-to-lock path',
+          stages: [
+            {
+              label: 'Access signal',
+              nodes: [
+                { label: 'Phone beacon simulator', detail: 'Broadcasts an Eddystone UID or URL', kind: 'device', icon: 'mobile' },
+              ],
+              connector: 'BLE advertisement',
+            },
+            {
+              label: 'Edge decision',
+              nodes: [
+                {
+                  label: 'ESP32 scanner',
+                  detail: 'Scans nearby advertisements',
+                  kind: 'device',
+                  icon: 'microchip',
+                  media: {
+                    src: `${base}/smartunlock/prototype-hardware-open.jpg`,
+                    alt: 'Open Smart Unlock prototype enclosure with the ESP32, status LED and wiring',
+                    fit: 'cover',
+                    position: 'center center',
+                  },
+                },
+                { label: 'Identifier filter', detail: 'Checks the expected beacon data', kind: 'service', icon: 'identifier' },
+              ],
+              connector: 'Recognized access',
+            },
+            {
+              label: 'Hardware and status',
+              nodes: [
+                {
+                  label: 'LED relay proof',
+                  detail: 'Represents the door-lock action safely',
+                  kind: 'output',
+                  icon: 'led',
+                  media: {
+                    src: `${base}/smartunlock/prototype-access-granted.jpg`,
+                    alt: 'Smart Unlock enclosure with its green access indicator active',
+                    fit: 'cover',
+                    position: 'center center',
+                  },
+                },
+                { label: 'Mosquitto MQTT', detail: 'Carries access and device-status events', kind: 'service', icon: 'mqtt' },
+                {
+                  label: 'Bench-tested enclosure',
+                  detail: 'Houses the scanner and visible status indicator',
+                  kind: 'device',
+                  icon: 'lock',
+                  media: {
+                    src: `${base}/smartunlock/prototype-hardware-enclosure.jpg`,
+                    alt: 'Closed Smart Unlock bench prototype enclosure and status indicator',
+                    fit: 'cover',
+                    position: 'center center',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     architecture: [
       {
         title: 'System Architecture',
@@ -1016,6 +1734,51 @@ const content: Record<string, ProjectContent> = {
       { group: 'Connected Feedback', icon: 'B', title: 'Blynk Telemetry', desc: 'Three environmental signals are published over Wi-Fi to remote Blynk widgets.' },
       { group: 'Connected Feedback', icon: 'LED', title: 'Local Status Indicators', desc: 'Dedicated LEDs translate sensor thresholds into immediate device-side feedback.' },
     ],
+    diagram: {
+      layout: 'flow',
+      title: 'Smart Agri sensing loop',
+      description: 'Environmental inputs are sampled at the edge, published remotely, and translated into immediate local feedback.',
+      lanes: [
+        {
+          label: 'Device-to-cloud monitoring',
+          stages: [
+            {
+              label: 'Environmental inputs',
+              nodes: [
+                { label: 'DHT11', detail: 'Temperature and air-humidity readings', kind: 'device', icon: 'temperature' },
+                { label: 'Soil moisture probe', detail: 'Analog soil-condition input', kind: 'device', icon: 'moisture' },
+              ],
+              connector: 'Sensor sampling',
+            },
+            {
+              label: 'Edge controller',
+              nodes: [
+                {
+                  label: 'ESP32 firmware',
+                  detail: 'Sampling, Wi-Fi, thresholds and channel mapping',
+                  kind: 'device',
+                  icon: 'microchip',
+                  media: {
+                    src: `${base}/smartagri/system-cover.png`,
+                    alt: 'Concept visualization of the Smart Agri ESP32, DHT11 and soil-moisture sensing setup',
+                    fit: 'cover',
+                    position: 'center center',
+                  },
+                },
+              ],
+              connector: 'Telemetry and state',
+            },
+            {
+              label: 'Remote and local feedback',
+              nodes: [
+                { label: 'Blynk dashboard', detail: 'Remote monitoring through virtual pins', kind: 'service', icon: 'cloud' },
+                { label: 'LED indicators', detail: 'Immediate threshold feedback at the device', kind: 'output', icon: 'led' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     architecture: [
       {
         title: 'Device-to-Cloud Sensing Loop',
@@ -1257,6 +2020,65 @@ const content: Record<string, ProjectContent> = {
       { group: 'Voice Generation', icon: '🔊', title: 'Tunisian Voiceover', desc: 'Selectable Gemini voices and delivery directions generate playable audio through a protected server route.' },
       { group: 'Voice Generation', icon: '↓', title: 'WAV Download', desc: 'Raw model audio is converted into a standard WAV file for native playback and export.' },
     ],
+    diagram: {
+      layout: 'flow',
+      title: 'Campaign-to-voice workflow',
+      description: 'Editable campaign content stays in the browser while protected server-side services turn approved copy into playable audio.',
+      lanes: [
+        {
+          label: 'Content and voice path',
+          stages: [
+            {
+              label: 'Campaign workspace',
+              nodes: [
+                {
+                  label: 'React editor',
+                  detail: 'Brief, concept, scenes and transcript',
+                  kind: 'screen',
+                  icon: 'react',
+                  media: {
+                    src: `${base}/tounsiads/campaign-script.png`,
+                    alt: 'TounsiAds campaign script editor with scene and transcript controls',
+                    fit: 'cover',
+                    position: 'center top',
+                  },
+                },
+                { label: 'LocalStorage', detail: 'Draft history and workspace preferences', kind: 'data', icon: 'backup' },
+                { label: 'Web Speech API', detail: 'Optional spoken brief input', kind: 'service', icon: 'microphone' },
+              ],
+              connector: 'Protected request',
+            },
+            {
+              label: 'Server boundary',
+              nodes: [
+                { label: 'Express API', detail: 'Validates the request and keeps credentials server-side', kind: 'service', icon: 'api' },
+                { label: 'Google GenAI SDK', detail: 'Sends text, voice and delivery direction', kind: 'ai', icon: 'chat' },
+              ],
+              connector: 'Raw audio',
+            },
+            {
+              label: 'Usable output',
+              nodes: [
+                {
+                  label: 'Gemini TTS',
+                  detail: 'Generates the voice response',
+                  kind: 'ai',
+                  icon: 'audio',
+                  media: {
+                    src: `${base}/tounsiads/voice-studio.png`,
+                    alt: 'TounsiAds voice studio with delivery and generated-audio controls',
+                    fit: 'cover',
+                    position: 'center center',
+                  },
+                },
+                { label: 'PCM to WAV', detail: 'Creates browser-playable audio', kind: 'output', icon: 'waveform' },
+                { label: 'Playback and download', detail: 'Returns the voiceover to the workspace', kind: 'output', icon: 'download' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     architecture: [
       {
         title: 'Browser Workspace + Server-Side TTS',
@@ -1290,13 +2112,13 @@ const content: Record<string, ProjectContent> = {
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Personal MVP', 'Gemini TTS', 'React + Node'],
+    status: ['Product MVP', 'Gemini TTS', 'React + Node'],
   },
 
   digiservice: {
     facts: [
       { label: 'Context', value: 'Academic Microservices Project' },
-      { label: 'Ownership', value: 'Reviews Service' },
+      { label: 'Service focus', value: 'Reviews & Evaluations' },
       { label: 'Runtime', value: 'Java 17 / Spring Boot' },
       { label: 'Integration', value: 'Eureka + Gateway' },
     ],
@@ -1336,10 +2158,96 @@ const content: Record<string, ProjectContent> = {
       { group: 'Platform Integration', icon: '⇄', title: 'Cross-Service Checks', desc: 'Feign clients validate linked users and artisans against adjacent platform services.' },
       { group: 'Platform Integration', icon: '◉', title: 'Discovery & Health', desc: 'Eureka registration, gateway routing, Actuator health, and OpenAPI documentation support service operation.' },
     ],
+    diagram: {
+      layout: 'ecosystem',
+      title: 'DigiService reviews topology',
+      description: 'The reviews domain sits behind the marketplace gateway, publishes a discoverable API, and validates cross-domain references without duplicating adjacent data.',
+      lanes: [
+        {
+          label: 'Marketplace request path',
+          stages: [
+            {
+              label: 'Product client',
+              nodes: [
+                {
+                  label: 'Angular marketplace',
+                  detail: 'Review, response and reputation interfaces',
+                  kind: 'screen',
+                  icon: 'browser',
+                  media: {
+                    src: `${base}/digiservice/marketplace.jpg`,
+                    alt: 'DigiService marketplace interface',
+                    fit: 'cover',
+                    position: 'center center',
+                  },
+                },
+              ],
+              connector: 'Gateway request',
+            },
+            {
+              label: 'Platform routing',
+              nodes: [
+                { label: 'Spring Cloud Gateway', detail: 'Single API entry point', kind: 'service', icon: 'gateway' },
+                { label: 'Eureka', detail: 'Service registration and discovery', kind: 'service', icon: 'discovery' },
+              ],
+              connector: 'Discovered route',
+            },
+            {
+              label: 'Reviews domain',
+              nodes: [
+                {
+                  label: 'Spring Boot service',
+                  detail: 'Reviews, responses, filters and statistics',
+                  kind: 'service',
+                  icon: 'spring',
+                  media: {
+                    src: `${base}/digiservice/logo.svg`,
+                    alt: 'DigiService platform logo',
+                    fit: 'contain',
+                    position: 'center center',
+                  },
+                },
+                { label: 'Spring Data JPA', detail: 'Domain persistence boundary', kind: 'data', icon: 'persistence' },
+                { label: 'OpenAPI + Actuator', detail: 'Contract and runtime health', kind: 'service', icon: 'health' },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Cross-domain validation',
+          stages: [
+            {
+              label: 'Review command',
+              nodes: [
+                { label: 'User identifier', detail: 'Client or responding user reference', kind: 'data', icon: 'user' },
+                { label: 'Artisan identifier', detail: 'Reviewed service-provider reference', kind: 'data', icon: 'artisan' },
+              ],
+              connector: 'Feign validation',
+            },
+            {
+              label: 'Adjacent domains',
+              nodes: [
+                { label: 'User service', detail: 'Confirms linked user records', kind: 'service', icon: 'user' },
+                { label: 'Artisan service', detail: 'Confirms linked artisan records', kind: 'service', icon: 'artisan' },
+              ],
+              connector: 'Validated reference',
+            },
+            {
+              label: 'Stored review data',
+              nodes: [
+                { label: 'Review lifecycle', detail: 'CRUD, filters and rating state', kind: 'output', icon: 'star' },
+                { label: 'Response lifecycle', detail: 'Replies linked to reviews and users', kind: 'output', icon: 'reply' },
+                { label: 'Rating statistics', detail: 'Average and star distribution', kind: 'output', icon: 'rating' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     architecture: [
       {
         title: 'Reviews Service Architecture',
-        desc: 'The Angular marketplace calls a Spring Cloud gateway. Eureka routes requests to domain services, including the reviews service I built. That service owns review and response data while using Feign clients for cross-domain validation.',
+        desc: 'The Angular marketplace calls a Spring Cloud gateway. Eureka routes requests to domain services, including the reviews service, which manages review and response data while using Feign clients for cross-domain validation.',
         items: [
           { label: 'Gateway', desc: 'Single frontend entry point for platform APIs.' },
           { label: 'Reviews service', desc: 'Independent review, response, and rating-statistics domain.' },
@@ -1351,19 +2259,19 @@ const content: Record<string, ProjectContent> = {
       { src: `${base}/digiservice/marketplace.jpg`, caption: 'DigiService marketplace interface — the reviews service supports reputation workflows within the wider marketplace platform' },
     ],
     challenges: [
-      { title: 'Clear Service Ownership', desc: 'Keeping reviews and responses independent while referencing users and artisans owned by other services.' },
+      { title: 'Clear Service Boundary', desc: 'Separating review and response data from user and artisan domains while preserving cross-service references.' },
       { title: 'Cross-Service Validation', desc: 'Providing useful validation without duplicating user or artisan domain data inside the reviews service.' },
       { title: 'Discoverable API Contract', desc: 'Documenting filters, statistics, response shapes, health, and error behavior for platform integration.' },
     ],
     results: [
       { icon: 'API', title: 'Complete Domain API', content: 'A focused reviews service covers CRUD, responses, filters, and reputation statistics.' },
       { icon: '↔', title: 'Platform Integration', content: 'Discovery, gateway routing, Feign boundaries, and OpenAPI documentation align the service with the wider platform.' },
-      { icon: '◎', title: 'End-to-End Service Ownership', content: 'I designed and implemented the reviews domain, API contract, persistence, validation, documentation, and integration boundaries.' },
+      { icon: '◎', title: 'Complete Service Delivery', content: 'The reviews domain includes its API contract, persistence, validation, documentation, statistics, and integration boundaries.' },
     ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Academic Microservices Project', 'Owned Reviews Service', 'Spring Boot'],
+    status: ['Academic Microservices Project', 'Reviews Domain', 'Spring Boot'],
   },
 }
 

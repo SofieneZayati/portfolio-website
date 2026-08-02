@@ -38,7 +38,7 @@ export default function Hero() {
               Explore selected work
               <HiArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </a>
-            <a href="/cv.pdf" download="Sofiene_Zayati_CV.pdf" className="button button--secondary">
+            <a href="/Sofiene_Zayati_CV.pdf" download="Sofiene_Zayati_CV.pdf" className="button button--secondary">
               <HiDownload aria-hidden="true" />
               Download CV
             </a>
@@ -66,10 +66,17 @@ export default function Hero() {
           </div>
           <div className="portrait-stage">
             <div className="portrait-halo" aria-hidden="true" />
-            <img src="/picture.png" alt="Sofiene Zayati" />
-            <span className="portrait-code portrait-code--one" aria-hidden="true">ESP32 / MQTT</span>
-            <span className="portrait-code portrait-code--two" aria-hidden="true">React / FastAPI</span>
-            <span className="portrait-code portrait-code--three" aria-hidden="true">AI / OCR / n8n</span>
+            <img
+              src="/picture-restored.png"
+              alt="Sofiene Zayati"
+              width={1556}
+              height={1556}
+              decoding="async"
+              fetchPriority="high"
+            />
+            <span className="portrait-code portrait-code--one" aria-hidden="true">Web Development</span>
+            <span className="portrait-code portrait-code--two" aria-hidden="true">Embedded Systems · IoT</span>
+            <span className="portrait-code portrait-code--three" aria-hidden="true">AI · Machine Learning</span>
           </div>
           <div className="portrait-card__footer">
             <span className="inline-flex items-center gap-2">

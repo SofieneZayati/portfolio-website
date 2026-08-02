@@ -90,7 +90,7 @@ export default function ContactForm() {
               })}
             </div>
 
-            <a href="/cv.pdf" download="Sofiene_Zayati_CV.pdf" className="button-link contact-cv">
+            <a href="/Sofiene_Zayati_CV.pdf" download="Sofiene_Zayati_CV.pdf" className="button-link contact-cv">
               <HiDownload aria-hidden="true" /> Download my CV
             </a>
           </div>

@@ -68,7 +68,7 @@ export default function ContactForm() {
               Have a role or product worth <span>building together?</span>
             </h2>
             <p>
-              I’m interested in product-focused web, full-stack, AI automation, and connected-
+              I’m interested in product-focused web, full-stack, AI automation, and connected
               systems work in Tunisia or with international teams.
             </p>
 

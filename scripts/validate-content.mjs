@@ -9,9 +9,13 @@ const sitemapSource = readFileSync(resolve(root, 'public/sitemap.xml'), 'utf8')
 const projectIds = [...projectsSource.matchAll(/^\s{4}id: '([^']+)'/gm)].map((match) => match[1])
 const contentBody = contentSource.slice(contentSource.indexOf('const content:'))
 const contentIds = [...contentBody.matchAll(/^\s{2}([a-z0-9]+): \{$/gm)].map((match) => match[1])
-const referencedAssets = [...projectsSource.matchAll(/['"](\/images\/projects\/[^'"]+)['"]/g)].map(
-  (match) => match[1],
-)
+const referencedAssets = [
+  ...new Set(
+    [...`${projectsSource}\n${contentSource}`.matchAll(/['"](\/images\/projects\/[^'"]+)['"]/g)].map(
+      (match) => match[1],
+    ),
+  ),
+]
 
 const duplicateIds = projectIds.filter((id, index) => projectIds.indexOf(id) !== index)
 const missingContent = projectIds.filter((id) => !contentIds.includes(id))

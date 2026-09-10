@@ -7,6 +7,8 @@ interface Props {
   src?: string
   alt?: string
   eager?: boolean
+  width?: number
+  height?: number
   className?: string
 }
 
@@ -20,7 +22,7 @@ function initials(title: string) {
     .toUpperCase()
 }
 
-export default function ProjectArtwork({ project, src, alt = '', eager = false, className = '' }: Props) {
+export default function ProjectArtwork({ project, src, alt = '', eager = false, width, height, className = '' }: Props) {
   const [failed, setFailed] = useState(false)
   const shortName = useMemo(() => initials(project.title), [project.title])
 
@@ -29,8 +31,11 @@ export default function ProjectArtwork({ project, src, alt = '', eager = false, 
       <img
         src={src}
         alt={alt}
+        width={width}
+        height={height}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
+        fetchPriority={eager ? 'high' : 'auto'}
         className={className}
         onError={() => setFailed(true)}
       />

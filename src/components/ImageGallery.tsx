@@ -1,10 +1,14 @@
 import { useState, useEffect, useCallback, useId, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiX, HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 
 interface GalleryImage {
   src: string
   caption: string
+  width?: number
+  height?: number
+  variant?: 'screen' | 'mobile' | 'diagram'
 }
 
 interface Props {
@@ -115,9 +119,13 @@ export default function ImageGallery({ images }: Props) {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8">
-        {images.map((img, i) => (
+        {images.map((img, i) => {
+          const isPortrait = img.variant === 'mobile' || Boolean(img.width && img.height && img.height > img.width)
+          const isPrimary = i === 0 && images.length > 2 && !isPortrait
+
+          return (
           <motion.button
-            key={i}
+            key={img.src}
             type="button"
             aria-label={`Open ${img.caption} image preview`}
             initial={{ opacity: 0, y: 20 }}
@@ -129,17 +137,22 @@ export default function ImageGallery({ images }: Props) {
               setSelected(i)
             }}
             className={`group cursor-pointer text-left ${
-              i === 0 && images.length > 2 ? 'sm:col-span-2 lg:col-span-2' : ''
+              isPrimary ? 'sm:col-span-2 lg:col-span-2' : ''
             }`}
           >
-            <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/[0.12]">
+            <div className={`relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/[0.12] ${
+              isPortrait ? 'mx-auto max-w-[19rem]' : ''
+            }`}>
               <img
                 src={img.src}
                 alt=""
+                width={img.width}
+                height={img.height}
                 className={`w-full object-contain transition-transform duration-700 group-hover:scale-[1.02] ${
-                  i === 0 && images.length > 2 ? 'h-72 md:h-[30rem]' : 'h-56 md:h-64'
+                  isPortrait ? 'h-auto max-h-[36rem]' : isPrimary ? 'h-72 md:h-[30rem]' : 'h-56 md:h-64'
                 }`}
                 loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   ;(e.target as HTMLImageElement).style.display = 'none'
                 }}
@@ -149,10 +162,11 @@ export default function ImageGallery({ images }: Props) {
               {img.caption}
             </p>
           </motion.button>
-        ))}
+          )
+        })}
       </div>
 
-      <AnimatePresence>
+      {typeof document !== 'undefined' && createPortal(<AnimatePresence>
         {selected !== null && (
           <motion.div
             ref={dialogRef}
@@ -165,6 +179,7 @@ export default function ImageGallery({ images }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            style={{ zIndex: 250 }}
             onClick={close}
           >
             <button
@@ -207,6 +222,9 @@ export default function ImageGallery({ images }: Props) {
               <img
                 src={images[selected].src}
                 alt={images[selected].caption}
+                width={images[selected].width}
+                height={images[selected].height}
+                decoding="async"
                 className="max-w-full max-h-[80vh] object-contain rounded-2xl"
               />
               <p
@@ -222,7 +240,7 @@ export default function ImageGallery({ images }: Props) {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>, document.body)}
     </>
   )
 }

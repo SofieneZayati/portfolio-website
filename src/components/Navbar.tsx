@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiDownload, HiMenu, HiX } from 'react-icons/hi'
+import SoundToggle from './SoundToggle'
 
 const links = [
   { href: '/#projects', label: 'Work', section: 'projects' },
@@ -119,6 +120,8 @@ export default function Navbar() {
             <HiDownload aria-hidden="true" /> CV
           </a>
         </div>
+
+        <SoundToggle />
 
         <button
           ref={toggleRef}

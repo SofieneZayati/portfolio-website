@@ -74,6 +74,7 @@ export default function Projects() {
           <p className="project-count" aria-live="polite">
             <strong>{visibleProjects.length}</strong>{activeCategory === 'all' && !showAll ? ' selected' : ''}{' '}
             {visibleProjects.length === 1 ? 'project' : 'projects'}
+            <span> · strongest evidence first</span>
           </p>
         </div>
 

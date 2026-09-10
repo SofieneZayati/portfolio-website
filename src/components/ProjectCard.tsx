@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { HiArrowRight, HiExternalLink } from 'react-icons/hi'
 import type { Project } from '../data/projects'
@@ -21,7 +22,21 @@ export default function ProjectCard({ project, featured = false }: Props) {
   const techLimit = 3
 
   return (
-    <article className={`project-card ${featured ? 'project-card--featured' : ''}`}>
+    <article
+      className={`project-card ${featured ? 'project-card--featured' : ''}`}
+      style={{ '--spotlight-x': '50%', '--spotlight-y': '35%' } as CSSProperties}
+      onPointerMove={(event) => {
+        if (event.pointerType === 'touch') return
+        const rect = event.currentTarget.getBoundingClientRect()
+        event.currentTarget.style.setProperty('--spotlight-x', `${event.clientX - rect.left}px`)
+        event.currentTarget.style.setProperty('--spotlight-y', `${event.clientY - rect.top}px`)
+      }}
+      onPointerLeave={(event) => {
+        event.currentTarget.style.setProperty('--spotlight-x', '50%')
+        event.currentTarget.style.setProperty('--spotlight-y', '35%')
+      }}
+    >
+      <div className="project-card__spotlight" aria-hidden="true" />
       <Link to={detailPath} className="project-card__media" aria-label={`View ${project.title} case study`}>
         <ProjectArtwork
           project={project}
@@ -33,7 +48,7 @@ export default function ProjectCard({ project, featured = false }: Props) {
         <span className="project-card__category">{categoryLabels[project.category]}</span>
         {project.logo && preview && (
           <span className="project-card__logo" aria-hidden="true">
-            <img src={project.logo} alt="" />
+            <img src={project.logo} alt="" width={48} height={48} loading="lazy" decoding="async" />
           </span>
         )}
       </Link>

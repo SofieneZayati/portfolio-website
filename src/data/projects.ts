@@ -29,15 +29,107 @@ export interface Project {
 }
 
 export const featuredProjectIds = [
+  'benmahmoudstock',
+  'geniuspmo',
+  'macroparkexperience',
   'machetamache',
   'smartproperty',
-  'prigado',
   'tounsiads',
   'macropark',
-  'smartagri',
+  'prigado',
 ] as const
 
-export const projects: Project[] = [
+const portfolioOrder = [
+  'benmahmoudstock',
+  'geniuspmo',
+  'macroparkexperience',
+  'machetamache',
+  'smartproperty',
+  'macropark',
+  'tounsiads',
+  'prigado',
+  'greencoffee',
+  'aurelle',
+  'pitchly',
+  'interna',
+  'daymark',
+  'innomall',
+  'digiservice',
+  'secondchance',
+  'smartunlock',
+  'smartagri',
+  'zenithhouse',
+  'sps',
+] as const
+
+const portfolioRank = new Map<string, number>(
+  portfolioOrder.map((projectId, index) => [projectId, index]),
+)
+
+const projectCatalog: Project[] = [
+  {
+    id: 'benmahmoudstock',
+    title: 'Ben Mahmoud Stock',
+    tagline: 'Offline Automotive Stock & Invoicing',
+    description:
+      'A production-minded Windows application for a Tunis automotive-parts shop, covering stock, clients, suppliers, negotiated invoices, returns, reporting, backups, and multilingual delivery.',
+    longDescription:
+      'I designed and engineered Ben Mahmoud Stock as a professional offline desktop application for Etablissement Ben Mahmoud. Electron keeps the shop independent from internet availability, while a typed IPC boundary protects the React renderer from raw Node and filesystem access. SQLite migrations, integer-millime money, transactional invoice finalization, immutable sale snapshots, returns, audit history, PDF printing, backup and restore, and a French-first interface make the system practical for everyday counter work.',
+    year: '2026',
+    role: 'Product designer & full-stack desktop engineer',
+    context: 'Client product for an automotive-parts shop',
+    scope: 'Offline Windows product · Client-ready delivery',
+    featured: true,
+    techStack: ['Electron', 'React 19', 'TypeScript', 'SQLite', 'electron-vite', 'PDF / Print', 'IPC', 'Windows'],
+    logo: '/images/projects/benmahmoudstock/brand-icon.png',
+    screenshots: [
+      '/images/projects/benmahmoudstock/invoice-workspace.png',
+      '/images/projects/benmahmoudstock/automotive-operations-editorial.png',
+    ],
+    visualFit: 'cover',
+    category: 'web',
+    links: { github: 'https://github.com/SofieneZayati/Automobile-Stock' },
+  },
+  {
+    id: 'macroparkexperience',
+    title: 'MacroPark Experience',
+    tagline: 'Interactive 3D Parking Consultation',
+    description:
+      'A client-facing 3D product experience where visitors choose a place, preview physical parking solutions, build a plan, and export a project brief without needing to understand the underlying technology.',
+    longDescription:
+      'MacroPark Experience turns the connected-parking platform into an interactive sales journey. Instead of presenting a feature list, it lets homeowners, residences, and retailers watch access, guidance, reservations, guest journeys, charging, and solar change a responsive 3D environment. The interface separates previewing from adding a solution, preserves a plan for each place, exports one consistent project brief, adapts graphics quality, supports reduced motion, and remains usable when WebGL is unavailable.',
+    year: '2026',
+    role: 'Product experience & 3D frontend engineer',
+    context: 'Interactive sales experience for MacroPark',
+    scope: 'Responsive 3D journey · Production build validated',
+    featured: true,
+    techStack: ['Next.js 15', 'React 19', 'Three.js', 'React Three Fiber', 'GSAP', 'Zustand', 'WebGL', 'Node Test Runner'],
+    logo: '/images/projects/macropark/macrologo.png',
+    screenshots: ['/images/projects/macropark-experience/opening.png'],
+    visualFit: 'cover',
+    category: 'web',
+    tags: ['embedded', 'mobile'],
+    links: { github: 'https://github.com/SofieneZayati/MacroParkWeb' },
+  },
+  {
+    id: 'daymark',
+    title: 'Daymark',
+    tagline: 'Calm Personal Planning Dashboard',
+    description:
+      'A compact personal dashboard that brings everyday tasks, a watchlist, and a game queue into one responsive, locally persistent workspace.',
+    longDescription:
+      'Daymark explores a quieter approach to personal planning. It combines quick capture, category-specific lists, completion filters, progress feedback, and device-local persistence in a responsive single-page dashboard. The project is intentionally small in scope and is presented as a polished product experiment rather than a production service.',
+    year: '2026',
+    role: 'Product designer & frontend engineer',
+    context: 'Personal productivity experiment',
+    scope: 'Responsive frontend · Device-local persistence',
+    featured: false,
+    techStack: ['React 19', 'TypeScript', 'Vinext', 'Vite', 'LocalStorage', 'Responsive CSS'],
+    logo: '',
+    screenshots: ['/images/projects/daymark/dashboard.png'],
+    category: 'web',
+    links: {},
+  },
   {
     id: 'machetamache',
     title: 'Machetamache',
@@ -288,34 +380,30 @@ export const projects: Project[] = [
   },
   {
     id: 'geniuspmo',
-    title: 'Genius PMO HRMS',
-    tagline: 'Bilingual HR Operations System',
+    title: 'LeadX HRMS',
+    tagline: 'Secure Workforce Operations & Mobile Attendance',
     description:
-      'A bilingual Next.js HR operations workspace with four demo roles, workforce status, employee records, teams, attendance, leave, biometrics, payroll, documents, requests, and reports.',
+      'A role-aware workforce platform connecting company administration, HR, leadership, payroll, employee self-service, and server-authorized Android attendance.',
     longDescription:
-      'I designed and built Genius PMO HRMS around realistic daily workforce operations. Four role-specific workspaces, English and French modes, accessible charts, CSV export, draft payslip generation, and responsive workflows sit on a FastAPI, SQLAlchemy, Alembic, PostgreSQL, and Docker foundation. Production authentication and HR business services are the next delivery milestone.',
+      'I designed and engineered LeadX HRMS for Genius PMO as one source of truth for workforce operations. The responsive web platform and focused Android companion share a FastAPI and PostgreSQL backend that owns identity, scoped permissions, workflow state, attendance decisions, and audit history. The result moved beyond a prototype into a deployment-ready source handoff with automated checks, reproducible delivery, backup and recovery procedures, and a physically tested preview APK.',
     year: '2026',
-    role: 'Product engineer',
-    context: 'Client-facing HR product',
-    scope: 'Operational product system · Active development',
+    role: 'Product designer & full-stack engineer',
+    context: 'Internship product for Genius PMO',
+    scope: 'Web + Android platform · Company deployment handoff',
     progress: {
-      available: 'Four role-focused workspaces, bilingual UX, exports, draft payroll, and backend readiness.',
-      next: 'Connect production authentication, HR endpoints, document storage, and payroll services.',
+      available: 'Deployment-ready web, API, database, and mobile source; tested preview APK; recovery tooling; and company-facing handoff material.',
+      next: 'Add the company HTTPS API URL, DNS/TLS, production secrets, database settings, and exact Office/proxy networks, then rebuild the final Android release.',
     },
     featured: true,
-    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'PDF generation', 'CSV export'],
-    logo: '/images/projects/geniuspmo/logo.png',
+    techStack: ['Next.js 15', 'React 19', 'Expo 54', 'FastAPI', 'PostgreSQL 17', 'Docker Compose', 'Alembic', 'Playwright'],
+    logo: '/images/projects/leadx/leadx-attendance-app-icon.png',
     screenshots: [
-      '/images/projects/geniuspmo/dashboard.png',
-      '/images/projects/geniuspmo/employees.png',
-      '/images/projects/geniuspmo/attendance.png',
-      '/images/projects/geniuspmo/payroll.png',
-      '/images/projects/geniuspmo/teams.png',
-      '/images/projects/geniuspmo/biometrics.png',
-      '/images/projects/geniuspmo/reports.png',
-      '/images/projects/geniuspmo/mobile-dashboard.png',
+      '/images/projects/leadx/01-login.png',
+      '/images/projects/leadx/17-admin-overview.png',
+      '/images/projects/leadx/02-mobile-today.png',
     ],
     category: 'web',
+    tags: ['mobile'],
     links: {},
   },
   {
@@ -504,3 +592,9 @@ export const projects: Project[] = [
     links: {},
   },
 ]
+
+export const projects = projectCatalog.sort(
+  (left, right) =>
+    (portfolioRank.get(left.id) ?? Number.MAX_SAFE_INTEGER) -
+    (portfolioRank.get(right.id) ?? Number.MAX_SAFE_INTEGER),
+)

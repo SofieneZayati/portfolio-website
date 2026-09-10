@@ -103,7 +103,9 @@ export default function ProjectDetail() {
   const heroPreviewCaption =
     content.gallery.find((image) => image.src === heroPreviewSrc)?.caption ??
     `${project.title} project preview`
-  const detailGallery = content.gallery.filter((image) => !heroPreviewSources.includes(image.src))
+  const detailGallery = content.gallery.filter(
+    (image) => !heroPreviewSources.includes(image.src) || content.galleryRetainHero?.includes(image.src),
+  )
   const hasGallery = detailGallery.length > 0
   const contentDemoLink = content.cta.primary &&
     /demo|watch|live/i.test(`${content.cta.primary.label} ${content.cta.primary.url}`)
@@ -161,6 +163,9 @@ export default function ProjectDetail() {
               <img
                 src={project.logo}
                 alt={`${project.title} logo`}
+                width={48}
+                height={48}
+                decoding="async"
                 className="w-10 h-10 md:w-12 md:h-12 object-contain opacity-90"
                 onError={(e) => {
                   ;(e.target as HTMLImageElement).style.display = 'none'
@@ -235,9 +240,8 @@ export default function ProjectDetail() {
           <figure className="mt-10 md:mt-14">
             <div className={`project-hero-visual ${heroPreviewSources.length > 1 ? 'is-mosaic' : 'is-single'}`}>
               {(heroPreviewSources.length > 0 ? heroPreviewSources : [undefined]).map((src, index) => {
-                const caption =
-                  content.gallery.find((image) => image.src === src)?.caption ??
-                  `${project.title} project view ${index + 1}`
+                const media = content.gallery.find((image) => image.src === src)
+                const caption = media?.caption ?? `${project.title} project view ${index + 1}`
                 return (
                   <div
                     key={src ?? 'project-placeholder'}
@@ -248,6 +252,8 @@ export default function ProjectDetail() {
                       src={src}
                       alt={src ? caption : ''}
                       eager={index === 0}
+                      width={media?.width}
+                      height={media?.height}
                       className={`w-full h-full ${
                         project.visualFit === 'cover' && index === 0 ? 'object-cover' : 'object-contain'
                       }`}
@@ -450,16 +456,41 @@ export default function ProjectDetail() {
                     </div>
                     <p className="architecture-desc mb-5">{arch.desc}</p>
                     {arch.image && (
-                      <figure className="mb-5">
-                        <img
-                          src={arch.image}
-                          alt={arch.title}
-                          className="w-full rounded-2xl border border-white/[0.04]"
-                          loading="lazy"
-                          onError={(e) => {
-                            ;(e.target as HTMLImageElement).style.display = 'none'
-                          }}
-                        />
+                      <figure className={`project-architecture-media mb-5 ${arch.imageKind === 'diagram' ? 'is-diagram' : ''}`}>
+                        <a
+                          href={arch.image}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${arch.imageCaption ?? `Open ${arch.title} image`} (opens in a new tab)`}
+                        >
+                          {arch.imageFallback ? (
+                            <picture>
+                              <source srcSet={arch.image} type="image/svg+xml" />
+                              <img
+                                src={arch.imageFallback}
+                                alt={arch.imageAlt ?? arch.title}
+                                width={arch.imageWidth}
+                                height={arch.imageHeight}
+                                loading="lazy"
+                                decoding="async"
+                              />
+                            </picture>
+                          ) : (
+                            <img
+                              src={arch.image}
+                              alt={arch.imageAlt ?? arch.title}
+                              width={arch.imageWidth}
+                              height={arch.imageHeight}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          )}
+                        </a>
+                        {arch.imageCaption && (
+                          <figcaption>
+                            {arch.imageCaption} <HiExternalLink aria-hidden="true" />
+                          </figcaption>
+                        )}
                       </figure>
                     )}
                     {arch.items && arch.items.length > 0 && (

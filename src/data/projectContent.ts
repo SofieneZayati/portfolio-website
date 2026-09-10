@@ -105,9 +105,27 @@ export interface ProjectContent {
   facts: { label: string; value: string }[]
   techStack: { category: string; items: { name: string; description?: string }[] }[]
   features: { group?: string; icon: string; title: string; desc: string }[]
-  architecture: { title: string; image?: string; desc: string; items?: { label: string; desc: string }[] }[]
+  architecture: {
+    title: string
+    image?: string
+    imageFallback?: string
+    imageAlt?: string
+    imageCaption?: string
+    imageWidth?: number
+    imageHeight?: number
+    imageKind?: 'diagram' | 'screenshot'
+    desc: string
+    items?: { label: string; desc: string }[]
+  }[]
   diagram?: ProjectDiagram
-  gallery: { src: string; caption: string }[]
+  gallery: {
+    src: string
+    caption: string
+    width?: number
+    height?: number
+    variant?: 'screen' | 'mobile' | 'diagram'
+  }[]
+  galleryRetainHero?: string[]
   challenges?: { title: string; desc: string }[]
   results?: { icon?: string; title: string; content: string; metric?: string }[]
   cta: { primary?: { label: string; url: string }; secondary?: { label: string; url: string }[] }
@@ -117,6 +135,312 @@ export interface ProjectContent {
 const base = '/images/projects'
 
 const content: Record<string, ProjectContent> = {
+  benmahmoudstock: {
+    facts: [
+      { label: 'Product', value: 'Offline Windows Desktop App' },
+      { label: 'Client', value: 'Automotive-Parts Shop' },
+      { label: 'Data', value: 'Local SQLite + Backups' },
+      { label: 'Delivery', value: 'French, English & Arabic' },
+    ],
+    techStack: [
+      {
+        category: 'Desktop Product',
+        items: [
+          { name: 'Electron', description: 'Packaged Windows runtime with offline operation' },
+          { name: 'React 19', description: 'Stock, sales, invoicing, reporting, and settings workflows' },
+          { name: 'TypeScript', description: 'Shared business contracts from renderer to services' },
+          { name: 'electron-vite', description: 'Separate main, preload, and renderer production bundles' },
+        ],
+      },
+      {
+        category: 'Data & Business Rules',
+        items: [
+          { name: 'Node SQLite', description: 'Local database with eight explicit migrations' },
+          { name: 'Integer millimes', description: 'Currency calculations without floating-point drift' },
+          { name: 'Movement ledger', description: 'Traceable deliveries, adjustments, sales, cancellations, and returns' },
+          { name: 'Transactional invoices', description: 'Numbering, snapshots, totals, and stock changes commit together' },
+        ],
+      },
+      {
+        category: 'Safety & Delivery',
+        items: [
+          { name: 'Typed preload IPC', description: 'Narrow renderer access with context isolation and sandboxing' },
+          { name: 'PDF / A4 printing', description: 'Preview, export, reprint, and consistent shop documents' },
+          { name: 'Backup verification', description: 'Integrity-checked backups, safe restore, and automatic copies' },
+          { name: 'electron-builder', description: 'Fast-launch client folder and portable Windows release' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Counter Operations', icon: 'SKU', title: 'Parts & Stock', desc: 'References, OEM codes, compatibility, shelf locations, suppliers, prices, quantities, alerts, and movement history.' },
+      { group: 'Counter Operations', icon: 'INV', title: 'Negotiated Invoicing', desc: 'Customer-specific unit prices, whole-invoice adjustments, drafts, automatic numbering, A4 preview, PDF export, and reprint.' },
+      { group: 'After-Sales', icon: 'RET', title: 'Returns & Exchanges', desc: 'Partial or complete returns restore only the accepted items, preserve the reason, and can open a replacement invoice.' },
+      { group: 'After-Sales', icon: 'AUD', title: 'Audit History', desc: 'Stock movements, invoice changes, cancellations, returns, and business events remain traceable locally.' },
+      { group: 'Business Control', icon: 'TND', title: 'Sales Reporting', desc: 'Day, week, month, and year views report net sales, estimated margin, and best-selling parts after returns.' },
+      { group: 'Business Control', icon: 'CSV', title: 'Exports & Backups', desc: 'CSV stock exports and verified SQLite backups support everyday reporting and recoverable client delivery.' },
+      { group: 'Client Fit', icon: 'FR', title: 'Three Languages', desc: 'A French-first interface switches to English or right-to-left Arabic without changing the underlying workflow.' },
+      { group: 'Client Fit', icon: 'OFF', title: 'Offline by Design', desc: 'The shop can sell, print, report, and restore data without a remote API, subscription, or internet connection.' },
+    ],
+    diagram: {
+      layout: 'ecosystem',
+      title: 'Offline stock-to-invoice system',
+      description: 'Every counter action crosses a narrow desktop boundary before business services update the local ledger, historical invoice snapshot, and recovery layer.',
+      lanes: [
+        {
+          label: 'Daily counter workflow',
+          stages: [
+            {
+              label: 'Shop operator',
+              nodes: [
+                { label: 'React workspace', detail: 'Stock, clients, suppliers, invoices, returns and reports', kind: 'screen', icon: 'react', media: { src: `${base}/benmahmoudstock/invoice-workspace.png`, alt: 'Ben Mahmoud Stock invoice workspace with live A4 preview', fit: 'cover', position: 'center top' } },
+              ],
+              connector: 'Typed request',
+            },
+            {
+              label: 'Desktop boundary',
+              nodes: [
+                { label: 'Electron preload', detail: 'Narrow, validated contextBridge API', kind: 'service', icon: 'desktop' },
+                { label: 'Electron main', detail: 'Owns Node, files, printing and business services', kind: 'service', icon: 'server' },
+              ],
+              connector: 'Transactional command',
+            },
+            {
+              label: 'Local source of truth',
+              nodes: [
+                { label: 'SQLite database', detail: 'Parts, people, movements, drafts and immutable invoices', kind: 'data', icon: 'database' },
+                { label: 'PDF / printer', detail: 'A4 previews, exports and historical reprints', kind: 'output', icon: 'document' },
+                { label: 'Verified backups', detail: 'Automatic, manual and USB-ready recovery copies', kind: 'output', icon: 'backup' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    architecture: [
+      {
+        title: 'A Protected Desktop Boundary',
+        desc: 'The React renderer never receives raw filesystem or Node.js access. A sandboxed preload exposes only typed business operations; the Electron main process validates each request and owns database, invoice, backup, export, and print services.',
+        items: [
+          { label: 'Renderer', desc: 'Fast counter workflows and multilingual presentation.' },
+          { label: 'Preload', desc: 'A small contract surface instead of an unrestricted bridge.' },
+          { label: 'Main process', desc: 'Business rules, local persistence, files, and printing.' },
+        ],
+      },
+      {
+        title: 'Operational Context',
+        image: `${base}/benmahmoudstock/automotive-operations-editorial.png`,
+        imageAlt: 'Editorial visualization of a local automotive-parts counter and offline desktop system',
+        imageCaption: 'Generated editorial visualization — the real interface and verified workflow remain the primary project evidence.',
+        imageWidth: 1672,
+        imageHeight: 941,
+        imageKind: 'screenshot',
+        desc: 'The product was shaped around a real parts counter: stock must remain available when the internet is not, negotiated prices must be visible before validation, and the client must be able to back up data without technical help.',
+      },
+    ],
+    gallery: [
+      { src: `${base}/benmahmoudstock/invoice-workspace.png`, caption: 'Invoice workspace — customer details, negotiated item prices, validation controls, and the live A4 document stay visible together', width: 1424, height: 861, variant: 'screen' },
+      { src: `${base}/benmahmoudstock/automotive-operations-editorial.png`, caption: 'Editorial visualization of the offline parts-counter context', width: 1672, height: 941, variant: 'screen' },
+    ],
+    challenges: [
+      { title: 'Financial Integrity', desc: 'All money is stored in integer millimes, while invoice numbering, snapshots, totals, stock reductions, and movements finalize in one transaction.' },
+      { title: 'Safe Corrections', desc: 'Historical invoices remain immutable; cancellations and returns use explicit reversing records so the ledger can explain what happened.' },
+      { title: 'Nontechnical Recovery', desc: 'Backup, restore, PDF, print, and delivery flows were designed for a shop owner, not for a developer maintaining a database.' },
+    ],
+    results: [
+      { metric: '3', title: 'Interface Languages', content: 'French, English, and right-to-left Arabic are exercised in the automated UI smoke test.' },
+      { metric: '8', title: 'Database Migrations', content: 'A clean installation upgrades predictably while preserving existing shop data across app updates.' },
+      { metric: '100%', title: 'Offline Core Workflow', content: 'Stock, invoicing, returns, reporting, printing, export, backup, and restore require no remote service.' },
+    ],
+    cta: {
+      secondary: [
+        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/Automobile-Stock' },
+        { label: 'Contact Me', url: '/#contact' },
+      ],
+    },
+    status: ['Client-Ready Windows Product', 'Offline First', 'Verified Delivery'],
+  },
+
+  macroparkexperience: {
+    facts: [
+      { label: 'Type', value: 'Interactive 3D Product Journey' },
+      { label: 'Audience', value: 'Home, Residence & Retail Clients' },
+      { label: 'Rendering', value: 'Adaptive WebGL + Fallback' },
+      { label: 'Validation', value: '21 Tests + Production Build' },
+    ],
+    techStack: [
+      {
+        category: 'Experience',
+        items: [
+          { name: 'Next.js 15', description: 'App shell, static production delivery, and code splitting' },
+          { name: 'React 19', description: 'Accessible client journey and solution workbench' },
+          { name: 'GSAP', description: 'Opening and interface choreography' },
+          { name: 'CSS Modules', description: 'Scoped responsive interface and modal layouts' },
+        ],
+      },
+      {
+        category: '3D Runtime',
+        items: [
+          { name: 'Three.js', description: 'Procedural architecture, vehicles, barriers, lights, and charging stories' },
+          { name: 'React Three Fiber', description: 'Scene composition and React rendering boundary' },
+          { name: 'Drei', description: 'Focused helpers without heavy external scene assets' },
+          { name: 'Adaptive graphics', description: 'DPR, shadows, frame scheduling, quality controls, and visibility pause' },
+        ],
+      },
+      {
+        category: 'State & Quality',
+        items: [
+          { name: 'Zustand', description: 'Preview, plan, replay, and per-place journey state' },
+          { name: 'Node test runner', description: 'Domain, store, brief, and camera behavior verification' },
+          { name: 'Deterministic QA routes', description: 'Repeatable desktop, mobile, reduced-motion, and fallback captures' },
+          { name: 'WebGL fallback', description: 'The consultation remains usable without a GPU context' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Guided Journey', icon: '01', title: 'Choose a Place', desc: 'Home, apartment building, and shop or mall each provide a relevant environment and keep an independent plan.' },
+      { group: 'Guided Journey', icon: '02', title: 'Preview Before Adding', desc: 'A solution can physically demonstrate itself without silently changing the client plan.' },
+      { group: 'Physical Stories', icon: 'CAR', title: 'Arrival & Access', desc: 'Vehicles approach recognition points, barriers respond, and accepted or expired visits have visible outcomes.' },
+      { group: 'Physical Stories', icon: 'EV', title: 'Charging & Solar', desc: 'Parked vehicles connect to chargers while optional solar canopies and energy pulses make the relationship visible.' },
+      { group: 'Decision Support', icon: 'PLAN', title: 'Per-Place Plans', desc: 'Visitors can compare needs, add or remove solutions, switch places, and return without mixing configurations.' },
+      { group: 'Decision Support', icon: 'TXT', title: 'Project Brief', desc: 'One domain model drives preview, copy, download, and an optional prepared email without claiming a backend submission.' },
+      { group: 'Resilience', icon: 'FPS', title: 'Adaptive Rendering', desc: 'Quality controls, hidden-page pause, reduced motion, settled animations, and selective mounting control GPU cost.' },
+      { group: 'Resilience', icon: 'A11Y', title: 'Usable Fallback', desc: 'Place selection, solution choices, and the project brief still work when WebGL is unavailable.' },
+    ],
+    diagram: {
+      layout: 'flow',
+      title: 'Place-to-plan experience loop',
+      description: 'A visitor decision drives both the client interface and a visible 3D consequence, while one normalized configuration stays responsible for the final brief.',
+      lanes: [
+        {
+          label: 'Client journey',
+          stages: [
+            {
+              label: 'Choose context',
+              nodes: [
+                { label: 'Home, residence or retail', detail: 'Each place has its own relevant needs and retained plan', kind: 'actor', icon: 'user', media: { src: `${base}/macropark-experience/opening.png`, alt: 'MacroPark 3D place chooser with home, residence and retail environments', fit: 'cover', position: 'center center' } },
+              ],
+              connector: 'Select a need',
+            },
+            {
+              label: 'Preview the outcome',
+              nodes: [
+                { label: 'Solution workbench', detail: 'Preview, add, remove and replay are separate actions', kind: 'screen', icon: 'browser' },
+                { label: '3D physical story', detail: 'Vehicles, access, guidance, charging and solar respond', kind: 'service', icon: 'media' },
+              ],
+              connector: 'Explicitly add',
+            },
+            {
+              label: 'Keep the decision',
+              nodes: [
+                { label: 'Normalized plan', detail: 'Valid solutions remain separate for each place', kind: 'data', icon: 'database' },
+                { label: 'Project brief', detail: 'Preview, copy, download or prepared email', kind: 'output', icon: 'document' },
+              ],
+            },
+          ],
+        },
+      ],
+      shared: {
+        label: 'Experience resilience',
+        nodes: [
+          { label: 'Adaptive graphics', detail: 'Quality and frame scheduling', kind: 'service', icon: 'quality' },
+          { label: 'Reduced motion', detail: 'Static outcomes and exact camera targets', kind: 'service', icon: 'preferences' },
+          { label: 'WebGL fallback', detail: 'Consultation without the canvas', kind: 'output', icon: 'browser' },
+        ],
+      },
+    },
+    architecture: [
+      {
+        title: 'One Journey, Separate Rendering System',
+        desc: 'The interface owns choices and accessible controls; the domain owns valid configurations; Zustand owns the current visit; and a dynamically loaded rendering boundary owns WebGL, frame scheduling, camera motion, and physical stories.',
+        items: [
+          { label: 'Domain', desc: 'Places, needs, compatibility rules, and exported brief data.' },
+          { label: 'Experience state', desc: 'Preview versus inclusion, replay, per-place plans, and modal state.' },
+          { label: 'Scene runtime', desc: 'Adaptive graphics, visibility, motion preference, camera, and WebGL failure.' },
+        ],
+      },
+    ],
+    gallery: [
+      { src: `${base}/macropark-experience/opening.png`, caption: 'Interactive place chooser — three environments share one cinematic scene and lead into relevant parking needs', width: 1440, height: 900, variant: 'screen' },
+    ],
+    challenges: [
+      { title: 'Show, Do Not Explain', desc: 'Every capability needed a visible physical consequence instead of another technical card or diagram.' },
+      { title: 'Preview Is Not Consent', desc: 'Exploring a solution had to remain separate from adding it to the plan, including keyboard and modal behavior.' },
+      { title: '3D Without Fragility', desc: 'The journey had to stay responsive, reduced-motion friendly, and usable when rendering fails or the page is hidden.' },
+    ],
+    results: [
+      { metric: '21', title: 'Behavior Tests Passing', content: 'Configuration, preview, replay, brief, and camera behavior pass the project test suite.' },
+      { metric: '3', title: 'Client Environments', content: 'Home, residence, and retail journeys share one product model while retaining distinct plans.' },
+      { metric: '116 kB', title: 'First Load JS', content: 'The production build keeps the 3D renderer outside the initial client bundle.' },
+    ],
+    cta: {
+      secondary: [
+        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/MacroParkWeb' },
+        { label: 'Contact Me', url: '/#contact' },
+      ],
+    },
+    status: ['Interactive 3D Experience', '21 Tests Passing', 'Adaptive WebGL'],
+  },
+
+  daymark: {
+    facts: [
+      { label: 'Type', value: 'Personal Dashboard Experiment' },
+      { label: 'Lists', value: 'Tasks, Watchlist & Games' },
+      { label: 'State', value: 'Device-Local Persistence' },
+      { label: 'Scope', value: 'Responsive Single Page' },
+    ],
+    techStack: [
+      {
+        category: 'Product Interface',
+        items: [
+          { name: 'React 19', description: 'Interactive lists, filters, completion state, and quick capture' },
+          { name: 'TypeScript', description: 'Typed categories, filters, and task records' },
+          { name: 'Vinext', description: 'Server-rendered application shell and Vite-based build' },
+          { name: 'Responsive CSS', description: 'Editorial dashboard layout from phone to desktop' },
+        ],
+      },
+      {
+        category: 'Local Product State',
+        items: [
+          { name: 'LocalStorage', description: 'Task state persists on the current device' },
+          { name: 'Intl.DateTimeFormat', description: 'A current, locale-aware date label' },
+          { name: 'Semantic controls', description: 'Real forms, labels, buttons, filters, and pressed state' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Capture', icon: '+', title: 'Quick Add', desc: 'A focused input sends a new item directly to life admin, the watchlist, or the game queue.' },
+      { group: 'Organize', icon: '3', title: 'Three Calm Lists', desc: 'Different kinds of personal reminders stay visible together without becoming one noisy backlog.' },
+      { group: 'Progress', icon: '%', title: 'Completion View', desc: 'Open and completed counts, filters, and a progress ring turn small actions into readable momentum.' },
+      { group: 'Persistence', icon: 'L', title: 'Device-Local State', desc: 'Edits save automatically in the browser without adding an account or server to a deliberately small experiment.' },
+    ],
+    architecture: [
+      {
+        title: 'Small by Design',
+        desc: 'One React page owns the task model, derived counts, filters, and category views. Device-local persistence keeps the interaction real while preserving the experiment’s intentionally narrow scope.',
+        items: [
+          { label: 'Task model', desc: 'Title, category, completion state, and stable identifier.' },
+          { label: 'Derived view', desc: 'Visible tasks and progress recalculate from one list.' },
+          { label: 'Local persistence', desc: 'The browser restores the current device’s list on load.' },
+        ],
+      },
+    ],
+    gallery: [
+      { src: `${base}/daymark/dashboard.png`, caption: 'Daymark dashboard — quick capture, progress, filters, and three personal lists in one editorial workspace', width: 1440, height: 960, variant: 'screen' },
+    ],
+    challenges: [
+      { title: 'Calm Information Density', desc: 'The dashboard needed to show three distinct lists and progress without feeling like project-management software.' },
+      { title: 'Honest Scope', desc: 'Device-local persistence suits the experiment; accounts, sharing, and cloud sync are intentionally not implied.' },
+    ],
+    results: [
+      { metric: '3', title: 'Focused Lists', content: 'Life admin, watchlist, and games remain distinct but share one capture and filtering model.' },
+      { metric: '1', title: 'Responsive Surface', content: 'The complete interaction fits a single coherent dashboard instead of fragmenting into unnecessary routes.' },
+    ],
+    cta: {
+      secondary: [{ label: 'Contact Me', url: '/#contact' }],
+    },
+    status: ['Product Experiment', 'Device-Local State', 'Responsive UI'],
+  },
+
   machetamache: {
     facts: [
       { label: 'Type', value: 'Local-First Full-Stack Product' },
@@ -1813,94 +2137,156 @@ const content: Record<string, ProjectContent> = {
 
   geniuspmo: {
     facts: [
-      { label: 'Context', value: 'HR Operations Product' },
-      { label: 'Role', value: 'Product Engineering' },
-      { label: 'Scope', value: '4 Role-Focused Workspaces' },
-      { label: 'Foundation', value: 'FastAPI + PostgreSQL' },
+      { label: 'Type', value: 'Full-Stack Internship Product' },
+      { label: 'Roles', value: '6 Responsibility Contexts' },
+      { label: 'Deployment', value: 'Source + Preview APK Handoff' },
+      { label: 'Stack', value: 'Web, Android, API + PostgreSQL' },
     ],
     techStack: [
       {
-        category: 'Application',
+        category: 'Web Experience',
         items: [
-          { name: 'Next.js 15', description: 'App Router frontend architecture' },
-          { name: 'React 19', description: 'Interactive HR workflows and local state' },
-          { name: 'TypeScript', description: 'Typed HR domain and component contracts' },
+          { name: 'Next.js 15', description: 'Responsive role-aware web application' },
+          { name: 'React 19', description: 'Interactive operational workspaces' },
+          { name: 'TypeScript', description: 'Typed client contracts and workflows' },
         ],
       },
       {
-        category: 'Interface',
+        category: 'Mobile Attendance',
         items: [
-          { name: 'Tailwind CSS 4', description: 'Responsive application styling' },
-          { name: 'Lucide', description: 'Consistent interface iconography' },
-          { name: 'EN / FR', description: 'Persisted bilingual interface preference' },
+          { name: 'Expo 54', description: 'Android application and build workflow' },
+          { name: 'React Native 0.81', description: 'Focused attendance companion' },
+          { name: 'SecureStore', description: 'Protected mobile bearer-session storage' },
+          { name: 'EAS Build', description: 'Reproducible preview and production builds' },
         ],
       },
       {
-        category: 'Documents & Data',
+        category: 'API & Data',
         items: [
-          { name: 'PDF generation', description: 'Dependency-free draft payslip output' },
-          { name: 'CSV export', description: 'UTF-8 workforce and operations exports' },
-          { name: 'Product dataset', description: 'Realistic HR records for complete workflow validation' },
+          { name: 'FastAPI', description: 'Authentication, authorization, rules, and workflow transitions' },
+          { name: 'Python 3.12', description: 'Backend application runtime' },
+          { name: 'PostgreSQL 17', description: 'Persistent operational source of truth' },
+          { name: 'SQLAlchemy', description: 'Asynchronous data access' },
+          { name: 'Alembic', description: 'Versioned database migrations' },
         ],
       },
       {
-        category: 'Backend Foundation',
+        category: 'Delivery & Quality',
         items: [
-          { name: 'FastAPI', description: 'Health, readiness, and future API boundary' },
-          { name: 'SQLAlchemy', description: 'Backend persistence foundation' },
-          { name: 'Alembic', description: 'Database migration workflow' },
-          { name: 'PostgreSQL', description: 'Docker-based local database target' },
+          { name: 'Docker Compose', description: 'Web, API, and database orchestration' },
+          { name: 'GitHub Actions', description: 'Automated quality and build checks' },
+          { name: 'Playwright', description: 'Chromium workflow regression coverage' },
+          { name: 'Ruff', description: 'Python quality checks' },
+          { name: 'SHA-256 Backups', description: 'Matched database and upload recovery packages' },
         ],
       },
     ],
     features: [
-      { group: 'Daily Operations', icon: '📊', title: 'HR Overview', desc: 'A compact daily cockpit for workforce presence, payroll readiness, document gaps, leave, requests, and exception queues.' },
-      { group: 'Daily Operations', icon: '⏱️', title: 'Attendance Review', desc: 'Schedule variance, late or missing scans, source filters, exceptions, and an HR review workflow.' },
-      { group: 'People & Compliance', icon: '👥', title: 'Employee Records', desc: 'Searchable employee directory and detailed records covering assignment, schedule, documents, payroll, skills, and history.' },
-      { group: 'People & Compliance', icon: '◫', title: 'Teams & Project Staffing', desc: 'Team structure, capacity, project assignments, role coverage, and skills help connect people records to active delivery work.' },
-      { group: 'People & Compliance', icon: '📁', title: 'Document Health', desc: 'Required-document tracking, employee checklists, reminders, and clearly simulated upload or status actions.' },
-      { group: 'Payroll & Requests', icon: '🧾', title: 'Draft Payroll', desc: 'Period preparation with attendance adjustments, readiness checks, previews, and individual or batch draft payslips.' },
-      { group: 'Payroll & Requests', icon: '✅', title: 'HR Case Center', desc: 'Requests organized by priority, owner, SLA, activity timeline, response draft, status, and resolution.' },
-      { group: 'Reporting & Access', icon: '📈', title: 'Reports & Exports', desc: 'Accessible workforce charts with working UTF-8 CSV exports and operational summaries.' },
-      { group: 'Reporting & Access', icon: '◎', title: 'Four Demo Workspaces', desc: 'Dedicated HR, manager, employee, and executive entry points demonstrate how the same operations adapt to different responsibilities.' },
-      { group: 'Reporting & Access', icon: '🌐', title: 'Bilingual & Responsive', desc: 'Persisted English/French and light/dark preferences across desktop and mobile dashboard layouts.' },
+      { group: 'Responsibility-Aware Workspaces', icon: '🏢', title: 'Company Admin & HR', desc: 'Company controls, organization setup, employee lifecycle, schedules, leave, documents, equipment, requests, reports, and audit history share one operational model.' },
+      { group: 'Responsibility-Aware Workspaces', icon: '◎', title: 'Scoped Leadership', desc: 'Department Managers and Team Leads receive only their assigned department or project context, without broader HR access.' },
+      { group: 'Responsibility-Aware Workspaces', icon: '🧾', title: 'Payroll & Self-Service', desc: 'Payroll receives a minimum-data preparation view while employees manage only their own profile, requests, documents, payslips, and attendance.' },
+      { group: 'Connected Operations', icon: '↔', title: 'One Linked Identity', desc: 'Additional responsibilities are additive and explicitly scoped, so people do not need duplicate accounts to move between authorized workspaces.' },
+      { group: 'Connected Operations', icon: '⏱', title: 'Shared Workflow Truth', desc: 'Schedules and leave affect attendance; attendance and adjustments feed payroll; decisions create notifications, reports, and audit history.' },
+      { group: 'Connected Operations', icon: '🌐', title: 'Inclusive Product UX', desc: 'English and French, light and dark themes, responsive layouts, reduced motion, keyboard-aware dialogs, and focused system states support daily use.' },
+      { group: 'Security & Delivery', icon: '🛡', title: 'Server-Authorized Attendance', desc: 'The backend derives identity, schedule, leave, work mode, and attendance state before it accepts a Check In or Check Out.' },
+      { group: 'Security & Delivery', icon: '⌁', title: 'Approved Office Networks', desc: 'Office mobile attendance fails closed unless the backend resolves the client inside an active, audited Office CIDR approved from Company Settings.' },
+      { group: 'Security & Delivery', icon: '✓', title: 'Deployment Handoff', desc: 'Production images, migrations, configuration checks, health endpoints, CI, matched backups, restore guidance, source exports, and a tested preview APK support company deployment.' },
     ],
     architecture: [
       {
-        title: 'Product Workspaces + Service Foundation',
-        desc: 'Next.js routes and shared dashboard components use a typed HR domain, while FastAPI, SQLAlchemy, Alembic, PostgreSQL, and Docker establish the production-service integration point.',
+        title: 'One Platform, Two Focused Clients',
+        image: `${base}/leadx/01-platform-ecosystem.svg`,
+        imageFallback: `${base}/leadx/01-platform-ecosystem.png`,
+        imageAlt: 'LeadX platform ecosystem connecting responsibility-aware web workspaces and the Android attendance companion to one FastAPI and PostgreSQL source of truth',
+        imageCaption: 'Open the platform ecosystem diagram at full size',
+        imageWidth: 1550,
+        imageHeight: 1134,
+        imageKind: 'diagram',
+        desc: 'A responsive Next.js application and the LeadX Attendance Android companion share one backend and one database. FastAPI owns authentication, authorization, operational transitions, attendance decisions, and persistence rather than trusting the clients.',
         items: [
-          { label: 'Routes', desc: 'One focused page per HR operations module.' },
-          { label: 'Shared state', desc: 'Client provider coordinates employees, leave, payroll, documents, and feedback.' },
-          { label: 'Backend foundation', desc: 'FastAPI health checks and PostgreSQL readiness establish the server-side integration point.' },
-          { label: 'Outputs', desc: 'PDF and CSV generation makes payroll and reporting workflows immediately usable.' },
+          { label: 'Web', desc: 'Dedicated Company Admin, HR, Manager, Team Lead, Payroll, and Employee experiences.' },
+          { label: 'Mobile', desc: 'A small employee app for sign-in, profile, today\'s assignment, and Check In/Out.' },
+          { label: 'API', desc: 'Server-derived identity, scope, rules, workflow transitions, and attendance authorization.' },
+          { label: 'Data', desc: 'PostgreSQL persistence with versioned Alembic migrations and protected upload storage.' },
+        ],
+      },
+      {
+        title: 'Technical Architecture',
+        image: `${base}/leadx/02-technical-architecture.svg`,
+        imageFallback: `${base}/leadx/02-technical-architecture.png`,
+        imageAlt: 'LeadX technical architecture showing Next.js and Expo clients, FastAPI services, PostgreSQL persistence, Docker delivery, and security boundaries',
+        imageCaption: 'Open the technical architecture diagram at full size',
+        imageWidth: 1451,
+        imageHeight: 1812,
+        imageKind: 'diagram',
+        desc: 'The product separates presentation from backend-owned security and business rules. Signed HttpOnly web sessions and protected mobile bearer sessions reach the same API, while production configuration validates trusted hosts, origins, cookies, proxy boundaries, and required secrets.',
+        items: [
+          { label: 'Sessions', desc: 'Argon2 credentials, signed web cookies, and SecureStore-backed mobile access.' },
+          { label: 'Scope', desc: 'Backend-derived role, responsibility, employee identity, and data projection.' },
+          { label: 'Operations', desc: 'Request IDs, security headers, throttling, health/readiness, and audit history.' },
+          { label: 'Persistence', desc: 'PostgreSQL operational data and separately protected uploads.' },
+        ],
+      },
+      {
+        title: 'Server-Authoritative Mobile Attendance',
+        image: `${base}/leadx/03-mobile-attendance-security.svg`,
+        imageFallback: `${base}/leadx/03-mobile-attendance-security.png`,
+        imageAlt: 'LeadX attendance security flow showing work-mode rules and backend verification for Office, Remote, External Site, Leave, and Not Scheduled states',
+        imageCaption: 'Open the attendance security diagram at full size',
+        imageWidth: 1784,
+        imageHeight: 2408,
+        imageKind: 'diagram',
+        desc: 'The employee cannot choose a different work mode in the app. Remote uses the normal public HTTPS API, External Site stays mobile-only, and Office stays mobile-only with backend-resolved approved-network verification. Leave and Not Scheduled remain blocked.',
+        items: [
+          { label: 'Office', desc: 'The resolved client address must be inside the active approved Office CIDRs.' },
+          { label: 'Remote', desc: 'Web or mobile can use the same public API and daily attendance record.' },
+          { label: 'External Site', desc: 'Mobile-only attendance uses the assigned mode from HRMS.' },
+          { label: 'Fail closed', desc: 'Missing Office configuration, invalid scope, leave, schedule, duplicates, or state conflicts block the write.' },
+        ],
+      },
+      {
+        title: 'Delivery, Verification & Recovery',
+        image: `${base}/leadx/06-delivery-and-recovery.svg`,
+        imageFallback: `${base}/leadx/06-delivery-and-recovery.png`,
+        imageAlt: 'LeadX delivery and recovery flow covering automated checks, Docker deployment, Android builds, matched backups, verification, and restore procedures',
+        imageCaption: 'Open the delivery and recovery diagram at full size',
+        imageWidth: 1302,
+        imageHeight: 1651,
+        imageKind: 'diagram',
+        desc: 'The company handoff includes exact-commit source exports, production containers, explicit migration steps, a tested preview APK, configuration guidance, and a matched PostgreSQL and upload backup with verification and restore procedures.',
+        items: [
+          { label: 'Quality gate', desc: 'Backend, TypeScript, browser workflow, build, container, and mobile checks.' },
+          { label: 'Runtime', desc: 'Next.js, FastAPI, and PostgreSQL under Docker Compose with health and readiness checks.' },
+          { label: 'Android', desc: 'EAS-built preview APK physically tested for install, launch, login, and Office attendance.' },
+          { label: 'Recovery', desc: 'Matched database and upload backups, SHA-256 verification, and documented restore steps.' },
         ],
       },
     ],
     gallery: [
-      { src: `${base}/geniuspmo/dashboard.png`, caption: 'HR overview — workforce status, quick actions, attendance plan, and focus queue' },
-      { src: `${base}/geniuspmo/employees.png`, caption: 'Employee directory — searchable records, work status, team context, and profile access' },
-      { src: `${base}/geniuspmo/teams.png`, caption: 'Teams workspace — capacity, project staffing, role coverage, and skills visibility' },
-      { src: `${base}/geniuspmo/attendance.png`, caption: 'Attendance review — schedules, source filters, exceptions, and HR follow-up actions' },
-      { src: `${base}/geniuspmo/biometrics.png`, caption: 'Biometric operations — terminal health, scan activity, exceptions, and integration status' },
-      { src: `${base}/geniuspmo/payroll.png`, caption: 'Payroll preparation — period readiness, attendance adjustments, and draft payslip workflow' },
-      { src: `${base}/geniuspmo/reports.png`, caption: 'Workforce reports — operational summaries, accessible charts, and export actions' },
-      { src: `${base}/geniuspmo/mobile-dashboard.png`, caption: 'Responsive HR workspace — daily priorities and navigation adapted for mobile use' },
+      { src: `${base}/leadx/01-login.png`, caption: 'LeadX brings every role into a focused, secure workspace through one polished entry experience.', width: 1265, height: 950, variant: 'screen' },
+      { src: `${base}/leadx/17-admin-overview.png`, caption: 'Company administration combines workforce, access, capacity, salary, and control signals without creating an employee identity for Admin.', width: 1265, height: 712, variant: 'screen' },
+      { src: `${base}/leadx/19-access-control.png`, caption: 'Responsibilities are additive and scoped, keeping company, department, project, payroll, and self-service boundaries explicit.', width: 1265, height: 712, variant: 'screen' },
+      { src: `${base}/leadx/21-admin-office-network-settings.png`, caption: 'Company Admin reviews the backend-observed address and explicitly confirms the versioned Office network list without changing code or restarting the service.', width: 1265, height: 712, variant: 'screen' },
+      { src: `${base}/leadx/02-mobile-today.png`, caption: 'LeadX Attendance displays the schedule and work mode assigned by HRMS; the employee cannot choose a different mode.', width: 430, height: 932, variant: 'mobile' },
+      { src: `${base}/leadx/12-manager-projects.png`, caption: 'Department Managers control department-led projects while cross-department ownership remains protected.', width: 1265, height: 712, variant: 'screen' },
+      { src: `${base}/leadx/14-payroll-overview.png`, caption: 'Payroll readiness connects approved inputs, draft outputs, external approval, and payment status in one controlled cycle.', width: 1265, height: 712, variant: 'screen' },
+      { src: `${base}/leadx/09-employee-self-service.png`, caption: 'Employees receive one personal workspace for schedules, attendance, leave, documents, requests, payslips, and notifications.', width: 1265, height: 712, variant: 'screen' },
     ],
+    galleryRetainHero: [`${base}/leadx/02-mobile-today.png`],
     challenges: [
-      { title: 'Dense Workflow Clarity', desc: 'Organizing many HR modules without turning the product into a collection of oversized, disconnected dashboard cards.' },
-      { title: 'Integration Clarity', desc: 'Biometric, payroll, upload, and notification workflows needed clear service boundaries for the production integration milestone.' },
-      { title: 'Operational Responsiveness', desc: 'Keeping data-heavy tables, drawers, filters, and navigation usable on smaller screens.' },
+      { title: 'Useful Roles Without Permission Leakage', desc: 'Company, department, project, payroll, and personal responsibilities needed different navigation and minimum-data projections while still sharing one employee identity and one operational source of truth.' },
+      { title: 'Convenient Attendance Without Trusting the Client', desc: 'The web and Android interfaces needed clear actions, but only the backend could safely derive the employee, assigned work mode, schedule, leave, network eligibility, duplicate state, and valid transition.' },
+      { title: 'A Product That Could Leave the Development Machine', desc: 'Persistent data, safe migrations, fail-closed production configuration, repeatable Android builds, automated checks, matched backups, and company-facing recovery guidance were delivery requirements rather than later polish.' },
     ],
     results: [
-      { icon: '✓', title: 'Coherent HR Workspace', content: 'A navigable product system connects role-aware journeys across daily workforce operations.' },
-      { icon: '↔', title: 'Explicit Integration Boundary', content: 'Typed domain models and a working backend foundation make the next production integration step clear.' },
-      { icon: '◎', title: 'Production-Ready Direction', content: 'Working interactions, exports, themes, language preferences, and an explicit service-integration roadmap.' },
+      { metric: '125', title: 'Backend Tests', content: 'The final HRMS revision passes the verified backend test suite.' },
+      { metric: '09', title: 'Browser Workflows', content: 'Chromium regression coverage spans Employee, Team Lead, Department Manager, HR, Payroll, and Admin responsibilities.' },
+      { metric: '02', title: 'Connected Clients', content: 'The responsive web platform and Android attendance companion share one backend, database, identity model, and attendance record.' },
     ],
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Active Development', '4 Product Roles', 'Backend Foundation', 'Next.js 15'],
+    status: ['Deployment-Ready Handoff', 'Web + Android', 'Server-Authoritative Security', 'Next.js 15'],
   },
 
   greencoffee: {

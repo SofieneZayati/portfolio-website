@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/prune-build.mjs",
     "generate:cv": "npm run build && node scripts/generate-cv.mjs && npm run build",
     "typecheck": "tsc -b --pretty false",
     "validate:content": "node scripts/validate-content.mjs",

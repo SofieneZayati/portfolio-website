@@ -228,7 +228,7 @@ const content: Record<string, ProjectContent> = {
       },
       {
         title: 'Operational Context',
-        image: `${base}/benmahmoudstock/automotive-operations-editorial.png`,
+        image: `${base}/benmahmoudstock/automotive-operations-editorial.webp`,
         imageAlt: 'Editorial visualization of a local automotive-parts counter and offline desktop system',
         imageCaption: 'Generated editorial visualization — the real interface and verified workflow remain the primary project evidence.',
         imageWidth: 1672,
@@ -239,7 +239,7 @@ const content: Record<string, ProjectContent> = {
     ],
     gallery: [
       { src: `${base}/benmahmoudstock/invoice-workspace.png`, caption: 'Invoice workspace — customer details, negotiated item prices, validation controls, and the live A4 document stay visible together', width: 1424, height: 861, variant: 'screen' },
-      { src: `${base}/benmahmoudstock/automotive-operations-editorial.png`, caption: 'Editorial visualization of the offline parts-counter context', width: 1672, height: 941, variant: 'screen' },
+      { src: `${base}/benmahmoudstock/automotive-operations-editorial.webp`, caption: 'Editorial visualization of the offline parts-counter context', width: 1672, height: 941, variant: 'screen' },
     ],
     challenges: [
       { title: 'Financial Integrity', desc: 'All money is stored in integer millimes, while invoice numbering, snapshots, totals, stock reductions, and movements finalize in one transaction.' },
@@ -504,7 +504,7 @@ const content: Record<string, ProjectContent> = {
                   kind: 'screen',
                   icon: 'desktop',
                   media: {
-                    src: `${base}/machetamache/recipe-library.png`,
+                    src: `${base}/machetamache/recipe-library.webp`,
                     alt: 'Machetamache desktop recipe library and costing workspace',
                     fit: 'cover',
                     position: 'center top',
@@ -578,7 +578,7 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/machetamache/recipe-library.png`, caption: 'Desktop recipe library with search, lifecycle filters, featured content, and exact per-portion costs' },
+      { src: `${base}/machetamache/recipe-library.webp`, caption: 'Desktop recipe library with search, lifecycle filters, featured content, and exact per-portion costs' },
       { src: `${base}/machetamache/product-overview.png`, caption: 'Product overview combining the desktop cookbook and compact mobile workflow' },
       { src: `${base}/machetamache/mobile-recipe.png`, caption: 'Touch-focused recipe detail designed for a phone on the same private Wi-Fi network' },
     ],
@@ -644,7 +644,7 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/aurelle/home-desktop.png`, caption: 'Image-led landing experience with premium editorial direction and clear consultation entry points' },
+      { src: `${base}/aurelle/home-desktop.webp`, caption: 'Image-led landing experience with premium editorial direction and clear consultation entry points' },
       { src: `${base}/aurelle/consultation-result.png`, caption: 'Guided consultation result connecting stated goals to a safe, contextual next step' },
       { src: `${base}/aurelle/member-portal.png`, caption: 'Member portal supporting care preparation, credits, routine, timeline, and concierge needs' },
       { src: `${base}/aurelle/home-mobile.png`, caption: 'Responsive mobile composition retaining hierarchy and conversion actions' },
@@ -709,7 +709,7 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/pitchly/player-dashboard.png`, caption: 'Player overview combining the next match, booking metrics, venue discovery, and upcoming schedule' },
+      { src: `${base}/pitchly/player-dashboard.webp`, caption: 'Player overview combining the next match, booking metrics, venue discovery, and upcoming schedule' },
       { src: `${base}/pitchly/find-a-pitch.png`, caption: 'Search and discovery experience with venue details, availability, favorites, and booking entry points' },
       { src: `${base}/pitchly/manager-dashboard.png`, caption: 'Venue manager overview with operational KPIs, incoming requests, schedule, and revenue context' },
       { src: `${base}/pitchly/manager-requests.png`, caption: 'Manager approval queue showing shared reservation state and decisive actions' },
@@ -956,7 +956,7 @@ const content: Record<string, ProjectContent> = {
                   kind: 'data',
                   icon: 'property',
                   media: {
-                    src: `${base}/smartproperty/realestatepropertydetails.png`,
+                    src: `${base}/smartproperty/realestatepropertydetails.webp`,
                     alt: 'SmartProperty listing details with property attributes and media',
                     fit: 'cover',
                     position: 'center top',
@@ -968,7 +968,7 @@ const content: Record<string, ProjectContent> = {
                   kind: 'data',
                   icon: 'preferences',
                   media: {
-                    src: `${base}/smartproperty/propertysearch.png`,
+                    src: `${base}/smartproperty/propertysearch.webp`,
                     alt: 'SmartProperty preference and location-aware search interface',
                     fit: 'cover',
                     position: 'center top',
@@ -980,7 +980,7 @@ const content: Record<string, ProjectContent> = {
                   kind: 'data',
                   icon: 'document',
                   media: {
-                    src: `${base}/smartproperty/clientpropertyadd.png`,
+                    src: `${base}/smartproperty/clientpropertyadd.webp`,
                     alt: 'SmartProperty listing creation flow with uploaded property information and media',
                     fit: 'cover',
                     position: 'center top',
@@ -1008,7 +1008,7 @@ const content: Record<string, ProjectContent> = {
                   kind: 'output',
                   icon: 'recommendation',
                   media: {
-                    src: `${base}/smartproperty/aifeedrecommendation.png`,
+                    src: `${base}/smartproperty/aifeedrecommendation.webp`,
                     alt: 'SmartProperty AI-ranked property recommendations',
                     fit: 'contain',
                   },
@@ -1100,12 +1100,12 @@ const content: Record<string, ProjectContent> = {
     ],
     gallery: [
       { src: `${base}/smartproperty/realestatedashboard.png`, caption: 'Real-estate agent command center with portfolio KPIs, applications, visits, and operational priorities' },
-      { src: `${base}/smartproperty/propertysearch.png`, caption: 'Map-based property discovery with location, radius, price, and listing filters' },
+      { src: `${base}/smartproperty/propertysearch.webp`, caption: 'Map-based property discovery with location, radius, price, and listing filters' },
       { src: `${base}/smartproperty/aianalysis.png`, caption: 'AI solvency analysis combining OCR evidence, affordability, anomaly signals, and an explainable recommendation' },
-      { src: `${base}/smartproperty/homepage.png`, caption: 'Personalized property discovery with intelligent search and voice-enabled input' },
+      { src: `${base}/smartproperty/homepage.webp`, caption: 'Personalized property discovery with intelligent search and voice-enabled input' },
       { src: `${base}/smartproperty/admindashboard.png`, caption: 'Administration workspace for platform health, branches, support queues, and rapid actions' },
-      { src: `${base}/smartproperty/clientpropertydetails.png`, caption: 'Client property detail with virtual viewing, comparison, application, and visit actions' },
-      { src: `${base}/smartproperty/aifeedrecommendation.png`, caption: 'AI-ranked property feed built around the client profile, preferences, budget, and listing signals' },
+      { src: `${base}/smartproperty/clientpropertydetails.webp`, caption: 'Client property detail with virtual viewing, comparison, application, and visit actions' },
+      { src: `${base}/smartproperty/aifeedrecommendation.webp`, caption: 'AI-ranked property feed built around the client profile, preferences, budget, and listing signals' },
       { src: `${base}/smartproperty/aipriceestimation.png`, caption: 'Predictive pricing workflow for estimating rent from amenities, type, and location' },
       { src: `${base}/smartproperty/aiimagedesc.png`, caption: 'Computer-vision workflow generating useful room-by-room property descriptions' },
       { src: `${base}/smartproperty/chatbotaiaigent.png`, caption: 'Conversational property assistant for questions, budget guidance, and product navigation' },
@@ -1216,7 +1216,7 @@ const content: Record<string, ProjectContent> = {
                   kind: 'ai',
                   icon: 'router',
                   media: {
-                    src: `${base}/prigado/flowchart-multi-path.png`,
+                    src: `${base}/prigado/flowchart-multi-path.webp`,
                     alt: 'Prigado intent-driven multi-path workflow routing',
                     fit: 'cover',
                     position: 'center',
@@ -1312,17 +1312,17 @@ const content: Record<string, ProjectContent> = {
     architecture: [
       {
         title: 'System Architecture',
-        image: `${base}/prigado/architecture-globale.png`,
+        image: `${base}/prigado/architecture-globale.webp`,
         desc: 'AI assistants sit on top of the Prigado Laravel+Vue.js stack, orchestrating MySQL, Gemini, and external APIs through n8n workflows.',
       },
       {
         title: 'Multi-Path Routing',
-        image: `${base}/prigado/flowchart-multi-path.png`,
+        image: `${base}/prigado/flowchart-multi-path.webp`,
         desc: 'Intent-driven routing directs user requests to specialized workflow paths based on extracted intent and parameters.',
       },
       {
         title: 'Use Case Coverage',
-        image: `${base}/prigado/usecase-general.png`,
+        image: `${base}/prigado/usecase-general.webp`,
         desc: 'Comprehensive coverage across admin, seller, and customer workflows.',
       },
     ],
@@ -1826,7 +1826,7 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/zenithhouse/connected-home-concept.png`, caption: 'Concept visualization of the documented ESP32 and Firebase architecture connecting room-level lighting, climate, access, and mobile control' },
+      { src: `${base}/zenithhouse/connected-home-concept.webp`, caption: 'Concept visualization of the documented ESP32 and Firebase architecture connecting room-level lighting, climate, access, and mobile control' },
     ],
     challenges: [
       { title: 'Hardware–Application Boundary', desc: 'Coordinating device commands, cloud state, and mobile feedback across the connected-home flow.' },
@@ -2006,7 +2006,7 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/sps/android-parking-concept.png`, caption: 'Visual summary of the documented Android and Firebase parking flow; the image is a system concept and does not imply a production interface' },
+      { src: `${base}/sps/android-parking-concept.webp`, caption: 'Visual summary of the documented Android and Firebase parking flow; the image is a system concept and does not imply a production interface' },
     ],
     challenges: [
       { title: 'Compact Mobile Flow', desc: 'Account access, parking visibility, and vehicle records needed a simple navigation path on small Android screens.' },
@@ -2083,7 +2083,7 @@ const content: Record<string, ProjectContent> = {
                   kind: 'device',
                   icon: 'microchip',
                   media: {
-                    src: `${base}/smartagri/system-cover.png`,
+                    src: `${base}/smartagri/system-cover.webp`,
                     alt: 'Concept visualization of the Smart Agri ESP32, DHT11 and soil-moisture sensing setup',
                     fit: 'cover',
                     position: 'center center',
@@ -2117,7 +2117,7 @@ const content: Record<string, ProjectContent> = {
       },
     ],
     gallery: [
-      { src: `${base}/smartagri/system-cover.png`, caption: 'Concept visualization based on the implemented ESP32 sensing loop for temperature, humidity, soil moisture, Blynk telemetry, and local indicators' },
+      { src: `${base}/smartagri/system-cover.webp`, caption: 'Concept visualization based on the implemented ESP32 sensing loop for temperature, humidity, soil moisture, Blynk telemetry, and local indicators' },
     ],
     challenges: [
       { title: 'Sensor Calibration', desc: 'Analog moisture readings and environmental thresholds need calibration against the actual soil, enclosure, and crop conditions.' },
@@ -2339,7 +2339,7 @@ const content: Record<string, ProjectContent> = {
     gallery: [
       { src: `${base}/greencoffee/owner-dashboard.png`, caption: 'Owner overview — revenue, service health, live orders, loyalty, and the floor in one operational view' },
       { src: `${base}/greencoffee/barista-orders.png`, caption: 'Barista workspace — a focused, role-restricted board for moving live drinks through preparation' },
-      { src: `${base}/greencoffee/customer-menu.png`, caption: 'Customer experience — mobile ordering, menu discovery, basket actions, and loyalty context' },
+      { src: `${base}/greencoffee/customer-menu.webp`, caption: 'Customer experience — mobile ordering, menu discovery, basket actions, and loyalty context' },
       { src: `${base}/greencoffee/orders.png`, caption: 'Live order board supporting the New → Preparing → Ready → Served workflow' },
       { src: `${base}/greencoffee/floor-plan.png`, caption: 'Interactive floor operations for table state, service flow, and shared staff context' },
       { src: `${base}/greencoffee/analytics.png`, caption: 'Analytics workspace for revenue, orders, products, reservations, and customer behavior' },

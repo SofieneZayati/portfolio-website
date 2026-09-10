@@ -67,7 +67,7 @@ export default function Hero() {
           <div className="portrait-stage">
             <div className="portrait-halo" aria-hidden="true" />
             <img
-              src="/picture-restored.png"
+              src="/picture-restored.webp"
               alt="Sofiene Zayati"
               width={1556}
               height={1556}

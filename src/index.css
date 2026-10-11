@@ -1280,6 +1280,54 @@ canvas {
   letter-spacing: 0.04em;
 }
 
+.project-card__deployment {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.58rem;
+  border: 1px solid rgba(110, 231, 183, 0.25);
+  border-radius: 999px;
+  background: rgba(7, 22, 18, 0.88);
+  color: #a7f3d0;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.project-card__deployment > span,
+.project-deployment__status > span {
+  width: 0.4rem;
+  height: 0.4rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #6ee7b7;
+}
+
+.project-deployment {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  margin-top: 1.5rem;
+  color: #a8b4c0;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.project-deployment__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgba(110, 231, 183, 0.2);
+  border-radius: 999px;
+  background: rgba(110, 231, 183, 0.05);
+  color: #a7f3d0;
+  font-weight: 600;
+}
+
 .project-card__logo {
   position: absolute;
   right: 0.85rem;

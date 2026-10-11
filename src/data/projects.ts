@@ -10,6 +10,9 @@ export interface Project {
   role: string
   context: string
   scope?: string
+  deployment?: {
+    platform: string
+  }
   progress?: {
     available: string
     next: string
@@ -18,6 +21,7 @@ export interface Project {
   techStack: string[]
   logo: string
   screenshots: string[]
+  cardPreview?: string
   visualFit?: 'contain' | 'cover'
   category: ProjectCategory
   tags?: ProjectCategory[]
@@ -25,10 +29,12 @@ export interface Project {
     github?: string
     githubLabel?: string
     live?: string
+    liveLabel?: string
   }
 }
 
 export const featuredProjectIds = [
+  'sobly',
   'benmahmoudstock',
   'geniuspmo',
   'macroparkexperience',
@@ -40,6 +46,7 @@ export const featuredProjectIds = [
 ] as const
 
 const portfolioOrder = [
+  'sobly',
   'benmahmoudstock',
   'geniuspmo',
   'macroparkexperience',
@@ -67,6 +74,31 @@ const portfolioRank = new Map<string, number>(
 )
 
 const projectCatalog: Project[] = [
+  {
+    id: 'sobly',
+    title: 'Sobly.tn',
+    tagline: 'Digital Storefront · Deployed on an Ubuntu VPS',
+    description:
+      'A live digital-products store for a Tunisian client, with a bilingual catalog, game and gift-card collections, a multi-item basket, manual-payment checkout, and an owner-managed admin workspace.',
+    longDescription:
+      'I designed, built, and deployed Sobly from the customer-facing storefront to the tools used by the shop owner. French and English shoppers can browse games, subscriptions, game-credit packs, and gift-card amounts, then combine products into one order. The admin manages products, images, prices, collections, payment recipients, and order verification. I also prepared the Ubuntu VPS deployment with Docker Compose, Caddy-managed HTTPS, persistent SQLite storage, backups, and a GitHub-based update workflow so the client can maintain the business as the product evolves.',
+    year: '2026',
+    role: 'Product designer & full-stack engineer',
+    context: 'Client digital-commerce project in Tunisia',
+    scope: 'Live client website · Storefront, admin & deployment',
+    deployment: { platform: 'OVH Ubuntu VPS · Docker Compose · Caddy HTTPS' },
+    featured: true,
+    techStack: ['Next.js 16', 'TypeScript', 'SQLite', 'React 19', 'Docker Compose', 'Caddy', 'Ubuntu', 'Zod', 'Sharp'],
+    logo: '/images/projects/sobly/brand-mark.svg',
+    cardPreview: '/images/projects/sobly/storefront-cover.webp',
+    screenshots: [
+      '/images/projects/sobly/storefront-desktop.webp',
+      '/images/projects/sobly/admin-catalog-desktop.webp',
+      '/images/projects/sobly/gift-amounts-desktop.webp',
+    ],
+    category: 'web',
+    links: { live: 'https://sobly.tn/', liveLabel: 'Visit live site' },
+  },
   {
     id: 'benmahmoudstock',
     title: 'Ben Mahmoud Stock',

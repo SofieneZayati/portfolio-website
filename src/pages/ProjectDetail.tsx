@@ -115,6 +115,7 @@ export default function ProjectDetail() {
     /github|source|code|repository/i.test(`${link.label} ${link.url}`)
   )?.url
   const demoUrl = project.links.live ?? contentDemoLink
+  const liveLabel = project.links.liveLabel ?? 'View demo'
   const codeUrl = project.links.github ?? contentCodeLink
   const codeLabel = project.links.githubLabel ?? 'View code'
   const primaryIsDownload = Boolean(
@@ -190,6 +191,12 @@ export default function ProjectDetail() {
           <p className="mt-4 text-sm md:text-base text-white/50 leading-relaxed max-w-3xl">
             {project.description}
           </p>
+          {project.deployment && (
+            <div className="project-deployment" aria-label="Deployment status">
+              <span className="project-deployment__status"><span aria-hidden="true" /> Deployed</span>
+              <span>{project.deployment.platform}</span>
+            </div>
+          )}
 
           <div className="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
             <ul className="flex flex-wrap items-center gap-2" aria-label="Project highlights">
@@ -214,11 +221,11 @@ export default function ProjectDetail() {
                     href={demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`View ${project.title} demo (opens in a new tab)`}
+                    aria-label={`${liveLabel}: ${project.title} (opens in a new tab)`}
                     className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-[#050505] rounded-xl bg-[#00f5ff] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60"
                   >
                     <HiExternalLink size={16} />
-                    View demo
+                    {liveLabel}
                   </a>
                 )}
                 {codeUrl && (

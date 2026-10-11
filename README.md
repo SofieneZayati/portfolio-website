@@ -42,3 +42,9 @@ npm run build
 `npm run validate:content` checks project/case-study parity, sitemap coverage, duplicate IDs, and referenced project assets.
 
 The site is configured for deployment at [sofienezayati.tn](https://sofienezayati.tn).
+
+## Sobly client case study
+
+The featured `/project/sobly` case study links to the deployed [Sobly storefront](https://sobly.tn/) and covers its customer journeys, owner admin, and Ubuntu VPS deployment with Docker Compose, Caddy HTTPS, persistent SQLite storage, and GitHub updates.
+
+Screenshots under `public/images/projects/sobly` were captured from the real running application. The desktop and mobile home views show the public website; catalog, checkout, and admin views use an isolated local preview with sample products. Gallery captions identify the source. The checkout capture contains no customer details or submitted order. The card cover composes the actual desktop and mobile captures. Images are optimized as WebP, and the brand mark comes from the project’s existing SVG.

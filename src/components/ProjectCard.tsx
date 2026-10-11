@@ -18,7 +18,7 @@ const categoryLabels: Record<Project['category'], string> = {
 
 export default function ProjectCard({ project, featured = false }: Props) {
   const detailPath = `/project/${project.id}`
-  const preview = project.screenshots[0]
+  const preview = project.cardPreview ?? project.screenshots[0]
   const techLimit = 3
 
   return (
@@ -46,6 +46,9 @@ export default function ProjectCard({ project, featured = false }: Props) {
         />
         <div className="project-card__media-shade" aria-hidden="true" />
         <span className="project-card__category">{categoryLabels[project.category]}</span>
+        {project.deployment && (
+          <span className="project-card__deployment"><span aria-hidden="true" /> Deployed</span>
+        )}
         {project.logo && preview && (
           <span className="project-card__logo" aria-hidden="true">
             <img src={project.logo} alt="" width={48} height={48} loading="lazy" decoding="async" />
@@ -84,7 +87,7 @@ export default function ProjectCard({ project, featured = false }: Props) {
           </Link>
           {project.links.live && (
             <a href={project.links.live} target="_blank" rel="noopener noreferrer">
-              Demo <HiExternalLink aria-hidden="true" />
+              {project.links.liveLabel ?? 'Demo'} <HiExternalLink aria-hidden="true" />
             </a>
           )}
           {project.links.github && (

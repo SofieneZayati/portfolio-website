@@ -135,6 +135,127 @@ export interface ProjectContent {
 const base = '/images/projects'
 
 const content: Record<string, ProjectContent> = {
+  sobly: {
+    facts: [
+      { label: 'Type', value: 'Client Digital Storefront' },
+      { label: 'Deployment', value: 'Live · sobly.tn · HTTPS' },
+      { label: 'Hosting', value: 'Ubuntu VPS + Docker' },
+      { label: 'Delivery', value: 'French & English' },
+    ],
+    techStack: [
+      {
+        category: 'Storefront & Admin',
+        items: [
+          { name: 'Next.js 16 + React 19', description: 'Bilingual storefront, customer checkout, and protected admin routes' },
+          { name: 'TypeScript + Zod', description: 'Shared catalog contracts and validated server inputs' },
+          { name: 'Responsive CSS', description: 'Burgundy and cream identity across desktop and mobile' },
+          { name: 'Sharp', description: 'Owner-uploaded product images converted to WebP' },
+        ],
+      },
+      {
+        category: 'Commerce & Persistence',
+        items: [
+          { name: 'SQLite', description: 'Durable catalog, settings, payment configuration, and order snapshots' },
+          { name: 'Integer millimes', description: 'Precise Tunisian-dinar basket totals' },
+          { name: 'Atomic transactions', description: 'Consistent payment-recipient rotation and duplicate-request handling' },
+          { name: 'Node test runner', description: 'Catalog, basket, migrations, payment rules, and deployment checks' },
+        ],
+      },
+      {
+        category: 'Production Delivery',
+        items: [
+          { name: 'OVH Ubuntu VPS', description: 'Self-hosted production environment for the client' },
+          { name: 'Docker Compose', description: 'Standalone Node application and reverse proxy with restart policies' },
+          { name: 'Caddy', description: 'HTTPS certificates, canonical-domain redirects, and reverse proxy' },
+          { name: 'GitHub + SSH deploy key', description: 'Versioned releases pulled by a guarded VPS update script' },
+        ],
+      },
+    ],
+    features: [
+      { group: 'Customer Experience', icon: 'FR/EN', title: 'Bilingual Discovery', desc: 'Search, category navigation, platform filters, favorites, and product details across French and English storefronts.' },
+      { group: 'Customer Experience', icon: 'PACK', title: 'Game & Brand Collections', desc: 'Choose a game or gift-card brand first, then compare its amounts, prices, and product images.' },
+      { group: 'Customer Experience', icon: 'CART', title: 'One Basket, One Order', desc: 'Persistent quantities and platform selections combine several products into one server-validated checkout total.' },
+      { group: 'Customer Experience', icon: 'D17', title: 'Local Payment Workflow', desc: 'D17 is presented first; IZI Payment and Wafacash are configurable. The customer submits a transfer reference for manual verification.' },
+      { group: 'Owner Workspace', icon: 'EDIT', title: 'Catalog & Image Management', desc: 'The owner edits prices, availability, featured offers, game groups, gift-card brands, and artwork without changing code.' },
+      { group: 'Owner Workspace', icon: 'PAY', title: 'Payment Recipients', desc: 'Enable or disable recipients, choose a destination manually, or rotate enabled destinations automatically between new orders.' },
+      { group: 'Owner Workspace', icon: 'ORDER', title: 'Verification & Fulfilment', desc: 'An order queue records customer details, products, total, assigned recipient, and transfer reference for the owner to review and deliver.' },
+      { group: 'Production Operations', icon: 'VPS', title: 'Deployed & Maintainable', desc: 'HTTPS, persistent data volumes, backups, container health checks, and a GitHub update script support ongoing client improvements.' },
+    ],
+    diagram: {
+      layout: 'flow',
+      title: 'From a GitHub change to a live client store',
+      description: 'The client VPS runs the storefront and admin behind Caddy. Application releases can change while catalog data, images, orders, and certificate storage remain in persistent volumes.',
+      lanes: [
+        {
+          label: 'Release & hosting',
+          stages: [
+            { label: 'Version the change', nodes: [{ label: 'GitHub repository', detail: 'Reviewed source and a dependency lockfile', kind: 'data', icon: 'code' }], connector: 'Run the VPS update script' },
+            { label: 'Build & run', nodes: [{ label: 'Ubuntu + Docker Compose', detail: 'Pull, backup, build, and check container health', kind: 'service', icon: 'docker' }], connector: 'Serve through HTTPS' },
+            { label: 'Public website', nodes: [{ label: 'Caddy → Next.js', detail: 'sobly.tn with managed TLS certificates', kind: 'service', icon: 'server' }], connector: 'Read and write' },
+            { label: 'Keep business data', nodes: [{ label: 'Persistent Docker volume', detail: 'SQLite database and uploaded artwork; backup scripts', kind: 'data', icon: 'database' }] },
+          ],
+        },
+        {
+          label: 'Customer & owner',
+          stages: [
+            { label: 'Browse & select', nodes: [{ label: 'Shopper', detail: 'Game or brand → amount → basket', kind: 'actor', icon: 'user' }], connector: 'Create one order' },
+            { label: 'Prepare payment', nodes: [{ label: 'Validated checkout', detail: 'Stored prices, exact total, and assigned recipient', kind: 'screen', icon: 'payment' }], connector: 'Submit transfer reference' },
+            { label: 'Review & deliver', nodes: [{ label: 'Owner admin', detail: 'Manual transfer verification and fulfilment', kind: 'screen', icon: 'admin' }], connector: 'Track the order' },
+            { label: 'Customer follow-up', nodes: [{ label: 'Private tracking link', detail: 'Order status without exposing the admin workspace', kind: 'output', icon: 'browser' }] },
+          ],
+        },
+      ],
+    },
+    architecture: [
+      {
+        title: 'A Complete Client Product',
+        desc: 'The same catalog powers the bilingual storefront, grouped product pages, basket, and owner workspace. Server-side validation uses current stored prices before an order is accepted; the order keeps an immutable product and payment snapshot.',
+        items: [
+          { label: 'Storefront', desc: 'Fast product browsing, search, filters, brand and game navigation, and a persistent basket.' },
+          { label: 'Admin', desc: 'Protected catalog, image, shop, payment, and order management.' },
+          { label: 'Data', desc: 'SQLite migrations preserve owner edits as product features evolve.' },
+        ],
+      },
+      {
+        title: 'Deployed on the Client’s VPS',
+        desc: 'A multi-stage Docker build produces the standalone Next.js application. Docker Compose runs it on an Ubuntu OVH VPS alongside Caddy, which serves the public domain over HTTPS and redirects the www address to the canonical domain.',
+        items: [
+          { label: 'HTTPS', desc: 'Caddy handles certificates and proxies requests to the application container.' },
+          { label: 'Persistence', desc: 'Named volumes retain the database, uploaded media, and Caddy state when containers are recreated.' },
+          { label: 'Maintenance', desc: 'Health checks, restart policies, and data backup scripts are included in the deployment.' },
+        ],
+      },
+      {
+        title: 'A Repeatable GitHub Update Workflow',
+        desc: 'The project moved from ZIP-based delivery to a Git checkout on the VPS. A repository-scoped, read-only SSH deploy key lets the update script fetch releases; the script checks for local changes, backs up data, rebuilds the image, and starts the updated services. Deployment is deliberately initiated on the VPS after a GitHub push.',
+      },
+    ],
+    gallery: [
+      { src: `${base}/sobly/storefront-desktop.webp`, caption: 'Live sobly.tn storefront — the burgundy and cream identity, featured games, search, basket, and category navigation', width: 1440, height: 1000, variant: 'screen' },
+      { src: `${base}/sobly/admin-catalog-desktop.webp`, caption: 'Owner catalog workspace — local preview with sample products, availability, featured placement, and editing controls', width: 1440, height: 1000, variant: 'screen' },
+      { src: `${base}/sobly/gift-amounts-desktop.webp`, caption: 'Steam collection — local preview showing gift-card amounts and prices inside one brand', width: 1440, height: 1000, variant: 'screen' },
+      { src: `${base}/sobly/game-packs-desktop.webp`, caption: 'Fortnite collection — local preview of game-specific credit packs and basket actions', width: 1440, height: 1000, variant: 'screen' },
+      { src: `${base}/sobly/checkout-desktop.webp`, caption: 'Multi-item checkout — local preview with customer details, D17 selection, and a combined purchase total', width: 1440, height: 1100, variant: 'screen' },
+      { src: `${base}/sobly/storefront-mobile.webp`, caption: 'Live mobile storefront — responsive navigation and the featured-game experience', width: 390, height: 844, variant: 'mobile' },
+      { src: `${base}/sobly/gift-amounts-mobile.webp`, caption: 'Mobile Steam collection — local preview with brand navigation and amount selection', width: 390, height: 1100, variant: 'mobile' },
+    ],
+    galleryRetainHero: [`${base}/sobly/admin-catalog-desktop.webp`, `${base}/sobly/gift-amounts-desktop.webp`],
+    challenges: [
+      { title: 'Organizing a Growing Catalog', desc: 'Flattened currency and gift-card offers became difficult to browse. Grouping offers by game or brand gives customers a clear first choice while preserving each pack’s price, image, and admin editability.' },
+      { title: 'Reliable Manual Payments', desc: 'A submitted reference is a request for verification, not proof of payment. Durable order snapshots, transactional recipient rotation, and idempotent request handling preserve the assigned destination across retries and refreshes.' },
+      { title: 'Updating Code Without Losing Shop Data', desc: 'Application code, environment secrets, and business data have separate lifecycles. GitHub carries source changes; the VPS keeps its environment configuration and persistent volumes, with backups before updates.' },
+    ],
+    results: [
+      { icon: '↗', title: 'A Live Client Website', content: 'Sobly is deployed at sobly.tn over HTTPS on an Ubuntu VPS, with the application and reverse proxy managed through Docker Compose.' },
+      { icon: '◎', title: 'Owner-Controlled Operations', content: 'Products, images, groups, shop settings, payment recipients, and order verification can be managed from one admin workspace.' },
+      { icon: '↻', title: 'Maintainable Delivery', content: 'Versioned GitHub updates, persistent storage, and backup tooling support continued improvements after the initial client handoff.' },
+    ],
+    cta: {
+      primary: { label: 'Visit Live Storefront', url: 'https://sobly.tn/' },
+      secondary: [{ label: 'Discuss a Similar Project', url: '/#contact' }],
+    },
+    status: ['Deployed Client Website', 'VPS + HTTPS', 'Owner-Managed Commerce'],
+  },
   benmahmoudstock: {
     facts: [
       { label: 'Product', value: 'Offline Windows Desktop App' },

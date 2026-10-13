@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiDownload, HiMenu, HiX } from 'react-icons/hi'
-import SoundToggle from './SoundToggle'
 
 const links = [
   { href: '/#projects', label: 'Work', section: 'projects' },
-  { href: '/#about', label: 'Profile', section: 'about' },
-  { href: '/#experience', label: 'Experience', section: 'experience' },
+  { href: '/#about', label: 'About', section: 'about' },
+  { href: '/#experience', label: 'Background', section: 'experience' },
   { href: '/#skills', label: 'Toolkit', section: 'skills' },
   { href: '/#contact', label: 'Contact', section: 'contact' },
 ]
@@ -19,7 +18,8 @@ export default function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => {
@@ -29,13 +29,15 @@ export default function Navbar() {
       setScrollProgress(scrollable > 0 ? Math.min((window.scrollY / scrollable) * 100, 100) : 0)
 
       if (pathname !== '/') return
+      let nextActiveSection = ''
       for (let index = links.length - 1; index >= 0; index -= 1) {
         const element = document.getElementById(links[index].section)
         if (element && element.getBoundingClientRect().top <= 240) {
-          setActiveSection(links[index].section)
+          nextActiveSection = links[index].section
           break
         }
       }
+      setActiveSection(nextActiveSection)
     }
 
     onScroll()
@@ -56,11 +58,16 @@ export default function Navbar() {
       }
 
       if (event.key !== 'Tab') return
-      const links = Array.from(mobileMenuRef.current?.querySelectorAll<HTMLAnchorElement>('a') ?? [])
+      const links = Array.from(
+        mobileMenuRef.current?.querySelectorAll<HTMLAnchorElement>('a') ?? [],
+      )
       if (links.length === 0) return
       const first = links[0]
       const last = links[links.length - 1]
-      if (event.shiftKey && document.activeElement === first) {
+      if (
+        event.shiftKey &&
+        (document.activeElement === first || document.activeElement === toggleRef.current)
+      ) {
         event.preventDefault()
         last.focus()
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -87,14 +94,30 @@ export default function Navbar() {
     const target = document.getElementById(href.slice(2))
     if (!target) return
     event.preventDefault()
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (hash !== `#${href.slice(2)}`) {
+      navigate(href, { replace: true })
+      return
+    }
+    target.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    })
+    target.setAttribute('tabindex', '-1')
+    target.focus({ preventScroll: true })
   }
 
   return (
     <nav className="site-nav" aria-label="Primary navigation">
       <div className={`nav-shell ${scrolled ? 'is-scrolled' : ''}`}>
-        <Link to="/" className="brand" aria-label="SZ, Sofiene Zayati — home" onClick={() => setMobileOpen(false)}>
-          <span className="brand-mark" aria-hidden="true">SZ</span>
+        <Link
+          to="/"
+          className="brand"
+          aria-label="SZ, Sofiene Zayati — home"
+          onClick={() => setMobileOpen(false)}
+        >
+          <span className="brand-mark" aria-hidden="true">
+            SZ
+          </span>
           <span className="brand-copy">
             <strong>Sofiene Zayati</strong>
             <small>Full-Stack · AI · IoT</small>
@@ -120,8 +143,6 @@ export default function Navbar() {
             <HiDownload aria-hidden="true" /> CV
           </a>
         </div>
-
-        <SoundToggle />
 
         <button
           ref={toggleRef}
@@ -161,7 +182,11 @@ export default function Navbar() {
                   </a>
                 )
               })}
-              <a href="/Sofiene_Zayati_CV.pdf" download="Sofiene_Zayati_CV.pdf" className="mobile-nav__cv">
+              <a
+                href="/Sofiene_Zayati_CV.pdf"
+                download="Sofiene_Zayati_CV.pdf"
+                className="mobile-nav__cv"
+              >
                 <HiDownload aria-hidden="true" /> Download CV
               </a>
             </motion.div>

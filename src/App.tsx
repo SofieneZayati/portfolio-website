@@ -1,9 +1,14 @@
 import { lazy, Suspense, useEffect, useRef } from 'react'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import {
+  BrowserRouter,
+  StaticRouter,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import CursorFollower from './components/CursorFollower'
 import AnimatedBackground from './components/AnimatedBackground'
 import Home from './pages/Home'
 
@@ -39,7 +44,7 @@ function ScrollManager() {
         }
         return
       }
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
       if (shouldMoveFocus) {
         const heading = document.querySelector<HTMLElement>('#main-content h1')
         if (heading) {
@@ -61,21 +66,24 @@ function ScrollManager() {
   return null
 }
 
-function App() {
+function App({ url }: { url?: string }) {
+  const Router = url ? StaticRouter : BrowserRouter
   return (
-    <BrowserRouter>
+    <Router location={url ?? '/'}>
       <MotionConfig reducedMotion="user">
         <ScrollManager />
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
-        <CursorFollower />
         <AnimatedBackground />
         <Navbar />
         <main id="main-content" tabIndex={-1}>
           <Suspense
             fallback={
-              <div className="min-h-screen flex items-center justify-center" role="status">
+              <div
+                className="min-h-screen flex items-center justify-center"
+                role="status"
+              >
                 <span className="loading-mark">SZ</span>
                 <span className="sr-only">Loading portfolio</span>
               </div>
@@ -90,7 +98,7 @@ function App() {
         </main>
         <Footer />
       </MotionConfig>
-    </BrowserRouter>
+    </Router>
   )
 }
 

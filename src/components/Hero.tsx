@@ -1,71 +1,73 @@
-import { HiArrowRight, HiDownload, HiLocationMarker } from 'react-icons/hi'
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
-import { profile } from '../data/profile'
-import { featuredProjectIds } from '../data/projects'
-import { experiences } from '../data/experience'
-
-const proofPoints = [
-  { value: String(featuredProjectIds.length).padStart(2, '0'), label: 'Selected case studies' },
-  {
-    value: String(experiences.filter((experience) => experience.type === 'work').length).padStart(2, '0'),
-    label: 'Professional placements',
-  },
-  { value: '03', label: 'Engineering domains' },
-]
+import { Link } from "react-router-dom";
+import {
+  HiArrowDown,
+  HiArrowRight,
+  HiDownload,
+  HiLocationMarker,
+} from "react-icons/hi";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { profile } from "../data/profile";
+import { projects } from "../data/projects";
 
 export default function Hero() {
-  const github = profile.socials.find((social) => social.label === 'GitHub')?.url
-  const linkedIn = profile.socials.find((social) => social.label === 'LinkedIn')?.url
-
   return (
     <section id="home" className="hero-section" aria-labelledby="hero-heading">
       <div className="hero-shell">
         <div className="hero-copy">
-          <div className="availability-pill">
-            <span className="availability-dot" aria-hidden="true" />
-            Open to full-stack, AI &amp; product engineering roles
-          </div>
-
-          <p className="hero-eyebrow">Full-stack &amp; AI engineer · Embedded systems background</p>
+          <p className="hero-eyebrow">
+            <span className="greeting-mark" aria-hidden="true" />
+            Sofiene Zayati <span className="hero-eyebrow__divider">/</span>{" "}
+            Engineer &amp; builder
+          </p>
           <h1 id="hero-heading" className="hero-title">
-            I build intelligent products
-            <span>end to end.</span>
+            <span className="sr-only">Sofiene Zayati — </span>
+            Engineering
+            <br />
+            ideas into
+            <br />
+            <span>real products.</span>
           </h1>
-          <p className="hero-summary">{profile.tagline}</p>
-
+          <p className="hero-summary">
+            A <strong>full-stack &amp; AI engineer</strong> with an
+            embedded-systems foundation. I turn complex workflows into
+            thoughtful digital products—from the first interface to the final
+            deployment.
+          </p>
           <div className="hero-actions">
-            <a href="#projects" className="button button--primary group">
-              Explore selected work
-              <HiArrowRight className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            <a href="#projects" className="button button--primary">
+              Explore my work <HiArrowDown aria-hidden="true" />
             </a>
-            <a href="/Sofiene_Zayati_CV.pdf" download="Sofiene_Zayati_CV.pdf" className="button button--secondary">
-              <HiDownload aria-hidden="true" />
-              Download CV
-            </a>
-            <a href="#contact" className="button-link hero-contact-link">
-              Contact me
-              <HiArrowRight aria-hidden="true" />
+            <a
+              href="/Sofiene_Zayati_CV.pdf"
+              download="Sofiene_Zayati_CV.pdf"
+              className="button button--secondary"
+            >
+              <HiDownload aria-hidden="true" /> Download CV
             </a>
           </div>
-
-          <dl className="hero-proof" aria-label="Portfolio highlights">
-            {proofPoints.map((item) => (
-              <div key={item.label}>
-                <dt>{item.value}</dt>
-                <dd>{item.label}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="hero-availability">
+            <span className="availability-dot" aria-hidden="true" />
+            Open to engineering roles &amp; product collaborations
+          </div>
         </div>
-
-        <aside className="portrait-card" aria-label="About Sofiene">
-          <div className="portrait-card__topline">
-            <span>Full-stack systems</span>
-            <span aria-hidden="true">/</span>
-            <span>Applied AI</span>
+        <aside className="hero-visual" aria-label="Meet Sofiene">
+          <div className="portrait-note">
+            <span>Behind the build</span>
+            <span>Design → Code → Ship</span>
           </div>
-          <div className="portrait-stage">
-            <div className="portrait-halo" aria-hidden="true" />
+          <div className="portrait-frame">
+            <div className="portrait-orbits" aria-hidden="true">
+              <span />
+              <span />
+            </div>
+            <span className="portrait-monogram" aria-hidden="true">
+              SZ
+            </span>
+            <span className="portrait-caption">
+              Full-stack thinking.
+              <br />
+              Human-first building.
+            </span>
             <img
               src="/picture-restored.webp"
               alt="Sofiene Zayati"
@@ -74,29 +76,60 @@ export default function Hero() {
               decoding="async"
               fetchPriority="high"
             />
-            <span className="portrait-code portrait-code--one" aria-hidden="true">Web Development</span>
-            <span className="portrait-code portrait-code--two" aria-hidden="true">Embedded Systems · IoT</span>
-            <span className="portrait-code portrait-code--three" aria-hidden="true">AI · Machine Learning</span>
-          </div>
-          <div className="portrait-card__footer">
-            <span className="inline-flex items-center gap-2">
-              <HiLocationMarker aria-hidden="true" /> {profile.location}
+            <span className="portrait-location">
+              <HiLocationMarker aria-hidden="true" /> Based in{" "}
+              {profile.location}
             </span>
-            <div className="portrait-socials" aria-label="Professional profiles">
-              {github && (
-                <a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          </div>
+          <Link to="/project/sobly" className="hero-project-note">
+            <img
+              src="/images/projects/sobly/storefront-desktop.webp"
+              alt=""
+              width={112}
+              height={76}
+              decoding="async"
+            />
+            <span>
+              <small>
+                <span className="availability-dot" aria-hidden="true" /> Built
+                &amp; deployed
+              </small>
+              <strong>
+                Sobly.tn <HiArrowRight aria-hidden="true" />
+              </strong>
+              <span>From a business idea to a live storefront.</span>
+            </span>
+          </Link>
+          <div className="hero-socials" aria-label="Professional profiles">
+            {profile.socials.map((social) => (
+              <a
+                key={social.label}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {social.label === "GitHub" ? (
                   <FaGithub aria-hidden="true" />
-                </a>
-              )}
-              {linkedIn && (
-                <a href={linkedIn} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                ) : (
                   <FaLinkedinIn aria-hidden="true" />
-                </a>
-              )}
-            </div>
+                )}
+                {social.label}
+                <span aria-hidden="true">↗</span>
+              </a>
+            ))}
           </div>
         </aside>
       </div>
+      <div className="hero-bottom">
+        <span>
+          Web products <span aria-hidden="true">/</span> Applied AI{" "}
+          <span aria-hidden="true">/</span> Connected systems
+        </span>
+        <a href="#projects">
+          {String(projects.length).padStart(2, "0")} projects. One builder.{" "}
+          <HiArrowDown aria-hidden="true" />
+        </a>
+      </div>
     </section>
-  )
+  );
 }

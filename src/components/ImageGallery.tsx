@@ -13,20 +13,28 @@ interface GalleryImage {
 
 interface Props {
   images: GalleryImage[]
+  layout?: 'grid' | 'hero'
+  priority?: boolean
 }
 
-export default function ImageGallery({ images }: Props) {
+export default function ImageGallery({
+  images,
+  layout = 'grid',
+  priority = false,
+}: Props) {
   const [selected, setSelected] = useState<number | null>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
-  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const triggerRef = useRef<HTMLAnchorElement | null>(null)
   const dialogLabelId = useId()
   const isOpen = selected !== null
 
   const close = useCallback(() => setSelected(null), [])
 
   const prev = useCallback(() => {
-    setSelected((s) => (s !== null ? (s - 1 + images.length) % images.length : null))
+    setSelected((s) =>
+      s !== null ? (s - 1 + images.length) % images.length : null,
+    )
   }, [images.length])
 
   const next = useCallback(() => {
@@ -70,9 +78,9 @@ export default function ImageGallery({ images }: Props) {
       const dialog = dialogRef.current
       if (!dialog) return
 
-      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector)).filter(
-        (element) => element.tabIndex >= 0
-      )
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(focusableSelector),
+      ).filter((element) => element.tabIndex >= 0)
 
       if (focusable.length === 0) {
         e.preventDefault()
@@ -103,7 +111,9 @@ export default function ImageGallery({ images }: Props) {
     document.addEventListener('keydown', handler)
     document.addEventListener('focusin', containFocus)
     document.body.style.overflow = 'hidden'
-    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus())
+    const focusFrame = window.requestAnimationFrame(() =>
+      closeButtonRef.current?.focus(),
+    )
 
     return () => {
       window.cancelAnimationFrame(focusFrame)
@@ -118,129 +128,137 @@ export default function ImageGallery({ images }: Props) {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8">
-        {images.map((img, i) => {
-          const isPortrait = img.variant === 'mobile' || Boolean(img.width && img.height && img.height > img.width)
-          const isPrimary = i === 0 && images.length > 2 && !isPortrait
-
+      <div className={`image-gallery ${layout === 'hero' ? 'is-hero' : ''}`}>
+        {images.map((image, index) => {
+          const portrait =
+            image.variant === 'mobile' ||
+            Boolean(image.width && image.height && image.height > image.width)
           return (
-          <motion.button
-            key={img.src}
-            type="button"
-            aria-label={`Open ${img.caption} image preview`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.04 }}
-            onClick={(event) => {
-              triggerRef.current = event.currentTarget
-              setSelected(i)
-            }}
-            className={`group cursor-pointer text-left ${
-              isPrimary ? 'sm:col-span-2 lg:col-span-2' : ''
-            }`}
-          >
-            <div className={`relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/[0.12] ${
-              isPortrait ? 'mx-auto max-w-[19rem]' : ''
-            }`}>
-              <img
-                src={img.src}
-                alt=""
-                width={img.width}
-                height={img.height}
-                className={`w-full object-contain transition-transform duration-700 group-hover:scale-[1.02] ${
-                  isPortrait ? 'h-auto max-h-[36rem]' : isPrimary ? 'h-72 md:h-[30rem]' : 'h-56 md:h-64'
-                }`}
-                loading="lazy"
-                decoding="async"
-                onError={(e) => {
-                  ;(e.target as HTMLImageElement).style.display = 'none'
-                }}
-              />
-            </div>
-            <p className="mt-3 text-xs text-white/60 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
-              {img.caption}
-            </p>
-          </motion.button>
+            <a
+              key={image.src}
+              href={image.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`gallery-item ${portrait ? 'is-portrait' : ''} ${index === 0 && images.length > 2 && !portrait ? 'is-wide' : ''}`}
+              aria-label={`Open ${image.caption} image preview`}
+              onClick={(event) => {
+                if (
+                  event.metaKey ||
+                  event.ctrlKey ||
+                  event.shiftKey ||
+                  event.altKey
+                )
+                  return
+                event.preventDefault()
+                triggerRef.current = event.currentTarget
+                setSelected(index)
+              }}
+            >
+              <div className="gallery-media">
+                <img
+                  src={image.src}
+                  alt=""
+                  width={image.width}
+                  height={image.height}
+                  loading={priority ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+                <span className="gallery-open" aria-hidden="true">
+                  ↗
+                </span>
+              </div>
+              <div className="gallery-caption">
+                <span>{image.caption}</span>
+                {layout !== 'hero' && (
+                  <small aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </small>
+                )}
+              </div>
+            </a>
           )
         })}
       </div>
-
-      {typeof document !== 'undefined' && createPortal(<AnimatePresence>
-        {selected !== null && (
-          <motion.div
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={dialogLabelId}
-            tabIndex={-1}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
-            style={{ zIndex: 250 }}
-            onClick={close}
-          >
-            <button
-              ref={closeButtonRef}
-              type="button"
-              aria-label="Close image preview"
-              onClick={close}
-              className="absolute top-4 right-4 z-10 p-2 text-white/60 hover:text-white transition-colors"
-            >
-              <HiX size={24} aria-hidden="true" />
-            </button>
-
-            <button
-              type="button"
-              aria-label="Previous image"
-              onClick={(e) => { e.stopPropagation(); prev() }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/60 hover:text-white transition-colors"
-            >
-              <HiChevronLeft size={32} aria-hidden="true" />
-            </button>
-
-            <button
-              type="button"
-              aria-label="Next image"
-              onClick={(e) => { e.stopPropagation(); next() }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 text-white/60 hover:text-white transition-colors"
-            >
-              <HiChevronRight size={32} aria-hidden="true" />
-            </button>
-
-            <motion.div
-              key={selected}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="max-w-5xl max-h-[90vh] mx-4 flex flex-col items-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={images[selected].src}
-                alt={images[selected].caption}
-                width={images[selected].width}
-                height={images[selected].height}
-                decoding="async"
-                className="max-w-full max-h-[80vh] object-contain rounded-2xl"
-              />
-              <p
-                id={dialogLabelId}
-                aria-live="polite"
-                className="mt-4 text-sm text-white/70"
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {selected !== null && (
+              <motion.div
+                ref={dialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={dialogLabelId}
+                tabIndex={-1}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="gallery-dialog"
+                onClick={close}
               >
-                {images[selected].caption}
-                <span className="text-white/60 ml-2">
-                  {selected + 1} / {images.length}
-                </span>
-              </p>
-            </motion.div>
-          </motion.div>
+                <div
+                  className="gallery-dialog-panel"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <div className="gallery-dialog-toolbar">
+                    <span>
+                      Project image {selected + 1} / {images.length}
+                    </span>
+                    <div>
+                      <a
+                        href={images[selected].src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Open original ↗
+                      </a>
+                      <button
+                        ref={closeButtonRef}
+                        type="button"
+                        aria-label="Close image preview"
+                        onClick={close}
+                      >
+                        <HiX aria-hidden="true" />
+                      </button>
+                    </div>
+                  </div>
+                  <img
+                    className="gallery-dialog-image"
+                    src={images[selected].src}
+                    alt={images[selected].caption}
+                    width={images[selected].width}
+                    height={images[selected].height}
+                    decoding="async"
+                  />
+                  <div className="gallery-dialog-footer">
+                    {images.length > 1 && (
+                      <button
+                        type="button"
+                        aria-label="Previous image"
+                        onClick={prev}
+                      >
+                        <HiChevronLeft aria-hidden="true" />
+                      </button>
+                    )}
+                    <p id={dialogLabelId} aria-live="polite">
+                      {images[selected].caption}
+                    </p>
+                    {images.length > 1 && (
+                      <button
+                        type="button"
+                        aria-label="Next image"
+                        onClick={next}
+                      >
+                        <HiChevronRight aria-hidden="true" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>, document.body)}
     </>
   )
 }

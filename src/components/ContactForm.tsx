@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion'
 import { useState, type FormEvent, type ComponentType } from 'react'
-import { HiArrowRight, HiCheck, HiDownload, HiExclamation, HiMail, HiPaperAirplane } from 'react-icons/hi'
+import {
+  HiArrowRight,
+  HiCheck,
+  HiDownload,
+  HiDuplicate,
+  HiExclamation,
+  HiMail,
+  HiPaperAirplane,
+} from 'react-icons/hi'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
 import { profile } from '../data/profile'
 
@@ -15,16 +23,42 @@ type ContactItem = {
 
 const contactItems: ContactItem[] = [
   { icon: HiMail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
-  { icon: FaLinkedinIn, label: 'LinkedIn', value: 'Let’s connect', href: 'https://www.linkedin.com/in/sofiene-zayati' },
-  { icon: FaGithub, label: 'GitHub', value: 'Browse my code', href: 'https://github.com/SofieneZayati' },
+  {
+    icon: FaLinkedinIn,
+    label: 'LinkedIn',
+    value: 'Let’s connect',
+    href: 'https://www.linkedin.com/in/sofiene-zayati',
+  },
+  {
+    icon: FaGithub,
+    label: 'GitHub',
+    value: 'Browse my code',
+    href: 'https://github.com/SofieneZayati',
+  },
 ]
 
 export default function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle')
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setCopyStatus('copied')
+    } catch {
+      setCopyStatus('error')
+    }
+  }
+
+  const updateField = (field: keyof typeof formData, value: string) => {
+    setFormData((current) => ({ ...current, [field]: value }))
+    if (status !== 'sending') setStatus('idle')
+  }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (status === 'sending') return
     setStatus('sending')
 
     try {
@@ -32,6 +66,7 @@ export default function ContactForm() {
         method: 'POST',
         body: new FormData(event.currentTarget),
         headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(15000),
       })
 
       if (!response.ok) throw new Error('Message could not be delivered')
@@ -42,14 +77,19 @@ export default function ContactForm() {
     }
   }
 
-  const statusMessage = status === 'success'
-    ? 'Thanks—your message has been sent. I’ll reply as soon as I can.'
-    : status === 'error'
-      ? `The form could not send your message. Please email me directly at ${profile.email}.`
-      : ''
+  const statusMessage =
+    status === 'success'
+      ? 'Thanks—your message has been sent. I’ll reply as soon as I can.'
+      : status === 'error'
+        ? `The form could not send your message. Please email me directly at ${profile.email}.`
+        : ''
 
   return (
-    <section id="contact" className="section-shell section-shell--contact" aria-labelledby="contact-heading">
+    <section
+      id="contact"
+      className="section-shell section-shell--contact"
+      aria-labelledby="contact-heading"
+    >
       <div className="section-container section-container--narrow">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -61,15 +101,19 @@ export default function ContactForm() {
           <div className="contact-copy">
             <div className="availability-pill">
               <span className="availability-dot" aria-hidden="true" />
-              Open to web, full-stack and embedded opportunities
+              Open to roles &amp; product collaborations
             </div>
-            <span className="section-label">Let’s build something useful</span>
+            <span className="section-label">
+              <span>05 /</span> Let’s talk
+            </span>
             <h2 id="contact-heading">
-              Have a role or product worth <span>building together?</span>
+              A good idea starts
+              <br />
+              with <span>a conversation.</span>
             </h2>
             <p>
-              I’m interested in product-focused web, full-stack, AI automation, and connected
-              systems work in Tunisia or with international teams.
+              Hiring an engineer, building a product, or exploring a collaboration? Tell me what you
+              have in mind. Based in Tunisia, open to working with international teams.
             </p>
 
             <div className="contact-links">
@@ -82,23 +126,55 @@ export default function ContactForm() {
                     target={external ? '_blank' : undefined}
                     rel={external ? 'noopener noreferrer' : undefined}
                   >
-                    <span className="contact-link__icon" aria-hidden="true"><Icon size={18} /></span>
-                    <span><small>{label}</small><strong>{value}</strong></span>
+                    <span className="contact-link__icon" aria-hidden="true">
+                      <Icon size={18} />
+                    </span>
+                    <span>
+                      <small>{label}</small>
+                      <strong>{value}</strong>
+                    </span>
                     <HiArrowRight className="contact-link__arrow" aria-hidden="true" />
                   </a>
                 )
               })}
             </div>
 
-            <a href="/Sofiene_Zayati_CV.pdf" download="Sofiene_Zayati_CV.pdf" className="button-link contact-cv">
+            <div className="contact-copy-email">
+              <button type="button" className="button-link" onClick={copyEmail}>
+                {copyStatus === 'copied' ? (
+                  <HiCheck aria-hidden="true" />
+                ) : (
+                  <HiDuplicate aria-hidden="true" />
+                )}
+                {copyStatus === 'copied' ? 'Email copied' : 'Copy email address'}
+              </button>
+              <span role="status">
+                {copyStatus === 'error'
+                  ? 'Please select the email link above to get in touch.'
+                  : copyStatus === 'copied'
+                    ? 'Ready to paste into your email app.'
+                    : ''}
+              </span>
+            </div>
+
+            <a
+              href="/Sofiene_Zayati_CV.pdf"
+              download="Sofiene_Zayati_CV.pdf"
+              className="button-link contact-cv"
+            >
               <HiDownload aria-hidden="true" /> Download my CV
             </a>
           </div>
 
           <form className="contact-form" onSubmit={handleSubmit} aria-busy={status === 'sending'}>
+            <input type="hidden" name="_subject" value="New portfolio enquiry — Sofiene Zayati" />
+            <div className="form-honeypot" aria-hidden="true">
+              <label htmlFor="contact-website">Leave this field empty</label>
+              <input id="contact-website" name="_gotcha" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="contact-form__heading">
               <p>Send a message</p>
-              <span>I usually reply within 1–2 days.</span>
+              <span>A role. A project. A hello.</span>
             </div>
 
             <div className="contact-form__row">
@@ -110,7 +186,9 @@ export default function ContactForm() {
                   name="name"
                   autoComplete="name"
                   value={formData.name}
-                  onChange={(event) => setFormData({ ...formData, name: event.target.value })}
+                  onChange={(event) => updateField('name', event.target.value)}
+                  maxLength={120}
+                  disabled={status === 'sending'}
                   required
                   placeholder="Your name"
                 />
@@ -123,7 +201,9 @@ export default function ContactForm() {
                   name="email"
                   autoComplete="email"
                   value={formData.email}
-                  onChange={(event) => setFormData({ ...formData, email: event.target.value })}
+                  onChange={(event) => updateField('email', event.target.value)}
+                  maxLength={254}
+                  disabled={status === 'sending'}
                   required
                   placeholder="you@example.com"
                 />
@@ -137,7 +217,10 @@ export default function ContactForm() {
                 name="message"
                 rows={6}
                 value={formData.message}
-                onChange={(event) => setFormData({ ...formData, message: event.target.value })}
+                onChange={(event) => updateField('message', event.target.value)}
+                minLength={10}
+                maxLength={5000}
+                disabled={status === 'sending'}
                 required
                 placeholder="Tell me about the opportunity, project, or idea..."
               />
@@ -149,10 +232,24 @@ export default function ContactForm() {
                 role={status === 'error' ? 'alert' : 'status'}
                 aria-live="polite"
               >
-                {statusMessage && (status === 'success' ? <HiCheck aria-hidden="true" /> : <HiExclamation aria-hidden="true" />)}
+                {statusMessage &&
+                  (status === 'success' ? (
+                    <HiCheck aria-hidden="true" />
+                  ) : (
+                    <HiExclamation aria-hidden="true" />
+                  ))}
                 {statusMessage}
               </p>
-              <button type="submit" className="button button--primary" disabled={status === 'sending'}>
+              {status === 'error' && (
+                <a href={`mailto:${profile.email}`} className="button-link">
+                  Email me directly <HiArrowRight aria-hidden="true" />
+                </a>
+              )}
+              <button
+                type="submit"
+                className="button button--primary"
+                disabled={status === 'sending'}
+              >
                 {status === 'sending' ? 'Sending…' : 'Send message'}
                 <HiPaperAirplane className="-rotate-45" aria-hidden="true" />
               </button>

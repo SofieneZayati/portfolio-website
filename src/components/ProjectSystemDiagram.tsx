@@ -47,7 +47,7 @@ import {
 } from 'react-icons/si'
 import type { ProjectDiagram, ProjectDiagramNode } from '../data/projectContent'
 
-const laneAccents = ['#0891b2', '#7c3aed', '#db2777']
+const laneAccents = ['#b79aff', '#8faeff', '#cdb3ff']
 
 type DiagramNodeKind = 'actor' | 'device' | 'screen' | 'service' | 'data' | 'ai' | 'output'
 

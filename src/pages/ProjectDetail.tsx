@@ -1,231 +1,172 @@
-import { useParams, Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { HiArrowLeft, HiArrowRight, HiDownload, HiExternalLink, HiCollection, HiUsers, HiServer, HiCode } from 'react-icons/hi'
+import { Link, useParams } from 'react-router-dom'
+import {
+  HiArrowLeft,
+  HiArrowRight,
+  HiChevronDown,
+  HiCode,
+  HiDownload,
+  HiExternalLink,
+} from 'react-icons/hi'
 import { projects } from '../data/projects'
 import projectContent from '../data/projectContent'
+import { projectNarratives } from '../data/projectNarratives'
+import { additionalDiagrams } from '../data/projectDiagrams'
 import ImageGallery from '../components/ImageGallery'
 import ProjectSectionNav from '../components/ProjectSectionNav'
-import SEO from '../components/SEO'
-import ProjectArtwork from '../components/ProjectArtwork'
 import ProjectSystemDiagram from '../components/ProjectSystemDiagram'
+import SEO from '../components/SEO'
 
-function ProjectSection({
-  children,
-  delay = 0,
-  first = false,
-  className = '',
-  id,
+function SectionTitle({
+  number,
+  label,
+  title,
 }: {
-  children: React.ReactNode
-  delay?: number
-  first?: boolean
-  className?: string
-  id?: string
+  number: string
+  label: string
+  title: string
 }) {
   return (
-    <motion.section
-      id={id}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`mb-20 md:mb-28 last:mb-0 ${first ? 'mt-8 md:mt-10' : 'mt-16 md:mt-24'} ${className}`}
-      style={id ? { scrollMarginTop: '5rem' } : undefined}
-    >
-      {children}
-    </motion.section>
+    <header className="case-section-heading">
+      <span className="section-label">
+        <span>{number} /</span>
+        {label}
+      </span>
+      <h2>{title}</h2>
+    </header>
   )
-}
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <span className="section-label block mb-4">{children}</span>
-}
-
-function SectionHeading({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return (
-    <h2
-      className={`text-2xl md:text-3xl font-display font-bold text-white max-w-2xl leading-[1.2] mb-8 md:mb-10 ${className}`}
-    >
-      {children}
-    </h2>
-  )
-}
-
-function pad2(n: number) {
-  return String(n).padStart(2, '0')
 }
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
-  const project = projects.find((p) => p.id === id)
+  const project = projects.find((item) => item.id === id)
   const content = id ? projectContent[id] : undefined
-
-  if (!project || !content) {
+  if (!project || !content)
     return (
       <>
         <SEO
           title="Project not found | Sofiene Zayati"
           description="The requested project could not be found."
-          path={id ? `/project/${id}` : '/project'}
+          path={`/project/${id ?? ''}`}
           noindex
         />
-        <div className="min-h-screen flex items-center justify-center px-4">
-          <div className="text-center">
-            <span className="section-label block mb-4">404 / Project</span>
-            <h1 className="text-4xl font-bold text-white mb-4">Project not found</h1>
-            <p className="text-white/60 mb-8">The project may have moved or the link may be incorrect.</p>
-            <Link
-              to="/#projects"
-              className="inline-flex items-center gap-2 text-[#00f5ff] hover:underline"
-            >
-              <HiArrowLeft /> Back to selected work
+        <div className="not-found">
+          <div>
+            <span className="section-label">404 / Project</span>
+            <h1>Project not found.</h1>
+            <p>The project may have moved or the link may be incorrect.</p>
+            <Link to="/#projects" className="button button--primary">
+              Back to selected work <HiArrowRight aria-hidden="true" />
             </Link>
           </div>
         </div>
       </>
     )
+
+  const narrative = projectNarratives[project.id]
+  const diagram = content.diagram ?? additionalDiagrams[project.id]
+  const primary = content.cta.primary
+  const demoUrl =
+    project.links.live ??
+    (primary && /demo|watch|live/i.test(primary.label)
+      ? primary.url
+      : undefined)
+  const codeUrl =
+    project.links.github ??
+    content.cta.secondary?.find((link) =>
+      /github|source|repository/i.test(link.label),
+    )?.url
+  const gallery = [...content.gallery]
+  for (const src of project.screenshots) {
+    if (!gallery.some((image) => image.src === src))
+      gallery.push({ src, caption: `${project.title} — project interface` })
   }
-
-  const currentIndex = projects.findIndex((p) => p.id === id)
-  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
-  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
-
-  const hasArchitecture = content.architecture && content.architecture.length > 0
-  const hasChallenges = content.challenges && content.challenges.length > 0
-  const hasResults = content.results && content.results.length > 0
-  const hasFacts = content.facts && content.facts.length > 0
-  const hasMetrics = hasResults && content.results!.some((r) => r.metric)
-  const hasFeatures = content.features.length > 0
-  const heroPreviewSources = Array.from(
-    new Set([...project.screenshots, ...content.gallery.map((image) => image.src)]),
-  ).slice(0, 3)
-  const heroPreviewSrc = heroPreviewSources[0]
-  const heroPreviewCaption =
-    content.gallery.find((image) => image.src === heroPreviewSrc)?.caption ??
-    `${project.title} project preview`
-  const detailGallery = content.gallery.filter(
-    (image) => !heroPreviewSources.includes(image.src) || content.galleryRetainHero?.includes(image.src),
-  )
-  const hasGallery = detailGallery.length > 0
-  const contentDemoLink = content.cta.primary &&
-    /demo|watch|live/i.test(`${content.cta.primary.label} ${content.cta.primary.url}`)
-    ? content.cta.primary.url
-    : undefined
-  const contentCodeLink = content.cta.secondary?.find((link) =>
-    /github|source|code|repository/i.test(`${link.label} ${link.url}`)
-  )?.url
-  const demoUrl = project.links.live ?? contentDemoLink
-  const liveLabel = project.links.liveLabel ?? 'View demo'
-  const codeUrl = project.links.github ?? contentCodeLink
-  const codeLabel = project.links.githubLabel ?? 'View code'
-  const primaryIsDownload = Boolean(
-    content.cta.primary &&
-    (/download/i.test(content.cta.primary.label) || /\.(?:pdf|pptx)(?:$|\?)/i.test(content.cta.primary.url)),
-  )
-  const heroMetadata = [project.role, project.year, project.scope ?? content.status?.[0]].filter(Boolean).slice(0, 3) as string[]
-
+  const heroImage =
+    gallery.find((image) => image.src === project.screenshots[0]) ?? gallery[0]
+  const grouped = content.features.reduce<
+    Record<string, typeof content.features>
+  >((groups, feature) => {
+    const key = feature.group ?? 'Product capabilities'
+    ;(groups[key] ??= []).push(feature)
+    return groups
+  }, {})
   const sections = [
-    ...(hasFacts ? [{ id: 'overview' as const, label: 'Overview' }] : []),
-    ...(hasFeatures ? [{ id: 'capabilities' as const, label: 'Capabilities' }] : []),
-    ...(content.techStack.length > 0 ? [{ id: 'stack' as const, label: 'Stack' }] : []),
-    ...(hasArchitecture ? [{ id: 'architecture' as const, label: 'Architecture' }] : []),
-    ...(hasGallery ? [{ id: 'gallery' as const, label: 'In Action' }] : []),
-    ...(hasChallenges ? [{ id: 'decisions' as const, label: 'Decisions' }] : []),
-    ...(hasResults ? [{ id: 'outcomes' as const, label: 'Outcomes' }] : []),
-    { id: 'next-steps' as const, label: project.progress ? 'Roadmap' : 'Explore' },
+    { id: 'overview', label: 'Brief' },
+    ...(content.features.length
+      ? [{ id: 'capabilities', label: 'Capabilities' }]
+      : []),
+    ...(diagram || content.architecture.length
+      ? [{ id: 'architecture', label: 'System' }]
+      : []),
+    ...(gallery.length ? [{ id: 'gallery', label: 'Walkthrough' }] : []),
+    ...(content.challenges?.length
+      ? [{ id: 'decisions', label: 'Decisions' }]
+      : []),
+    ...(content.techStack.length ? [{ id: 'stack', label: 'Toolkit' }] : []),
+    ...(content.results?.length ? [{ id: 'outcomes', label: 'Delivery' }] : []),
+    { id: 'next-steps', label: 'Resources' },
   ]
+  const index = projects.findIndex((item) => item.id === id)
+  const adjacent = [projects[index - 1], projects[index + 1]]
+  const isDownload = (url: string, label: string) =>
+    /download/i.test(label) || /\.(pdf|pptx)(?:$|\?)/i.test(url)
 
   return (
     <>
       <SEO
         title={`${project.title} | Sofiene Zayati`}
-        description={`${project.description} A project by Sofiene Zayati.`}
+        description={project.description}
         path={`/project/${project.id}`}
-        image={project.screenshots[0] || project.logo || '/images/og-image.png'}
+        image={project.cardPreview ?? project.screenshots[0] ?? '/og.png'}
         imageAlt={`${project.title} project by Sofiene Zayati`}
         type="article"
       />
-      <div className="min-h-screen pt-24 md:pt-28 pb-16 md:pb-24 px-4 sm:px-8">
-      <div className="max-w-[1000px] mx-auto">
-        {/* Back link */}
-        <div>
-          <Link
-            to="/#projects"
-            className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-[#00f5ff] transition-colors mb-10 md:mb-16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60 rounded-lg"
-          >
-            <HiArrowLeft /> Back to projects
+      <div className="case-page">
+        <div className="case-container">
+          <Link to="/#projects" className="case-back">
+            <HiArrowLeft aria-hidden="true" /> All projects
           </Link>
-        </div>
-
-        {/* 1. HERO */}
-        <header className="mb-10 md:mb-16">
-          <div className="flex items-center gap-3 mb-6 md:mb-8">
-            {project.logo ? (
-              <img
-                src={project.logo}
-                alt={`${project.title} logo`}
-                width={48}
-                height={48}
-                decoding="async"
-                className="w-10 h-10 md:w-12 md:h-12 object-contain opacity-90"
-                onError={(e) => {
-                  ;(e.target as HTMLImageElement).style.display = 'none'
-                }}
-              />
-            ) : (
-              <span className="text-xs font-bold text-white/50">
-                {project.title.slice(0, 3).toUpperCase()}
-              </span>
-            )}
-            <span className="text-xs font-display tracking-[0.25em] uppercase text-white/55 font-semibold">
-              Project case study
-            </span>
-          </div>
-
-          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-7xl leading-[0.98] tracking-[-0.04em] text-white mb-5 md:mb-6 max-w-4xl">
-            {project.title}
-          </h1>
-          <p className="text-lg md:text-2xl text-white/65 leading-relaxed max-w-3xl">
-            {project.tagline}
-          </p>
-          <p className="mt-4 text-sm md:text-base text-white/50 leading-relaxed max-w-3xl">
-            {project.description}
-          </p>
-          {project.deployment && (
-            <div className="project-deployment" aria-label="Deployment status">
-              <span className="project-deployment__status"><span aria-hidden="true" /> Deployed</span>
-              <span>{project.deployment.platform}</span>
-            </div>
-          )}
-
-          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-            <ul className="flex flex-wrap items-center gap-2" aria-label="Project highlights">
-              {heroMetadata.map((item, index) => (
-                <li
-                  key={item}
-                  className={`px-3 py-1.5 text-xs font-medium tracking-wider uppercase rounded-full border ${
-                    index === 0
-                      ? 'text-[#00f5ff]/90 border-[#00f5ff]/25 bg-[#00f5ff]/[0.05]'
-                      : 'text-white/60 border-white/[0.1] bg-white/[0.02]'
-                  }`}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {(demoUrl || codeUrl) && (
-              <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Project links">
+          <header className="case-hero">
+            <div className="case-hero-copy">
+              <p className="case-kicker">
+                <span>{project.year}</span> / Project case study
+              </p>
+              <h1>{project.title}</h1>
+              <p className="case-tagline">{project.tagline}</p>
+              <p className="case-description">{project.description}</p>
+              <dl className="case-meta">
+                <div>
+                  <dt>My role</dt>
+                  <dd>{project.role}</dd>
+                </div>
+                <div>
+                  <dt>Scope</dt>
+                  <dd>{project.scope}</dd>
+                </div>
+              </dl>
+              {project.deployment && (
+                <p className="case-status">
+                  <span className="availability-dot" aria-hidden="true" />{' '}
+                  Deployed · {project.deployment.platform}
+                </p>
+              )}
+              {project.progress && (
+                <p className="case-status">
+                  In development · {project.progress.available}
+                </p>
+              )}
+              <div className="case-actions">
                 {demoUrl && (
                   <a
                     href={demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${liveLabel}: ${project.title} (opens in a new tab)`}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-[#050505] rounded-xl bg-[#00f5ff] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60"
+                    className="button button--primary"
                   >
-                    <HiExternalLink size={16} />
-                    {liveLabel}
+                    {project.links.liveLabel ??
+                      (primary?.url === demoUrl
+                        ? primary.label
+                        : 'View demo')}{' '}
+                    <HiExternalLink aria-hidden="true" />
                   </a>
                 )}
                 {codeUrl && (
@@ -233,461 +174,342 @@ export default function ProjectDetail() {
                     href={codeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`View ${project.title} source code (opens in a new tab)`}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white/80 rounded-xl border border-white/[0.12] bg-white/[0.03] hover:text-white hover:bg-white/[0.07] hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/60"
+                    className="button button--secondary"
                   >
-                    <HiCode size={16} />
-                    {codeLabel}
+                    <HiCode aria-hidden="true" />
+                    {project.links.githubLabel ?? 'View source'}
+                  </a>
+                )}
+                {!demoUrl && !codeUrl && (
+                  <a href="#architecture" className="button button--primary">
+                    Explore the system <HiArrowRight aria-hidden="true" />
                   </a>
                 )}
               </div>
-            )}
-          </div>
-
-          <figure className="mt-10 md:mt-14">
-            <div className={`project-hero-visual ${heroPreviewSources.length > 1 ? 'is-mosaic' : 'is-single'}`}>
-              {(heroPreviewSources.length > 0 ? heroPreviewSources : [undefined]).map((src, index) => {
-                const media = content.gallery.find((image) => image.src === src)
-                const caption = media?.caption ?? `${project.title} project view ${index + 1}`
-                return (
-                  <div
-                    key={src ?? 'project-placeholder'}
-                    className={`project-hero-visual__item ${index === 0 ? 'is-primary' : ''}`}
-                  >
-                    <ProjectArtwork
-                      project={project}
-                      src={src}
-                      alt={src ? caption : ''}
-                      eager={index === 0}
-                      width={media?.width}
-                      height={media?.height}
-                      className={`w-full h-full ${
-                        project.visualFit === 'cover' && index === 0 ? 'object-cover' : 'object-contain'
-                      }`}
-                    />
-                  </div>
-                )
-              })}
             </div>
-            <figcaption className="mt-3 text-xs text-white/55 leading-relaxed">
-              {heroPreviewSrc ? heroPreviewCaption : `${project.title} — visual overview`}
-            </figcaption>
-          </figure>
-
-          <div className="accent-rule mt-10 md:mt-16" />
-        </header>
-
-        <ProjectSectionNav sections={sections} />
-
-        {/* 2. OVERVIEW (lead paragraph + stat cards) */}
-        {hasFacts && (
-          <ProjectSection id="overview" first>
-            <div className="section-anchor mb-4" />
-            <SectionLabel>Overview</SectionLabel>
-            <h2 className="sr-only">Project overview</h2>
-            <p className="text-lg md:text-xl text-white/65 leading-relaxed max-w-3xl mb-10 md:mb-14">
-              {project.longDescription}
-            </p>
-            <div className={`project-ownership ${project.progress ? 'mb-5' : 'mb-10 md:mb-12'}`}>
-              <div>
-                <span>Role &amp; focus</span>
-                <strong>{project.role}</strong>
-              </div>
-              <p>{project.context}{project.scope ? ` · ${project.scope}` : ''}</p>
-            </div>
-            {project.progress && (
-              <div className="project-progress mb-10 md:mb-12">
-                <article>
-                  <span>Available now</span>
-                  <p>{project.progress.available}</p>
-                </article>
-                <article>
-                  <span>Next milestone</span>
-                  <p>{project.progress.next}</p>
-                </article>
+            {heroImage && (
+              <div className="case-cover">
+                <ImageGallery images={[heroImage]} layout="hero" priority />
+                <a href="#gallery" className="case-cover-link">
+                  {gallery.length} project{' '}
+                  {gallery.length === 1 ? 'view' : 'views'}{' '}
+                  <HiArrowRight aria-hidden="true" />
+                </a>
               </div>
             )}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {content.facts.map((fact, i) => {
-                const iconMap: Record<string, React.ReactNode> = {
-                  Type: <HiCollection size={16} />,
-                  Roles: <HiUsers size={16} />,
-                  Deployment: <HiServer size={16} />,
-                  Stack: <HiCode size={16} />,
-                }
-                return (
-                  <div key={i} className="stat-card">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[#00f5ff]/70">{iconMap[fact.label] || <HiCollection size={16} />}</span>
-                      <span className="text-[0.6875rem] font-display font-semibold tracking-[0.2em] uppercase text-white/55">
-                        {fact.label}
-                      </span>
-                    </div>
-                    <div className="text-base md:text-lg font-semibold text-white/92 leading-[1.4]">
-                      {fact.value}
-                    </div>
-                  </div>
-                )
-              })}
+          </header>
+          <ProjectSectionNav sections={sections} />
+          <section id="overview" className="case-section">
+            <SectionTitle
+              number="01"
+              label="At a glance"
+              title="The project in a minute."
+            />
+            <div className="case-brief">
+              <article>
+                <span>01 / The problem</span>
+                <h3>Why it exists</h3>
+                <p>{narrative?.problem ?? project.description}</p>
+              </article>
+              <article>
+                <span>02 / My contribution</span>
+                <h3>What I built</h3>
+                <p>{narrative?.contribution ?? project.longDescription}</p>
+              </article>
+              <article>
+                <span>03 / Delivery scope</span>
+                <h3>
+                  {project.progress ? 'Where it stands' : 'What’s included'}
+                </h3>
+                <p>{project.progress?.available ?? project.scope}</p>
+                <a href={project.progress ? '#next-steps' : '#architecture'}>
+                  {project.progress
+                    ? 'See the next milestone'
+                    : 'Explore the implementation'}{' '}
+                  <HiArrowRight aria-hidden="true" />
+                </a>
+              </article>
             </div>
-          </ProjectSection>
-        )}
-
-        {/* 3. CAPABILITIES (grouped glass containers) */}
-        {hasFeatures && (() => {
-          const grouped = content.features.reduce<Record<string, typeof content.features>>((acc, f) => {
-            const g = f.group || 'Capabilities'
-            if (!acc[g]) acc[g] = []
-            acc[g].push(f)
-            return acc
-          }, {})
-          const groupNames = Object.keys(grouped)
-          const groupAccents = ['#00f5ff', '#8b5cf6', '#ff0080', '#00f5ff', '#8b5cf6', '#ff0080']
-          return (
-            <ProjectSection id="capabilities">
-              <div className="section-anchor mb-4" />
-              <SectionLabel>Capabilities</SectionLabel>
-              <SectionHeading>Core product capabilities</SectionHeading>
-              <div className="grid md:grid-cols-2 gap-6">
-                {groupNames.map((gName, gi) => {
-                  const accentColor = groupAccents[gi % groupAccents.length]
-                  const glowColor = accentColor + '1A'
-                  return (
-                    <motion.div
-                      key={gName}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: gi * 0.08 }}
-                      className="group relative"
-                    >
-                      <div
-                        className="glass-card-elevated rounded-2xl p-8 card-left-glow card-hover-glow transition-all duration-500"
-                        style={{
-                          '--card-accent': accentColor,
-                          '--card-glow': glowColor,
-                        } as React.CSSProperties}
-                      >
-                        <div
-                          className="group-accent -mx-8 -mt-8 mb-4"
-                          style={{ backgroundColor: accentColor, height: '4px' }}
-                        />
-                        <h3 className="font-display font-bold text-white text-lg mb-4">
-                          {gName}
-                        </h3>
-                        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-5">
-                          {grouped[gName].map((feat, fi) => (
-                            <div key={fi}>
-                              <div className="flex items-center gap-3 mb-3">
-                                <span className="icon-glow" aria-hidden="true">
-                                  <span>{feat.icon}</span>
-                                </span>
-                                <span className="text-base font-semibold text-white">
-                                  {feat.title}
-                                </span>
-                              </div>
-                              <p className="text-sm text-white/60 leading-relaxed">
-                                {feat.desc}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </ProjectSection>
-          )
-        })()}
-
-        {/* 4. STACK (single glass panel) */}
-        {content.techStack.length > 0 && (
-          <ProjectSection id="stack">
-            <div className="section-anchor mb-4" />
-            <SectionLabel>Stack</SectionLabel>
-            <div className="mb-10">
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-white leading-[1.2]">
-                <span className="text-white/85">Technology stack</span>
-                <span className="block mt-2 text-white/50 font-normal text-base md:text-lg">
-                  The tools, services, and engineering layers behind the product.
-                </span>
-              </h2>
-            </div>
-            <div className="glass-card-elevated rounded-2xl p-6 md:p-8 hover:-translate-y-0.5 transition-transform duration-500">
-              {content.techStack.map((group, gi) => (
-                <div
-                  key={gi}
-                  className="tech-row border-b border-white/[0.04] last:border-b-0 !py-5 first:!pt-0 last:!pb-0"
-                >
-                  <span className="tech-row-label">{group.category}</span>
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    {group.items.map((item) => (
-                      <span
-                        key={item.name}
-                        className="tech-pill"
-                        title={item.description}
-                        aria-label={item.description ? `${item.name}: ${item.description}` : item.name}
-                      >
-                        {item.name}
-                      </span>
-                    ))}
-                  </div>
+            <dl className="case-facts">
+              {content.facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
                 </div>
               ))}
-            </div>
-          </ProjectSection>
-        )}
-
-        {/* 5. ARCHITECTURE (subtle glass per block) */}
-        {hasArchitecture && (
-          <ProjectSection id="architecture">
-            <div className="section-anchor mb-4" />
-            <SectionLabel>Architecture</SectionLabel>
-            <SectionHeading>How the system fits together</SectionHeading>
-            {content.diagram && <ProjectSystemDiagram diagram={content.diagram} />}
-            <div className="space-y-6 max-w-[860px] mx-auto">
-              {content.architecture.map((arch, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.06 }}
-                  className="group"
-                >
-                  <div className="glass-card-elevated rounded-2xl p-6 md:p-8 transition-transform duration-500">
-                    <div className="flex items-center gap-4 mb-5">
-                      <span className="architecture-badge shrink-0">{pad2(i + 1)}</span>
-                      <h3 className="architecture-title" style={{ marginBottom: 0 }}>{arch.title}</h3>
+            </dl>
+            <details className="case-context">
+              <summary>
+                Read the full project context{' '}
+                <HiChevronDown aria-hidden="true" />
+              </summary>
+              <p>{project.longDescription}</p>
+              <small>{project.context}</small>
+            </details>
+          </section>
+          {!!content.features.length && (
+            <section id="capabilities" className="case-section">
+              <SectionTitle
+                number="02"
+                label="Product experience"
+                title="What the product does."
+              />
+              <div className="case-capabilities">
+                {Object.entries(grouped).map(([name, features], groupIndex) => (
+                  <details
+                    key={name}
+                    className="case-capability-group"
+                    open={groupIndex === 0}
+                  >
+                    <summary>
+                      <span>
+                        <small>{String(groupIndex + 1).padStart(2, '0')}</small>
+                        {name}
+                      </span>
+                      <span>
+                        {features.length} capabilities{' '}
+                        <HiChevronDown aria-hidden="true" />
+                      </span>
+                    </summary>
+                    <div className="case-feature-grid">
+                      {features.map((feature) => (
+                        <article key={feature.title}>
+                          <h3>{feature.title}</h3>
+                          <p>{feature.desc}</p>
+                        </article>
+                      ))}
                     </div>
-                    <p className="architecture-desc mb-5">{arch.desc}</p>
-                    {arch.image && (
-                      <figure className={`project-architecture-media mb-5 ${arch.imageKind === 'diagram' ? 'is-diagram' : ''}`}>
-                        <a
-                          href={arch.image}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${arch.imageCaption ?? `Open ${arch.title} image`} (opens in a new tab)`}
-                        >
-                          {arch.imageFallback ? (
-                            <picture>
-                              <source srcSet={arch.image} type="image/svg+xml" />
-                              <img
-                                src={arch.imageFallback}
-                                alt={arch.imageAlt ?? arch.title}
-                                width={arch.imageWidth}
-                                height={arch.imageHeight}
-                                loading="lazy"
-                                decoding="async"
-                              />
-                            </picture>
-                          ) : (
-                            <img
-                              src={arch.image}
-                              alt={arch.imageAlt ?? arch.title}
-                              width={arch.imageWidth}
-                              height={arch.imageHeight}
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          )}
-                        </a>
-                        {arch.imageCaption && (
-                          <figcaption>
-                            {arch.imageCaption} <HiExternalLink aria-hidden="true" />
-                          </figcaption>
-                        )}
-                      </figure>
-                    )}
-                    {arch.items && arch.items.length > 0 && (
-                      <ul className="architecture-items mt-5">
-                        {arch.items.map((item, j) => (
-                          <li key={j}>
-                            <strong>{item.label}</strong>
-                            <span>{item.desc}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </ProjectSection>
-        )}
-
-        {/* 6. IN ACTION (gallery) */}
-        {hasGallery && (
-          <ProjectSection id="gallery">
-            <div className="section-anchor mb-4" />
-            <SectionLabel>In Action</SectionLabel>
-            <SectionHeading>
-              Product walkthrough
-            </SectionHeading>
-            <ImageGallery images={detailGallery} />
-          </ProjectSection>
-        )}
-
-        {/* 7. ENGINEERING CONSIDERATIONS */}
-        {hasChallenges && (
-          <ProjectSection id="decisions">
-            <div className="section-anchor mb-4" />
-            <SectionLabel>Engineering Considerations</SectionLabel>
-            <SectionHeading>Engineering decisions and trade-offs</SectionHeading>
-            <div className="space-y-6 max-w-3xl">
-              {content.challenges!.map((ch, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.06 }}
-                  className="group"
-                >
-                  <div className="glass-card-elevated rounded-2xl p-6 md:p-8 decision-rule transition-transform duration-500">
-                    <span className="text-xs font-display font-semibold tracking-[0.25em] uppercase text-white/55 block mb-2">
-                      Consideration {pad2(i + 1)}
-                    </span>
-                    <h3 className="text-lg font-semibold text-white mb-4 leading-snug">
-                      {ch.title}
-                    </h3>
-                    <p className="text-base text-white/65 leading-relaxed">{ch.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </ProjectSection>
-        )}
-
-        {/* 8. OUTCOMES (metric tiles OR icon pillars, auto-detect) */}
-        {hasResults && (
-          <ProjectSection id="outcomes">
-            <div className="section-anchor mb-4" />
-            <SectionLabel>Outcomes</SectionLabel>
-            <SectionHeading>What I delivered</SectionHeading>
-            {hasMetrics ? (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-14">
-                {content.results!.map((r, i) => (
-                  <div key={i} className="max-w-xs">
-                    {r.metric && <div className="metric-figure mb-3">{r.metric}</div>}
-                    <div className="text-xs font-display font-semibold tracking-[0.2em] uppercase text-white/60 mb-3">
-                      {r.title}
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+          {(diagram || !!content.architecture.length) && (
+            <section id="architecture" className="case-section">
+              <SectionTitle
+                number="03"
+                label="System design"
+                title="How the pieces connect."
+              />
+              {diagram && <ProjectSystemDiagram diagram={diagram} />}
+              <div className="case-architecture">
+                {content.architecture.map((block, i) => (
+                  <details key={block.title} open={!diagram && i === 0}>
+                    <summary>
+                      <span>
+                        <small>{String(i + 1).padStart(2, '0')}</small>
+                        {block.title}
+                      </span>
+                      <HiChevronDown aria-hidden="true" />
+                    </summary>
+                    <div className="case-architecture-body">
+                      <p>{block.desc}</p>
+                      {block.image && (
+                        <ImageGallery
+                          layout="hero"
+                          images={[
+                            {
+                              src: block.image,
+                              caption:
+                                block.imageAlt ??
+                                block.imageCaption ??
+                                block.title,
+                              width: block.imageWidth,
+                              height: block.imageHeight,
+                              variant:
+                                block.imageKind === 'diagram'
+                                  ? 'diagram'
+                                  : 'screen',
+                            },
+                          ]}
+                        />
+                      )}
+                      {block.items && (
+                        <dl>
+                          {block.items.map((item) => (
+                            <div key={item.label}>
+                              <dt>{item.label}</dt>
+                              <dd>{item.desc}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      )}
                     </div>
-                    <p className="text-sm text-white/55 leading-relaxed">{r.content}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+          {!!gallery.length && (
+            <section id="gallery" className="case-section">
+              <SectionTitle
+                number="04"
+                label="In action"
+                title="A closer look at the build."
+              />
+              <p className="case-section-lead">
+                Actual project screens and documented visuals. Open any image
+                for the full view.
+              </p>
+              <ImageGallery images={gallery} />
+            </section>
+          )}
+          {!!content.challenges?.length && (
+            <section id="decisions" className="case-section">
+              <SectionTitle
+                number="05"
+                label="Engineering choices"
+                title="The decisions behind the build."
+              />
+              <div className="case-decisions">
+                {content.challenges.map((decision, i) => (
+                  <article key={decision.title}>
+                    <span>{String(i + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h3>{decision.title}</h3>
+                      <p>{decision.desc}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
+          {!!content.techStack.length && (
+            <section id="stack" className="case-section">
+              <SectionTitle
+                number="06"
+                label="The toolkit"
+                title="Each tool has a job."
+              />
+              <p className="case-section-lead">
+                Open a technology to see its role in this project.
+              </p>
+              <div className="case-stack">
+                {content.techStack.map((group) => (
+                  <div className="case-stack-group" key={group.category}>
+                    <h3>{group.category}</h3>
+                    <div>
+                      {group.items.map((item) =>
+                        item.description ? (
+                          <details key={item.name}>
+                            <summary>
+                              {item.name} <span aria-hidden="true">+</span>
+                            </summary>
+                            <p>{item.description}</p>
+                          </details>
+                        ) : (
+                          <span key={item.name} className="case-stack-item">
+                            {item.name}
+                          </span>
+                        ),
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
-            ) : (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
-                {content.results!.map((r, i) => (
-                  <div key={i} className="max-w-xs">
-                    {r.icon && (
-                      <div className="text-3xl mb-4" aria-hidden="true">
-                        {r.icon}
-                      </div>
+            </section>
+          )}
+          {!!content.results?.length && (
+            <section id="outcomes" className="case-section">
+              <SectionTitle
+                number="07"
+                label="Delivery notes"
+                title="The documented scope."
+              />
+              <div className="case-delivery">
+                {content.results.map((result) => (
+                  <article key={result.title}>
+                    {result.metric && (
+                      <span className="case-delivery-metric">
+                        {result.metric}
+                      </span>
                     )}
-                    <h3 className="text-base font-semibold text-white mb-2">{r.title}</h3>
-                    <p className="text-sm text-white/55 leading-relaxed whitespace-pre-line">
-                      {r.content}
-                    </p>
-                  </div>
+                    <h3>{result.title}</h3>
+                    <p>{result.content}</p>
+                  </article>
                 ))}
               </div>
-            )}
-          </ProjectSection>
-        )}
-
-        {/* 9. NEXT STEPS (centered, no card, no border) */}
-        <ProjectSection id="next-steps">
-          <div className="accent-rule mb-20" />
-          <div className="text-center max-w-2xl mx-auto py-8">
-            <span className="section-label block mb-6">
-              {project.progress ? 'Development roadmap' : 'Explore further'}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-white leading-[1.15] mb-5">
-              {project.progress ? 'The next milestone is defined.' : `Explore ${project.title} in more depth.`}
-            </h2>
-            <p className="text-base text-white/55 leading-relaxed mb-10 max-w-md mx-auto">
-              {project.progress
-                ? project.progress.next
-                : 'Open the available project resources or get in touch to discuss the engineering behind it.'}
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {content.cta.primary && (
+            </section>
+          )}
+          <section id="next-steps" className="case-section case-resources">
+            <div>
+              <span className="section-label">
+                {project.progress ? 'Next milestone' : 'Explore further'}
+              </span>
+              <h2>
+                {project.progress
+                  ? 'The next step is defined.'
+                  : 'Want to go deeper?'}
+              </h2>
+              <p>
+                {project.progress?.next ??
+                  'Explore the available resources or talk with me about the design and engineering behind this project.'}
+              </p>
+            </div>
+            <div className="case-resource-links">
+              {primary && (
                 <a
-                  href={content.cta.primary.url}
-                  target={primaryIsDownload ? undefined : '_blank'}
-                  rel={primaryIsDownload ? undefined : 'noopener noreferrer'}
-                  download={primaryIsDownload ? true : undefined}
-                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-[#050505] rounded-xl bg-[#00f5ff] hover:bg-white hover:-translate-y-1 transition-all duration-300"
+                  href={primary.url}
+                  className="button button--primary"
+                  download={isDownload(primary.url, primary.label) || undefined}
+                  target={primary.url.startsWith('http') ? '_blank' : undefined}
+                  rel={
+                    primary.url.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
                 >
-                  {primaryIsDownload ? <HiDownload size={16} /> : <HiExternalLink size={16} />}
-                  {content.cta.primary.label}
+                  {primary.label}
+                  {isDownload(primary.url, primary.label) ? (
+                    <HiDownload aria-hidden="true" />
+                  ) : (
+                    <HiExternalLink aria-hidden="true" />
+                  )}
                 </a>
               )}
-              {content.cta.secondary?.map((link, i) => {
-                const external = link.url.startsWith('http')
-                return (
+              {content.cta.secondary
+                ?.filter((link) => !link.url.includes('#contact'))
+                .map((link) => (
                   <a
-                    key={i}
+                    key={link.url}
                     href={link.url}
-                    target={external ? '_blank' : undefined}
-                    rel={external ? 'noopener noreferrer' : undefined}
-                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white/80 rounded-xl border border-white/[0.12] hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-300"
+                    className="button button--secondary"
+                    download={isDownload(link.url, link.label) || undefined}
+                    target={link.url.startsWith('http') ? '_blank' : undefined}
+                    rel={
+                      link.url.startsWith('http')
+                        ? 'noopener noreferrer'
+                        : undefined
+                    }
                   >
-                    {external ? <HiExternalLink size={16} /> : <HiArrowRight size={16} />}
-                    {link.label}
+                    {link.label} <HiExternalLink aria-hidden="true" />
                   </a>
-                )
-              })}
+                ))}
+              <Link to="/#contact" className="button button--secondary">
+                Let’s talk <HiArrowRight aria-hidden="true" />
+              </Link>
             </div>
-          </div>
-        </ProjectSection>
-
-        {/* 10. PREV / NEXT NAVIGATION */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 pt-10 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between gap-6"
-        >
-          {prevProject ? (
-            <Link
-              to={`/project/${prevProject.id}`}
-              className="group flex items-center gap-3 text-left"
-            >
-              <HiArrowLeft className="text-white/55 group-hover:text-[#00f5ff] transition-colors shrink-0" />
-              <div>
-                <span className="text-xs text-white/55 block uppercase tracking-wider">Previous</span>
-                <span className="text-lg font-bold text-white group-hover:text-[#00f5ff] transition-colors">
-                  {prevProject.title}
-                </span>
-              </div>
-            </Link>
-          ) : (
-            <div />
-          )}
-          {nextProject ? (
-            <Link
-              to={`/project/${nextProject.id}`}
-              className="group flex items-center gap-3 text-right sm:text-left justify-end"
-            >
-              <div>
-                <span className="text-xs text-white/55 block uppercase tracking-wider">Next</span>
-                <span className="text-lg font-bold text-white group-hover:text-[#ff0080] transition-colors">
-                  {nextProject.title}
-                </span>
-              </div>
-              <HiArrowRight className="text-white/55 group-hover:text-[#ff0080] transition-colors shrink-0" />
-            </Link>
-          ) : (
-            <div />
-          )}
-        </motion.div>
+          </section>
+          <nav className="case-adjacent" aria-label="More projects">
+            {adjacent.map((item, i) =>
+              item ? (
+                <Link key={item.id} to={`/project/${item.id}`}>
+                  <small>{i === 0 ? 'Previous project' : 'Next project'}</small>
+                  <strong>{item.title}</strong>
+                  <span>{item.tagline}</span>
+                  {i === 0 ? (
+                    <HiArrowLeft aria-hidden="true" />
+                  ) : (
+                    <HiArrowRight aria-hidden="true" />
+                  )}
+                </Link>
+              ) : (
+                <div key={i} />
+              ),
+            )}
+          </nav>
+        </div>
       </div>
-    </div>
     </>
   )
 }

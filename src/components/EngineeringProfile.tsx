@@ -1,114 +1,111 @@
-import { motion } from 'framer-motion'
-import { HiChip, HiCode, HiLightningBolt, HiServer } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
+import { HiArrowRight, HiChip, HiCode, HiLightningBolt } from 'react-icons/hi'
 
 const focusAreas = [
   {
     icon: HiCode,
-    title: 'Web products',
-    label: 'Primary focus',
+    title: 'Full-stack products',
     description:
-      'Responsive interfaces, role-based SaaS products, and maintainable full-stack applications built around real workflows.',
+      'Interfaces that make complex work feel simple, backed by typed services, reliable data, and practical deployment.',
     tools: ['React & Next.js', 'TypeScript', 'NestJS & FastAPI'],
-  },
-  {
-    icon: HiChip,
-    title: 'Connected systems',
-    label: 'Engineering foundation',
-    description:
-      'Firmware, sensors, and reliable device communication shaped by an embedded-systems background and hands-on IoT work.',
-    tools: ['Embedded C/C++', 'ESP32 & WT32', 'MQTT & BLE'],
+    project: 'sobly',
+    evidence: 'See Sobly’s storefront & admin',
   },
   {
     icon: HiLightningBolt,
-    title: 'Applied intelligence',
-    label: 'Core capability',
+    title: 'AI with a purpose',
     description:
-      'AI-assisted decisions, document intelligence, and automation designed around explainability, resilience, and human control.',
-    tools: ['n8n & Gemini', 'OCR & document AI', 'Groq & fallback logic'],
+      'Document intelligence, conversational assistants, and automation integrated into the workflow people already use.',
+    tools: ['n8n & Gemini', 'OCR & document AI', 'LLM integration'],
+    project: 'prigado',
+    evidence: 'Explore Prigado’s AI workflows',
+  },
+  {
+    icon: HiChip,
+    title: 'Software meets hardware',
+    description:
+      'An embedded-systems foundation that connects sensors, firmware, device communication, and the user-facing product.',
+    tools: ['Embedded C/C++', 'ESP32 & WT32', 'MQTT & BLE'],
+    project: 'macropark',
+    evidence: 'Inside the MacroPark system',
   },
 ]
-
-const systemLayers = [
-  { label: 'Device', value: 'C++ · ESP32', icon: HiChip },
-  { label: 'Connect', value: 'MQTT · BLE', icon: HiLightningBolt },
-  { label: 'Services', value: 'APIs · Cloud', icon: HiServer },
-  { label: 'Experience', value: 'React · Next', icon: HiCode },
+const process = [
+  { title: 'Understand', description: 'Start with the people, the workflow, and the constraints.' },
+  { title: 'Design', description: 'Shape a clear experience and a system that supports it.' },
+  { title: 'Engineer', description: 'Connect interface, services, data, and integrations.' },
+  { title: 'Deliver', description: 'Validate the critical paths and prepare a usable handoff.' },
 ]
 
 export default function EngineeringProfile() {
   return (
-    <section id="about" className="section-shell section-shell--profile" aria-labelledby="profile-heading">
+    <section
+      id="about"
+      className="section-shell section-shell--profile"
+      aria-labelledby="profile-heading"
+    >
       <div className="section-container">
-        <motion.header
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.55 }}
-          className="profile-intro"
-        >
+        <header className="profile-intro">
           <div>
-            <span className="section-label">Engineering profile</span>
+            <span className="section-label">
+              <span>02 /</span> A little about me
+            </span>
             <h2 id="profile-heading" className="section-heading">
-              Product-focused by default. <span>Systems-minded by training.</span>
+              I care about the details.
+              <br />
+              <span>And the whole system.</span>
             </h2>
           </div>
           <div className="profile-intro__copy">
             <p>
-              I combine full-stack product engineering with applied AI and an embedded-systems
-              foundation. That range helps me own the complete workflow: the data and decision
-              logic, the services that move it, and the interface people finally use.
+              I’m Sofiene, an engineer based in Tunisia. My path started with embedded and mobile
+              systems at ISET Radès and continues with web and internet technologies at ESPRIT.
+            </p>
+            <p>
+              Today, I build across that spectrum: a store a business owner can run, an AI assistant
+              that fits a real workflow, or a connected device that responds to the physical world.
             </p>
             <p className="profile-principle">
-              My strongest work lives where reliable engineering and useful product design meet.
+              Good engineering should make someone’s day a little easier.
             </p>
           </div>
-        </motion.header>
-
+        </header>
         <div className="focus-grid">
-          {focusAreas.map(({ icon: Icon, title, label, description, tools }, index) => (
-            <motion.article
-              key={title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.45, delay: index * 0.07 }}
-              className="focus-card"
-            >
+          {focusAreas.map(({ icon: Icon, title, description, tools, project, evidence }, index) => (
+            <article key={title} className="focus-card">
               <div className="focus-card__topline">
-                <span className="focus-card__icon" aria-hidden="true"><Icon /></span>
-                <span>{label}</span>
+                <Icon aria-hidden="true" />
+                <span>0{index + 1}</span>
               </div>
               <h3>{title}</h3>
               <p>{description}</p>
               <ul aria-label={`${title} technologies`}>
-                {tools.map((tool) => <li key={tool}>{tool}</li>)}
+                {tools.map((tool) => (
+                  <li key={tool}>{tool}</li>
+                ))}
               </ul>
-            </motion.article>
+              <Link to={`/project/${project}`} className="evidence-link">
+                {evidence}
+                <HiArrowRight aria-hidden="true" />
+              </Link>
+            </article>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="system-flow"
-          aria-label="End-to-end engineering workflow"
-        >
-          <div className="system-flow__intro">
-            <span>One connected product</span>
-            <strong>From physical input to a useful interface</strong>
+        <div className="process-panel">
+          <div className="process-heading">
+            <span className="section-label">The way I work</span>
+            <h3>From the brief to the build.</h3>
           </div>
           <ol>
-            {systemLayers.map(({ label, value, icon: Icon }, index) => (
-              <li key={label}>
-                <span className="system-flow__number">{String(index + 1).padStart(2, '0')}</span>
-                <Icon aria-hidden="true" />
-                <span><small>{label}</small><strong>{value}</strong></span>
+            {process.map((step, index) => (
+              <li key={step.title}>
+                <span className="process-number">0{index + 1}</span>
+                <h4>{step.title}</h4>
+                <p>{step.description}</p>
               </li>
             ))}
           </ol>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

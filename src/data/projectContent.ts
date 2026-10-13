@@ -1256,7 +1256,7 @@ const content: Record<string, ProjectContent> = {
 
   prigado: {
     facts: [
-      { label: 'Type', value: 'Internship Project' },
+      { label: 'Type', value: 'AI Integration Project' },
       { label: 'Domain', value: 'E-Commerce AI Automation' },
       { label: 'Stack', value: 'AI + Automation' },
       { label: 'Role', value: 'AI Workflow Engineer' },
@@ -1467,15 +1467,15 @@ const content: Record<string, ProjectContent> = {
       { title: 'Relational Joins for Analytics', desc: 'Precise joins between users, orders, order_details, products, and categories to deliver accurate business insights.' },
     ],
     results: [
-      { icon: '⚡', title: 'Efficiency', content: 'Automated key business processes across product creation, sales, marketing, and logistics — reducing manual effort significantly.' },
+      { icon: '⚡', title: 'Efficiency', content: 'Automated key business processes across product creation, sales, marketing, and logistics.' },
       { icon: '📊', title: 'Data Quality', content: 'Standardized SQL aggregations and sanitized AI outputs ensure consistent, reliable data for decision-making.' },
       { icon: '🚀', title: 'Speed', content: 'Delivered fast, readable outputs ready for operators and executives without additional processing.' },
     ],
     cta: {
-      primary: { label: 'Download Internship Report', url: `${base}/prigado/Rapport_de_stage_Prigado.pdf` },
+      primary: { label: 'Download Project Report', url: `${base}/prigado/Rapport_de_stage_Prigado.pdf` },
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Internship Project', 'AI Automation', 'n8n + Gemini'],
+    status: ['AI Integration Project', 'AI Automation', 'n8n + Gemini'],
   },
 
   innomall: {
@@ -2088,7 +2088,7 @@ const content: Record<string, ProjectContent> = {
     cta: {
       secondary: [{ label: 'Contact Me', url: '/#contact' }],
     },
-    status: ['Internship Prototype', 'BLE Beacon', 'ESP32 + MQTT'],
+    status: ['Hardware Prototype', 'BLE Beacon', 'ESP32 + MQTT'],
   },
 
   sps: {
@@ -2258,7 +2258,7 @@ const content: Record<string, ProjectContent> = {
 
   geniuspmo: {
     facts: [
-      { label: 'Type', value: 'Full-Stack Internship Product' },
+      { label: 'Type', value: 'Workforce Product' },
       { label: 'Roles', value: '6 Responsibility Contexts' },
       { label: 'Deployment', value: 'Source + Preview APK Handoff' },
       { label: 'Stack', value: 'Web, Android, API + PostgreSQL' },

@@ -37,10 +37,7 @@ export const featuredProjectIds = [
   'sobly',
   'benmahmoudstock',
   'geniuspmo',
-  'macroparkexperience',
-  'machetamache',
   'smartproperty',
-  'tounsiads',
   'macropark',
   'prigado',
 ] as const
@@ -324,10 +321,10 @@ const projectCatalog: Project[] = [
     description:
       'AI workflow automation for an e-commerce platform, with conversational assistants supporting product enrichment, analytics, marketing, and logistics operations.',
     longDescription:
-      'During my Inspark Connect placement, I developed AI-powered workflows and assistants for the Prigado e-commerce platform. The work included n8n routing, intent extraction, JSON sanitization, structured SQL aggregation, Gemini integrations, and automated email flows connected to a Laravel and Vue.js product.',
+      'For the Prigado e-commerce platform at Inspark Connect, I developed AI-powered workflows and assistants. The work included n8n routing, intent extraction, JSON sanitization, structured SQL aggregation, Gemini integrations, and automated email flows connected to a Laravel and Vue.js product.',
     year: '2025',
     role: 'AI automation & full-stack developer',
-    context: 'Professional placement',
+    context: 'Prigado e-commerce integration',
     scope: 'Integrated into an existing platform',
     featured: true,
     techStack: ['n8n', 'Laravel', 'Vue.js', 'MySQL', 'Gemini', 'SMTP', 'REST APIs'],
@@ -420,7 +417,7 @@ const projectCatalog: Project[] = [
       'I designed and engineered LeadX HRMS for Genius PMO as one source of truth for workforce operations. The responsive web platform and focused Android companion share a FastAPI and PostgreSQL backend that owns identity, scoped permissions, workflow state, attendance decisions, and audit history. The result moved beyond a prototype into a deployment-ready source handoff with automated checks, reproducible delivery, backup and recovery procedures, and a physically tested preview APK.',
     year: '2026',
     role: 'Product designer & full-stack engineer',
-    context: 'Internship product for Genius PMO',
+    context: 'Workforce platform for Genius PMO',
     scope: 'Web + Android platform · Company deployment handoff',
     progress: {
       available: 'Deployment-ready web, API, database, and mobile source; tested preview APK; recovery tooling; and company-facing handoff material.',
@@ -568,10 +565,10 @@ const projectCatalog: Project[] = [
     description:
       'A BLE beacon access-control proof of concept using ESP32 scanning, Eddystone identifier checks, an LED relay simulation, and MQTT status messaging.',
     longDescription:
-      'I built Smart Unlock during my internship at Scheidt & Bachmann. A phone beacon simulator and an ESP32 WROOM-32 scanner test a keyless access decision; a matched Eddystone identifier triggers the door-relay proof and publishes status through Mosquitto MQTT.',
+      'I built Smart Unlock as a connected-access project at Scheidt & Bachmann. A phone beacon simulator and an ESP32 WROOM-32 scanner test a keyless access decision; a matched Eddystone identifier triggers the door-relay proof and publishes status through Mosquitto MQTT.',
     year: '2023',
     role: 'Hardware & software developer',
-    context: 'Embedded systems internship',
+    context: 'Connected access project at Scheidt & Bachmann',
     scope: 'Connected access prototype',
     techStack: ['C++', 'ESP32', 'Eddystone BLE', 'MQTT', 'Mosquitto'],
     logo: '/images/projects/smartunlock/smartunlocklogo.png',

@@ -20,10 +20,10 @@ export default function Footer() {
             <span className="brand-mark" aria-hidden="true">SZ</span>
             <span className="brand-copy">
               <strong>{profile.name}</strong>
-              <small>Embedded &amp; full-stack engineering</small>
+              <small>Full-Stack &amp; AI Engineer</small>
             </span>
           </Link>
-          <p>Building connected products from firmware to interface.</p>
+          <p>Thoughtful products. From the first idea to the final build.</p>
         </div>
 
         <div className="footer-links" aria-label="Professional links">

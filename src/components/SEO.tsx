@@ -18,7 +18,9 @@ function setMeta(selector: string, attributes: Record<string, string>) {
     element = document.createElement('meta')
     document.head.appendChild(element)
   }
-  Object.entries(attributes).forEach(([key, value]) => element!.setAttribute(key, value))
+  Object.entries(attributes).forEach(([key, value]) =>
+    element!.setAttribute(key, value),
+  )
 }
 
 export default function SEO({
@@ -31,34 +33,96 @@ export default function SEO({
   noindex = false,
 }: SEOProps) {
   useEffect(() => {
-    const normalizedPath = path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}`
+    const normalizedPath =
+      path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}`
     const canonicalUrl = `${SITE_URL}${normalizedPath}`
     const imageUrl = image.startsWith('http') ? image : `${SITE_URL}${image}`
 
     document.title = title
-    setMeta('meta[name="description"]', { name: 'description', content: description })
+    setMeta('meta[name="description"]', {
+      name: 'description',
+      content: description,
+    })
     setMeta('meta[name="robots"]', {
       name: 'robots',
-      content: noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large',
+      content: noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large',
     })
-    setMeta('meta[property="og:title"]', { property: 'og:title', content: title })
-    setMeta('meta[property="og:description"]', { property: 'og:description', content: description })
+    setMeta('meta[name="googlebot"]', {
+      name: 'googlebot',
+      content: noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large',
+    })
+    setMeta('meta[property="og:title"]', {
+      property: 'og:title',
+      content: title,
+    })
+    setMeta('meta[property="og:description"]', {
+      property: 'og:description',
+      content: description,
+    })
     setMeta('meta[property="og:type"]', { property: 'og:type', content: type })
-    setMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl })
-    setMeta('meta[property="og:image"]', { property: 'og:image', content: imageUrl })
-    setMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: imageAlt })
-    setMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title })
-    setMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description })
-    setMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: imageUrl })
-    setMeta('meta[name="twitter:image:alt"]', { name: 'twitter:image:alt', content: imageAlt })
+    setMeta('meta[property="og:url"]', {
+      property: 'og:url',
+      content: canonicalUrl,
+    })
+    setMeta('meta[property="og:image"]', {
+      property: 'og:image',
+      content: imageUrl,
+    })
+    setMeta('meta[property="og:image:alt"]', {
+      property: 'og:image:alt',
+      content: imageAlt,
+    })
+    setMeta('meta[name="twitter:title"]', {
+      name: 'twitter:title',
+      content: title,
+    })
+    setMeta('meta[name="twitter:description"]', {
+      name: 'twitter:description',
+      content: description,
+    })
+    setMeta('meta[name="twitter:image"]', {
+      name: 'twitter:image',
+      content: imageUrl,
+    })
+    setMeta('meta[name="twitter:image:alt"]', {
+      name: 'twitter:image:alt',
+      content: imageAlt,
+    })
 
-    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    let canonical = document.head.querySelector<HTMLLinkElement>(
+      'link[rel="canonical"]',
+    )
     if (!canonical) {
       canonical = document.createElement('link')
       canonical.rel = 'canonical'
       document.head.appendChild(canonical)
     }
     canonical.href = canonicalUrl
+    let structured = document.head.querySelector<HTMLScriptElement>(
+      '#project-structured-data',
+    )
+    if (type === 'article' && !noindex) {
+      if (!structured) {
+        structured = document.createElement('script')
+        structured.id = 'project-structured-data'
+        structured.type = 'application/ld+json'
+        document.head.appendChild(structured)
+      }
+      structured.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        '@id': `${canonicalUrl}#project`,
+        name: title.split(' | ')[0],
+        description,
+        url: canonicalUrl,
+        image: imageUrl,
+        author: { '@type': 'Person', name: 'Sofiene Zayati', url: SITE_URL },
+      })
+    } else structured?.remove()
   }, [title, description, path, image, imageAlt, type, noindex])
 
   return null

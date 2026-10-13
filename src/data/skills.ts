@@ -22,7 +22,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     category: 'Data & Delivery',
-    items: ['MongoDB', 'MySQL', 'Firebase', 'Docker', 'Kubernetes', 'Jenkins', 'CI/CD'],
+    items: ['PostgreSQL', 'SQLite', 'MongoDB', 'MySQL', 'Firebase', 'Docker', 'Kubernetes', 'Jenkins', 'CI/CD'],
   },
   {
     category: 'Engineering Tools',

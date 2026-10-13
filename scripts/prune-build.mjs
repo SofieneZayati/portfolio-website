@@ -23,12 +23,9 @@ const replacedAssets = [
   'images/projects/sps/android-parking-concept.png',
   'images/projects/smartagri/system-cover.png',
 ]
-const unusedAssets = [
-  'images/projects/macropark/MacroPark Presentation final.pptx',
-]
 
 let removedBytes = 0
-for (const relativePath of [...replacedAssets, ...unusedAssets]) {
+for (const relativePath of replacedAssets) {
   const target = resolve(distRoot, relativePath)
   if (!target.startsWith(`${distRoot}${sep}`)) {
     throw new Error(`Refusing to prune outside dist: ${relativePath}`)

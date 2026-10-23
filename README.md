@@ -45,7 +45,9 @@ The homepage presents six selected projects with a searchable archive of all 21.
 
 The site is configured for deployment at [sofienezayati.tn](https://sofienezayati.tn).
 
-## MacroPark Experience — live 3D case study
+## MacroPark Experience — work in progress
+
+Present MacroPark Experience as **work in progress**, with a public 3D preview. Its homepage card and case study use that status, describe the current preview scope, and identify the next refinement and validation work.
 
 The featured `/project/macroparkexperience` case study links to [MacroPark on Vercel](https://macropark-web.vercel.app/). It occupies the second large selected-work position, alongside the existing client-product showcases. The entry covers the current architectural models, attributed concept car, orbit inspection, independent parking plans, adaptive rendering, and project-brief export. The underlying embedded/mobile system remains a separate case study, with links in both directions.
 

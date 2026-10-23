@@ -124,14 +124,17 @@ const projectCatalog: Project[] = [
     title: 'MacroPark Experience',
     tagline: 'A Parking World You Can Build Around You',
     description:
-      'A live 3D parking configurator: explore a home, residence, or retail property, watch solutions respond, and turn your choices into a project brief.',
+      'A 3D parking configurator in active development: explore a home, residence, or retail property, watch solutions respond, and turn your choices into a project brief.',
     longDescription:
-      'I designed and engineered MacroPark Experience to make connected parking tangible before a site visit. Visitors enter one of three architectural environments, preview arrivals, access, reservations, charging, and solar, then explicitly add the solutions they want. The experience combines custom architectural geometry with an optimized, attributed concept-car asset, locally served PBR surfaces, reflections, animated hardware, and orbit inspection. A validated per-place plan drives the interface and exportable brief, while adaptive graphics, reduced motion, and a WebGL fallback keep the consultation usable. The product is deployed on Vercel.',
+      'MacroPark Experience is a work in progress with a public preview on Vercel. I am designing and engineering it to make connected parking tangible before a site visit. Visitors enter one of three architectural environments, preview arrivals, access, reservations, charging, and solar, then explicitly add the solutions they want. The current build combines custom architectural geometry with an optimized, attributed concept-car asset, locally served PBR surfaces, reflections, animated hardware, and orbit inspection. A validated per-place plan drives the interface and exportable brief, while adaptive graphics, reduced motion, and a WebGL fallback keep the consultation usable.',
     year: '2026',
     role: 'Product experience & 3D frontend engineer',
     context: 'Interactive sales experience for MacroPark',
-    scope: 'Live 3D product · Design, engineering & deployment',
-    deployment: { platform: 'Vercel · Next.js production deployment' },
+    scope: 'Work in progress · Public 3D preview',
+    progress: {
+      available: 'Home, residence, and retail journeys, parking plans, and brief export are available in the public preview.',
+      next: 'Refine the 3D scenes and animations, validate performance on physical phones, and finish production consultation integrations.',
+    },
     featured: true,
     techStack: ['Next.js 15', 'TypeScript', 'Three.js', 'React Three Fiber', 'React 19', 'GSAP', 'Zustand', 'Draco', 'Vercel'],
     logo: '/images/projects/macropark-experience/brand-mark.svg',
@@ -140,7 +143,7 @@ const projectCatalog: Project[] = [
     visualFit: 'cover',
     category: 'web',
     tags: ['mobile'],
-    links: { live: 'https://macropark-web.vercel.app/', liveLabel: 'Explore in 3D' },
+    links: { live: 'https://macropark-web.vercel.app/', liveLabel: 'Try the preview' },
   },
   {
     id: 'daymark',

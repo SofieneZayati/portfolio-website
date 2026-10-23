@@ -2,6 +2,8 @@
 
 ## MacroPark Experience update — 23 October 2026
 
+- Status correction requested by the owner: label the project **Work in progress · Public 3D preview**. The homepage card and case study now use development status, preview links, current scope, and upcoming work rather than a completed-product label.
+
 - Promoted the existing MacroPark Experience entry to the second large selected-work slot. The homepage still has six selected projects and the complete 21-project archive; the connected-parking hardware case study remains available through the archive, existing background/toolkit links, and new links between the two MacroPark case studies.
 - Added the live Vercel demo, current delivery scope, 33-test verification, and the measured 120 kB initial JavaScript figure, explicitly excluding deferred 3D asset transfers. Removed public source links for MacroParkWeb after its repository was made private.
 - Replaced the older single-screen gallery with eight optimized WebP captures of the live product: Home planning, villa inspection, the place chooser, Residence, Retail, solar charging, the brief form, and mobile guidance. Optional personal fields are empty and no enquiry was sent.

@@ -383,7 +383,7 @@ const content: Record<string, ProjectContent> = {
 
   macroparkexperience: {
     facts: [
-      { label: 'Deployment', value: 'Live on Vercel · October 2026' },
+      { label: 'Status', value: 'Work in progress · Public preview' },
       { label: 'Audience', value: 'Home, Residence & Retail Clients' },
       { label: 'Rendering', value: 'Adaptive WebGL + Fallback' },
       { label: 'Validation', value: '33 Tests + Production Build' },
@@ -530,14 +530,14 @@ const content: Record<string, ProjectContent> = {
       { metric: '120 kB', title: 'First Load JS', content: 'The validated Next.js production build defers the 3D renderer and assets. This initial JavaScript figure excludes model, texture, and decoder transfers.' },
     ],
     cta: {
-      primary: { label: 'Explore the Live 3D Experience', url: 'https://macropark-web.vercel.app/' },
+      primary: { label: 'Explore the Public 3D Preview', url: 'https://macropark-web.vercel.app/' },
       secondary: [
         { label: 'MacroPark Connected-System Case Study', url: '/project/macropark' },
         { label: '3D Asset Credits & Licenses', url: 'https://macropark-web.vercel.app/asset-credits.txt' },
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
-    status: ['Live on Vercel', '33 Tests Passing', 'Adaptive WebGL'],
+    status: ['Work in Progress', 'Public Preview', 'Adaptive WebGL'],
   },
 
   daymark: {

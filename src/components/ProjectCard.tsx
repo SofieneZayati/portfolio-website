@@ -16,7 +16,7 @@ const categoryLabels: Record<Project['category'], string> = {
 }
 const summaries: Record<string, string> = {
   macroparkexperience:
-    'An interactive parking world with detailed architecture, animated vehicles, and a guided plan builder. Explore the live experience in 3D.',
+    'A parking configurator in development, with architectural scenes, animated vehicles, and a guided plan builder. Try the public 3D preview.',
   sobly:
     'A bilingual digital storefront for a Tunisian business. Catalog, checkout, owner admin, and VPS deployment—all in one delivery.',
   benmahmoudstock:

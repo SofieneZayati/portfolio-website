@@ -35,18 +35,18 @@ export interface Project {
 
 export const featuredProjectIds = [
   'sobly',
+  'macroparkexperience',
   'benmahmoudstock',
   'geniuspmo',
   'smartproperty',
-  'macropark',
   'prigado',
 ] as const
 
 const portfolioOrder = [
   'sobly',
+  'macroparkexperience',
   'benmahmoudstock',
   'geniuspmo',
-  'macroparkexperience',
   'machetamache',
   'smartproperty',
   'macropark',
@@ -122,23 +122,25 @@ const projectCatalog: Project[] = [
   {
     id: 'macroparkexperience',
     title: 'MacroPark Experience',
-    tagline: 'Interactive 3D Parking Consultation',
+    tagline: 'A Parking World You Can Build Around You',
     description:
-      'A client-facing 3D product experience where visitors choose a place, preview physical parking solutions, build a plan, and export a project brief without needing to understand the underlying technology.',
+      'A live 3D parking configurator: explore a home, residence, or retail property, watch solutions respond, and turn your choices into a project brief.',
     longDescription:
-      'MacroPark Experience turns the connected-parking platform into an interactive sales journey. Instead of presenting a feature list, it lets homeowners, residences, and retailers watch access, guidance, reservations, guest journeys, charging, and solar change a responsive 3D environment. The interface separates previewing from adding a solution, preserves a plan for each place, exports one consistent project brief, adapts graphics quality, supports reduced motion, and remains usable when WebGL is unavailable.',
+      'I designed and engineered MacroPark Experience to make connected parking tangible before a site visit. Visitors enter one of three architectural environments, preview arrivals, access, reservations, charging, and solar, then explicitly add the solutions they want. The experience combines custom architectural geometry with an optimized, attributed concept-car asset, locally served PBR surfaces, reflections, animated hardware, and orbit inspection. A validated per-place plan drives the interface and exportable brief, while adaptive graphics, reduced motion, and a WebGL fallback keep the consultation usable. The product is deployed on Vercel.',
     year: '2026',
     role: 'Product experience & 3D frontend engineer',
     context: 'Interactive sales experience for MacroPark',
-    scope: 'Responsive 3D journey · Production build validated',
+    scope: 'Live 3D product · Design, engineering & deployment',
+    deployment: { platform: 'Vercel · Next.js production deployment' },
     featured: true,
-    techStack: ['Next.js 15', 'React 19', 'Three.js', 'React Three Fiber', 'GSAP', 'Zustand', 'WebGL', 'Node Test Runner'],
-    logo: '/images/projects/macropark/macrologo.png',
-    screenshots: ['/images/projects/macropark-experience/opening.png'],
+    techStack: ['Next.js 15', 'TypeScript', 'Three.js', 'React Three Fiber', 'React 19', 'GSAP', 'Zustand', 'Draco', 'Vercel'],
+    logo: '/images/projects/macropark-experience/brand-mark.svg',
+    cardPreview: '/images/projects/macropark-experience/villa-inspection.webp',
+    screenshots: ['/images/projects/macropark-experience/home-planner.webp'],
     visualFit: 'cover',
     category: 'web',
-    tags: ['embedded', 'mobile'],
-    links: { github: 'https://github.com/SofieneZayati/MacroParkWeb' },
+    tags: ['mobile'],
+    links: { live: 'https://macropark-web.vercel.app/', liveLabel: 'Explore in 3D' },
   },
   {
     id: 'daymark',

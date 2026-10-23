@@ -1,5 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "^/project/(sobly|benmahmoudstock|geniuspmo|macroparkexperience|machetamache|smartproperty|macropark|tounsiads|prigado|greencoffee|aurelle|pitchly|interna|daymark|innomall|digiservice|secondchance|smartunlock|smartagri|zenithhouse|sps)/?$",

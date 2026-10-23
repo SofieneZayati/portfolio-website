@@ -383,10 +383,10 @@ const content: Record<string, ProjectContent> = {
 
   macroparkexperience: {
     facts: [
-      { label: 'Type', value: 'Interactive 3D Product Journey' },
+      { label: 'Deployment', value: 'Live on Vercel · October 2026' },
       { label: 'Audience', value: 'Home, Residence & Retail Clients' },
       { label: 'Rendering', value: 'Adaptive WebGL + Fallback' },
-      { label: 'Validation', value: '21 Tests + Production Build' },
+      { label: 'Validation', value: '33 Tests + Production Build' },
     ],
     techStack: [
       {
@@ -401,9 +401,10 @@ const content: Record<string, ProjectContent> = {
       {
         category: '3D Runtime',
         items: [
-          { name: 'Three.js', description: 'Procedural architecture, vehicles, barriers, lights, and charging stories' },
+          { name: 'Three.js', description: 'Custom architecture, reflective surfaces, animated vehicles, and physical parking stories' },
           { name: 'React Three Fiber', description: 'Scene composition and React rendering boundary' },
-          { name: 'Drei', description: 'Focused helpers without heavy external scene assets' },
+          { name: 'Drei + Draco', description: 'Local compressed glTF loading and orbit/zoom inspection' },
+          { name: 'PBR materials', description: 'Locally served color, normal, and roughness maps with a generated reflection environment' },
           { name: 'Adaptive graphics', description: 'DPR, shadows, frame scheduling, quality controls, and visibility pause' },
         ],
       },
@@ -411,18 +412,20 @@ const content: Record<string, ProjectContent> = {
         category: 'State & Quality',
         items: [
           { name: 'Zustand', description: 'Preview, plan, replay, and per-place journey state' },
-          { name: 'Node test runner', description: 'Domain, store, brief, and camera behavior verification' },
-          { name: 'Deterministic QA routes', description: 'Repeatable desktop, mobile, reduced-motion, and fallback captures' },
+          { name: 'Node test runner', description: '33 checks covering planning, persistence, briefs, cameras, asset fitting, wheel pivots, and size budgets' },
+          { name: 'Vercel', description: 'Production Next.js deployment with local model, decoder, font, and texture delivery' },
           { name: 'WebGL fallback', description: 'The consultation remains usable without a GPU context' },
         ],
       },
     ],
     features: [
+      { group: 'Architectural Experience', icon: '3D', title: 'Three Distinct Places', desc: 'A cantilevered villa, terraced residence, and retail pavilion use custom geometry, recessed glazing, furnishings, timber screens, and landscaping.' },
+      { group: 'Architectural Experience', icon: '360', title: 'Inspect in 3D', desc: 'Orbit and zoom around the property and detailed concept car. Return to the guided workbench without competing camera controllers.' },
       { group: 'Guided Journey', icon: '01', title: 'Choose a Place', desc: 'Home, apartment building, and shop or mall each provide a relevant environment and keep an independent plan.' },
       { group: 'Guided Journey', icon: '02', title: 'Preview Before Adding', desc: 'A solution can physically demonstrate itself without silently changing the client plan.' },
       { group: 'Physical Stories', icon: 'CAR', title: 'Arrival & Access', desc: 'Vehicles approach recognition points, barriers respond, and accepted or expired visits have visible outcomes.' },
       { group: 'Physical Stories', icon: 'EV', title: 'Charging & Solar', desc: 'Parked vehicles connect to chargers while optional solar canopies and energy pulses make the relationship visible.' },
-      { group: 'Decision Support', icon: 'PLAN', title: 'Per-Place Plans', desc: 'Visitors can compare needs, add or remove solutions, switch places, and return without mixing configurations.' },
+      { group: 'Decision Support', icon: 'PLAN', title: 'Per-Place Plans', desc: 'Visitors can compare needs, add or remove solutions, and return after a refresh. Only parking choices are saved on the device; personal brief details stay in memory.' },
       { group: 'Decision Support', icon: 'TXT', title: 'Project Brief', desc: 'One domain model drives preview, copy, download, and an optional prepared email without claiming a backend submission.' },
       { group: 'Resilience', icon: 'FPS', title: 'Adaptive Rendering', desc: 'Quality controls, hidden-page pause, reduced motion, settled animations, and selective mounting control GPU cost.' },
       { group: 'Resilience', icon: 'A11Y', title: 'Usable Fallback', desc: 'Place selection, solution choices, and the project brief still work when WebGL is unavailable.' },
@@ -438,7 +441,7 @@ const content: Record<string, ProjectContent> = {
             {
               label: 'Choose context',
               nodes: [
-                { label: 'Home, residence or retail', detail: 'Each place has its own relevant needs and retained plan', kind: 'actor', icon: 'user', media: { src: `${base}/macropark-experience/opening.png`, alt: 'MacroPark 3D place chooser with home, residence and retail environments', fit: 'cover', position: 'center center' } },
+                { label: 'Home, residence or retail', detail: 'Each place has its own relevant needs and retained plan', kind: 'actor', icon: 'user', media: { src: `${base}/macropark-experience/places.webp`, alt: 'Live MacroPark place chooser with home, residence and retail environments', fit: 'cover', position: 'center center' } },
               ],
               connector: 'Select a need',
             },
@@ -454,7 +457,7 @@ const content: Record<string, ProjectContent> = {
               label: 'Keep the decision',
               nodes: [
                 { label: 'Normalized plan', detail: 'Valid solutions remain separate for each place', kind: 'data', icon: 'database' },
-                { label: 'Project brief', detail: 'Preview, copy, download or prepared email', kind: 'output', icon: 'document' },
+                { label: 'Project brief', detail: 'Preview, copy, or download; email is optional configuration', kind: 'output', icon: 'document' },
               ],
             },
           ],
@@ -472,34 +475,69 @@ const content: Record<string, ProjectContent> = {
     architecture: [
       {
         title: 'One Journey, Separate Rendering System',
+        image: `${base}/macropark-experience/experience-architecture.svg`,
+        imageAlt: 'MacroPark architecture: accessible interface, validated Zustand plans, a deferred 3D runtime, device-local choices, and an exportable project brief',
+        imageWidth: 1200,
+        imageHeight: 760,
+        imageKind: 'diagram',
         desc: 'The interface owns choices and accessible controls; the domain owns valid configurations; Zustand owns the current visit; and a dynamically loaded rendering boundary owns WebGL, frame scheduling, camera motion, and physical stories.',
         items: [
           { label: 'Domain', desc: 'Places, needs, compatibility rules, and exported brief data.' },
           { label: 'Experience state', desc: 'Preview versus inclusion, replay, per-place plans, and modal state.' },
           { label: 'Scene runtime', desc: 'Adaptive graphics, visibility, motion preference, camera, and WebGL failure.' },
+          { label: 'Privacy', desc: 'Persist validated parking choices only. Keep contact and project details in memory until the visitor copies or downloads the brief.' },
         ],
+      },
+      {
+        title: 'Detailed 3D Assets Within a Browser Budget',
+        image: `${base}/macropark-experience/asset-pipeline.svg`,
+        imageAlt: '3D asset pipeline: an attributed concept car is compressed and normalized, local PBR maps and custom architecture are assembled, and the runtime adapts rendering quality',
+        imageWidth: 1200,
+        imageHeight: 760,
+        imageKind: 'diagram',
+        desc: 'The vehicle adapts the Khronos Car Concept by Eric Chadwick / Darmstadt Graphics Group GmbH under CC BY 4.0. Draco compression, WebP textures, static-material batching, and normalized wheel assemblies reduce the source GLB from 11.8 MB to about 1.01 MB. The architecture is custom geometry; its 512-pixel PBR maps come from Poly Haven under CC0.',
+        items: [
+          { label: 'Keep the detail', desc: 'Glazing, cabin detail, separate wheel pivots, per-instance paint, and distance-driven wheel rotation retain the vehicle character.' },
+          { label: 'Fit the story', desc: 'Ground and center visible geometry, align the vehicle heading, and preserve the established motion paths.' },
+          { label: 'Control rendering cost', desc: 'Share prepared geometry, batch surfaces, generate reflections locally, and adapt resolution, shadows, and frame scheduling.' },
+        ],
+      },
+      {
+        title: 'A Product Experience for a Connected-Parking System',
+        desc: 'This website demonstrates parking outcomes through an illustrative 3D environment. It complements the separate MacroPark embedded, mobile, and administration project; the live configurator does not operate a real barrier, accept payments, or submit a CRM enquiry. Explore the connected-system case study through the related-project link below.',
       },
     ],
     gallery: [
-      { src: `${base}/macropark-experience/opening.png`, caption: 'Interactive place chooser — three environments share one cinematic scene and lead into relevant parking needs', width: 1440, height: 900, variant: 'screen' },
+      { src: `${base}/macropark-experience/home-planner.webp`, caption: 'Live Home journey — the villa, concept car, and workbench connect a visitor’s place to relevant parking choices.', width: 1600, height: 1000, variant: 'screen' },
+      { src: `${base}/macropark-experience/villa-inspection.webp`, caption: 'Live 3D inspection — orbit and zoom reveal the cantilevered architecture, recessed glazing, timber fins, and detailed vehicle.', width: 1600, height: 1000, variant: 'screen' },
+      { src: `${base}/macropark-experience/places.webp`, caption: 'Live place chooser — Home, Residence, and Retail lead into independent plans and different physical stories.', width: 1600, height: 1000, variant: 'screen' },
+      { src: `${base}/macropark-experience/residence.webp`, caption: 'Live Residence environment — terraced towers, glazed balconies, and shared parking support resident-specific needs.', width: 1600, height: 1000, variant: 'screen' },
+      { src: `${base}/macropark-experience/retail.webp`, caption: 'Live Retail environment — a layered pavilion, customer parking, and pedestrian approach frame the commercial journey.', width: 1600, height: 1000, variant: 'screen' },
+      { src: `${base}/macropark-experience/solar-charging.webp`, caption: 'Live charging preview with solar included — the car, charger, canopy, and energy flow make the selected combination visible.', width: 1600, height: 1000, variant: 'screen' },
+      { src: `${base}/macropark-experience/project-brief.webp`, caption: 'Live brief export — a sample parking plan is ready to copy or download. Optional personal fields are empty; no enquiry was sent.', width: 1440, height: 900, variant: 'screen' },
+      { src: `${base}/macropark-experience/mobile-planner.webp`, caption: 'Live mobile journey — the architecture stays visible above a compact workbench with fixed planning actions.', width: 390, height: 844, variant: 'mobile' },
     ],
     challenges: [
       { title: 'Show, Do Not Explain', desc: 'Every capability needed a visible physical consequence instead of another technical card or diagram.' },
       { title: 'Preview Is Not Consent', desc: 'Exploring a solution had to remain separate from adding it to the plan, including keyboard and modal behavior.' },
       { title: '3D Without Fragility', desc: 'The journey had to stay responsive, reduced-motion friendly, and usable when rendering fails or the page is hidden.' },
+      { title: 'Detailed Models, Predictable Motion', desc: 'Model scale, hidden geometry, mirrored transforms, and normalized attributes can change grounding and wheel placement. Geometry regressions guard the imported asset before it enters the existing story paths.' },
+      { title: 'Two Camera Modes, One Owner', desc: 'Guided shots yield while the visitor inspects a property, then recover from the actual camera position when the workbench returns.' },
     ],
     results: [
-      { metric: '21', title: 'Behavior Tests Passing', content: 'Configuration, preview, replay, brief, and camera behavior pass the project test suite.' },
+      { metric: '33', title: 'Tests Passing', content: 'The Node suite verifies plans, persistence, previews, briefs, cameras, vehicle geometry, wheel pivots, and asset budgets.' },
       { metric: '3', title: 'Client Environments', content: 'Home, residence, and retail journeys share one product model while retaining distinct plans.' },
-      { metric: '116 kB', title: 'First Load JS', content: 'The production build keeps the 3D renderer outside the initial client bundle.' },
+      { metric: '120 kB', title: 'First Load JS', content: 'The validated Next.js production build defers the 3D renderer and assets. This initial JavaScript figure excludes model, texture, and decoder transfers.' },
     ],
     cta: {
+      primary: { label: 'Explore the Live 3D Experience', url: 'https://macropark-web.vercel.app/' },
       secondary: [
-        { label: 'GitHub Repository', url: 'https://github.com/SofieneZayati/MacroParkWeb' },
+        { label: 'MacroPark Connected-System Case Study', url: '/project/macropark' },
+        { label: '3D Asset Credits & Licenses', url: 'https://macropark-web.vercel.app/asset-credits.txt' },
         { label: 'Contact Me', url: '/#contact' },
       ],
     },
-    status: ['Interactive 3D Experience', '21 Tests Passing', 'Adaptive WebGL'],
+    status: ['Live on Vercel', '33 Tests Passing', 'Adaptive WebGL'],
   },
 
   daymark: {
@@ -1833,6 +1871,7 @@ const content: Record<string, ProjectContent> = {
       secondary: [
         { label: 'Download Presentation', url: `${base}/macropark/MacroPark%20Presentation%20final.pptx` },
         { label: 'WT32 Firmware', url: 'https://github.com/SofieneZayati/MacroPark' },
+        { label: 'Explore the New 3D Experience', url: '/project/macroparkexperience' },
         { label: 'Contact Me', url: '/#contact' },
       ],
     },

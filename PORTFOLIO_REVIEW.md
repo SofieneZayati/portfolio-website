@@ -1,5 +1,14 @@
 # Portfolio design and content review — 13 October 2026
 
+## MacroPark Experience update — 23 October 2026
+
+- Promoted the existing MacroPark Experience entry to the second large selected-work slot. The homepage still has six selected projects and the complete 21-project archive; the connected-parking hardware case study remains available through the archive, existing background/toolkit links, and new links between the two MacroPark case studies.
+- Added the live Vercel demo, current delivery scope, 33-test verification, and the measured 120 kB initial JavaScript figure, explicitly excluding deferred 3D asset transfers. Removed public source links for MacroParkWeb after its repository was made private.
+- Replaced the older single-screen gallery with eight optimized WebP captures of the live product: Home planning, villa inspection, the place chooser, Residence, Retail, solar charging, the brief form, and mobile guidance. Optional personal fields are empty and no enquiry was sent.
+- Retained the responsive journey diagram and added two enlargeable SVG diagrams for experience architecture and asset preparation. The diagrams are generated with `scripts/generate-macropark-diagrams.mjs`; vehicle/model and texture sources are attributed in the case study and linked application credits.
+- Added explicit Vite/dist deployment settings while preserving all existing prerendered project routes and the 404 response.
+- Verification: TypeScript and the complete production build pass; source and built-content validation cover all 21 case studies and 154 referenced assets. Browser checks at 1440×900 and 390×844 found no horizontal page overflow or broken loaded images. Both SVG diagrams load at their native dimensions; the image viewer opens them, closes with Escape, restores focus to its trigger, and restores body scrolling. These are desktop-browser checks, not physical-phone measurements.
+
 ## Direction
 
 The portfolio keeps the approved black and deep-purple identity with restrained blue accents. The homepage introduces Sofiene, presents two larger client-product showcases, and offers a searchable archive of 21 projects. The background section presents projects and education; case studies are framed as projects rather than internships.

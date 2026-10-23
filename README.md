@@ -45,6 +45,14 @@ The homepage presents six selected projects with a searchable archive of all 21.
 
 The site is configured for deployment at [sofienezayati.tn](https://sofienezayati.tn).
 
+## MacroPark Experience — live 3D case study
+
+The featured `/project/macroparkexperience` case study links to [MacroPark on Vercel](https://macropark-web.vercel.app/). It occupies the second large selected-work position, alongside the existing client-product showcases. The entry covers the current architectural models, attributed concept car, orbit inspection, independent parking plans, adaptive rendering, and project-brief export. The underlying embedded/mobile system remains a separate case study, with links in both directions.
+
+The eight WebP screenshots under `public/images/projects/macropark-experience` were captured from the public production experience on 2026-10-23. The brief contains a sample parking plan and empty optional personal fields. The gallery includes the Home planner, villa inspection, place chooser, Residence, Retail, charging with solar, brief export, and mobile guidance. No customer data or submitted enquiry is shown. Source code is private, so the public portfolio links to the live demo and asset credits.
+
+The case study has a responsive journey diagram and two native SVG diagrams documenting the interface/state/rendering boundary and asset pipeline. Regenerate the SVGs with `node scripts/generate-macropark-diagrams.mjs`. The model is attributed to Eric Chadwick / Darmstadt Graphics Group GmbH under CC BY 4.0, and PBR maps to Poly Haven under CC0; the case-study resources link to the application's full asset credits.
+
 ## Sobly client case study
 
 The featured `/project/sobly` case study links to the deployed [Sobly storefront](https://sobly.tn/) and covers its customer journeys, owner admin, and Ubuntu VPS deployment with Docker Compose, Caddy HTTPS, persistent SQLite storage, and GitHub updates.

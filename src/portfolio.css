@@ -711,6 +711,9 @@
   background:
     radial-gradient(ellipse at 50% 90%, #40357550, transparent 75%), #121020;
 }
+.project-card__media--macroparkexperience {
+  background: #171e20;
+}
 .project-card__media--prigado {
   background:
     radial-gradient(ellipse at 50% 90%, #56307c50, transparent 75%), #171020;

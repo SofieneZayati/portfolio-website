@@ -25,7 +25,7 @@ export const projectNarratives: Record<
     problem:
       'Help visitors understand parking solutions through their own space and needs, without requiring technical knowledge.',
     contribution:
-      'Built the responsive 3D journey, separate preview and planning flows, environment-specific plans, brief export, and graphics fallbacks.',
+      'Designed the journey and architectural scenes, integrated an optimized concept-car asset, engineered the planning and rendering systems, and deployed the product on Vercel.',
   },
   machetamache: {
     problem:

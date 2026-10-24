@@ -3,6 +3,12 @@ export const projectNarratives: Record<
   string,
   { problem: string; contribution: string }
 > = {
+  olivetrace: {
+    problem:
+      'Give producers a reliable record of their farms and day-to-day work, while making selected origin information usable by a wider traceability platform.',
+    contribution:
+      'Owned the ProducerProfile/Farm domain in a five-person team: data relationships, ownership checks, private maps and uploads, farm journals, public-origin rules, and producer-reviewed AI plans. The other supply-chain modules and shared platform are team work.',
+  },
   sobly: {
     problem:
       'Give a Tunisian business a bilingual storefront and a practical way to manage digital-product orders.',

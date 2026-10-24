@@ -48,6 +48,7 @@ const portfolioOrder = [
   'benmahmoudstock',
   'geniuspmo',
   'machetamache',
+  'olivetrace',
   'smartproperty',
   'macropark',
   'tounsiads',
@@ -71,6 +72,30 @@ const portfolioRank = new Map<string, number>(
 )
 
 const projectCatalog: Project[] = [
+  {
+    id: 'olivetrace',
+    title: 'OliveTrace',
+    tagline: 'Farm Operations within an Olive-Oil Traceability Platform',
+    description:
+      'My Producer/Farm module in a five-person traceability project: ownership-protected farm management, private maps, activity journals, and AI action plans that producers review before use.',
+    longDescription:
+      'OliveTrace follows Tunisian olive oil from producer to consumer. I owned the ProducerProfile and Farm domain: Eloquent relationships, validated CRUD, access policies, private uploads and maps, opt-in public origin cards, activity journals, and saved AI advice. Stable farm references connect my module to the team’s harvest, certification, distribution, and consumer modules. Authentication, roles, layouts, and infrastructure are shared platform work. The documented delivery includes automated checks and a local Docker deployment; no hosted deployment is claimed.',
+    year: '2026',
+    role: 'Producer/Farm module developer',
+    context: 'Academic team project · Five contributors',
+    scope: 'Integrated local application · Producer/Farm domain',
+    techStack: ['Laravel 12', 'PHP', 'MySQL', 'Eloquent', 'Blade', 'Leaflet', 'Gemini', 'Docker', 'GitHub Actions'],
+    logo: '',
+    screenshots: [
+      '/images/projects/olivetrace/farms-desktop.webp',
+      '/images/projects/olivetrace/farm-detail.webp',
+      '/images/projects/olivetrace/farm-journal.webp',
+      '/images/projects/olivetrace/saved-reports.webp',
+    ],
+    category: 'web',
+    tags: ['ai'],
+    links: {},
+  },
   {
     id: 'sobly',
     title: 'Sobly.tn',

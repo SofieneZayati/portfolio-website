@@ -39,6 +39,32 @@ const flow = (
 
 // These explain the documented systems. Planned services are explicitly separated.
 export const additionalDiagrams: Record<string, ProjectDiagram> = {
+  olivetrace: {
+    layout: 'ecosystem',
+    title: 'My module, its boundaries, and the team around it.',
+    description: 'The Producer/Farm domain owns farm operations and reviewed advice. Stable references connect it to the shared traceability platform.',
+    lanes: [
+      { label: 'My contribution · Producer/Farm operations', stages: [
+        stage('People', [node('Producer / admin', 'Owned records or scoped moderation', 'actor', 'user')], 'Authorized requests'),
+        stage('Application rules', [node('Laravel + Blade', 'Ownership policies, validated forms, maps, and journals', 'service', 'server')], 'Eloquent relationships'),
+        stage('Domain records', [node('MySQL', 'ProducerProfile, Farm, activities, and advice reports', 'data', 'database')], 'Stable farm references'),
+        stage('Integration contract', [node('Farm selector + origin', 'Eligible farm IDs and opt-in public information', 'output', 'api')]),
+      ] },
+      { label: 'My contribution · Advisory AI workflow', stages: [
+        stage('Prepare', [node('Fact snapshot', 'Selected farm and activity data; no contact details or exact GPS', 'data', 'document')], 'Explicit request'),
+        stage('Generate', [node('Configured AI provider', 'Gemini, OpenAI, or Ollama adapter', 'ai', 'agent')], 'Validate output'),
+        stage('Review', [node('Saved report', 'Evidence-linked recommendations for producer review', 'screen', 'quality')], 'Producer adopts a suggestion'),
+        stage('Follow through', [node('Farm journal', 'Idempotent activity creation and completion tracking', 'output', 'workflow')]),
+      ] },
+    ],
+    shared: { label: 'Team-owned platform and adjacent modules', nodes: [
+      node('Shared foundation', 'Identity, roles, layouts, and delivery infrastructure', 'service', 'server'),
+      node('Harvest & milling', 'Harvests, mills, and oil lots', 'service', 'product'),
+      node('Certification', 'Laboratory and certification records', 'service', 'quality'),
+      node('Distribution', 'Products and distribution', 'service', 'logistics'),
+      node('Consumer traceability', 'Origin, feedback, and complaints', 'service', 'user'),
+    ] },
+  },
   geniuspmo: flow(
     'Two clients. One workforce system.',
     'The web platform and Android attendance companion share backend-owned identity, permissions, work-mode rules, and attendance records.',

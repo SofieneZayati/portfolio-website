@@ -58,12 +58,13 @@ export default function EngineeringProfile() {
           </div>
           <div className="profile-intro__copy">
             <p>
-              I’m Sofiene, an engineer based in Tunisia. My path started with embedded and mobile
-              systems at ISET Radès and continues with web and internet technologies at ESPRIT.
+              I’m Sofiene, a developer based in Tunisia, studying Web and Internet Technologies
+              at ESPRIT after a bachelor’s degree in Embedded and Mobile Systems at ISET Radès.
             </p>
             <p>
-              Today, I build across that spectrum: a store a business owner can run, an AI assistant
-              that fits a real workflow, or a connected device that responds to the physical world.
+              I’ve built for shop owners, HR teams, and connected-parking projects. That range
+              has taught me to work with the constraints that matter: offline access, permissions,
+              reliable data, and a handoff someone else can use.
             </p>
             <p className="profile-principle">
               Good engineering should make someone’s day a little easier.

@@ -78,6 +78,8 @@ export default function ProjectCard({
               ? 'In development'
               : project.context.startsWith('Client')
                 ? 'Client work'
+                : project.context.includes('Academic')
+                  ? 'Academic project'
                 : project.context.includes('Internship') ||
                     project.context.includes('placement') ||
                     project.context.includes('Scheidt')

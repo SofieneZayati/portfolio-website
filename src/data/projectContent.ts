@@ -135,6 +135,62 @@ export interface ProjectContent {
 const base = '/images/projects'
 
 const content: Record<string, ProjectContent> = {
+  olivetrace: {
+    facts: [
+      { label: 'Context', value: 'Five-person university project' },
+      { label: 'My domain', value: 'Producer profiles & farms' },
+      { label: 'Persistence', value: 'MySQL + Eloquent' },
+      { label: 'Delivery', value: 'Local application + Docker setup' },
+    ],
+    techStack: [
+      { category: 'Application', items: [
+        { name: 'Laravel 12 + PHP', description: 'Controllers, Form Requests, ownership policies, services, and automated checks.' },
+        { name: 'Blade + Vite', description: 'Server-rendered workspaces and reusable forms within shared Front/Back Office layouts.' },
+        { name: 'MySQL + Eloquent', description: 'ProducerProfile/Farm relationships, foreign keys, retained history, and integration references.' },
+      ] },
+      { category: 'Maps & AI', items: [
+        { name: 'Leaflet + OpenStreetMap', description: 'Private location picker and farm overview, with explicit map loading.' },
+        { name: 'Gemini / OpenAI / Ollama adapters', description: 'Configurable providers for saved advice; normal farm operations work without AI.' },
+      ] },
+      { category: 'Shared delivery', items: [
+        { name: 'Docker Compose', description: 'Documented local application and MySQL deployment with persistent storage.' },
+        { name: 'GitHub Actions + SonarQube', description: 'Team pipeline with formatting, SQLite/MySQL tests, coverage reports, and a quality gate.' },
+      ] },
+    ],
+    features: [
+      { group: 'Producer/Farm module', icon: '🌿', title: 'Owned farm records', desc: 'Producers manage their own profiles and farms. Ownership policies, service checks, validation, and restricted foreign keys protect domain relationships.' },
+      { group: 'Producer/Farm module', icon: '↗', title: 'Private maps, selective publication', desc: 'Owners and admins can inspect exact farm locations. Public origin cards require both profile and farm opt-in, and omit contact details and precise coordinates.' },
+      { group: 'Producer/Farm module', icon: '✓', title: 'Activity journals', desc: 'Plan, edit, complete, or cancel farm work with date and water-use validation, overdue indicators, and retained history.' },
+      { group: 'Producer/Farm module', icon: '✦', title: 'Advice with human review', desc: 'Save a snapshot of relevant farm facts and validated AI recommendations. Producers explicitly choose which suggestions become journal activities.' },
+      { group: 'Team integration', icon: '↔', title: 'Stable integration contracts', desc: 'Shared farm IDs and selectable-farm rules connect to the harvest module. A public-origin service provides selected provenance data to the consumer module.' },
+    ],
+    architecture: [
+      { title: 'A domain within a shared platform', desc: 'My implementation centers on ProducerProfile, Farm, activity records, and advice reports. The wider application combines five student modules; authentication, common user management, layouts, and infrastructure are shared work.', items: [
+        { label: 'My module', desc: 'Producer profiles, farms, private locations, farm journals, and reviewed advice.' },
+        { label: 'Team modules', desc: 'Harvest/milling/oil lots, laboratory/certification, product/distribution, and consumer traceability.' },
+        { label: 'Integration boundary', desc: 'Stable farm references, ownership-aware selectors, and a filtered public-origin contract.' },
+      ] },
+      { title: 'AI is an advisory step', desc: 'A report stores its input snapshot and validated recommendations. Contact information, precise GPS, activity titles, and free-text notes are excluded from provider inputs. Advice never changes farm records automatically; adoption is an explicit producer action.' },
+    ],
+    gallery: [
+      { src: `${base}/olivetrace/farms-desktop.webp`, caption: 'Producer farm workspace, captured from the running local application on 23 October 2026. All visible farms belong to the documented development demo.', width: 1440, height: 1000, variant: 'screen' },
+      { src: `${base}/olivetrace/farm-detail.webp`, caption: 'Fictional Sfax demo farm: ownership context, publication status, private location fields, and the entry to saved AI advice. Coordinates are illustrative demo data.', width: 1440, height: 1000, variant: 'screen' },
+      { src: `${base}/olivetrace/farm-journal.webp`, caption: 'Farm journal with seeded demonstration activities. Counts and water totals illustrate the interface; they are not real agricultural results.', width: 1440, height: 1000, variant: 'screen' },
+      { src: `${base}/olivetrace/saved-reports.webp`, caption: 'Existing saved advice for the fictional demo farm. Recommendations retain their snapshot and require explicit review; no AI request or record change was made for this capture.', width: 1440, height: 1000, variant: 'screen' },
+    ],
+    challenges: [
+      { title: 'Preserving traceability history', desc: 'Archive farms that have linked history instead of deleting their provenance. Foreign-key restrictions and service rules keep downstream references intact.' },
+      { title: 'Keeping public and private data separate', desc: 'Public origin is a deliberately limited view, with explicit publication rules. Private logos, contacts, notes, and exact coordinates stay outside that contract.' },
+      { title: 'Working within a team boundary', desc: 'Documented farm selectors and origin contracts let other modules integrate without duplicating producer data or bypassing ownership and status checks.' },
+    ],
+    results: [
+      { title: 'Integrated module', content: 'Producer/Farm features operate inside the team application with real MySQL relationships and shared authorization infrastructure.' },
+      { title: 'Repeatable local delivery', content: 'The 22 October handover documents the automated pipeline and verified local Docker setup. Public hosting is not confirmed in that handover.' },
+      { title: 'Traceable AI workflow', content: 'Saved snapshots, validated outputs, and explicit producer adoption connect advice to follow-up work without autonomous changes.' },
+    ],
+    cta: { secondary: [{ label: 'Discuss this project', url: '/#contact' }] },
+    status: ['Academic Team Project', 'Producer/Farm Module', 'Local Application'],
+  },
   sobly: {
     facts: [
       { label: 'Type', value: 'Client Digital Storefront' },

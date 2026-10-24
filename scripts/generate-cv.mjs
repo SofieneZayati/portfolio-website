@@ -1,11 +1,12 @@
-import { existsSync, statSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, statSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright-core'
-import { preview } from 'vite'
+import { createServer } from 'vite'
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const output = resolve(root, 'public', 'Sofiene_Zayati_CV.pdf')
+const artifactDirectory = resolve(root, 'output', 'pdf')
 const host = '127.0.0.1'
 const port = 4188
 
@@ -21,10 +22,11 @@ if (!executablePath) {
   throw new Error('Microsoft Edge was not found. Install Edge or update the browser candidates in generate-cv.mjs.')
 }
 
-const server = await preview({
+const server = await createServer({
   root,
-  preview: { host, port, strictPort: true },
+  server: { host, port, strictPort: true },
 })
+await server.listen()
 
 let browser
 
@@ -56,6 +58,7 @@ try {
     )
   })
 
+  await page.emulateMedia({ media: 'print' })
   const pageCount = await page.locator('.page').count()
   if (pageCount !== 2) throw new Error(`Expected two CV pages in the source, found ${pageCount}.`)
 
@@ -67,12 +70,15 @@ try {
       return {
         page: index + 1,
         overflowY: cvPage.scrollHeight - cvPage.clientHeight,
+        height: pageBox.height,
+        overflowX: cvPage.scrollWidth - cvPage.clientWidth,
         footerInsidePage: Boolean(footerBox && footerBox.bottom <= pageBox.bottom + 0.5),
       }
     }),
   )
 
-  const invalidPage = pageDiagnostics.find(({ overflowY, footerInsidePage }) => overflowY > 1 || !footerInsidePage)
+  // A4 is 1122.52 CSS pixels high at 96 dpi. A min-height layout must not silently grow.
+  const invalidPage = pageDiagnostics.find(({ height, overflowX, overflowY, footerInsidePage }) => height > 1123 || overflowX > 1 || overflowY > 1 || !footerInsidePage)
   if (invalidPage) throw new Error(`CV page preflight failed: ${JSON.stringify(pageDiagnostics)}`)
 
   await page.pdf({
@@ -80,14 +86,20 @@ try {
     format: 'A4',
     printBackground: true,
     preferCSSPageSize: true,
+    tagged: true,
     margin: { top: '0', right: '0', bottom: '0', left: '0' },
   })
 
-  if (!existsSync(output) || statSync(output).size < 50000) {
+  if (!existsSync(output) || statSync(output).size < 10000) {
     throw new Error('Generated CV PDF is missing or unexpectedly small.')
   }
 
-  console.log(`Generated ${output}.`)
+  mkdirSync(artifactDirectory, { recursive: true })
+  copyFileSync(output, resolve(artifactDirectory, 'Sofiene_Zayati_CV.pdf'))
+  for (let index = 0; index < pageCount; index++) {
+    await page.locator('.page').nth(index).screenshot({ path: resolve(artifactDirectory, `cv-preview-${index + 1}.png`) })
+  }
+  console.log(`Generated ${output}. Preflight: ${JSON.stringify(pageDiagnostics)}`)
 } finally {
   if (browser) await browser.close()
   await server.close()

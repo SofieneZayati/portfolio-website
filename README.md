@@ -41,9 +41,19 @@ npm run build
 
 `npm run validate:content` checks project/case-study parity, sitemap coverage, duplicate IDs, featured selections, experience links, and referenced project assets. `npm run build` also validates the production assets after pruning, including encoded download filenames.
 
-The homepage presents six selected projects with a searchable archive of all 21. Presentation styles live in `src/portfolio.css`; global styles and system diagrams live in `src/index.css`, and case-study layouts live in `src/case-studies.css`. See `PORTFOLIO_REVIEW.md` for the design and content review, verification, and remaining content opportunities.
+The homepage presents six selected projects with a searchable archive of all 22. Three engineering-focus links lead directly to the LeadX, Prigado, and MacroPark system sections; a recent-case-study link surfaces OliveTrace. Presentation styles live in `src/portfolio.css`; global styles and system diagrams live in `src/index.css`, and case-study layouts live in `src/case-studies.css`. See `PORTFOLIO_REVIEW.md` for the design and content review, verification, and remaining content opportunities.
 
 The site is configured for deployment at [sofienezayati.tn](https://sofienezayati.tn).
+
+## CV
+
+`public/cv.html` is the editable source for the two-page English CV. The owner chose to retain the original two-page version on 24 October 2026. Run `npm run generate:cv` to render it with local Microsoft Edge and rebuild the portfolio with the updated download. The generator reads the current source directly, checks both A4 pages for height and horizontal overflow in print mode, and emits a tagged PDF at `public/Sofiene_Zayati_CV.pdf` plus a local copy and per-page previews in the ignored `output/pdf` directory. Inspect the rendered PDF after content changes; successful generation alone is not a visual review.
+
+## OliveTrace team case study
+
+`/project/olivetrace` describes Sofiene's Producer/Farm module within the five-person university project. Ownership is grounded in the application's `docs/sofiene-production.md`: shared authentication, layouts, infrastructure, and other supply-chain modules are explicitly credited as team work. The case study does not claim public deployment.
+
+The four WebP screenshots were captured on 23 October 2026 from the local Laravel application using its documented Producer Demo account and existing fictional farms/activities. The saved-advice view shows an existing report; no AI request, farm edit, or activity submission was made during capture. All four images retain their genuine interface content and have captions identifying demonstration data. The code-native system diagram separates the Producer/Farm domain, reviewed AI workflow, and adjacent team modules.
 
 ## MacroPark Experience — work in progress
 

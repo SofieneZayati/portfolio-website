@@ -4,7 +4,7 @@
   "outputDirectory": "dist",
   "routes": [
     {
-      "src": "^/project/(sobly|benmahmoudstock|geniuspmo|macroparkexperience|machetamache|smartproperty|macropark|tounsiads|prigado|greencoffee|aurelle|pitchly|interna|daymark|innomall|digiservice|secondchance|smartunlock|smartagri|zenithhouse|sps)/?$",
+      "src": "^/project/(sobly|benmahmoudstock|geniuspmo|macroparkexperience|machetamache|olivetrace|smartproperty|macropark|tounsiads|prigado|greencoffee|aurelle|pitchly|interna|daymark|innomall|digiservice|secondchance|smartunlock|smartagri|zenithhouse|sps)/?$",
       "dest": "/project/$1.html"
     },
     {

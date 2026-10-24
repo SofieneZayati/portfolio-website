@@ -1,5 +1,45 @@
 # Portfolio design and content review — 13 October 2026
 
+## Portfolio and CV refinement — 23 October 2026
+
+**CV preference update — 24 October 2026:** the owner chose to retain the original two-page CV. Restored the exact original PDF and matching HTML source, and adjusted the generator to expect two pages. The one-page experiment is archived locally; all portfolio enhancements below remain in place.
+
+### Findings
+
+The existing visual identity, project galleries, and system diagrams already provide a strong foundation. The main weaknesses were the generic first-screen copy, a project count that implied every project was solo work, an absent OliveTrace case study, and a CV that repeated broad capability lists across two dense pages. The latest checkout is `Career/Projects/portfolio-website`; the older copy under `Career/portfolios` was left unchanged.
+
+### Delivered
+
+- Kept the black/violet identity, tightened the desktop hero, adjusted the portrait framing, and replaced generic introductory copy with concrete work across web products, AI workflows, and devices.
+- Replaced the project-count slogan with three direct routes into engineering evidence: LeadX for shared APIs and permissions, Prigado for AI workflow integration, and MacroPark for connected systems. Existing selected-project order is preserved.
+- Clarified current education in the About section and made the work introduction explicit about client, team, and prototype contexts.
+- Added OliveTrace as the 22nd project, with a recent-case-study link, four real local application captures, and a responsive two-lane architecture diagram. The page distinguishes the owned Producer/Farm domain from shared platform work and adjacent team modules. Screenshots use documented fictional demo records; metrics are not represented as agricultural outcomes.
+- Explored a single-page English CV, then restored the original two-page version following the owner's preference on 24 October. The original experience, SmartProperty and Machetamache entries, toolkit, education, and languages are retained.
+- Improved PDF generation to use the current HTML directly and validate print geometry. The generator now expects two pages, and the website's CV download serves the restored original file.
+
+### Evidence used
+
+- LeadX's final portfolio package, especially its technical facts and publishing-status notes. The documented 125 backend tests and tested Android preview belong to the handoff, not a claim of public production operation.
+- OliveTrace's README, Producer/Farm integration contracts, DevOps handover, and the running local application. Exact ownership is stated in its module documentation.
+- Ben Mahmoud Stock's README for transactional invoicing, integer-millime money, offline operation, and recovery.
+- Existing Prigado/MacroPark project records and portfolio content for experience scope; SmartProperty and Machetamache documentation for the broader project review.
+
+### Further content opportunities
+
+- A short narrated walkthrough of LeadX or SmartProperty would make complex workflows easier to assess than a long feature list alone.
+- Older hardware projects still benefit from actual prototype photos and device captures. Keep existing concept artwork labeled until such evidence is available.
+- SmartProperty would benefit from a precise individual-versus-team responsibility breakdown, backed by the owner's confirmation or contribution records.
+- Keep start dates and availability outside the public profile unless intentionally supplied for publication. Review credential and degree status when they change.
+
+### Verification
+
+- TypeScript, ESLint, source-content validation, and the production build pass. The build prerenders 23 routes and validates all 22 projects and 158 referenced assets.
+- Checked the homepage and all 22 case studies at 390px and 1440px (46 route checks): no horizontal overflow, broken loaded images, or browser exceptions. Every case study has a system diagram.
+- Checked project search, category/search intersections, empty-state reset, the 22-project archive, all three engineering-focus links, the OliveTrace image viewer with Escape/focus restoration, mobile navigation, and the CV download. The homepage also fits at 320px and 768px.
+- Visually reviewed the final desktop/mobile homepage, project introduction, OliveTrace case study and diagram, and the actual PDF rendered by Poppler. These are browser viewport checks, not physical-phone measurements.
+- The one-page experiment was rendered and its reading order checked before the owner selected the original. The restored CV contains two pages and is byte-for-byte identical to the supplied original; its HTML source is restored as well.
+- Review was completed against a local production build. No deployment, form submission, AI-provider request, or project-data mutation was performed during that review. Existing development accounts were used only for reading and screenshots.
+
 ## MacroPark Experience update — 23 October 2026
 
 - Status correction requested by the owner: label the project **Work in progress · Public 3D preview**. The homepage card and case study now use development status, preview links, current scope, and upcoming work rather than a completed-product label.

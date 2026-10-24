@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { HiArrowDown, HiArrowUp, HiSearch, HiX } from 'react-icons/hi'
 import ProjectCard from './ProjectCard'
 import { featuredProjectIds, projects } from '../data/projects'
@@ -61,16 +62,22 @@ export default function Projects() {
               id="projects-heading"
               className="section-heading"
             >
-              Projects with purpose.
+              Ideas are a start.
               <br />
-              <span>Built end to end.</span>
+              <span>Here’s the working software.</span>
             </h2>
           </div>
           <p>
-            Client products, connected systems, and engineering experiments.
-            Here’s what I built, the decisions behind it, and how it works.
+            Explore the interfaces, architecture, and engineering decisions
+            behind client products, team projects, and prototypes. Each case
+            study explains my contribution and the current delivery scope.
           </p>
         </header>
+        <Link to="/project/olivetrace" className="project-update">
+          <span className="project-update__label">New case study</span>
+          <span><strong>OliveTrace</strong> <span>Farm operations, reviewed AI advice, and a clearly defined team contribution.</span></span>
+          <span aria-hidden="true">↗</span>
+        </Link>
         <div className="project-toolbar">
           <div className="project-filters" aria-label="Filter projects">
             {categories.map((category) => (
@@ -161,7 +168,7 @@ export default function Projects() {
             <span>
               {showAll
                 ? 'The full collection. From first experiments to client delivery.'
-                : 'There’s more where that came from.'}
+                : 'More client work, team projects, and early experiments.'}
             </span>
             <button
               type="button"
